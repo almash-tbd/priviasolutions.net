@@ -9,9 +9,63 @@ import {
   Layers, Settings, Play, Flame, HelpCircle
 } from "lucide-react";
 
+const TechLogo = ({ name }) => {
+  const logos = {
+    "React Native": (
+      <svg viewBox="-11.5 -10.23174 23 20.46348" className="w-8 h-8 text-cyan-500">
+        <circle cx="0" cy="0" r="2.05" fill="currentColor"/>
+        <g stroke="currentColor" strokeWidth="1.5" fill="none">
+          <ellipse rx="11" ry="4.2"/>
+          <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+          <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+        </g>
+      </svg>
+    ),
+    "Flutter": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 text-cyan-400" fill="currentColor">
+        <path d="M14.3 2.1L5 11.4l2.9 2.9 9.3-9.3zM14.3 11.4l-5.6 5.6 5.6 5.6h5.7l-5.6-5.6 5.6-5.6z"/>
+      </svg>
+    ),
+    "Kotlin": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 text-purple-600" fill="currentColor">
+        <path d="M24 0H0v24h24L12 12z"/>
+      </svg>
+    ),
+    "Swift": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 text-orange-500" fill="currentColor">
+        <path d="M22.5 13.5c-.3-1.6-1.5-3.3-2.9-4.3-.8-.5-1.9-.9-2.7-.8.5.8.7 1.8.5 2.8-.2.9-.8 1.7-1.4 2.3-2 1.9-5.1 1.7-6.8-.4-.7-.9-1-2.1-.9-3.2 0-.3.1-.7.2-1C7 9.8 5.7 11 4.8 12.5c-1.8 3 0 7 3.3 7.8 2.2.5 4.6-.2 6.3-1.7.9-.8 1.7-1.9 2.4-1.9.5 0 .9.3 1.3.6 1.8 1.4 3.7.8 4.4-.8.2-.5 0-2-.2-3z"/>
+      </svg>
+    ),
+    "Firebase": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 text-amber-500" fill="currentColor">
+        <path d="M3.9 18.2l7.5-14.3c.2-.4.7-.4.9 0l2 3.8zM19.7 15.3l-2.4-4.6-2.5-4.8c-.2-.4-.7-.4-.9 0l-5.1 9.8z"/>
+      </svg>
+    ),
+    "GraphQL": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 text-pink-600" fill="currentColor">
+        <path d="M12 2L2 7.7v11.4L12 22l10-5.7V7.7zM12 4.4l7.7 4.4L12 13.2 4.3 8.8zM4.3 16.4l7.7-4.4v8.8zM19.7 16.4l-7.7-4.4v8.8z"/>
+      </svg>
+    ),
+    "iOS SDK": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 text-slate-800" fill="currentColor">
+        <path d="M18.7 18.5c-.8 1.1-1.6 2.2-2.8 2.2-1.2 0-1.6-.7-3-.7-1.4 0-1.8.7-3 .7-1.2 0-2.1-1.2-2.9-2.3-1.6-2.3-2.8-6.5-1.1-9.4 1.2-2.1 3.4-2.3 4.5-2.3 1.2 0 2.2.7 2.9.7.7 0 2-.9 3.4-.7 1.4.1 2.5.7 3.1 1.7-2.9 1.7-2.4 5.3.5 6.5-.9 2.2-2.1 4.5-3.3 5.4zM15.9 4.2c.8-1 1.3-2.4 1.1-3.7-1.2.1-2.6.8-3.4 1.8-.7.8-1.3 2.2-1.1 3.5 1.3.1 2.6-.6 3.4-1.6z"/>
+      </svg>
+    ),
+    "Android SDK": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 text-emerald-500" fill="currentColor">
+        <path d="M17.5 10c-.5 0-.9-.4-.9-.9V5.9c0-.5.4-.9.9-.9s.9.4.9.9v3.2c0 .5-.4.9-.9.9zm-11 0c-.5 0-.9-.4-.9-.9V5.9c0-.5.4-.9.9-.9s.9.4.9.9v3.2c0 .5-.4.9-.9.9zm13-2H4.5C3.7 8 3 8.7 3 9.5v7c0 .8.7 1.5 1.5 1.5h15c.8 0 1.5-.7 1.5-1.5v-7C21 8.7 20.3 8 19.5 8zM12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/>
+      </svg>
+    )
+  };
+  return logos[name] || <Cpu className="w-8 h-8 text-slate-400" />;
+};
+
 export default function MobileAppsPage() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [activeTab, setActiveTab] = useState("cross"); // native or cross
+  const [faqPage, setFaqPage] = useState(0);
+  const [faqInput, setFaqInput] = useState("");
+  const [faqSent, setFaqSent] = useState(false);
 
   const toggleFaq = (index) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -382,35 +436,46 @@ export default function MobileAppsPage() {
             <h3 className="text-3xl font-extrabold tracking-tight text-slate-900">Native vs Cross-Platform Matrix</h3>
           </div>
 
-          <div className="overflow-x-auto border border-slate-200/80 rounded-2xl bg-white/70 shadow-sm">
-            <table className="w-full text-left border-collapse text-xs">
+          <div className="overflow-x-auto border-2 border-[#2c5ead]/20 rounded-2xl bg-white shadow-xl">
+            <table className="w-full text-left border-collapse text-xs sm:text-sm">
               <thead>
-                <tr className="border-b border-slate-200 bg-slate-50 font-bold text-slate-700">
-                  <th className="p-4">Feature</th>
-                  <th className="p-4">Native Development</th>
-                  <th className="p-4">Cross-Platform</th>
+                <tr className="bg-gradient-to-r from-[#2c5ead] to-[#1591dc] text-white font-bold">
+                  <th className="p-5 tracking-wide uppercase text-xs">Comparison Feature</th>
+                  <th className="p-5 tracking-wide uppercase text-xs">Native Development (Swift / Kotlin)</th>
+                  <th className="p-5 tracking-wide uppercase text-xs">Cross-Platform (React Native / Flutter)</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 text-slate-600">
-                <tr>
-                  <td className="p-4 font-bold text-slate-800">Language</td>
-                  <td className="p-4">Swift, Kotlin</td>
-                  <td className="p-4">TypeScript (React Native), Dart (Flutter)</td>
+              <tbody className="divide-y-2 divide-slate-100 text-slate-800">
+                <tr className="hover:bg-slate-50 transition-colors">
+                  <td className="p-5 font-extrabold text-slate-950 border-r border-slate-100 bg-slate-50/50">Programming Language</td>
+                  <td className="p-5 font-semibold text-indigo-900">Swift (iOS), Kotlin (Android)</td>
+                  <td className="p-5 font-semibold text-cyan-900">TypeScript (React Native), Dart (Flutter)</td>
                 </tr>
-                <tr>
-                  <td className="p-4 font-bold text-slate-800">Performance</td>
-                  <td className="p-4">Maximum (Hardware threads)</td>
-                  <td className="p-4">High (Near-native bridge / compiled)</td>
+                <tr className="hover:bg-slate-50 transition-colors bg-cyan-50/10">
+                  <td className="p-5 font-extrabold text-slate-950 border-r border-slate-100 bg-slate-50/50">Execution & Performance</td>
+                  <td className="p-5 font-semibold text-emerald-700 flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                    Maximum (Direct hardware access)
+                  </td>
+                  <td className="p-5 font-semibold text-cyan-700">
+                    High (Optimized JS bridge or compiled UI threads)
+                  </td>
                 </tr>
-                <tr>
-                  <td className="p-4 font-bold text-slate-800">Code Share</td>
-                  <td className="p-4">0% (Separate repositories)</td>
-                  <td className="p-4">85% - 95% Codebase Share</td>
+                <tr className="hover:bg-slate-50 transition-colors">
+                  <td className="p-5 font-extrabold text-slate-950 border-r border-slate-100 bg-slate-50/50">Code Reusability</td>
+                  <td className="p-5 font-semibold text-slate-500">0% (Separate native repositories)</td>
+                  <td className="p-5 font-semibold text-[#1591dc] flex items-center gap-2">
+                    <span className="font-extrabold bg-[#1591dc]/10 px-2 py-0.5 rounded text-xs">85% - 95%</span>
+                    Shared codebase across platforms
+                  </td>
                 </tr>
-                <tr>
-                  <td className="p-4 font-bold text-slate-800">Time to Market</td>
-                  <td className="p-4">Longer (Dual development cycles)</td>
-                  <td className="p-4">Significantly Faster (Single Cycle)</td>
+                <tr className="hover:bg-slate-50 transition-colors bg-cyan-50/10">
+                  <td className="p-5 font-extrabold text-slate-950 border-r border-slate-100 bg-slate-50/50">Time to Market (TTM)</td>
+                  <td className="p-5 font-semibold text-amber-700">Longer (Requires dual-squad development)</td>
+                  <td className="p-5 font-semibold text-emerald-600 flex items-center gap-2">
+                    <span className="font-extrabold bg-emerald-500/10 px-2 py-0.5 rounded text-xs text-emerald-700">Significantly Faster</span>
+                    Single codebase iteration cycle
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -419,65 +484,199 @@ export default function MobileAppsPage() {
       </section>
 
       {/* 7. TECHNOLOGIES WE USE */}
-      <section className="relative bg-gradient-to-b from-[#edf4fc] via-[#e6effb] to-[#d6e5fb] py-20 border-b border-black/5 text-slate-950">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
+      <section className="relative bg-gradient-to-b from-[#edf4fc] via-[#e6effb] to-[#d6e5fb] py-20 overflow-hidden text-slate-950">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
             <h2 className="text-[10px] font-black tracking-widest text-[#2C5EAD] uppercase font-mono">technical::modules</h2>
             <h3 className="text-3xl font-extrabold tracking-tight text-slate-900">Technologies We Deploy</h3>
           </div>
+        </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            {techStack.map((tech) => (
+        {/* Infinite Horizontal Carousel (Left to Right) */}
+        <div className="relative w-full overflow-hidden py-4">
+          {/* Gradient Masks */}
+          <div className="absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-[#edf4fc] to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-[#d6e5fb] to-transparent z-10 pointer-events-none" />
+
+          <motion.div 
+            className="flex gap-6 w-max pl-6"
+            animate={{ x: ["-33.33%", "0%"] }}
+            transition={{
+              ease: "linear",
+              duration: 20,
+              repeat: Infinity,
+            }}
+          >
+            {[...techStack, ...techStack, ...techStack].map((tech, idx) => (
               <div 
-                key={tech.name} 
-                className="p-4 bg-white/80 border border-slate-200/60 rounded-xl flex flex-col justify-center text-center shadow-sm"
+                key={idx} 
+                className="w-56 p-5 bg-white border border-slate-200/80 rounded-2xl flex flex-col justify-between shadow-md hover:shadow-lg hover:border-cyan-500/30 transition-all flex-shrink-0 cursor-default group"
               >
-                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest block font-mono mb-1">{tech.category}</span>
-                <span className="text-sm font-bold text-slate-800">{tech.name}</span>
+                <div className="flex justify-between items-start mb-4">
+                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest font-mono">{tech.category}</span>
+                  <div className="w-8 h-8 flex items-center justify-center text-slate-700 group-hover:scale-110 transition-transform duration-300">
+                    <TechLogo name={tech.name} />
+                  </div>
+                </div>
+                <div>
+                  <span className="text-sm font-bold text-slate-900 block group-hover:text-cyan-600 transition-colors">{tech.name}</span>
+                </div>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* 8. FAQs */}
-      <section className="relative bg-gradient-to-b from-[#d6e5fb] via-[#f1f5f9] to-[#ffffff] py-20 overflow-hidden text-slate-950">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <h2 className="text-[10px] font-black tracking-widest text-[#2C5EAD] uppercase font-mono">common::inquiries</h2>
-            <h3 className="text-3xl font-extrabold tracking-tight text-slate-900">Frequently Asked Questions</h3>
+      <section className="relative bg-[#ffffff] py-24 overflow-hidden text-slate-950 border-b border-slate-100">
+        {/* Header Section from the image */}
+        <div className="text-center max-w-4xl mx-auto mb-16 relative">
+          {/* Watermark text behind */}
+          <div className="absolute inset-0 flex items-center justify-center -top-8 pointer-events-none select-none overflow-hidden">
+            <span className="text-5xl sm:text-7xl md:text-8xl font-black text-slate-100 tracking-wider whitespace-nowrap opacity-70 uppercase">
+              Frequently Ask Question
+            </span>
           </div>
+          
+          <h3 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 relative z-10">
+            Frequently Ask Question
+          </h3>
+          <p className="text-sm font-bold text-cyan-500 mt-2 relative z-10 cursor-pointer hover:underline">
+            <Link href="/contact">Click Here to contact now.</Link>
+          </p>
+        </div>
 
-          <div className="space-y-4">
-            {faqs.map((faq, idx) => {
-              const isOpen = openFaqIndex === idx;
-              return (
-                <div key={idx} className="border border-slate-200/85 rounded-2xl overflow-hidden bg-white/70 hover:bg-white transition-colors shadow-sm">
-                  <button
-                    onClick={() => toggleFaq(idx)}
-                    className="w-full flex justify-between items-center p-6 text-left font-bold text-slate-900 text-sm sm:text-base focus:outline-none"
-                  >
-                    <span>{faq.q}</span>
-                    <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform duration-200 ${isOpen ? "rotate-180 text-[#2C5EAD]" : ""}`} />
-                  </button>
-
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25 }}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-12 gap-12 items-start">
+            
+            {/* Left Column: Accordions & Pagination */}
+            <div className="lg:col-span-7 flex flex-col space-y-4">
+              <div className="space-y-4 min-h-[380px]">
+                {faqs.slice(faqPage * 3, (faqPage + 1) * 3).map((faq, pageIdx) => {
+                  const globalIdx = faqPage * 3 + pageIdx;
+                  const isOpen = openFaqIndex === globalIdx;
+                  return (
+                    <div 
+                      key={globalIdx} 
+                      className="border border-slate-100 rounded-xl bg-white shadow-[0_8px_30px_rgb(0,0,0,0.03)] overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
+                    >
+                      <button
+                        onClick={() => toggleFaq(globalIdx)}
+                        className="w-full flex justify-between items-center p-6 text-left font-bold text-slate-900 text-sm sm:text-base focus:outline-none"
                       >
-                        <div className="px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
-                          {faq.a}
+                        <span>{faq.q}</span>
+                        <div className="w-8 h-8 rounded-full bg-cyan-500 hover:bg-cyan-600 flex items-center justify-center text-white text-base font-black flex-shrink-0 transition-colors shadow-sm">
+                          {isOpen ? "−" : "+"}
                         </div>
-                      </motion.div>
+                      </button>
+
+                      <AnimatePresence initial={false}>
+                        {isOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.25 }}
+                          >
+                            <div className="px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-50">
+                              {faq.a}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Pagination Controls */}
+              <div className="flex items-center justify-start gap-4 pt-6 pl-4">
+                <button 
+                  onClick={() => setFaqPage(0)}
+                  className={`w-10 h-10 rounded-full flex items-center justify-center text-white transition-all shadow-sm ${
+                    faqPage === 0 ? "bg-cyan-600 scale-105" : "bg-cyan-500/70 hover:bg-cyan-500"
+                  }`}
+                >
+                  1
+                </button>
+                <button 
+                  onClick={() => setFaqPage(1)}
+                  className={`w-10 h-10 rounded-full flex items-center justify-center text-white transition-all shadow-sm ${
+                    faqPage === 1 ? "bg-cyan-600 scale-105" : "bg-cyan-500/70 hover:bg-cyan-500"
+                  }`}
+                >
+                  2
+                </button>
+              </div>
+            </div>
+
+            {/* Right Column: Illustration & Question Input Form */}
+            <div className="lg:col-span-5 flex flex-col items-center p-8 bg-slate-50/50 rounded-3xl border border-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.02)]">
+              {/* Question mark illustration */}
+              <div className="w-56 h-48 relative mb-6">
+                <img 
+                  src="/assets/faq_illustration.png" 
+                  alt="FAQ Illustration" 
+                  className="w-full h-full object-contain"
+                />
+              </div>
+
+              <h4 className="text-2xl font-extrabold text-slate-900 mb-1">Any Question?</h4>
+              <p className="text-xs text-slate-500 text-center mb-6">
+                You can ask anything you want to know about Mobile Apps.
+              </p>
+
+              {/* Submission Form */}
+              <div className="w-full space-y-4">
+                <div className="space-y-1">
+                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block font-mono pl-1">
+                    Let me know.
+                  </label>
+                  <div className="relative">
+                    <input 
+                      type="text" 
+                      placeholder="Enter Here"
+                      value={faqInput}
+                      onChange={(e) => setFaqInput(e.target.value)}
+                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 text-xs sm:text-sm focus:outline-none focus:border-cyan-500 pr-10 shadow-sm"
+                    />
+                    {faqInput && (
+                      <button 
+                        onClick={() => setFaqInput("")}
+                        className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs font-bold font-mono"
+                      >
+                        ×
+                      </button>
                     )}
-                  </AnimatePresence>
+                  </div>
                 </div>
-              );
-            })}
+
+                <div className="flex justify-center pt-2">
+                  <button 
+                    onClick={() => {
+                      if (!faqInput.trim()) return;
+                      setFaqSent(true);
+                      setFaqInput("");
+                      setTimeout(() => setFaqSent(false), 4000);
+                    }}
+                    className="w-full sm:w-auto px-10 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg shadow-cyan-500/20 active:scale-95"
+                  >
+                    {faqSent ? "Sent Successfully!" : "Sent"}
+                  </button>
+                </div>
+                
+                {faqSent && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-center text-[10px] font-bold text-emerald-600 font-mono mt-2"
+                  >
+                    Thank you! Your question has been forwarded to our support queue.
+                  </motion.div>
+                )}
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
