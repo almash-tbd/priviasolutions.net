@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float } from "@react-three/drei";
 import { motion } from "framer-motion";
@@ -139,6 +139,22 @@ function OrbitingParticles({ radius, speed, color }) {
 
 export default function ThreeDHero() {
   const [hoveredNode, setHoveredNode] = useState(null);
+  const containerRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsVisible(entry.isIntersecting);
+    }, { threshold: 0 });
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   // Position definitions for Aetheris Nodes
   const nodes = [
@@ -205,7 +221,7 @@ export default function ThreeDHero() {
   ];
 
   return (
-    <div className="relative w-full aspect-square max-w-[480px] mx-auto flex items-center justify-center select-none pt-4 pb-4">
+    <div ref={containerRef} className="relative w-full aspect-square max-w-[480px] mx-auto flex items-center justify-center select-none pt-4 pb-4">
       {/* Concentric CSS Orbit Rings in Background */}
       <div className="absolute inset-2 rounded-full border border-blue-200/40 border-dashed animate-[spin_45s_linear_infinite] pointer-events-none z-0"></div>
       <div className="absolute inset-12 rounded-full border border-blue-300/30 border-dashed animate-[spin_30s_linear_infinite_reverse] pointer-events-none z-0"></div>
@@ -213,7 +229,7 @@ export default function ThreeDHero() {
 
       {/* 3D WebGL Canvas Layer */}
       <div className="w-[280px] h-[280px] sm:w-[330px] sm:h-[330px] relative z-10">
-        <Canvas camera={{ position: [0, 2, 4.5], fov: 60 }} dpr={[1, 2]}>
+        <Canvas camera={{ position: [0, 2, 4.5], fov: 60 }} dpr={[1, 2]} frameloop={isVisible ? "always" : "never"}>
           <ambientLight intensity={1.5} />
           <pointLight position={[5, 5, 5]} intensity={2.5} />
           <pointLight position={[-5, 3, -5]} intensity={1.2} />

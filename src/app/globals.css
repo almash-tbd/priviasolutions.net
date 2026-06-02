@@ -56,40 +56,40 @@
   --foreground: #0f172a;
 
   /* Fintech Colors */
-  --ft-bg: #0c1729;
-  --ft-border: rgba(255, 255, 255, 0.08);
-  --ft-text: #e2e8f0;
-  --ft-muted: #7aa3c8;
-  --ft-accent: #00a2ff;
-  --ft-glow: rgba(0, 162, 255, 0.4);
+  --ft-bg: rgba(12, 23, 41, 0.6);
+  --ft-border: rgba(56, 189, 248, 0.2);
+  --ft-text: #ffffff;
+  --ft-muted: #94a3b8;
+  --ft-accent: #38bdf8;
+  --ft-glow: rgba(56, 189, 248, 0.25);
 
   /* Healthcare Colors */
-  --hc-bg: #ffffff;
-  --hc-border: #e2e8f0;
-  --hc-text: #0f172a;
-  --hc-muted: #475569;
-  --hc-accent: #1D9E75;
-  --hc-badge-bg: #E1F5EE;
-  --hc-badge-text: #0F6E56;
-  --hc-glow: rgba(29, 158, 117, 0.35);
+  --hc-bg: rgba(6, 30, 23, 0.6);
+  --hc-border: rgba(52, 211, 153, 0.2);
+  --hc-text: #ffffff;
+  --hc-muted: #a7f3d0;
+  --hc-accent: #34d399;
+  --hc-badge-bg: rgba(52, 211, 153, 0.1);
+  --hc-badge-text: #34d399;
+  --hc-glow: rgba(52, 211, 153, 0.25);
 
   /* SaaS Colors */
-  --saas-bg: #EEEDFE;
-  --saas-border: #AFA9EC;
-  --saas-text: #26215C;
-  --saas-muted: #5a5499;
-  --saas-accent: #534AB7;
-  --saas-pill-bg: #CECBF6;
-  --saas-glow: rgba(83, 74, 183, 0.35);
+  --saas-bg: rgba(26, 21, 58, 0.6);
+  --saas-border: rgba(192, 132, 252, 0.2);
+  --saas-text: #ffffff;
+  --saas-muted: #e9d5ff;
+  --saas-accent: #c084fc;
+  --saas-pill-bg: rgba(192, 132, 252, 0.1);
+  --saas-glow: rgba(192, 132, 252, 0.25);
 
   /* Retail Colors */
-  --ret-bg: #fff8f0;
-  --ret-border: #FAC775;
-  --ret-text: #412402;
-  --ret-muted: #854F0B;
-  --ret-accent: #BA7517;
-  --ret-badge-bg: #FAEEDA;
-  --ret-glow: rgba(186, 117, 23, 0.35);
+  --ret-bg: rgba(45, 30, 10, 0.6);
+  --ret-border: rgba(251, 191, 36, 0.2);
+  --ret-text: #ffffff;
+  --ret-muted: #fde68a;
+  --ret-accent: #fbbf24;
+  --ret-badge-bg: rgba(251, 191, 36, 0.1);
+  --ret-glow: rgba(251, 191, 36, 0.25);
 
   /* Stacking Cards configuration */
   --s-card-width: 1100px;
@@ -103,9 +103,9 @@
   --s-gradient-3: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
   
   /* Stacking Card Glow Colors */
-  --s-glow-1: rgba(255, 94, 98, 0.15);
-  --s-glow-2: rgba(138, 35, 135, 0.15);
-  --s-glow-3: rgba(0, 198, 255, 0.15);
+  --s-glow-1: rgba(255, 94, 98, 0.08);
+  --s-glow-2: rgba(138, 35, 135, 0.08);
+  --s-glow-3: rgba(0, 198, 255, 0.08);
 
   /* Premium Pricing Configurations */
   --pr-blue-theme: #3b82f6;
@@ -688,15 +688,11 @@ body {
   position: sticky;
   width: 100%;
   height: var(--s-card-height);
-  border-radius: 24px;
+  border-radius: 16px;
   overflow: hidden;
-  background: rgba(10, 12, 20, 0.93); /* Translucent glass look */
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 
-    0 10px 40px -10px rgba(0, 0, 0, 0.6),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  background: #182232;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   display: flex;
   margin-bottom: 60px;
   transform-origin: top center;
@@ -709,25 +705,22 @@ body {
 }
 
 .stacking-card:hover {
-  border-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
 .stacking-card-1 {
   top: var(--s-card-top-offset);
   z-index: 1;
-  border-left: 4px solid #ff5e62 !important;
 }
 
 .stacking-card-2 {
   top: calc(var(--s-card-top-offset) + var(--s-card-visible-height));
   z-index: 2;
-  border-left: 4px solid #e94057 !important;
 }
 
 .stacking-card-3 {
   top: calc(var(--s-card-top-offset) + (var(--s-card-visible-height) * 2));
   z-index: 3;
-  border-left: 4px solid #00c6ff !important;
 }
 
 /* Stacking depth adjustments */
@@ -809,17 +802,15 @@ body {
 
 .stacking-card-badge {
   font-family: var(--font-sans);
-  font-weight: 700;
-  font-size: 0.75rem;
-  letter-spacing: 2px;
-  padding: 4px 10px;
-  border-radius: 4px;
-  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
-
-.stacking-card-1 .stacking-card-badge { background: rgba(255, 94, 98, 0.1); color: #ff5e62; }
-.stacking-card-2 .stacking-card-badge { background: rgba(138, 35, 135, 0.1); color: #e94057; }
-.stacking-card-3 .stacking-card-badge { background: rgba(0, 198, 255, 0.1); color: #00c6ff; }
 
 .stacking-card h2 {
   font-family: var(--font-sans);
@@ -846,7 +837,7 @@ body {
 .stacking-card-features li {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   font-size: 0.95rem;
   color: #e2e8f0;
 }
@@ -1826,9 +1817,10 @@ body {
 .carousel-3d-card-wrapper {
   position: absolute;
   width: 360px;
-  height: 240px;
+  height: 320px; /* Increased to house title above and link below */
   transform-style: preserve-3d;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -1837,14 +1829,13 @@ body {
   width: 360px;
   height: 220px;
   border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgb(13, 15, 24);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 
+    0 15px 35px -5px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15); /* Beveled edge style */
+  position: relative;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   cursor: pointer;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -2570,13 +2561,12 @@ body {
 
 .sticky-heading-wrapper h3 {
   display: inline-block;
-  padding: 12px 28px;
-  border-radius: 9999px;
-  background: rgba(15, 21, 45, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 @media (max-width: 768px) {

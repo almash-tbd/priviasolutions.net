@@ -108,6 +108,29 @@ const serviceAnimationMeta = {
   }
 };
 
+const serviceImages = {
+  "custom-development": "/assets/images/services/custom-development.png",
+  "mobile-apps": "/assets/images/services/mobile-apps.png",
+  "cloud-sre": "/assets/images/services/cloud-sre.png",
+  "api-integrations": "/assets/images/services/api-integrations.png",
+  "qa-performance": "/assets/images/services/qa-performance.png",
+  "managed-support": "/assets/images/services/managed-support.png",
+  "cybersecurity": "/assets/images/services/cybersecurity.png",
+  "data-ai": "/assets/images/services/data-ai.png"
+};
+
+const serviceLinkColors = {
+  "cybersecurity": { light: "#1d4ed8", dark: "#60a5fa" },
+  "data-ai": { light: "#047857", dark: "#34d399" },
+  "ux-ui": { light: "#7e22ce", dark: "#c084fc" },
+  "api-integrations": { light: "#0e7490", dark: "#22d3ee" },
+  "qa-performance": { light: "#b45309", dark: "#fbbf24" },
+  "managed-support": { light: "#be123c", dark: "#fb7185" },
+  "custom-development": { light: "#0369a1", dark: "#38bdf8" },
+  "mobile-apps": { light: "#0f766e", dark: "#2dd4bf" },
+  "cloud-sre": { light: "#6d28d9", dark: "#a78bfa" }
+};
+
 function Carousel3dCard({ slug, data, index, scrollYProgress, isActive, onCardClick }) {
   const meta = serviceAnimationMeta[slug] || {
     themeColor: "text-primary",
@@ -128,6 +151,13 @@ function Carousel3dCard({ slug, data, index, scrollYProgress, isActive, onCardCl
   // Smoothly interpolate styling values based on distance from the front
   const scale = useTransform(distanceVal, [0, 1, 2, 3], [1.05, 0.82, 0.68, 0.58]);
   const opacity = useTransform(distanceVal, [0, 1, 2, 3], [1, 0.75, 0.3, 0.12]);
+  const visibility = useTransform(distanceVal, (val) => val > 1.6 ? "hidden" : "visible");
+  const pointerEvents = useTransform(distanceVal, (val) => val > 1.6 ? "none" : "auto");
+
+  const cardTitleColor = useTransform(scrollYProgress, [0, 0.5], ["#0f172a", "#ffffff"]);
+
+  // Only display titles for the 3 front-facing cards
+  const contentOpacity = useTransform(distanceVal, [1.2, 1.6], [1, 0]);
 
   const angle = index * 45;
 
@@ -139,65 +169,86 @@ function Carousel3dCard({ slug, data, index, scrollYProgress, isActive, onCardCl
         transform: `rotateY(${angle}deg) translateZ(480px)`
       }}
     >
-      <motion.div
-        onClick={() => onCardClick(index)}
-        style={{
-          scale,
-          opacity,
-          willChange: "transform, opacity",
-          "--hover-glow": meta.hoverGlow,
-          "--hover-border": meta.hoverBorder
+      <Link 
+        href={`/services/${slug}`}
+        onClick={(e) => {
+          if (!isActive) {
+            e.preventDefault();
+            e.stopPropagation();
+            onCardClick(index);
+          } else {
+            e.stopPropagation();
+          }
         }}
-        className="carousel-3d-card group"
+        className="flex flex-col items-center select-none"
+        style={{ transformStyle: "preserve-3d" }}
       >
-        <div className="flex flex-col justify-between h-full">
-          <div className="space-y-3">
-            <div className="flex justify-between items-center">
-              <div className={`p-2 rounded-xl transition-all duration-300 group-hover:scale-110 ${meta.iconBg}`}>
-                <IconComponent className="w-5 h-5" />
-              </div>
-              <div className="w-1.5 h-1.5 rounded-full bg-white/20 transition-all duration-300 group-hover:bg-white/40" />
+        {/* The actual card containing the image with hover effect */}
+        <motion.div
+          style={{
+            scale,
+            opacity,
+            visibility,
+            pointerEvents,
+            willChange: "transform, opacity",
+            "--hover-glow": meta.hoverGlow,
+            "--hover-border": meta.hoverBorder
+          }}
+          className="carousel-3d-card relative overflow-hidden group rounded-[24px]"
+        >
+          {/* Service Image */}
+          <Image 
+            src={serviceImages[slug] || `/assets/images/services/${slug}.png`}
+            alt={data.title}
+            fill
+            sizes="360px"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+
+          {/* Bevel gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none" />
+
+          {/* Floating icon */}
+          <div className="absolute top-4 left-4 z-10">
+            <div className={`p-2 rounded-xl transition-all duration-300 group-hover:scale-110 ${meta.iconBg}`}>
+              <IconComponent className="w-4 h-4" />
             </div>
-            <h4 className="text-sm font-bold text-white leading-snug group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-300 transition-all duration-300">
-              {data.title}
-            </h4>
-            <p className="text-[10px] text-slate-400 leading-relaxed line-clamp-3 group-hover:text-slate-300 transition-colors">
-              {data.description}
-            </p>
           </div>
 
-          <div className="space-y-3 mt-auto pt-4">
-            <ul className="space-y-1">
+          {/* Hover overlay with details */}
+          <div className="absolute inset-0 bg-slate-950/80 opacity-0 group-hover:opacity-100 group-hover:backdrop-blur-md transition-all duration-300 p-5 flex flex-col justify-between z-20">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-mono text-slate-400 font-bold uppercase">key metrics</span>
+              </div>
+              <p className="text-xs text-slate-200 leading-relaxed font-medium">
+                {data.description}
+              </p>
+            </div>
+            <ul className="space-y-1.5 pt-2 border-t border-white/5">
               {data.features.slice(0, 3).map((f) => (
-                <li key={f} className="text-[9px] text-slate-400/90 flex items-center leading-tight">
-                  <span className={`w-1 h-1 rounded-full ${meta.bulletColor} mr-2 flex-shrink-0 transition-transform group-hover:scale-125`} />
-                  <span className="group-hover:text-slate-300 transition-colors line-clamp-1">{f}</span>
+                <li key={f} className="text-[9px] text-slate-300 flex items-center leading-snug">
+                  <span className={`w-1.5 h-1.5 rounded-full ${meta.bulletColor} mr-2 flex-shrink-0`} />
+                  <span className="line-clamp-1">{f}</span>
                 </li>
               ))}
             </ul>
-            
-            <div className="border-t border-white/5 pt-3">
-              <Link 
-                href={`/services/${slug}`}
-                onClick={(e) => {
-                  if (!isActive) {
-                    // Prevent navigation and focus card if it's currently in the background
-                    e.preventDefault();
-                    e.stopPropagation();
-                    onCardClick(index);
-                  } else {
-                    e.stopPropagation();
-                  }
-                }}
-                className={`inline-flex items-center text-xs font-bold transition-all duration-300 ${meta.themeColor} group-hover:brightness-110`}
-              >
-                Learn More
-                <ArrowRight className="w-3.5 h-3.5 ml-1.5 transform group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+
+        {/* Title below the card (only visible for the front 3 cards) */}
+        <motion.div 
+          style={{ opacity: contentOpacity }}
+          className="mt-4 flex flex-col items-center"
+        >
+          <motion.h4 
+            style={{ color: cardTitleColor }} 
+            className="text-sm font-extrabold text-center tracking-wide drop-shadow-md select-none"
+          >
+            {data.title}
+          </motion.h4>
+        </motion.div>
+      </Link>
     </div>
   );
 }
@@ -205,7 +256,6 @@ function Carousel3dCard({ slug, data, index, scrollYProgress, isActive, onCardCl
 export default function Home() {
   const router = useRouter();
   const [orderCount, setOrderCount] = useState(3370);
-  const [isAnnual, setIsAnnual] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -215,72 +265,70 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    let scheduledAnimationFrame = false;
+    const stuckStates = { card1: false, card2: false, card3: false };
 
-    const handleScroll = () => {
-      if (scheduledAnimationFrame) return;
-      scheduledAnimationFrame = true;
+    const updateClasses = () => {
+      const card1 = document.getElementById("step-card-1");
+      const card2 = document.getElementById("step-card-2");
+      const card3 = document.getElementById("step-card-3");
+      if (!card1 || !card2 || !card3) return;
 
-      requestAnimationFrame(() => {
-        scheduledAnimationFrame = false;
+      if (window.innerWidth <= 768) {
+        [card1, card2, card3].forEach((card) => {
+          card.classList.remove("stacked-under-1", "stacked-under-2", "active-focus");
+        });
+        return;
+      }
 
-        const card1 = document.getElementById("step-card-1");
-        const card2 = document.getElementById("step-card-2");
-        const card3 = document.getElementById("step-card-3");
-        if (!card1 || !card2 || !card3) return;
+      card1.classList.remove("stacked-under-1", "stacked-under-2", "active-focus");
+      card2.classList.remove("stacked-under-1", "stacked-under-2", "active-focus");
+      card3.classList.remove("stacked-under-1", "stacked-under-2", "active-focus");
 
-        if (window.innerWidth <= 768) {
-          [card1, card2, card3].forEach((card) => {
-            card.classList.remove("stacked-under-1", "stacked-under-2", "active-focus");
-          });
-          return;
-        }
+      if (stuckStates.card3) {
+        card1.classList.add("stacked-under-1");
+        card2.classList.add("stacked-under-2");
+        card3.classList.add("active-focus");
+      } else if (stuckStates.card2) {
+        card1.classList.add("stacked-under-2");
+        card2.classList.add("active-focus");
+      } else if (stuckStates.card1) {
+        card1.classList.add("active-focus");
+      }
+    };
 
-        // Base sticky offset from CSS
-        const cardHeight = 400;
-        const topOffset = 170;
-        const visibleHeight = cardHeight * 0.1; // 40px
-
-        const offsets = {
-          top1: topOffset,
-          top2: topOffset + visibleHeight,
-          top3: topOffset + (visibleHeight * 2)
-        };
-
-        const rect1 = card1.getBoundingClientRect();
-        const rect2 = card2.getBoundingClientRect();
-        const rect3 = card3.getBoundingClientRect();
-
-        const tolerance = 3;
-
-        const isCard1Stuck = rect1.top <= offsets.top1 + tolerance;
-        const isCard2Stuck = rect2.top <= offsets.top2 + tolerance;
-        const isCard3Stuck = rect3.top <= offsets.top3 + tolerance;
-
-        card1.classList.remove("stacked-under-1", "stacked-under-2", "active-focus");
-        card2.classList.remove("stacked-under-1", "stacked-under-2", "active-focus");
-        card3.classList.remove("stacked-under-1", "stacked-under-2", "active-focus");
-
-        if (isCard3Stuck) {
-          card1.classList.add("stacked-under-1");
-          card2.classList.add("stacked-under-2");
-          card3.classList.add("active-focus");
-        } else if (isCard2Stuck) {
-          card1.classList.add("stacked-under-2");
-          card2.classList.add("active-focus");
-        } else if (isCard1Stuck) {
-          card1.classList.add("active-focus");
-        }
+    const createObserver = (cardKey, marginString, stuckOffset) => {
+      return new IntersectionObserver((entries) => {
+        const [entry] = entries;
+        // Element is stuck if it is not intersecting the active area AND is above/at the sticky top offset
+        stuckStates[cardKey] = !entry.isIntersecting && entry.boundingClientRect.top <= stuckOffset + 5;
+        updateClasses();
+      }, {
+        rootMargin: marginString
       });
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll);
-    handleScroll();
+    const observer1 = createObserver("card1", "-170px 0px 0px 0px", 170);
+    const observer2 = createObserver("card2", "-210px 0px 0px 0px", 210);
+    const observer3 = createObserver("card3", "-250px 0px 0px 0px", 250);
+
+    const s1 = document.getElementById("step-card-sentinel-1");
+    const s2 = document.getElementById("step-card-sentinel-2");
+    const s3 = document.getElementById("step-card-sentinel-3");
+
+    if (s1) observer1.observe(s1);
+    if (s2) observer2.observe(s2);
+    if (s3) observer3.observe(s3);
+
+    const handleResize = () => {
+      updateClasses();
+    };
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
+      observer1.disconnect();
+      observer2.disconnect();
+      observer3.disconnect();
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -585,6 +633,18 @@ export default function Home() {
   const servicesContainerRef = useRef(null);
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveInsightSlug((prev) => {
+        const keys = ["cloud-cost-guardrails", "shift-security-left", "kubernetes-resource-optimization"];
+        const currentIndex = keys.indexOf(prev);
+        const nextIndex = (currentIndex + 1) % keys.length;
+        return keys[nextIndex];
+      });
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
     const checkScreen = () => {
       setIsDesktop(window.innerWidth >= 1024);
     };
@@ -648,21 +708,24 @@ export default function Home() {
     });
   };
 
-  const headerOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-  const headerY = useTransform(scrollYProgress, [0, 0.15], [0, -50]);
+  const headerOpacity = useTransform(scrollYProgress, [0.85, 0.95], [1, 0]);
+  const headerY = useTransform(scrollYProgress, [0.85, 0.95], [0, -50]);
   const rotateY = useTransform(scrollYProgress, [0, 1], [0, -315]);
+  const headerColor = useTransform(scrollYProgress, [0, 0.5], ["#0f172a", "#ffffff"]);
+  const subHeaderColor = useTransform(scrollYProgress, [0, 0.5], ["#1591dc", "#4bb8fa"]);
+  const descColor = useTransform(scrollYProgress, [0, 0.5], ["#475569", "#cbd5e1"]);
 
   const serviceGlowClasses = ["glow-card-teal", "glow-card-gold", "glow-card-purple", "glow-card-rose"];
   const blogGlows = ["glow-card-gold", "glow-card-teal", "glow-card-purple"];
 
   return (
-    <div className="relative bg-slate-50 text-slate-900">
+    <div className="relative bg-[#edf5fd] text-slate-900">
       
       {/* Grid background overlay */}
       <div className="absolute inset-0 grid-pattern opacity-[0.4] pointer-events-none -z-20"></div>
 
       {/* Hero Section Container (Full-width wrapper to support full-bleed background image) */}
-      <div className="relative w-full overflow-hidden border-b border-slate-200/60 bg-slate-50">
+      <div className="relative w-full overflow-hidden border-b border-slate-200/40 bg-gradient-to-b from-[#edf5fd] to-[#dceaf7]">
         
         {/* Full-bleed Background Image */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
@@ -674,8 +737,8 @@ export default function Home() {
             className="object-cover object-right opacity-35 sm:opacity-55 lg:opacity-100"
           />
           {/* Gradients to blend into slate-50 background on left and bottom */}
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-50 via-slate-50/80 to-transparent z-10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-transparent to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#edf5fd] via-[#edf5fd]/80 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#dceaf7] via-transparent to-transparent z-10" />
         </div>
 
         {/* 1. Hero Section (White/Light Slate Alternate) */}
@@ -818,7 +881,7 @@ export default function Home() {
     </div>
 
       {/* 2. About Intro Section (Light Blue Alternate Background) */}
-      <section className="relative border-y border-slate-200/60 bg-gradient-to-b from-[#e8eff6] via-[#edf3f8] to-[#dbe6f2] py-20">
+      <section className="relative border-y border-slate-200/40 bg-gradient-to-b from-[#dceaf7] to-[#b9d3ee] py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
@@ -926,7 +989,7 @@ export default function Home() {
       {/* 3. Services Grid Section */}
       <section 
         ref={servicesContainerRef} 
-        className={isDesktop ? "relative h-[300vh] bg-gradient-to-b from-[#dbe6f2] via-[#0c0f1d] to-[#070913]" : "w-full py-24 bg-gradient-to-b from-[#dbe6f2] via-[#0c0f1d] to-[#070913] border-b border-white/5"}
+        className={isDesktop ? "relative h-[300vh] bg-gradient-to-b from-[#b9d3ee] to-[#254d80]" : "w-full py-24 bg-gradient-to-b from-[#b9d3ee] to-[#254d80] border-b border-white/5"}
       >
         {!isDesktop ? (
           /* Standard layout for mobile/tablet */
@@ -953,19 +1016,19 @@ export default function Home() {
                     className={`p-6 rounded-2xl ${glowClass} flex flex-col justify-between group`}
                   >
                     <div className="space-y-4">
-                      <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 text-slate-500 group-hover:bg-primary/5 group-hover:text-primary transition-all flex items-center justify-center">
+                      <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200/60 text-slate-500 group-hover:bg-[#1591DC]/10 group-hover:text-[#2C5EAD] transition-all flex items-center justify-center">
                         <IconComponent className="w-6 h-6" />
                       </div>
-                      <h4 className="text-lg font-bold text-slate-900 group-hover:text-primary transition-colors">
+                      <h4 className="text-lg font-bold text-slate-900 group-hover:text-[#2C5EAD] transition-colors">
                         {data.title}
                       </h4>
-                      <p className="text-xs text-slate-500 leading-relaxed">
+                      <p className="text-xs text-slate-600 leading-relaxed">
                         {data.description}
                       </p>
                       <ul className="space-y-1.5 pt-2">
                         {data.features.slice(0, 3).map((f) => (
-                          <li key={f} className="text-[10px] text-slate-500 flex items-center">
-                            <span className="w-1.5 h-1.5 rounded-full bg-primary/40 mr-2 flex-shrink-0"></span>
+                          <li key={f} className="text-[10px] text-slate-700 flex items-center">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#2C5EAD]/40 mr-2 flex-shrink-0"></span>
                             <span>{f}</span>
                           </li>
                         ))}
@@ -974,7 +1037,7 @@ export default function Home() {
                     <div className="pt-6 mt-6 border-t border-slate-100">
                       <Link 
                         href={`/services/${slug}`}
-                        className="inline-flex items-center text-xs font-bold text-primary group-hover:text-secondary transition-colors"
+                        className="inline-flex items-center text-xs font-bold text-[#2C5EAD] group-hover:text-blue-800 transition-colors"
                       >
                         Learn More
                         <ArrowRight className="w-3.5 h-3.5 ml-1.5 group-hover:translate-x-1 transition-transform" />
@@ -997,20 +1060,17 @@ export default function Home() {
           </div>
         ) : (
           /* 3D Perspective Circular Carousel for desktop */
-          <div className="sticky top-0 flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-transparent">
+          <div className="sticky top-0 flex h-screen w-full flex-col items-center justify-start pt-32 overflow-hidden bg-transparent">
             {/* Background Glow */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03),transparent_60%)] pointer-events-none" />
 
             {/* Fading Sticky Header */}
             <motion.div 
               style={{ opacity: headerOpacity, y: headerY }}
-              className="absolute top-12 left-0 right-0 z-20 text-center max-w-3xl mx-auto space-y-4 px-4 pointer-events-none"
+              className="relative z-20 text-center max-w-3xl mx-auto space-y-4 px-4 pointer-events-none mb-8"
             >
-              <h2 className="text-xs font-black tracking-widest text-[#1591DC] uppercase">Comprehensive IT Solutions</h2>
-              <h3 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Our Core Services</h3>
-              <p className="text-slate-400 text-sm sm:text-base">
-                Scroll down to see our core service divisions rotate in 3D perspective.
-              </p>
+              <motion.h2 style={{ color: subHeaderColor }} className="text-xs font-black tracking-widest uppercase">Comprehensive IT Solutions</motion.h2>
+              <motion.h3 style={{ color: headerColor }} className="text-3xl sm:text-4xl font-extrabold tracking-tight">Our Core Services</motion.h3>
             </motion.div>
 
             {/* 3D Perspective Ring Container */}
@@ -1033,16 +1093,16 @@ export default function Home() {
               </motion.div>
             </div>
 
-            {/* Dynamic Dot Pagination Indicator */}
-            <div className="absolute bottom-10 left-0 right-0 z-20 flex justify-center gap-3">
+            {/* Vertical Dot Pagination Indicator on the right side of the page */}
+            <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3">
               {Object.entries(servicesData).slice(0, 8).map(([slug, data], index) => {
                 const isActive = activeCarouselIndex === index;
                 return (
                   <button
                     key={slug}
                     onClick={() => handleCardClick(index)}
-                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                      isActive ? "bg-[#1591DC] w-8 shadow-[0_0_10px_rgba(21,145,220,0.6)]" : "bg-white/20 hover:bg-white/45"
+                    className={`w-2.5 transition-all duration-300 rounded-full ${
+                      isActive ? "bg-[#1591DC] h-8 shadow-[0_0_10px_rgba(21,145,220,0.6)]" : "bg-white/20 hover:bg-white/45 h-2.5"
                     }`}
                     aria-label={`Go to service ${index + 1}`}
                   />
@@ -1054,7 +1114,7 @@ export default function Home() {
       </section>
 
       {/* 4. Industries Section (Smooth Gradient Background) */}
-      <section className="relative py-20 bg-gradient-to-b from-[#070913] via-[#edf3f8] to-[#edf3f8] border-b border-slate-200/50">
+      <section className="relative py-20 bg-gradient-to-b from-[#254d80] to-[#14294d] border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
             <h2 className="text-xs font-black tracking-widest text-[#1591DC] uppercase">Sectors We Empower</h2>
@@ -1067,201 +1127,165 @@ export default function Home() {
               {/* 1. FINTECH: Dark Terminal Theme */}
               <div 
                 onClick={() => router.push("/solutions/fintech")} 
-                className="sector-custom-card card-fintech" 
+                className="sector-custom-card card-fintech relative overflow-hidden group" 
                 role="button" 
                 tabIndex={0}
               >
-                <div className="ft-header">
-                  <div className="ft-dot" style={{ background: "#ff5f56" }}></div>
-                  <div className="ft-dot" style={{ background: "#ffbd2e" }}></div>
-                  <div className="ft-dot" style={{ background: "#27c93f" }}></div>
+                {/* Background Image (blurred) */}
+                <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+                  <Image 
+                    src="/assets/images/sectors/fintech.png"
+                    alt="FinTech"
+                    fill
+                    className="object-cover opacity-20 filter blur-md transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-[#0c1729]/30" />
                 </div>
-                <div className="sector-custom-card-body flex flex-col justify-between h-full">
-                  <div>
-                    <div className="ft-ticker mb-4">
-                      <div className="ft-ticker-line">
-                        <span className="ft-lbl"><span>▲</span>PCI_AUDIT</span>
-                        <span className="ft-val">OK</span>
-                      </div>
-                      <div className="ft-ticker-line">
-                        <span className="ft-lbl">TX_HASH</span>
-                        <span className="ft-val" style={{ color: "#38bdf8", fontSize: "11px" }}>0xf3a…9c2</span>
-                      </div>
-                      <div className="ft-ticker-line">
-                        <span className="ft-lbl">LEDGER</span>
-                        <span className="ft-val">LOCKED</span>
-                      </div>
-                    </div>
-                    <h2 className="sector-custom-card-title text-white">{solutionsData.fintech.title}</h2>
-                    <p className="sector-custom-card-desc text-slate-300 text-xs leading-relaxed">{solutionsData.fintech.description}</p>
-                    
-                    {/* Features list */}
-                    <ul className="space-y-1.5 my-4">
-                      {solutionsData.fintech.features.slice(0, 3).map((feat, idx) => (
-                        <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
-                          <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
+                
+                <div className="relative z-10 flex flex-col h-full justify-between w-full">
+                  <div className="ft-header">
+                    <div className="ft-dot" style={{ background: "#ff5f56" }}></div>
+                    <div className="ft-dot" style={{ background: "#ffbd2e" }}></div>
+                    <div className="ft-dot" style={{ background: "#27c93f" }}></div>
                   </div>
-
-                  <div>
-                    {/* Metrics Row */}
-                    <div className="grid grid-cols-3 gap-2 border-t border-white/10 pt-4 mt-2">
-                      {solutionsData.fintech.metrics.map((m, idx) => (
-                        <div key={idx} className="text-center bg-[#070d18] border border-white/5 p-2 rounded-xl">
-                          <span className="text-[9px] font-bold text-slate-400 block truncate">{m.label}</span>
-                          <span className="text-xs font-black text-sky-400 block mt-0.5">{m.value}</span>
+                  <div className="sector-custom-card-body flex flex-col justify-between h-full">
+                    <div>
+                      <div className="ft-ticker mb-4">
+                        <div className="ft-ticker-line">
+                          <span className="ft-lbl"><span>▲</span>PCI_AUDIT</span>
+                          <span className="ft-val">OK</span>
                         </div>
-                      ))}
+                        <div className="ft-ticker-line">
+                          <span className="ft-lbl">TX_HASH</span>
+                          <span className="ft-val" style={{ color: "#38bdf8", fontSize: "11px" }}>0xf3a…9c2</span>
+                        </div>
+                        <div className="ft-ticker-line">
+                          <span className="ft-lbl">LEDGER</span>
+                          <span className="ft-val">LOCKED</span>
+                        </div>
+                      </div>
+                      <h2 className="sector-custom-card-title text-white">{solutionsData.fintech.title}</h2>
+                      <p className="sector-custom-card-desc text-slate-300 text-xs leading-relaxed">{solutionsData.fintech.description}</p>
+                      
+                      {/* Features list */}
+                      <ul className="space-y-1.5 my-4">
+                        {solutionsData.fintech.features.slice(0, 3).map((feat, idx) => (
+                          <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
+                            <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
+                            <span>{feat}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
 
-                    {/* Tech stack badges */}
-                    <div className="flex flex-wrap gap-1.5 mt-4">
-                      {solutionsData.fintech.techStack.map((tech) => (
-                        <span key={tech} className="ft-tech-badge text-[9px] px-2 py-0.5 rounded bg-white/5 text-sky-300 border border-white/10">{tech}</span>
-                      ))}
-                    </div>
+                    <div>
+                      {/* Metrics Row */}
+                      <div className="grid grid-cols-3 gap-2 border-t border-white/10 pt-4 mt-2">
+                        {solutionsData.fintech.metrics.map((m, idx) => (
+                          <div key={idx} className="text-center bg-[#070d18] border border-white/5 p-2 rounded-xl">
+                            <span className="text-[9px] font-bold text-slate-400 block truncate">{m.label}</span>
+                            <span className="text-xs font-black text-sky-400 block mt-0.5">{m.value}</span>
+                          </div>
+                        ))}
+                      </div>
 
-                    <div className="sector-custom-card-link text-sky-400 mt-6 inline-flex items-center gap-1.5 text-xs font-bold">
-                      Explore Solution
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="3" y1="8" x2="13" y2="8" />
-                        <polyline points="9 4 13 8 9 12" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                      {/* Tech stack badges */}
+                      <div className="flex flex-wrap gap-1.5 mt-4">
+                        {solutionsData.fintech.techStack.map((tech) => (
+                          <span key={tech} className="ft-tech-badge text-[9px] px-2 py-0.5 rounded bg-white/5 text-sky-300 border border-white/10">{tech}</span>
+                        ))}
+                      </div>
 
-              {/* 2. HEALTHCARE: Clinical Soft Theme */}
-              <div 
-                onClick={() => router.push("/solutions/healthcare")} 
-                className="sector-custom-card card-health" 
-                role="button" 
-                tabIndex={0}
-              >
-                <div className="hc-strip"></div>
-                <div className="sector-custom-card-body flex flex-col justify-between h-full">
-                  <div>
-                    <div className="hc-pulse mb-4">
-                      <div className="hc-cross">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                      <div className="sector-custom-card-link text-sky-400 mt-6 inline-flex items-center gap-1.5 text-xs font-bold">
+                        Explore Solution
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="3" y1="8" x2="13" y2="8" />
+                          <polyline points="9 4 13 8 9 12" />
                         </svg>
                       </div>
-                      <span className="hc-badge">HIPAA ready</span>
-                    </div>
-                    <h2 className="sector-custom-card-title text-slate-900">{solutionsData.healthcare.title}</h2>
-                    <p className="sector-custom-card-desc text-slate-600 text-xs leading-relaxed">{solutionsData.healthcare.description}</p>
-                    
-                    {/* Features list */}
-                    <ul className="space-y-1.5 my-4">
-                      {solutionsData.healthcare.features.slice(0, 3).map((feat, idx) => (
-                        <li key={idx} className="text-[10px] text-slate-600 flex items-start gap-1.5">
-                          <Check className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0 mt-0.5" />
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div>
-                    {/* Metrics Row */}
-                    <div className="grid grid-cols-3 gap-2 border-t border-slate-200 pt-4 mt-2">
-                      {solutionsData.healthcare.metrics.map((m, idx) => (
-                        <div key={idx} className="text-center bg-[#edfcf7] border border-[#1D9E75]/10 p-2 rounded-xl">
-                          <span className="text-[9px] font-bold text-slate-500 block truncate">{m.label}</span>
-                          <span className="text-xs font-black text-[#1D9E75] block mt-0.5">{m.value}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Tech stack badges */}
-                    <div className="flex flex-wrap gap-1.5 mt-4">
-                      {solutionsData.healthcare.techStack.map((tech) => (
-                        <span key={tech} className="hc-tech-badge text-[9px] px-2 py-0.5 rounded bg-[#E1F5EE] text-[#0F6E56] border border-[#1D9E75]/20">{tech}</span>
-                      ))}
-                    </div>
-
-                    <div className="sector-custom-card-link text-[#0F6E56] mt-6 inline-flex items-center gap-1.5 text-xs font-bold">
-                      Explore Solution
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="3" y1="8" x2="13" y2="8" />
-                        <polyline points="9 4 13 8 9 12" />
-                      </svg>
                     </div>
                   </div>
                 </div>
               </div>
-
               {/* 3. SAAS: Infra Dashboard Theme */}
               <div 
                 onClick={() => router.push("/solutions/saas")} 
-                className="sector-custom-card card-saas" 
+                className="sector-custom-card card-saas relative overflow-hidden group" 
                 role="button" 
                 tabIndex={0}
               >
-                <div className="saas-header">
-                  <div className="saas-dots">
-                    <div className="saas-dot"></div>
-                    <div className="saas-dot"></div>
-                    <div className="saas-dot"></div>
-                  </div>
-                  <div className="saas-live">
-                    <div className="saas-ping"></div>
-                    <span className="saas-live-txt">LIVE</span>
-                  </div>
+                {/* Background Image (blurred) */}
+                <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+                  <Image 
+                    src="/assets/images/sectors/saas.png"
+                    alt="SaaS"
+                    fill
+                    className="object-cover opacity-20 filter blur-md transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-[#1a153a]/30" />
                 </div>
-                <div className="sector-custom-card-body flex flex-col justify-between h-full">
-                  <div>
-                    <div className="saas-bars mb-4 !p-0">
-                      <div className="saas-bar" style={{ height: "35%" }}></div>
-                      <div className="saas-bar" style={{ height: "55%" }}></div>
-                      <div className="saas-bar" style={{ height: "30%" }}></div>
-                      <div className="saas-bar" style={{ height: "85%" }}></div>
-                      <div className="saas-bar" style={{ height: "60%" }}></div>
-                      <div className="saas-bar" style={{ height: "45%" }}></div>
+
+                <div className="relative z-10 flex flex-col h-full justify-between w-full">
+                  <div className="saas-header">
+                    <div className="saas-dots">
+                      <div className="saas-dot"></div>
+                      <div className="saas-dot"></div>
+                      <div className="saas-dot"></div>
                     </div>
-                    <h2 className="sector-custom-card-title text-slate-900">{solutionsData.saas.title}</h2>
-                    <p className="sector-custom-card-desc text-slate-600 text-xs leading-relaxed">{solutionsData.saas.description}</p>
-                    
-                    {/* Features list */}
-                    <ul className="space-y-1.5 my-4">
-                      {solutionsData.saas.features.slice(0, 3).map((feat, idx) => (
-                        <li key={idx} className="text-[10px] text-slate-600 flex items-start gap-1.5">
-                          <Check className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0 mt-0.5" />
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="saas-live">
+                      <div className="saas-ping"></div>
+                      <span className="saas-live-txt">LIVE</span>
+                    </div>
                   </div>
-
-                  <div>
-                    {/* Metrics Row */}
-                    <div className="grid grid-cols-3 gap-2 border-t border-slate-300 pt-4 mt-2">
-                      {solutionsData.saas.metrics.map((m, idx) => (
-                        <div key={idx} className="text-center bg-[#EEEDFE] border border-[#534AB7]/10 p-2 rounded-xl">
-                          <span className="text-[9px] font-bold text-slate-500 block truncate">{m.label}</span>
-                          <span className="text-xs font-black text-[#534AB7] block mt-0.5">{m.value}</span>
-                        </div>
-                      ))}
+                  <div className="sector-custom-card-body flex flex-col justify-between h-full">
+                    <div>
+                      <div className="saas-bars mb-4 !p-0">
+                        <div className="saas-bar" style={{ height: "35%" }}></div>
+                        <div className="saas-bar" style={{ height: "55%" }}></div>
+                        <div className="saas-bar" style={{ height: "30%" }}></div>
+                        <div className="saas-bar" style={{ height: "85%" }}></div>
+                        <div className="saas-bar" style={{ height: "60%" }}></div>
+                        <div className="saas-bar" style={{ height: "45%" }}></div>
+                      </div>
+                      <h2 className="sector-custom-card-title text-white">{solutionsData.saas.title}</h2>
+                      <p className="sector-custom-card-desc text-slate-300 text-xs leading-relaxed">{solutionsData.saas.description}</p>
+                      
+                      {/* Features list */}
+                      <ul className="space-y-1.5 my-4">
+                        {solutionsData.saas.features.slice(0, 3).map((feat, idx) => (
+                          <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
+                            <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
+                            <span>{feat}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
 
-                    {/* Tech stack badges */}
-                    <div className="flex flex-wrap gap-1.5 mt-4">
-                      {solutionsData.saas.techStack.map((tech) => (
-                        <span key={tech} className="saas-tech-badge text-[9px] px-2 py-0.5 rounded bg-[#CECBF6] text-[#26215C] border border-[#AFA9EC]/20">{tech}</span>
-                      ))}
-                    </div>
+                    <div>
+                      {/* Metrics Row */}
+                      <div className="grid grid-cols-3 gap-2 border-t border-white/5 pt-4 mt-2">
+                        {solutionsData.saas.metrics.map((m, idx) => (
+                          <div key={idx} className="text-center bg-[#534ab7]/10 border border-[#534AB7]/25 p-2 rounded-xl">
+                            <span className="text-[9px] font-bold text-slate-400 block truncate">{m.label}</span>
+                            <span className="text-xs font-black text-purple-400 block mt-0.5">{m.value}</span>
+                          </div>
+                        ))}
+                      </div>
 
-                    <div className="sector-custom-card-link text-[#534AB7] mt-6 inline-flex items-center gap-1.5 text-xs font-bold">
-                      Explore Solution
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="3" y1="8" x2="13" y2="8" />
-                        <polyline points="9 4 13 8 9 12" />
-                      </svg>
+                      {/* Tech stack badges */}
+                      <div className="flex flex-wrap gap-1.5 mt-4">
+                        {solutionsData.saas.techStack.map((tech) => (
+                          <span key={tech} className="saas-tech-badge text-[9px] px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20">{tech}</span>
+                        ))}
+                      </div>
+
+                      <div className="sector-custom-card-link text-purple-300 mt-6 inline-flex items-center gap-1.5 text-xs font-bold">
+                        Explore Solution
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="3" y1="8" x2="13" y2="8" />
+                          <polyline points="9 4 13 8 9 12" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1270,80 +1294,93 @@ export default function Home() {
               {/* 4. RETAIL: Warm Amber Theme */}
               <div 
                 onClick={() => router.push("/solutions/retail")} 
-                className="sector-custom-card card-retail" 
+                className="sector-custom-card card-retail relative overflow-hidden group" 
                 role="button" 
                 tabIndex={0}
               >
-                <div className="ret-header">
-                  <span className="ret-tag">Live orders</span>
-                  <span className="ret-count">{orderCount.toLocaleString()}</span>
+                {/* Background Image (blurred) */}
+                <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+                  <Image 
+                    src="/assets/images/sectors/retail.png"
+                    alt="Retail"
+                    fill
+                    className="object-cover opacity-20 filter blur-md transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-[#2d1e0a]/30" />
                 </div>
-                <div className="sector-custom-card-body flex flex-col justify-between h-full">
-                  <div>
-                    <div className="ret-shelf mb-4 !p-0">
-                      <div className="ret-item">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <circle cx="9" cy="21" r="1" />
-                          <circle cx="20" cy="21" r="1" />
-                          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                        </svg>
-                      </div>
-                      <div className="ret-item">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <rect x="1" y="3" width="15" height="13" />
-                          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
-                          <circle cx="5.5" cy="18.5" r="2.5" />
-                          <circle cx="18.5" cy="18.5" r="2.5" />
-                        </svg>
-                      </div>
-                      <div className="ret-item">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M3 21h18" />
-                          <path d="M3 7l1 4h16l1-4" />
-                          <path d="M4 11v10" />
-                          <path d="M20 11v10" />
-                          <path d="M9 21v-4a3 3 0 0 1 6 0v4" />
-                        </svg>
-                      </div>
-                    </div>
-                    <h2 className="sector-custom-card-title text-slate-900">{solutionsData.retail.title}</h2>
-                    <p className="sector-custom-card-desc text-slate-600 text-xs leading-relaxed">{solutionsData.retail.description}</p>
-                    
-                    {/* Features list */}
-                    <ul className="space-y-1.5 my-4">
-                      {solutionsData.retail.features.slice(0, 3).map((feat, idx) => (
-                        <li key={idx} className="text-[10px] text-slate-600 flex items-start gap-1.5">
-                          <Check className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0 mt-0.5" />
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
+
+                <div className="relative z-10 flex flex-col h-full justify-between w-full">
+                  <div className="ret-header">
+                    <span className="ret-tag">Live orders</span>
+                    <span className="ret-count">{orderCount.toLocaleString()}</span>
                   </div>
-
-                  <div>
-                    {/* Metrics Row */}
-                    <div className="grid grid-cols-3 gap-2 border-t border-slate-300 pt-4 mt-2">
-                      {solutionsData.retail.metrics.map((m, idx) => (
-                        <div key={idx} className="text-center bg-[#FAEEDA] border border-[#BA7517]/10 p-2 rounded-xl">
-                          <span className="text-[9px] font-bold text-slate-500 block truncate">{m.label}</span>
-                          <span className="text-xs font-black text-[#BA7517] block mt-0.5">{m.value}</span>
+                  <div className="sector-custom-card-body flex flex-col justify-between h-full">
+                    <div>
+                      <div className="ret-shelf mb-4 !p-0">
+                        <div className="ret-item">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="9" cy="21" r="1" />
+                            <circle cx="20" cy="21" r="1" />
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                          </svg>
                         </div>
-                      ))}
+                        <div className="ret-item">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="1" y="3" width="15" height="13" />
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                            <circle cx="5.5" cy="18.5" r="2.5" />
+                            <circle cx="18.5" cy="18.5" r="2.5" />
+                          </svg>
+                        </div>
+                        <div className="ret-item">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M3 21h18" />
+                            <path d="M3 7l1 4h16l1-4" />
+                            <path d="M4 11v10" />
+                            <path d="M20 11v10" />
+                            <path d="M9 21v-4a3 3 0 0 1 6 0v4" />
+                          </svg>
+                        </div>
+                      </div>
+                      <h2 className="sector-custom-card-title text-white">{solutionsData.retail.title}</h2>
+                      <p className="sector-custom-card-desc text-slate-300 text-xs leading-relaxed">{solutionsData.retail.description}</p>
+                      
+                      {/* Features list */}
+                      <ul className="space-y-1.5 my-4">
+                        {solutionsData.retail.features.slice(0, 3).map((feat, idx) => (
+                          <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
+                            <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
+                            <span>{feat}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
 
-                    {/* Tech stack badges */}
-                    <div className="flex flex-wrap gap-1.5 mt-4">
-                      {solutionsData.retail.techStack.map((tech) => (
-                        <span key={tech} className="ret-tech-badge text-[9px] px-2 py-0.5 rounded bg-[#FAEEDA] text-[#412402] border border-[#FAC775]/20">{tech}</span>
-                      ))}
-                    </div>
+                    <div>
+                      {/* Metrics Row */}
+                      <div className="grid grid-cols-3 gap-2 border-t border-white/5 pt-4 mt-2">
+                        {solutionsData.retail.metrics.map((m, idx) => (
+                          <div key={idx} className="text-center bg-[#ba7517]/10 border border-[#BA7517]/25 p-2 rounded-xl">
+                            <span className="text-[9px] font-bold text-slate-400 block truncate">{m.label}</span>
+                            <span className="text-xs font-black text-amber-400 block mt-0.5">{m.value}</span>
+                          </div>
+                        ))}
+                      </div>
 
-                    <div className="sector-custom-card-link text-[#BA7517] mt-6 inline-flex items-center gap-1.5 text-xs font-bold">
-                      Explore Solution
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="3" y1="8" x2="13" y2="8" />
-                        <polyline points="9 4 13 8 9 12" />
-                      </svg>
+                      {/* Tech stack badges */}
+                      <div className="flex flex-wrap gap-1.5 mt-4">
+                        {solutionsData.retail.techStack.map((tech) => (
+                          <span key={tech} className="ret-tech-badge text-[9px] px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20">{tech}</span>
+                        ))}
+                      </div>
+
+                      <div className="sector-custom-card-link text-amber-300 mt-6 inline-flex items-center gap-1.5 text-xs font-bold">
+                        Explore Solution
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="3" y1="8" x2="13" y2="8" />
+                          <polyline points="9 4 13 8 9 12" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1370,322 +1407,284 @@ export default function Home() {
                   </div>
                   <span className="collapsed-title-rotated">FinTech</span>
                 </div>
-                <div className="expanded-content">
-                  <div className="ft-header">
-                    <div className="ft-dot" style={{ background: "#ff5f56" }}></div>
-                    <div className="ft-dot" style={{ background: "#ffbd2e" }}></div>
-                    <div className="ft-dot" style={{ background: "#27c93f" }}></div>
+                <div className="expanded-content relative h-full">
+                  {/* Background Image (blurred) */}
+                  <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+                    <Image 
+                      src="/assets/images/sectors/fintech.png"
+                      alt="FinTech"
+                      fill
+                      className="object-cover opacity-20 filter blur-md"
+                    />
+                    <div className="absolute inset-0 bg-[#0c1729]/30" />
                   </div>
-                  <div className="sector-custom-card-body flex flex-row gap-6 p-6">
-                    <div className="sector-left-col flex-1 flex flex-col justify-between">
-                      <div>
-                        <div className="ft-ticker mb-4">
-                          <div className="ft-ticker-line">
-                            <span className="ft-lbl"><span>▲</span>PCI_AUDIT</span>
-                            <span className="ft-val">OK</span>
-                          </div>
-                          <div className="ft-ticker-line">
-                            <span className="ft-lbl">TX_HASH</span>
-                            <span className="ft-val" style={{ color: "#38bdf8", fontSize: "11px" }}>0xf3a…9c2</span>
-                          </div>
-                          <div className="ft-ticker-line">
-                            <span className="ft-lbl">LEDGER</span>
-                            <span className="ft-val">LOCKED</span>
-                          </div>
-                        </div>
-                        <h2 className="sector-custom-card-title text-white">{solutionsData.fintech.title}</h2>
-                        <p className="sector-custom-card-desc text-slate-300 text-xs leading-relaxed">{solutionsData.fintech.description}</p>
-                      </div>
-                      
-                      <div className="flex flex-wrap gap-2 mt-4">
-                        {solutionsData.fintech.techStack.map((tech) => (
-                          <span key={tech} className="ft-tech-badge text-[10px] px-2 py-1 rounded bg-white/5 text-sky-300 border border-white/10">{tech}</span>
-                        ))}
-                      </div>
+                  <div className="relative z-10 flex flex-col h-full justify-between w-full">
+                    <div className="ft-header">
+                      <div className="ft-dot" style={{ background: "#ff5f56" }}></div>
+                      <div className="ft-dot" style={{ background: "#ffbd2e" }}></div>
+                      <div className="ft-dot" style={{ background: "#27c93f" }}></div>
                     </div>
-
-                    <div className="sector-right-col w-[240px] flex flex-col justify-between border-l border-white/10 pl-6">
-                      <div className="space-y-4">
-                        <span className="text-[10px] font-bold text-sky-400 tracking-wider uppercase block">Key Metrics</span>
-                        <div className="grid grid-cols-1 gap-2.5">
-                          {solutionsData.fintech.metrics.map((m, idx) => (
-                            <div key={idx} className="metric-box bg-[#070d18] border border-white/5 p-2 rounded-xl flex items-center justify-between">
-                              <span className="text-xs font-bold text-[#e2e8f0]">{m.label}</span>
-                              <span className="text-sm font-black text-sky-400">{m.value}</span>
+                    <div className="sector-custom-card-body flex flex-row gap-6 p-6">
+                      <div className="sector-left-col flex-1 flex flex-col justify-between">
+                        <div>
+                          <div className="ft-ticker mb-4">
+                            <div className="ft-ticker-line">
+                              <span className="ft-lbl"><span>▲</span>PCI_AUDIT</span>
+                              <span className="ft-val">OK</span>
                             </div>
+                            <div className="ft-ticker-line">
+                              <span className="ft-lbl">TX_HASH</span>
+                              <span className="ft-val" style={{ color: "#38bdf8", fontSize: "11px" }}>0xf3a…9c2</span>
+                            </div>
+                            <div className="ft-ticker-line">
+                              <span className="ft-lbl">LEDGER</span>
+                              <span className="ft-val">LOCKED</span>
+                            </div>
+                          </div>
+                          <h2 className="sector-custom-card-title text-white">{solutionsData.fintech.title}</h2>
+                          <p className="sector-custom-card-desc text-slate-300 text-xs leading-relaxed">{solutionsData.fintech.description}</p>
+                        </div>
+                        
+                        <div className="flex flex-wrap gap-2 mt-4">
+                          {solutionsData.fintech.techStack.map((tech) => (
+                            <span key={tech} className="ft-tech-badge text-[10px] px-2 py-1 rounded bg-white/5 text-sky-300 border border-white/10">{tech}</span>
                           ))}
                         </div>
                       </div>
 
-                      <div className="space-y-3 mt-4">
-                        <span className="text-[10px] font-bold text-sky-400 tracking-wider uppercase block">Key Features</span>
-                        <ul className="space-y-1.5">
-                          {solutionsData.fintech.features.slice(0, 3).map((feat, idx) => (
-                            <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
-                              <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                              <span>{feat}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                      <div className="sector-right-col w-[240px] flex flex-col justify-between border-l border-white/10 pl-6">
+                        <div className="space-y-4">
+                          <span className="text-[10px] font-bold text-sky-400 tracking-wider uppercase block">Key Metrics</span>
+                          <div className="grid grid-cols-1 gap-2.5">
+                            {solutionsData.fintech.metrics.map((m, idx) => (
+                              <div key={idx} className="metric-box bg-[#070d18] border border-white/5 p-2 rounded-xl flex items-center justify-between">
+                                <span className="text-xs font-bold text-[#e2e8f0]">{m.label}</span>
+                                <span className="text-sm font-black text-sky-400">{m.value}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
 
-                      <Link href="/solutions/fintech" className="sector-custom-card-link text-sky-400 hover:text-sky-300 mt-6 inline-flex items-center gap-1.5 text-xs font-bold">
-                        Explore Solution
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <line x1="3" y1="8" x2="13" y2="8" />
-                          <polyline points="9 4 13 8 9 12" />
-                        </svg>
-                      </Link>
+                        <div className="space-y-3 mt-4">
+                          <span className="text-[10px] font-bold text-sky-400 tracking-wider uppercase block">Key Features</span>
+                          <ul className="space-y-1.5">
+                            {solutionsData.fintech.features.slice(0, 3).map((feat, idx) => (
+                              <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
+                                <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
+                                <span>{feat}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <Link href="/solutions/fintech" className="sector-custom-card-link text-sky-400 hover:text-sky-300 mt-6 inline-flex items-center gap-1.5 text-xs font-bold">
+                          Explore Solution
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="3" y1="8" x2="13" y2="8" />
+                            <polyline points="9 4 13 8 9 12" />
+                          </svg>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-
-              {/* 2. HEALTHCARE */}
+              {/* 2. SAAS */}
               <div 
                 onClick={() => setActiveSectorIndex(1)}
-                className={`sector-accordion-card card-health ${activeSectorIndex === 1 ? 'active' : 'collapsed'}`}
+                className={`sector-accordion-card card-saas ${activeSectorIndex === 1 ? 'active' : 'collapsed'}`}
               >
                 <div className="collapsed-content">
                   <span className="collapsed-number">02</span>
-                  <div className="collapsed-icon-wrapper">
-                    <Heart className="w-5 h-5" />
-                  </div>
-                  <span className="collapsed-title-rotated">Healthcare</span>
-                </div>
-                <div className="expanded-content">
-                  <div className="hc-strip"></div>
-                  <div className="sector-custom-card-body flex flex-row gap-6 p-6">
-                    <div className="sector-left-col flex-1 flex flex-col justify-between">
-                      <div>
-                        <div className="hc-pulse mb-4">
-                          <div className="hc-cross">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                            </svg>
-                          </div>
-                          <span className="hc-badge">HIPAA ready</span>
-                        </div>
-                        <h2 className="sector-custom-card-title text-slate-900">{solutionsData.healthcare.title}</h2>
-                        <p className="sector-custom-card-desc text-slate-600 text-xs leading-relaxed">{solutionsData.healthcare.description}</p>
-                      </div>
-                      
-                      <div className="flex flex-wrap gap-2 mt-4">
-                        {solutionsData.healthcare.techStack.map((tech) => (
-                          <span key={tech} className="hc-tech-badge text-[10px] px-2 py-1 rounded bg-[#E1F5EE] text-[#0F6E56] border border-[#1D9E75]/20">{tech}</span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="sector-right-col w-[240px] flex flex-col justify-between border-l border-slate-200 pl-6">
-                      <div className="space-y-4">
-                        <span className="text-[10px] font-bold text-[#0F6E56] tracking-wider uppercase block">Key Metrics</span>
-                        <div className="grid grid-cols-1 gap-2.5">
-                          {solutionsData.healthcare.metrics.map((m, idx) => (
-                            <div key={idx} className="metric-box bg-[#edfcf7] border border-[#1D9E75]/10 p-2 rounded-xl flex items-center justify-between">
-                              <span className="text-xs font-bold text-slate-700">{m.label}</span>
-                              <span className="text-sm font-black text-[#1D9E75]">{m.value}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="space-y-3 mt-4">
-                        <span className="text-[10px] font-bold text-[#0F6E56] tracking-wider uppercase block">Key Features</span>
-                        <ul className="space-y-1.5">
-                          {solutionsData.healthcare.features.slice(0, 3).map((feat, idx) => (
-                            <li key={idx} className="text-[10px] text-slate-600 flex items-start gap-1.5">
-                              <Check className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0 mt-0.5" />
-                              <span>{feat}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <Link href="/solutions/healthcare" className="sector-custom-card-link text-[#0F6E56] hover:text-[#0c5946] mt-6 inline-flex items-center gap-1.5 text-xs font-bold">
-                        Explore Solution
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <line x1="3" y1="8" x2="13" y2="8" />
-                          <polyline points="9 4 13 8 9 12" />
-                        </svg>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* 3. SAAS */}
-              <div 
-                onClick={() => setActiveSectorIndex(2)}
-                className={`sector-accordion-card card-saas ${activeSectorIndex === 2 ? 'active' : 'collapsed'}`}
-              >
-                <div className="collapsed-content">
-                  <span className="collapsed-number">03</span>
                   <div className="collapsed-icon-wrapper">
                     <Cloud className="w-5 h-5" />
                   </div>
                   <span className="collapsed-title-rotated">SaaS</span>
                 </div>
-                <div className="expanded-content">
-                  <div className="saas-header">
-                    <div className="saas-dots">
-                      <div className="saas-dot"></div>
-                      <div className="saas-dot"></div>
-                      <div className="saas-dot"></div>
-                    </div>
-                    <div className="saas-live">
-                      <div className="saas-ping"></div>
-                      <span className="saas-live-txt">LIVE</span>
-                    </div>
+                <div className="expanded-content relative h-full">
+                  {/* Background Image (blurred) */}
+                  <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+                    <Image 
+                      src="/assets/images/sectors/saas.png"
+                      alt="SaaS"
+                      fill
+                      className="object-cover opacity-20 filter blur-md"
+                    />
+                    <div className="absolute inset-0 bg-[#1a153a]/30" />
                   </div>
-                  <div className="sector-custom-card-body flex flex-row gap-6 p-6">
-                    <div className="sector-left-col flex-1 flex flex-col justify-between">
-                      <div>
-                        <div className="saas-bars mb-4 !p-0">
-                          <div className="saas-bar" style={{ height: "35%" }}></div>
-                          <div className="saas-bar" style={{ height: "55%" }}></div>
-                          <div className="saas-bar" style={{ height: "30%" }}></div>
-                          <div className="saas-bar" style={{ height: "85%" }}></div>
-                          <div className="saas-bar" style={{ height: "60%" }}></div>
-                          <div className="saas-bar" style={{ height: "45%" }}></div>
-                        </div>
-                        <h2 className="sector-custom-card-title text-white">{solutionsData.saas.title}</h2>
-                        <p className="sector-custom-card-desc text-slate-300 text-xs leading-relaxed">{solutionsData.saas.description}</p>
+                  <div className="relative z-10 flex flex-col h-full justify-between w-full">
+                    <div className="saas-header">
+                      <div className="saas-dots">
+                        <div className="saas-dot"></div>
+                        <div className="saas-dot"></div>
+                        <div className="saas-dot"></div>
                       </div>
-                      
-                      <div className="flex flex-wrap gap-2 mt-4">
-                        {solutionsData.saas.techStack.map((tech) => (
-                          <span key={tech} className="saas-tech-badge text-[10px] px-2 py-1 rounded bg-white/5 text-purple-300 border border-white/10">{tech}</span>
-                        ))}
+                      <div className="saas-live">
+                        <div className="saas-ping"></div>
+                        <span className="saas-live-txt">LIVE</span>
                       </div>
                     </div>
-
-                    <div className="sector-right-col w-[240px] flex flex-col justify-between border-l border-white/10 pl-6">
-                      <div className="space-y-4">
-                        <span className="text-[10px] font-bold text-purple-300 tracking-wider uppercase block">Key Metrics</span>
-                        <div className="grid grid-cols-1 gap-2.5">
-                          {solutionsData.saas.metrics.map((m, idx) => (
-                            <div key={idx} className="metric-box bg-[#1b173c] border border-white/5 p-2 rounded-xl flex items-center justify-between">
-                              <span className="text-xs font-bold text-[#e2e8f0]">{m.label}</span>
-                              <span className="text-sm font-black text-purple-300">{m.value}</span>
-                            </div>
+                    <div className="sector-custom-card-body flex flex-row gap-6 p-6">
+                      <div className="sector-left-col flex-1 flex flex-col justify-between">
+                        <div>
+                          <div className="saas-bars mb-4 !p-0">
+                            <div className="saas-bar" style={{ height: "35%" }}></div>
+                            <div className="saas-bar" style={{ height: "55%" }}></div>
+                            <div className="saas-bar" style={{ height: "30%" }}></div>
+                            <div className="saas-bar" style={{ height: "85%" }}></div>
+                            <div className="saas-bar" style={{ height: "60%" }}></div>
+                            <div className="saas-bar" style={{ height: "45%" }}></div>
+                          </div>
+                          <h2 className="sector-custom-card-title text-white">{solutionsData.saas.title}</h2>
+                          <p className="sector-custom-card-desc text-slate-300 text-xs leading-relaxed">{solutionsData.saas.description}</p>
+                        </div>
+                        
+                        <div className="flex flex-wrap gap-2 mt-4">
+                          {solutionsData.saas.techStack.map((tech) => (
+                            <span key={tech} className="saas-tech-badge text-[10px] px-2 py-1 rounded bg-white/5 text-purple-300 border border-white/10">{tech}</span>
                           ))}
                         </div>
                       </div>
 
-                      <div className="space-y-3 mt-4">
-                        <span className="text-[10px] font-bold text-purple-300 tracking-wider uppercase block">Key Features</span>
-                        <ul className="space-y-1.5">
-                          {solutionsData.saas.features.slice(0, 3).map((feat, idx) => (
-                            <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
-                              <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                              <span>{feat}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                      <div className="sector-right-col w-[240px] flex flex-col justify-between border-l border-white/10 pl-6">
+                        <div className="space-y-4">
+                          <span className="text-[10px] font-bold text-purple-300 tracking-wider uppercase block">Key Metrics</span>
+                          <div className="grid grid-cols-1 gap-2.5">
+                            {solutionsData.saas.metrics.map((m, idx) => (
+                              <div key={idx} className="metric-box bg-[#1b173c] border border-white/5 p-2 rounded-xl flex items-center justify-between">
+                                <span className="text-xs font-bold text-[#e2e8f0]">{m.label}</span>
+                                <span className="text-sm font-black text-purple-300">{m.value}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
 
-                      <Link href="/solutions/saas" className="sector-custom-card-link text-purple-300 hover:text-purple-200 mt-6 inline-flex items-center gap-1.5 text-xs font-bold">
-                        Explore Solution
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <line x1="3" y1="8" x2="13" y2="8" />
-                          <polyline points="9 4 13 8 9 12" />
-                        </svg>
-                      </Link>
+                        <div className="space-y-3 mt-4">
+                          <span className="text-[10px] font-bold text-purple-300 tracking-wider uppercase block">Key Features</span>
+                          <ul className="space-y-1.5">
+                            {solutionsData.saas.features.slice(0, 3).map((feat, idx) => (
+                              <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
+                                <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
+                                <span>{feat}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <Link href="/solutions/saas" className="sector-custom-card-link text-purple-300 hover:text-purple-200 mt-6 inline-flex items-center gap-1.5 text-xs font-bold">
+                          Explore Solution
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="3" y1="8" x2="13" y2="8" />
+                            <polyline points="9 4 13 8 9 12" />
+                          </svg>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* 4. RETAIL */}
+              {/* 3. RETAIL */}
               <div 
-                onClick={() => setActiveSectorIndex(3)}
-                className={`sector-accordion-card card-retail ${activeSectorIndex === 3 ? 'active' : 'collapsed'}`}
+                onClick={() => setActiveSectorIndex(2)}
+                className={`sector-accordion-card card-retail ${activeSectorIndex === 2 ? 'active' : 'collapsed'}`}
               >
                 <div className="collapsed-content">
-                  <span className="collapsed-number">04</span>
+                  <span className="collapsed-number">03</span>
                   <div className="collapsed-icon-wrapper">
                     <ShoppingCart className="w-5 h-5" />
                   </div>
                   <span className="collapsed-title-rotated">Retail</span>
                 </div>
-                <div className="expanded-content">
-                  <div className="ret-header">
-                    <span className="ret-tag">Live orders</span>
-                    <span className="ret-count">{orderCount.toLocaleString()}</span>
+                <div className="expanded-content relative h-full">
+                  {/* Background Image (blurred) */}
+                  <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+                    <Image 
+                      src="/assets/images/sectors/retail.png"
+                      alt="Retail"
+                      fill
+                      className="object-cover opacity-20 filter blur-md"
+                    />
+                    <div className="absolute inset-0 bg-[#2d1e0a]/30" />
                   </div>
-                  <div className="sector-custom-card-body flex flex-row gap-6 p-6">
-                    <div className="sector-left-col flex-1 flex flex-col justify-between">
-                      <div>
-                        <div className="ret-shelf mb-4 !p-0">
-                          <div className="ret-item">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <circle cx="9" cy="21" r="1" />
-                              <circle cx="20" cy="21" r="1" />
-                              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                            </svg>
-                          </div>
-                          <div className="ret-item">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <rect x="1" y="3" width="15" height="13" />
-                              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
-                              <circle cx="5.5" cy="18.5" r="2.5" />
-                              <circle cx="18.5" cy="18.5" r="2.5" />
-                            </svg>
-                          </div>
-                          <div className="ret-item">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M3 21h18" />
-                              <path d="M3 7l1 4h16l1-4" />
-                              <path d="M4 11v10" />
-                              <path d="M20 11v10" />
-                              <path d="M9 21v-4a3 3 0 0 1 6 0v4" />
-                            </svg>
-                          </div>
-                        </div>
-                        <h2 className="sector-custom-card-title text-white">{solutionsData.retail.title}</h2>
-                        <p className="sector-custom-card-desc text-slate-300 text-xs leading-relaxed">{solutionsData.retail.description}</p>
-                      </div>
-                      
-                      <div className="flex flex-wrap gap-2 mt-4">
-                        {solutionsData.retail.techStack.map((tech) => (
-                          <span key={tech} className="ret-tech-badge text-[10px] px-2 py-1 rounded bg-white/5 text-amber-300 border border-white/10">{tech}</span>
-                        ))}
-                      </div>
+                  <div className="relative z-10 flex flex-col h-full justify-between w-full">
+                    <div className="ret-header">
+                      <span className="ret-tag">Live orders</span>
+                      <span className="ret-count">{orderCount.toLocaleString()}</span>
                     </div>
-
-                    <div className="sector-right-col w-[240px] flex flex-col justify-between border-l border-white/10 pl-6">
-                      <div className="space-y-4">
-                        <span className="text-[10px] font-bold text-amber-300 tracking-wider uppercase block">Key Metrics</span>
-                        <div className="grid grid-cols-1 gap-2.5">
-                          {solutionsData.retail.metrics.map((m, idx) => (
-                            <div key={idx} className="metric-box bg-[#381f03] border border-white/5 p-2 rounded-xl flex items-center justify-between">
-                              <span className="text-xs font-bold text-[#e2e8f0]">{m.label}</span>
-                              <span className="text-sm font-black text-amber-300">{m.value}</span>
+                    <div className="sector-custom-card-body flex flex-row gap-6 p-6">
+                      <div className="sector-left-col flex-1 flex flex-col justify-between">
+                        <div>
+                          <div className="ret-shelf mb-4 !p-0">
+                            <div className="ret-item">
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <circle cx="9" cy="21" r="1" />
+                                <circle cx="20" cy="21" r="1" />
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                              </svg>
                             </div>
+                            <div className="ret-item">
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <rect x="1" y="3" width="15" height="13" />
+                                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                                <circle cx="5.5" cy="18.5" r="2.5" />
+                                <circle cx="18.5" cy="18.5" r="2.5" />
+                              </svg>
+                            </div>
+                            <div className="ret-item">
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M3 21h18" />
+                                <path d="M3 7l1 4h16l1-4" />
+                                <path d="M4 11v10" />
+                                <path d="M20 11v10" />
+                                <path d="M9 21v-4a3 3 0 0 1 6 0v4" />
+                              </svg>
+                            </div>
+                          </div>
+                          <h2 className="sector-custom-card-title text-white">{solutionsData.retail.title}</h2>
+                          <p className="sector-custom-card-desc text-slate-300 text-xs leading-relaxed">{solutionsData.retail.description}</p>
+                        </div>
+                        
+                        <div className="flex flex-wrap gap-2 mt-4">
+                          {solutionsData.retail.techStack.map((tech) => (
+                            <span key={tech} className="ret-tech-badge text-[10px] px-2 py-1 rounded bg-white/5 text-amber-300 border border-white/10">{tech}</span>
                           ))}
                         </div>
                       </div>
 
-                      <div className="space-y-3 mt-4">
-                        <span className="text-[10px] font-bold text-amber-300 tracking-wider uppercase block">Key Features</span>
-                        <ul className="space-y-1.5">
-                          {solutionsData.retail.features.slice(0, 3).map((feat, idx) => (
-                            <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
-                              <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                              <span>{feat}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                      <div className="sector-right-col w-[240px] flex flex-col justify-between border-l border-white/10 pl-6">
+                        <div className="space-y-4">
+                          <span className="text-[10px] font-bold text-amber-300 tracking-wider uppercase block">Key Metrics</span>
+                          <div className="grid grid-cols-1 gap-2.5">
+                            {solutionsData.retail.metrics.map((m, idx) => (
+                              <div key={idx} className="metric-box bg-[#381f03] border border-white/5 p-2 rounded-xl flex items-center justify-between">
+                                <span className="text-xs font-bold text-[#e2e8f0]">{m.label}</span>
+                                <span className="text-sm font-black text-amber-300">{m.value}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
 
-                      <Link href="/solutions/retail" className="sector-custom-card-link text-amber-300 hover:text-amber-200 mt-6 inline-flex items-center gap-1.5 text-xs font-bold">
-                        Explore Solution
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <line x1="3" y1="8" x2="13" y2="8" />
-                          <polyline points="9 4 13 8 9 12" />
-                        </svg>
-                      </Link>
+                        <div className="space-y-3 mt-4">
+                          <span className="text-[10px] font-bold text-amber-300 tracking-wider uppercase block">Key Features</span>
+                          <ul className="space-y-1.5">
+                            {solutionsData.retail.features.slice(0, 3).map((feat, idx) => (
+                              <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
+                                <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
+                                <span>{feat}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <Link href="/solutions/retail" className="sector-custom-card-link text-amber-300 hover:text-amber-200 mt-6 inline-flex items-center gap-1.5 text-xs font-bold">
+                          Explore Solution
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="3" y1="8" x2="13" y2="8" />
+                            <polyline points="9 4 13 8 9 12" />
+                          </svg>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1696,7 +1695,7 @@ export default function Home() {
       </section>
 
       {/* 5. How We Work (Process) Section (Smooth Gradient Background) */}
-      <section className="relative py-24 bg-gradient-to-b from-[#0f152d] via-[#101323] to-[#060914] border-b border-white/5">
+      <section className="relative py-24 bg-gradient-to-b from-[#14294d] to-[#0b172e] border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-6">
             <h2 className="text-xs font-black tracking-widest text-sky-400 uppercase font-mono">Our Process</h2>
@@ -1711,94 +1710,73 @@ export default function Home() {
 
             <div className="stacking-cards-container">
               
+              {/* Sentinel 1 */}
+              <div id="step-card-sentinel-1" className="w-full h-px pointer-events-none opacity-0" style={{ marginTop: "-1px" }} />
               {/* Card 1 */}
               <div className="stacking-card stacking-card-1" id="step-card-1" role="button" tabIndex={0}>
-                <div className="stacking-card-glow"></div>
                 <div className="stacking-card-content">
                   <div className="stacking-card-left">
-                    <span className="stacking-card-num">01</span>
-                    <span className="stacking-card-badge">STRATEGY</span>
+                    <span className="stacking-card-badge">Card 1</span>
                     <h2>Discovery & Planning</h2>
                     <p>We deep-dive into your operational pipeline, audit systems infrastructure, and lay down an exhaustive software blueprint.</p>
-                    <ul className="stacking-card-features">
-                      <li><span className="stacking-bullet"></span> Audit of systems and database structures</li>
-                      <li><span className="stacking-bullet"></span> Comprehensive software blueprints</li>
-                      <li><span className="stacking-bullet"></span> Strategic transition roadmap</li>
-                    </ul>
-                    <a href="/contact" className="stacking-card-btn">Explore Strategy Blueprint</a>
                   </div>
                   <div className="stacking-card-right relative w-full h-full p-6">
-                    <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+                    <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-lg">
                       <Image 
-                        src="/assets/images/Process/plan.png"
+                        src="/assets/images/Process/plan_v2.png"
                         alt="Discovery & Planning Strategy"
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 400px"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent pointer-events-none" />
                     </div>
                   </div>
                 </div>
               </div>
 
+              {/* Sentinel 2 */}
+              <div id="step-card-sentinel-2" className="w-full h-px pointer-events-none opacity-0" style={{ marginTop: "-1px" }} />
               {/* Card 2 */}
               <div className="stacking-card stacking-card-2" id="step-card-2" role="button" tabIndex={0}>
-                <div className="stacking-card-glow"></div>
                 <div className="stacking-card-content">
                   <div className="stacking-card-left">
-                    <span className="stacking-card-num">02</span>
-                    <span className="stacking-card-badge">DEVELOPMENT</span>
+                    <span className="stacking-card-badge">Card 2</span>
                     <h2>Design & Development</h2>
                     <p>Our engineers build iterative cloud-native components and secure APIs, verifying code quality through automation.</p>
-                    <ul className="stacking-card-features">
-                      <li><span className="stacking-bullet"></span> Cloud-native architecture design</li>
-                      <li><span className="stacking-bullet"></span> Test-driven microservice creation</li>
-                      <li><span className="stacking-bullet"></span> Automated CI/CD verification pipelines</li>
-                    </ul>
-                    <a href="/contact" className="stacking-card-btn">View Development Sandbox</a>
                   </div>
                   <div className="stacking-card-right relative w-full h-full p-6">
-                    <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+                    <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-lg">
                       <Image 
-                        src="/assets/images/Process/design.png"
+                        src="/assets/images/Process/design_v2.png"
                         alt="Design & Development"
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 400px"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent pointer-events-none" />
                     </div>
                   </div>
                 </div>
               </div>
 
+              {/* Sentinel 3 */}
+              <div id="step-card-sentinel-3" className="w-full h-px pointer-events-none opacity-0" style={{ marginTop: "-1px" }} />
               {/* Card 3 */}
               <div className="stacking-card stacking-card-3" id="step-card-3" role="button" tabIndex={0}>
-                <div className="stacking-card-glow"></div>
                 <div className="stacking-card-content">
                   <div className="stacking-card-left">
-                    <span className="stacking-card-num">03</span>
-                    <span className="stacking-card-badge">DEPLOYMENT</span>
+                    <span className="stacking-card-badge">Card 3</span>
                     <h2>Launch & Scale</h2>
                     <p>We coordinate zero-downtime Strangler deployments and wire up 24/7 reliability monitoring for elastic loads.</p>
-                    <ul className="stacking-card-features">
-                      <li><span className="stacking-bullet"></span> Zero-downtime blue-green rollouts</li>
-                      <li><span className="stacking-bullet"></span> 24/7 reliability/incident alerting setup</li>
-                      <li><span className="stacking-bullet"></span> Auto-scaling Kubernetes infrastructure</li>
-                    </ul>
-                    <a href="/contact" className="stacking-card-btn">Access Operations Portal</a>
                   </div>
                   <div className="stacking-card-right relative w-full h-full p-6">
-                    <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+                    <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-lg">
                       <Image 
-                        src="/assets/images/Process/launch.png"
+                        src="/assets/images/Process/launch_v2.png"
                         alt="Launch & Scale"
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 400px"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent pointer-events-none" />
                     </div>
                   </div>
                 </div>
@@ -1810,7 +1788,7 @@ export default function Home() {
       </section>
 
       {/* 6. Results / Stats Section (Cyber HUD / Cybernetic Midnight Theme) */}
-      <section className="relative py-20 bg-gradient-to-b from-[#060914] via-[#0d091e] to-[#06070d] border-b border-white/5 overflow-hidden">
+      <section className="relative py-20 bg-gradient-to-b from-[#0b172e] to-[#050a14] border-b border-white/5 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
             <h2 className="text-xs font-black tracking-widest text-[#1591DC] uppercase">Proven Track Record</h2>
@@ -1867,198 +1845,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Engagement / Pricing Models Section (Premium Pricing Theme) */}
-      <section className="relative w-full py-24 bg-gradient-to-b from-[#06070d] via-[#0f1225] to-[#070913] border-b border-white/5 overflow-hidden flex flex-col items-center">
-        {/* Color-matched Ambient Glow Spheres in Background */}
-        <div className="absolute top-1/2 left-[20%] -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none -z-10 animate-pulse-slow"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-purple-500/10 rounded-full blur-[120px] pointer-events-none -z-10 animate-pulse-slow"></div>
-        <div className="absolute top-1/2 left-[80%] -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none -z-10 animate-pulse-slow"></div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center w-full relative z-10">
-          <div className="text-center max-w-3xl mx-auto space-y-4 mb-10 flex flex-col items-center">
-            <h3 className="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">Plans and Pricing</h3>
-            <p className="text-slate-400 text-sm sm:text-base max-w-2xl text-center">
-              Choose a plan that fits your investment goals, whether you're just starting or scaling your portfolio.
-            </p>
-          
-          {/* Billing Toggle Switch */}
-          <div className="pr-toggle-container">
-            <button 
-              className={`pr-toggle-btn ${!isAnnual ? "active" : ""}`} 
-              onClick={() => setIsAnnual(false)}
-            >
-              Bill Monthly
-            </button>
-            <button 
-              className={`pr-toggle-btn ${isAnnual ? "active" : ""}`} 
-              onClick={() => setIsAnnual(true)}
-            >
-              Bill Annually
-            </button>
-            <div 
-              className="pr-toggle-slider" 
-              style={{ transform: isAnnual ? 'translateX(100%)' : 'translateX(0)' }}
-            ></div>
-          </div>
-        </div>
-
-        {/* Pricing Grid */}
-        <div className="pr-grid">
-          
-          {/* Free Plan Card */}
-          <div className="pr-card free-plan">
-            <div className="pr-card-glow"></div>
-            <div className="card-header">
-              <div className="pr-icon-container">
-                <svg className="pr-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#3b82f6" opacity="0.3"/><rect x="6" y="6" width="12" height="12" rx="2" fill="#3b82f6"/></svg>
-              </div>
-              <span className="pr-plan-name">Free Plan</span>
-              <div className="pr-price-container">
-                <span className="pr-currency">$</span>
-                <span className="pr-price-amount">0</span>
-                <span className="pr-billing-period">/month</span>
-              </div>
-              <p className="pr-plan-desc">For beginners to explore our platform and start their investment journey.</p>
-            </div>
-            <div className="pr-card-action">
-              <Link href="/contact" className="pr-btn-secondary block">Start for Free</Link>
-            </div>
-            <div className="pr-card-divider">
-              <span>STAND OUT FEATURES</span>
-            </div>
-            <ul className="pr-features-list">
-              <li>
-                <svg className="pr-check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span>Track up to 5 stocks</span>
-              </li>
-              <li>
-                <svg className="pr-check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span>Access to real-time stock prices.</span>
-              </li>
-              <li>
-                <svg className="pr-check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span>Mobile access for tracking on-the-go.</span>
-              </li>
-              <li>
-                <svg className="pr-check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span>Basic investment insights</span>
-              </li>
-              <li>
-                <svg className="pr-check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span>Limited watchlist management.</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Pro Plan Card (Popular) */}
-          <div className="pr-card pro-plan popular">
-            <div className="pr-card-glow"></div>
-            <div className="card-header">
-              <div className="header-row">
-                <div className="pr-icon-container">
-                  <svg className="pr-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#ffffff" opacity="0.3"/><rect x="6" y="6" width="12" height="12" rx="2" fill="#ffffff"/></svg>
-                </div>
-                <span className="pr-badge-popular">
-                  <svg className="pr-star-mini" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="currentColor"/></svg>
-                  POPULAR
-                </span>
-              </div>
-              <span className="pr-plan-name">Pro Plan</span>
-              <div className="pr-price-container">
-                <span className="pr-currency">$</span>
-                <span className="pr-price-amount">{isAnnual ? 64 : 80}</span>
-                <span className="pr-billing-period">/month</span>
-              </div>
-              <p className="pr-plan-desc">For active investors who want advanced tools to grow their portfolio.</p>
-            </div>
-            <div className="pr-card-action">
-              <Link href="/contact" className="pr-btn-primary block">Start Free 7 Days Trial</Link>
-            </div>
-            <div className="pr-card-divider">
-              <span>STAND OUT FEATURES</span>
-            </div>
-            <ul className="pr-features-list">
-              <li>
-                <svg className="pr-check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span>Track unlimited stocks</span>
-              </li>
-              <li>
-                <svg className="pr-check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span>Advanced analytics and performance</span>
-              </li>
-              <li>
-                <svg className="pr-check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span>Custom alerts for price movements</span>
-              </li>
-              <li>
-                <svg className="pr-check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span>Expert-curated stock selections</span>
-              </li>
-              <li>
-                <svg className="pr-check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span>Priority support assistance.</span>
-              </li>
-              <li>
-                <svg className="pr-check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span>Export data to CSV/PDF</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Advance Plan Card */}
-          <div className="pr-card advance-plan">
-            <div className="pr-card-glow"></div>
-            <div className="card-header">
-              <div className="pr-icon-container">
-                <svg className="pr-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="#10b981" opacity="0.3"/><rect x="6" y="6" width="12" height="12" rx="2" fill="#10b981"/></svg>
-              </div>
-              <span className="pr-plan-name">Advance Plan</span>
-              <div className="pr-price-container">
-                <span className="pr-price-amount custom-text">Custom</span>
-              </div>
-              <p className="pr-plan-desc">For institutions or high-net-worth individuals seeking tailored solutions.</p>
-            </div>
-            <div className="pr-card-action">
-              <Link href="/contact" className="pr-btn-secondary block">Contact Us</Link>
-            </div>
-            <div className="pr-card-divider">
-              <span>STAND OUT FEATURES</span>
-            </div>
-            <ul className="pr-features-list">
-              <li>
-                <svg className="pr-check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span>Dedicated account manager</span>
-              </li>
-              <li>
-                <svg className="pr-check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span>Customizable investment tools</span>
-              </li>
-              <li>
-                <svg className="pr-check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span>Integration with third-party systems</span>
-              </li>
-              <li>
-                <svg className="pr-check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span>Advanced AI-driven insights</span>
-              </li>
-              <li>
-                <svg className="pr-check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                <span>Team collaboration tools</span>
-              </li>
-            </ul>
-          </div>
-
-        </div>
-
-        {/* Bottom Notice */}
-        <div className="pr-bottom-notice">
-          Start your journey risk free - No credit card needed
-        </div>
-        </div>
-      </section>
 
       {/* 8. Testimonials Section (Dark Theme with Glows - Matching the Prototype Link) */}
-      <section className="relative bg-[#070913] py-20 overflow-hidden border-b border-white/5">
+      <section className="relative bg-gradient-to-b from-[#050a14] to-[#02050d] py-20 overflow-hidden border-b border-white/5">
         {/* Subtle background glow highlights */}
         <div className="absolute top-0 left-1/4 w-[350px] h-[350px] bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none -z-10 animate-pulse-slow"></div>
         <div className="absolute bottom-0 right-1/4 w-[350px] h-[350px] bg-[#1591DC]/10 rounded-full blur-[100px] pointer-events-none -z-10 animate-pulse-slow"></div>
@@ -2157,7 +1947,7 @@ export default function Home() {
       </section>
 
       {/* 9. Latest Insights (Blog) Section - Interactive Developer Dashboard */}
-      <section className="w-full bg-gradient-to-b from-[#070913] via-[#0f1124] to-[#1d3f75] py-24 relative overflow-hidden">
+      <section className="w-full bg-gradient-to-b from-[#02050d] to-[#1d3f75] py-24 relative overflow-hidden">
         {/* Techy Grid overlay */}
         <div className="absolute inset-0 dark-grid-pattern opacity-60 pointer-events-none" />
         
