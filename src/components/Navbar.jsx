@@ -60,14 +60,6 @@ export default function Navbar() {
       ]
     },
     {
-      title: "Products",
-      dropdown: [
-        { name: "All Products", href: "/products", desc: "View our core enterprise product suite", icon: Layers },
-        { name: "IceDeploy", href: "/products/icedeploy", desc: "Automated canary release manager", icon: TrendingUp },
-        { name: "IceInsight", href: "/products/iceinsight", desc: "Real-time CDC metrics & event pipeline", icon: BarChart3 }
-      ]
-    },
-    {
       title: "Solutions",
       dropdown: [
         { name: "SaaS Solutions", href: "/solutions/saas", desc: "Scalable multi-tenant infrastructures", icon: Layers },
