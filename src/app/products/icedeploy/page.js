@@ -658,114 +658,12 @@ export default function IceDeployPage() {
         </div>
       </section>
 
-      {/* 7. PRICING & FAQ ACCORDION */}
+      {/* 7. FAQ ACCORDION */}
       <section className="relative bg-gradient-to-b from-[#edf4fc] via-[#e6effb] to-[#d6e5fb] py-24 overflow-hidden text-slate-950 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <h2 className="text-[10px] font-black tracking-widest text-[#2C5EAD] uppercase font-mono">plans::pricing</h2>
-            <h3 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900">Pricing & FAQs</h3>
-          </div>
-
-          {/* Pricing Grid */}
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16 items-stretch">
-            {/* Free Consultation */}
-            <div className="p-8 rounded-3xl bg-white border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden group">
-              <div className="space-y-6">
-                <div className="flex justify-between items-start gap-4">
-                  <div className="space-y-1">
-                    <h4 className="text-xl font-bold text-slate-900">Free Consultation</h4>
-                    <p className="text-xs text-slate-500">Get an assessment and implementation roadmap.</p>
-                  </div>
-                  
-                  {/* Isometric Drawing for Database (Blue theme) */}
-                  <svg viewBox="0 0 120 120" className="w-24 h-24 text-blue-500 opacity-90 flex-shrink-0 -mt-2 -mr-2">
-                    <g transform="translate(10, 10)">
-                      <path d="M 50,15 L 85,32.5 L 50,50 L 15,32.5 Z" fill="rgba(44,94,173,0.06)" stroke="#2c5ead" strokeWidth="1.5" />
-                      <path d="M 15,32.5 L 15,47.5 L 50,65 L 50,50 Z" fill="rgba(44,94,173,0.12)" stroke="#2c5ead" strokeWidth="1.5" />
-                      <path d="M 50,50 L 50,65 L 85,47.5 L 85,32.5 Z" fill="rgba(44,94,173,0.08)" stroke="#2c5ead" strokeWidth="1.5" />
-                      
-                      <path d="M 15,52.5 L 15,67.5 L 50,85 L 50,70 Z" fill="rgba(44,94,173,0.12)" stroke="#2c5ead" strokeWidth="1.5" />
-                      <path d="M 50,70 L 50,85 L 85,67.5 L 85,52.5 Z" fill="rgba(44,94,173,0.08)" stroke="#2c5ead" strokeWidth="1.5" />
-
-                      <path d="M 15,72.5 L 15,87.5 L 50,105 L 50,90 Z" fill="rgba(44,94,173,0.15)" stroke="#2c5ead" strokeWidth="1.5" />
-                      <path d="M 50,90 L 50,105 L 85,87.5 L 85,72.5 Z" fill="rgba(44,94,173,0.1)" stroke="#2c5ead" strokeWidth="1.5" />
-                      
-                      {/* Inner lights */}
-                      <circle cx="32" cy="42" r="2" fill="#4bb8fa" />
-                      <circle cx="32" cy="62" r="2" fill="#2c5ead" />
-                      <circle cx="32" cy="82" r="2" fill="#4bb8fa" />
-                    </g>
-                  </svg>
-                </div>
-                
-                <div className="text-4xl font-extrabold text-[#2c5ead] font-mono">₹0 <span className="text-xs text-slate-400 font-normal font-sans">/ session</span></div>
-                
-                <ul className="space-y-3 pt-6 border-t border-slate-100">
-                  {["Initial deployment assessment", "Architecture recommendations", "Technology stack review", "Timeline & roadmap planning"].map(li => (
-                    <li key={li} className="flex items-center text-xs text-slate-650">
-                      <div className="w-5 h-5 rounded-full bg-blue-50 flex items-center justify-center mr-3 flex-shrink-0">
-                        <Check className="w-3 h-3 text-[#2c5ead]" />
-                      </div>
-                      <span>{li}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="pt-8">
-                <Link href="/contact" className="flex items-center justify-center w-full py-4 rounded-full font-bold text-sm text-white bg-blue-600 hover:bg-blue-700 transition-all shadow-md shadow-blue-500/10 group-hover:scale-101">
-                  Book Free Session <ArrowRight className="w-4 h-4 ml-2" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Enterprise Tier */}
-            <div className="p-8 rounded-3xl bg-[#05070f] border-2 border-emerald-500 text-white shadow-[0_0_35px_rgba(16,185,129,0.15)] flex flex-col justify-between relative overflow-hidden group">
-              <div className="absolute top-6 right-6 bg-[#10b981]/15 text-[#10b981] border border-[#10b981]/30 font-mono font-bold text-[9px] uppercase tracking-wider px-3 py-1 rounded-full z-10">
-                Most Popular
-              </div>
-              
-              <div className="space-y-6">
-                <div className="flex justify-between items-start gap-4">
-                  <div className="space-y-1">
-                    <h4 className="text-xl font-bold text-white">Enterprise Tier</h4>
-                    <p className="text-xs text-slate-400">Production-ready setups customized for your team.</p>
-                  </div>
-                  
-                  {/* Isometric Drawing for Server (Green theme) */}
-                  <svg viewBox="0 0 120 120" className="w-28 h-28 text-emerald-500 flex-shrink-0 -mt-3 -mr-3">
-                    <g transform="translate(10, 10)">
-                      <path d="M 50,15 L 85,32.5 L 50,50 L 15,32.5 Z" fill="rgba(16,185,129,0.1)" stroke="#10b981" strokeWidth="1.5" />
-                      <path d="M 15,32.5 L 15,82.5 L 50,100 L 50,50 Z" fill="rgba(16,185,129,0.15)" stroke="#10b981" strokeWidth="1.5" />
-                      <path d="M 50,50 L 50,100 L 85,82.5 L 85,32.5 Z" fill="rgba(16,185,129,0.05)" stroke="#10b981" strokeWidth="1.5" />
-                      
-                      <path d="M 22,43 L 45,54.5 L 45,58.5 L 22,47 Z" fill="#10b981" className="animate-pulse" />
-                      <path d="M 22,55 L 45,66.5 L 45,70.5 L 22,59 Z" fill="#34d399" />
-                      <path d="M 22,67 L 45,78.5 L 45,82.5 L 22,71 Z" fill="#10b981" className="animate-pulse" />
-                      
-                      <circle cx="50" cy="50" r="25" fill="none" stroke="#10b981" strokeWidth="1" strokeDasharray="3 3" className="animate-spin" style={{ transformOrigin: '50px 50px', animationDuration: '8s' }} />
-                    </g>
-                  </svg>
-                </div>
-                
-                <div className="text-4xl font-extrabold text-[#10b981] font-mono">Custom <span className="text-xs text-slate-400 font-normal font-sans">/ contract</span></div>
-                
-                <ul className="space-y-3 pt-6 border-t border-slate-800">
-                  {["Tailored deployment solution", "Unlimited deployments", "On-premise deployment option", "24/7 support", "Custom SLA", "Dedicated account manager"].map(li => (
-                    <li key={li} className="flex items-center text-xs text-slate-300">
-                      <div className="w-5 h-5 rounded-full bg-emerald-500/10 flex items-center justify-center mr-3 flex-shrink-0">
-                        <Check className="w-3 h-3 text-[#10b981]" />
-                      </div>
-                      <span>{li}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="pt-8">
-                <Link href="/contact" className="flex items-center justify-center w-full py-4 rounded-full font-bold text-sm text-[#022c22] bg-[#10b981] hover:bg-[#0ea5e9]/90 hover:text-white transition-all shadow-lg shadow-emerald-500/20 group-hover:scale-101">
-                  Contact Sales <ArrowRight className="w-4 h-4 ml-2" />
-                </Link>
-              </div>
-            </div>
+            <h2 className="text-[10px] font-black tracking-widest text-[#2C5EAD] uppercase font-mono">product::faq</h2>
+            <h3 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900">Frequently Asked Questions</h3>
           </div>
 
           {/* Accordion FAQ */}

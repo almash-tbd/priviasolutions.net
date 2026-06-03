@@ -126,7 +126,7 @@ export const servicesData = {
     ],
     features: [
       "Penetration Testing & Vulnerability Assessment",
-      "SOC2, ISO27001, and HIPAA Audits & Alignment",
+      "Security Standard Alignment & Assessment",
       "Zero-Trust Networks & Role-Based Access Control",
       "Secure Software Development Lifecycle Setup"
     ],
@@ -214,7 +214,7 @@ export const solutionsData = {
         description: "Metered billing, subscription management, and revenue optimization.",
         benefits: [
           "API usage tracking",
-          "Tiered pricing models",
+          "Tiered billing models",
           "Stripe/Chargebee integration",
           "Revenue analytics"
         ]
@@ -242,7 +242,7 @@ export const solutionsData = {
     ],
     successStories: [
       {
-        client: "CloudSync - B2B SaaS Scale-Up",
+        client: "B2B SaaS Scale-Up",
         challenge: "Scaling from 100 to 10,000 tenants while maintaining high uptime and reducing infrastructure costs.",
         solution: "Implemented Kubernetes-based multi-tenant architecture with tenant-aware routing, auto-scaling, and cost monitoring.",
         results: [
@@ -253,7 +253,7 @@ export const solutionsData = {
         ]
       },
       {
-        client: "AnalyticsHub - Usage-Based Billing",
+        client: "Usage-Based Billing Platform",
         challenge: "Building real-time usage tracking and billing system for API-based SaaS product with millions of API calls daily.",
         solution: "Developed event-driven metering system with Redis for real-time tracking and Stripe for automated billing.",
         results: [
@@ -331,7 +331,7 @@ export const solutionsData = {
       },
       {
         question: "How do you implement usage-based billing?",
-        answer: "We use event-driven architecture to track usage metrics (API calls, storage, compute) in real-time using Redis/TimescaleDB, then aggregate and bill using Stripe, Chargebee, or custom billing systems. We support tiered pricing, pay-as-you-go, and hybrid models."
+        answer: "We use event-driven architecture to track usage metrics (API calls, storage, compute) in real-time using Redis/TimescaleDB, then aggregate and bill using Stripe, Chargebee, or custom billing systems. We support tiered billing, pay-as-you-go, and hybrid models."
       },
       {
         question: "Can you help migrate from single-tenant to multi-tenant?",
@@ -341,10 +341,10 @@ export const solutionsData = {
   },
   "fintech": {
     title: "FinTech Compliance & Core Platforms",
-    description: "Secure, transaction-safe, and fully compliant financial platforms. We build custom ledger systems, integrate payment processors, and audit systems for PCI-DSS compliance.",
+    description: "Secure, transaction-safe, and fully compliant financial platforms. We build custom ledger systems, integrate payment processors, and audit systems for transaction security compliance.",
     features: [
       "Double-Entry Ledgers & Immutable Audit Logs",
-      "PCI-DSS Tier 1 Security Implementations",
+      "Tier 1 Transaction Security Implementations",
       "KYC/AML Automated Verification Integrations",
       "High-frequency Transaction Routing Systems"
     ],
@@ -360,7 +360,7 @@ export const solutionsData = {
       { title: "Security First", description: "End-to-end encryption, security compliance, fraud detection systems, and secure API design." },
       { title: "Audit & Compliance", description: "Comprehensive audit logs, transaction traceability, regulatory reporting, and data retention policies." },
       { title: "Performance", description: "Sub-100ms latency targets, high-throughput systems, enterprise-grade uptime, and real-time processing." },
-      { title: "Compliance Standards", description: "Built for PCI-DSS Tier 1, SOC 2, and international data protection laws." }
+      { title: "Security Standards", description: "Built for industry standards and international data protection laws." }
     ],
     useCases: [
       {
@@ -406,7 +406,7 @@ export const solutionsData = {
     ],
     successStories: [
       {
-        client: "PayStream - Payment Gateway Scale-Up",
+        client: "Payment Gateway Scale-Up",
         challenge: "Scaling from 10K to 1M daily transactions while maintaining security compliance and sub-100ms latency.",
         solution: "Implemented microservices architecture with Redis caching, Kafka for event streaming, and horizontal scaling on Multi-Cloud.",
         results: [
@@ -417,7 +417,7 @@ export const solutionsData = {
         ]
       },
       {
-        client: "NeoBank - Digital Banking Platform",
+        client: "Digital Banking Platform",
         challenge: "Building a modern digital bank from scratch with full regulatory compliance and real-time features.",
         solution: "Developed cloud-native banking core with event-driven architecture, real-time notifications, and KYC/AML integration.",
         results: [
@@ -504,7 +504,7 @@ export const solutionsData = {
     ]
   },
   "healthcare": {
-    title: "HIPAA Compliant Healthcare Solutions",
+    title: "Secure Healthcare Solutions",
     description: "Secure health-tech software designed to improve patient care while complying with regulatory requirements. We build EHR integrations, telehealth portals, and medical analytics systems.",
     features: [
       "End-to-End Encryption for Patient Health Info",
@@ -513,15 +513,15 @@ export const solutionsData = {
       "Telehealth Video Streaming & Scheduling"
     ],
     metrics: [
-      { value: "100%", label: "HIPAA Compliance Ready" },
+      { value: "100%", label: "Security Verification Ready" },
       { value: "AES-256", label: "Data Encryption" },
       { value: "99.95%", label: "Video Call Quality SLA" }
     ],
     challenge: "Medical applications struggle to combine ease of use with the high security compliance standards required for patient records.",
-    solution: "We implement automated encryption at rest and in transit, auditing access records to ensure complete HIPAA compliance.",
+    solution: "We implement automated encryption at rest and in transit, auditing access records to ensure complete data security alignment.",
     techStack: ["Python", "FastAPI", "React", "PostgreSQL", "WebRTC", "Auth0"],
     usp: [
-      { title: "Security & Compliance", description: "Business Associate Agreements, PHI encryption (at rest & transit), access controls & MFA, and security risk assessments." },
+      { title: "Security & Compliance", description: "Secure data agreements, PHI encryption (at rest & transit), access controls & MFA, and security risk assessments." },
       { title: "Data Management", description: "Secure data storage, data de-identification, backup & disaster recovery, and patient data portability." },
       { title: "Auditability", description: "Comprehensive audit logs, PHI access tracking, breach detection & response, and compliance reporting." }
     ],
@@ -569,7 +569,7 @@ export const solutionsData = {
     ],
     successStories: [
       {
-        client: "HealthCore - Telemedicine Platform",
+        client: "Telemedicine Platform",
         challenge: "Building a secure telemedicine platform during COVID-19 pandemic to scale from 0 to 50K daily consultations.",
         solution: "Developed cloud-native platform with WebRTC video, e-prescriptions, and integration with EHR systems. Implemented secure agreements with all vendors.",
         results: [
@@ -580,7 +580,7 @@ export const solutionsData = {
         ]
       },
       {
-        client: "MediAnalytics - Clinical Decision Support",
+        client: "Clinical Decision Support Platform",
         challenge: "Creating real-time clinical decision support system that processes HL7 messages and provides drug warnings.",
         solution: "Built event-driven system with HL7 message processing, integrated with FDA drug database, and ML-based interaction detection.",
         results: [
@@ -645,12 +645,12 @@ export const solutionsData = {
     ],
     faqs: [
       {
-        question: "What is a Business Associate Agreement (BAA)?",
-        answer: "A BAA is a contract between a healthcare-covered entity and a vendor that handles PHI. We provide BAA templates and execute BAAs with all sub-processors (cloud providers, monitoring tools, etc.) to ensure complete security chain."
+        question: "Do you sign secure data processing agreements?",
+        answer: "Yes, we sign comprehensive data processing agreements with covered entities and sub-processors to ensure that sensitive health data is handled according to strict privacy guidelines."
       },
       {
-        question: "How long does healthcare compliance take?",
-        answer: "For new systems, 4-6 months including development, security controls, and third-party audit. For existing systems, 2-4 months for gap remediation and audit. We provide continuous compliance monitoring and annual audits."
+        question: "How long does healthcare compliance alignment take?",
+        answer: "For new systems, 4-6 months including development, security controls, and third-party audit. For existing systems, 2-4 months for gap remediation and audit. We provide continuous monitoring and annual audits."
       },
       {
         question: "Do you support HL7 and FHIR standards?",
@@ -661,8 +661,8 @@ export const solutionsData = {
         answer: "We implement breach detection systems, maintain incident response playbooks, and assist with breach notification procedures. Our systems include comprehensive audit logs for forensic analysis."
       },
       {
-        question: "Can you help with FDA compliance for medical devices?",
-        answer: "Yes, we have experience with FDA 510(k) submissions, IEC 62304 software lifecycle processes, and ISO 13485 quality management systems for medical device software."
+        question: "Can you assist with medical device software compliance?",
+        answer: "Yes, we have experience with standard medical device software lifecycles and quality management systems for medical software."
       }
     ]
   },
@@ -732,7 +732,7 @@ export const solutionsData = {
     ],
     successStories: [
       {
-        client: "FashionHub - Omnichannel Retail",
+        client: "Omnichannel Retail Brand",
         challenge: "Unifying 200+ physical stores with eCommerce platform, enabling BOPIS and unified inventory across all channels.",
         solution: "Built headless commerce platform with real-time inventory sync, in-store pickup, and unified customer profiles across channels.",
         results: [
@@ -743,7 +743,7 @@ export const solutionsData = {
         ]
       },
       {
-        client: "ElectroMart - Peak Traffic Handling",
+        client: "E-Commerce Retailer",
         challenge: "Handling Black Friday traffic spikes (10x normal) without downtime or performance degradation.",
         solution: "Implemented auto-scaling infrastructure with CDN, Redis caching, and queue-based order processing.",
         results: [
@@ -871,7 +871,7 @@ export const productsData = {
 export const caseStudiesData = {
   "banking-core-modernization": {
     title: "Banking Core System Modernization",
-    client: "NeoBank Digital",
+    client: "Digital Banking Platform",
     industry: "FinTech",
     duration: "18 months",
     description: "Migrated monolithic banking system to cloud-native microservices architecture with zero downtime.",
@@ -881,13 +881,13 @@ export const caseStudiesData = {
       { value: "+3x", label: "Performance" },
       { value: "-40%", label: "Cost Reduction" }
     ],
-    challenge: "NeoBank Digital was running on a 15-year-old monolithic Java application that was becoming impossible to maintain. Every deployment required 6-hour maintenance windows, and adding new features took months due to tight coupling. They needed to modernize their entire core banking system while serving 5M+ customers without any downtime or data loss - a mission-critical transformation.",
+    challenge: "A digital banking platform was running on a 15-year-old monolithic Java application that was becoming impossible to maintain. Every deployment required 6-hour maintenance windows, and adding new features took months due to tight coupling. They needed to modernize their entire core banking system while serving 5M+ customers without any downtime or data loss - a mission-critical transformation.",
     solution: "We executed a phased migration to modern cloud-native architecture with zero downtime. Using the Strangler Pattern, we incrementally extracted 45 microservices from the monolith over 18 months, running both systems in parallel using feature flags. We implemented Kafka-based event streaming for real-time data synchronization and migrated to a Multi-Cloud configuration with Kubernetes orchestration.",
     techStack: ["Java 17", "Spring Boot", "Spring Cloud", "Kafka", "PostgreSQL", "Kubernetes", "Terraform", "Datadog"]
   },
   "edtech-lms-platform": {
     title: "EdTech Learning Management System",
-    client: "LearnHub India",
+    client: "E-Learning Platform",
     industry: "EdTech",
     duration: "8 months",
     description: "Built scalable LMS platform supporting 500K+ concurrent users with live video streaming and interactive assessments.",
@@ -896,13 +896,13 @@ export const caseStudiesData = {
       { value: "<3s", label: "Video Latency" },
       { value: "High", label: "Completion Rate" }
     ],
-    challenge: "LearnHub's existing e-learning system crashed repeatedly during peak study hours. The interactive virtual classrooms had high video lag, leading to low completion rates and student frustration.",
+    challenge: "The learning management platform's existing e-learning system crashed repeatedly during peak study hours. The interactive virtual classrooms had high video lag, leading to low completion rates and student frustration.",
     solution: "We rebuilt their virtual classroom framework from the ground up using WebRTC and Node.js backend cluster, caching user profiles in Redis to manage concurrent authentication requests.",
     techStack: ["React", "Node.js", "WebRTC", "MongoDB", "Redis", "Multi-Cloud"]
   },
   "fintech-scale-up": {
     title: "FinTech Scale-Up: 10x Transaction Volume",
-    client: "PayFlow Systems",
+    client: "Payment Processor",
     industry: "FinTech",
     duration: "9 months",
     description: "Scaled payment processing infrastructure to handle massive transaction volume while achieving enterprise security compliance.",
@@ -911,13 +911,13 @@ export const caseStudiesData = {
       { value: "<100ms", label: "P95 Latency" },
       { value: "Enterprise", label: "Uptime" }
     ],
-    challenge: "PayFlow Systems faced significant latency during payment reconciliation cycles, resulting in transactional timing failures and compliance issues.",
+    challenge: "A payment processing platform faced significant latency during payment reconciliation cycles, resulting in transactional timing failures and compliance issues.",
     solution: "We restructured their transactional ledger using database partition logic and optimized gRPC microservices to process high-velocity requests.",
     techStack: ["Node.js", "PostgreSQL", "Multi-Cloud", "Kubernetes", "gRPC", "Kafka"]
   },
   "government-citizen-portal": {
     title: "Government Citizen Services Portal",
-    client: "Municipal Corporation",
+    client: "Public Sector Entity",
     industry: "Public Sector",
     duration: "15 months",
     description: "Unified government services into a single secure platform handling 1M+ daily citizens.",
@@ -928,12 +928,12 @@ export const caseStudiesData = {
       { value: "100%", label: "Security Compliance" }
     ],
     challenge: "Citizens were forced to visit government offices in person for everything from birth certificates to business licenses. With 50+ different services across multiple departments, each had separate forms, processes, and long waiting times.",
-    solution: "We designed a unified Citizen Services Portal, integrating Aadhaar-based multi-factor authentication, digital document validation, and streamlined backend workflows to reduce processing latency by 90%.",
+    solution: "We designed a unified Citizen Services Portal, integrating dynamic multi-factor authentication, digital document validation, and streamlined backend workflows to reduce processing latency by 90%.",
     techStack: ["React", "TypeScript", "Java", "Spring Boot", "PostgreSQL", "Kubernetes", "NIC Cloud"]
   },
   "healthcare-analytics": {
     title: "Healthcare Analytics Platform",
-    client: "MediData Insights",
+    client: "Healthcare Platform",
     industry: "Healthcare",
     duration: "12 months",
     description: "Built secure analytics platform for healthcare providers with real-time dashboards and secure PHI handling.",
@@ -942,13 +942,13 @@ export const caseStudiesData = {
       { value: "Certified", label: "Security" },
       { value: "High", label: "User Adoption" }
     ],
-    challenge: "Medical providers lacked a centralized analytical tool to track clinical outcomes, while having to adhere to strict HIPAA compliance.",
+    challenge: "Medical providers lacked a centralized analytical tool to track clinical outcomes, while having to adhere to strict security compliance guidelines.",
     solution: "We constructed an encrypted data warehouse utilizing role-based access rules and developed a clean dashboard visualization interface using React.",
     techStack: ["Python", "React", "Cloud Platform", "Security", "FastAPI", "BigQuery"]
   },
   "hospitality-booking-system": {
     title: "Hotel Chain Booking Platform",
-    client: "GrandStay Hotels",
+    client: "Hospitality Group",
     industry: "Hospitality",
     duration: "10 months",
     description: "Unified booking system across 150+ properties with dynamic pricing AI integration.",
@@ -958,13 +958,13 @@ export const caseStudiesData = {
       { value: "<2s", label: "Load Time" },
       { value: "150+", label: "Properties" }
     ],
-    challenge: "GrandStay Hotels operated 150+ properties but each used different booking systems. This fragmentation created inventory chaos, pricing inconsistencies, and a terrible customer experience with 70% mobile cart abandonment.",
+    challenge: "A major hotel chain operated 150+ properties but each used different booking systems. This fragmentation created inventory chaos, pricing inconsistencies, and a terrible customer experience with 70% mobile cart abandonment.",
     solution: "We engineered a unified core booking engine, integrating a machine-learning pricing model to calculate rates dynamically based on hotel occupancies.",
     techStack: ["React", "Next.js", "Node.js", "MySQL", "Redis", "Kubernetes", "S3"]
   },
   "insurance-digital-platform": {
     title: "Insurance Digital Transformation",
-    client: "SecureLife Insurance",
+    client: "Insurance Provider",
     industry: "Insurance",
     duration: "14 months",
     description: "Digitized legacy insurance processes with online policy management and claims processing portals.",
@@ -973,13 +973,13 @@ export const caseStudiesData = {
       { value: "High", label: "Customer Satisfaction" },
       { value: "Significant", label: "Cost Savings" }
     ],
-    challenge: "SecureLife processed claims manually using spreadsheets, taking up to 3 weeks per claim and generating high processing overhead.",
+    challenge: "An insurance provider processed claims manually using spreadsheets, taking up to 3 weeks per claim and generating high processing overhead.",
     solution: "We deployed an automated claims processing flow that parses insurance applications using optical character recognition, accelerating approvals.",
     techStack: ["Java", "Spring Boot", "Oracle", "Multi-Cloud", "React", "OpenCV"]
   },
   "logistics-tracking-system": {
     title: "Real-Time Logistics Tracking",
-    client: "SwiftShip Logistics",
+    client: "Logistics Provider",
     industry: "Logistics",
     duration: "11 months",
     description: "Implemented IoT-based fleet tracking and predictive maintenance scheduling.",
@@ -989,13 +989,13 @@ export const caseStudiesData = {
       { value: "-30%", label: "Delivery Time" },
       { value: "5000+", label: "Fleet Size" }
     ],
-    challenge: "SwiftShip Logistics was operating blind with no real-time tracking of their 5000+ vehicle fleet. Customers had no visibility into deliveries, route planning was inefficient, and unexpected breakdowns caused major delays and cost overruns.",
+    challenge: "A logistics provider was operating blind with no real-time tracking of their 5000+ vehicle fleet. Customers had no visibility into deliveries, route planning was inefficient, and unexpected breakdowns caused major delays and cost overruns.",
     solution: "We deployed MQTT-enabled IoT sensors on their fleet and engineered a tracking dashboard using TimescaleDB to handle telemetry feeds.",
     techStack: ["Python", "Django", "PostgreSQL", "TimescaleDB", "Redis", "Kafka", "GPS Modules", "MQTT"]
   },
   "manufacturing-iot-platform": {
     title: "Smart Manufacturing IoT Platform",
-    client: "TechManufacture Ltd",
+    client: "Manufacturing Firm",
     industry: "Manufacturing",
     duration: "15 months",
     description: "Centralized predictive maintenance monitoring across 20+ automated factories.",
@@ -1005,13 +1005,13 @@ export const caseStudiesData = {
       { value: "10K+", label: "Sensors Connected" },
       { value: "95%", label: "Maintenance Prediction" }
     ],
-    challenge: "TechManufacture Ltd was losing ₹5 crores annually to unplanned equipment failures. With 20+ factories and thousands of machines, they had no way to predict failures or monitor production efficiency in real-time.",
+    challenge: "A manufacturing company was losing ₹5 crores annually to unplanned equipment failures. With 20+ factories and thousands of machines, they had no way to predict failures or monitor production efficiency in real-time.",
     solution: "We established a centralized IoT lakehouse, capturing telemetry from 10,000+ machine sensors and applying prediction algorithms (TensorFlow) to forecast mechanical failures.",
     techStack: ["Python", "FastAPI", "MQTT", "InfluxDB", "Apache Spark", "TensorFlow", "Multi-Cloud"]
   },
   "retail-omnichannel": {
     title: "Retail Omni-Channel Platform",
-    client: "ShopUnited",
+    client: "E-Commerce Brand",
     industry: "Retail & eCommerce",
     duration: "10 months",
     description: "Unified online and in-store experience with real-time inventory synchronization.",
@@ -1020,13 +1020,13 @@ export const caseStudiesData = {
       { value: "High", label: "Uptime" },
       { value: "Growth", label: "Revenue Growth" }
     ],
-    challenge: "ShopUnited had major inventory sync errors, selling out of stock online when stock was purchased in physical retail locations.",
+    challenge: "An e-commerce brand had major inventory sync errors, selling out of stock online when stock was purchased in physical retail locations.",
     solution: "We implemented an event-driven stock synchronization engine using Kafka, connecting store POS registers to the eCommerce database.",
     techStack: ["React Native", ".NET Core", "MongoDB", "Cloud Platform", "Next.js", "Kafka"]
   },
   "saas-devops": {
     title: "SaaS DevOps Transformation",
-    client: "CloudOps Pro",
+    client: "DevOps Solution",
     industry: "SaaS",
     duration: "6 months",
     description: "Implemented automated CI/CD pipelines, SLO metrics, and observability stack.",
@@ -1035,13 +1035,13 @@ export const caseStudiesData = {
       { value: "Reduced", label: "MTTR" },
       { value: "5x", label: "Release Frequency" }
     ],
-    challenge: "CloudOps Pro struggled with slow release schedules, releasing software manually once every quarter, leading to long feedback loops.",
+    challenge: "A SaaS provider struggled with slow release schedules, releasing software manually once every quarter, leading to long feedback loops.",
     solution: "We fully automated their deployment pipeline using Gitlab CI and Docker containers, introducing automated testing gates to reduce risks.",
     techStack: ["GitLab", "Terraform", "Cloud Services", "Datadog", "Docker", "Kubernetes"]
   },
   "telecom-crm-system": {
     title: "Telecom Customer Management",
-    client: "ConnectTel",
+    client: "Telecom Operator",
     industry: "Telecom",
     duration: "14 months",
     description: "Unified legacy customer data platforms to improve customer support workflows.",
@@ -1051,9 +1051,9 @@ export const caseStudiesData = {
       { value: "-20%", label: "Churn Rate" },
       { value: "+300%", label: "Support Tickets" }
     ],
-    challenge: "ConnectTel was managing 10M+ subscribers using 5 different legacy systems that didn't talk to each other. Customer service agents needed to toggle between multiple screens, leading to long wait times and frustrated customers.",
+    challenge: "A telecom provider was managing 10M+ subscribers using 5 different legacy systems that didn't talk to each other. Customer service agents needed to toggle between multiple screens, leading to long wait times and frustrated customers.",
     solution: "We engineered an Angular-based CRM interface, exposing user statistics from the 5 backends through an API aggregation layer.",
-    techStack: ["Angular", ".NET Core", "SQL Server", "Redis", "Elasticsearch", "AKS"]
+    techStack: ["Angular", "TypeScript", "Node.js", "Express", "PostgreSQL", "Docker"]
   }
 };
 
@@ -2363,7 +2363,7 @@ export const careersData = [
     id: "sr-sre",
     title: "Senior Site Reliability Engineer",
     department: "Infrastructure / SRE",
-    location: "Remote (India) / Ahmedabad",
+    location: "Remote",
     type: "Full-Time",
     experience: "5+ Years",
     summary: "We are looking for an SRE to scale our multi-cloud Kubernetes clusters, automate environments with Terraform, and optimize application latency.",
@@ -2384,7 +2384,7 @@ export const careersData = [
     id: "fs-engineer",
     title: "Full-Stack Software Engineer (React / Node.js)",
     department: "Software Engineering",
-    location: "Ahmedabad, India (On-Site)",
+    location: "Remote / Global",
     type: "Full-Time",
     experience: "3+ Years",
     summary: "Join us in building responsive user interfaces in React and secure microservices backends using Node.js.",
@@ -2405,20 +2405,20 @@ export const careersData = [
     id: "security-architect",
     title: "Information Security Architect",
     department: "Cybersecurity & Compliance",
-    location: "Remote (India)",
+    location: "Remote",
     type: "Full-Time",
     experience: "6+ Years",
-    summary: "Help secure our core infrastructure and consult clients on SOC2, ISO27001, and HIPAA compliance readiness.",
+    summary: "Help secure our core infrastructure and consult clients on security compliance readiness.",
     responsibilities: [
       "Conduct security audits and penetration tests on cloud environments.",
       "Help engineering teams implement security-by-default workflows.",
-      "Consult clients on audit compliance paths (SOC2, HIPAA).",
+      "Consult clients on security compliance pathways.",
       "Deploy and manage vulnerability scanning tools."
     ],
     requirements: [
       "Professional certifications (CISSP, CEH, or equivalent).",
       "Familiarity with cloud security controls (AWS IAM, WAF).",
-      "Understanding of regulatory frameworks (GDPR, HIPAA, SOC2).",
+      "Understanding of security and data privacy regulatory frameworks.",
       "Experience auditing complex web application architectures."
     ]
   }
@@ -2434,8 +2434,8 @@ export const faqData = [
     a: "We utilize standard migration patterns like the Strangler Pattern. By deploying new microservices in parallel, utilizing feature flags, and configuring double-write databases before phasing out legacy components, we ensure zero downtime."
   },
   {
-    q: "Are your healthcare projects HIPAA compliant?",
-    a: "Yes. All healthcare projects are developed inside encrypted cloud networks with role-based access control, strict database logs, and encrypted data fields, satisfying HIPAA compliance rules."
+    q: "Are your healthcare projects secure and private?",
+    a: "Yes. All healthcare projects are developed inside encrypted cloud networks with role-based access control, strict database logs, and encrypted data fields, satisfying high privacy and security standards."
   },
   {
     q: "What is the billing model for managed support?",

@@ -122,7 +122,7 @@ export default function MobileAppsPage() {
     },
     {
       title: "Healthcare & Wellness",
-      desc: "HIPAA-ready telemedicine portals, fitness tracking, and active patient monitoring interfaces.",
+      desc: "Secure telemedicine portals, fitness tracking, and active patient monitoring interfaces.",
       accent: "from-rose-500/20 to-pink-500/20"
     },
     {

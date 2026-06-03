@@ -176,7 +176,7 @@ export default function DataAiPage() {
     },
     {
       title: "Transformation",
-      desc: "Raw, unstructured data is seldom ready for analytical or machine learning model consumption. In this phase, we run distributed serverless processing jobs to clean, normalize, and enrich data streams on the fly. We employ Apache Spark for large-scale batch transformations and dbt (data build tool) for structured warehouse SQL modeling. Real-time stream filtering is managed by Apache Flink, allowing us to perform temporal joins, aggregate windowed events, and redact sensitive PII (Personally Identifiable Information) values. This ensures complete GDPR and HIPAA compliance while flattening nested JSON fields into clean schemas.",
+      desc: "Raw, unstructured data is seldom ready for analytical or machine learning model consumption. In this phase, we run distributed serverless processing jobs to clean, normalize, and enrich data streams on the fly. We employ Apache Spark for large-scale batch transformations and dbt (data build tool) for structured warehouse SQL modeling. Real-time stream filtering is managed by Apache Flink, allowing us to perform temporal joins, aggregate windowed events, and redact sensitive PII (Personally Identifiable Information) values. This ensures complete data privacy compliance while flattening nested JSON fields into clean schemas.",
       bullets: [
         "Distributed batch computing and modeling engines using Apache Spark clusters and dbt pipelines.",
         "Real-time streaming transformations, windows, and temporal joins powered by Apache Flink.",

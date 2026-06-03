@@ -137,10 +137,11 @@ function OrbitingParticles({ radius, speed, color }) {
   );
 }
 
-export default function ThreeDHero() {
+export default function ThreeDHero({ isLoaded = true }) {
   const [hoveredNode, setHoveredNode] = useState(null);
   const containerRef = useRef(null);
   const [isVisible, setIsVisible] = useState(true);
+  const [shouldFloat, setShouldFloat] = useState(true);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -155,6 +156,17 @@ export default function ThreeDHero() {
       observer.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    if (isLoaded) {
+      const timer = setTimeout(() => {
+        setShouldFloat(false);
+      }, 1400); // 1.2s animation duration + 200ms buffer
+      return () => clearTimeout(timer);
+    } else {
+      setShouldFloat(true);
+    }
+  }, [isLoaded]);
 
   // Position definitions for Aetheris Nodes
   const nodes = [
@@ -222,13 +234,25 @@ export default function ThreeDHero() {
 
   return (
     <div ref={containerRef} className="relative w-full aspect-square max-w-[480px] mx-auto flex items-center justify-center select-none pt-4 pb-4">
-      {/* Concentric CSS Orbit Rings in Background */}
-      <div className="absolute inset-2 rounded-full border border-blue-200/40 border-dashed animate-[spin_45s_linear_infinite] pointer-events-none z-0"></div>
-      <div className="absolute inset-12 rounded-full border border-blue-300/30 border-dashed animate-[spin_30s_linear_infinite_reverse] pointer-events-none z-0"></div>
-      <div className="absolute inset-24 rounded-full border border-cyan-400/20 border-dashed animate-[spin_20s_linear_infinite] pointer-events-none z-0"></div>
+      {/* Concentric CSS Orbit Rings in Background (faded in when loaded) */}
+      <div className={`absolute inset-2 rounded-full border border-blue-200/40 border-dashed animate-[spin_45s_linear_infinite] pointer-events-none z-0 transition-opacity duration-1000 ${isLoaded ? "opacity-100" : "opacity-0"}`}></div>
+      <div className={`absolute inset-12 rounded-full border border-blue-300/30 border-dashed animate-[spin_30s_linear_infinite_reverse] pointer-events-none z-0 transition-opacity duration-1000 ${isLoaded ? "opacity-100" : "opacity-0"}`}></div>
+      <div className={`absolute inset-24 rounded-full border border-cyan-400/20 border-dashed animate-[spin_20s_linear_infinite] pointer-events-none z-0 transition-opacity duration-1000 ${isLoaded ? "opacity-100" : "opacity-0"}`}></div>
 
-      {/* 3D WebGL Canvas Layer */}
-      <div className="w-[280px] h-[280px] sm:w-[330px] sm:h-[330px] relative z-10">
+      {/* 3D WebGL Canvas Layer wrapped in a layout-animating motion.div */}
+      <motion.div 
+        layout
+        transition={{ 
+          type: "spring", 
+          stiffness: 35, 
+          damping: 13, 
+          mass: 1.2
+        }}
+        className={isLoaded 
+          ? `w-[280px] h-[280px] sm:w-[330px] sm:h-[330px] relative ${shouldFloat ? "z-[70]" : "z-10"}` 
+          : "fixed inset-0 m-auto w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] z-[70] pointer-events-none"
+        }
+      >
         <Canvas camera={{ position: [0, 2, 4.5], fov: 60 }} dpr={[1, 2]} frameloop={isVisible ? "always" : "never"}>
           <ambientLight intensity={1.5} />
           <pointLight position={[5, 5, 5]} intensity={2.5} />
@@ -237,9 +261,9 @@ export default function ThreeDHero() {
           
           <CentralCore />
         </Canvas>
-      </div>
+      </motion.div>
 
-      {/* Surround Node HTML Labels */}
+      {/* Surround Node HTML Labels (fade in after reactor core reaches position) */}
       {nodes.map((node) => {
         const IconComponent = node.icon;
         const isHovered = hoveredNode === node.id;
@@ -249,8 +273,14 @@ export default function ThreeDHero() {
             key={node.id}
             className={`${node.position} z-20`}
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: node.animationDelay }}
+            animate={{ 
+              opacity: isLoaded ? 1 : 0, 
+              scale: isLoaded ? 1 : 0.8 
+            }}
+            transition={{ 
+              duration: 0.6, 
+              delay: isLoaded ? node.animationDelay + 1.2 : 0 
+            }}
             onMouseEnter={() => setHoveredNode(node.id)}
             onMouseLeave={() => setHoveredNode(null)}
           >

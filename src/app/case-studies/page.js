@@ -72,10 +72,10 @@ export default function CaseStudiesHub() {
 
   // Client nodes coordinates for Interactive Map
   const mapNodes = [
-    { id: "usa", name: "New York, USA", x: "24%", y: "38%", client: "FinTech Leader", caseTitle: "Scalable Cloud Infrastructure", metric: "40% Cost Savings" },
-    { id: "uk", name: "London, UK", x: "48%", y: "30%", client: "SaaS Company", caseTitle: "CI/CD Transformation", metric: "3x Release Frequency" },
-    { id: "uae", name: "Dubai, UAE", x: "60%", y: "46%", client: "Logistics Corp", caseTitle: "Kubernetes Migration", metric: "99.99% Availability" },
-    { id: "india", name: "Ahmedabad, India", x: "71%", y: "52%", client: "Healthcare Provider", caseTitle: "Zero-Trust Compliance", metric: "100% HIPAA Ready" }
+    { id: "usa", name: "Americas Hub", x: "24%", y: "38%", client: "FinTech Leader", caseTitle: "Scalable Cloud Infrastructure", metric: "40% Cost Savings" },
+    { id: "uk", name: "Europe Hub", x: "48%", y: "30%", client: "SaaS Company", caseTitle: "CI/CD Transformation", metric: "3x Release Frequency" },
+    { id: "uae", name: "Middle East Hub", x: "60%", y: "46%", client: "Logistics Corp", caseTitle: "Kubernetes Migration", metric: "99.99% Availability" },
+    { id: "india", name: "Asia-Pacific Hub", x: "71%", y: "52%", client: "Healthcare Provider", caseTitle: "Zero-Trust Compliance", metric: "100% Secure" }
   ];
 
   return (

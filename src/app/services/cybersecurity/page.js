@@ -97,23 +97,23 @@ export default function CybersecurityPage() {
   const complianceStandards = [
     {
       title: "Security Standards",
-      desc: "Compliance mapping (SOC2, ISO 27001) and preparation audits.",
-      badge: "SOC2, ISO 27001 Audit Support"
+      desc: "Compliance mapping and preparation audits.",
+      badge: "Security Standard Support"
     },
     {
       title: "Data Protection",
-      desc: "Privacy assessments, data flow mappings, and GDPR/CCPA readiness.",
-      badge: "GDPR, CCPA Compliance"
+      desc: "Privacy assessments, data flow mappings, and privacy regulation readiness.",
+      badge: "Data Privacy Compliance"
     },
     {
       title: "Healthcare Security",
-      desc: "HIPAA-ready infrastructure designs and patient PHI secure vaulting.",
-      badge: "HIPAA, PHI Data Handling"
+      desc: "Secure medical infrastructure designs and patient PHI secure vaulting.",
+      badge: "Healthcare Data Handling"
     },
     {
       title: "Security Management",
-      desc: "Setting up information security management systems (ISMS).",
-      badge: "ISMS Setup & Frameworks"
+      desc: "Setting up information security management systems.",
+      badge: "Security Frameworks"
     }
   ];
 
@@ -225,22 +225,22 @@ export default function CybersecurityPage() {
   const successStories = [
     {
       title: "FinTech Security Hardening",
-      challenge: "NeoBank needed to pass rigorous compliance audits and secure transactional assets from outside penetrations.",
+      challenge: "A digital banking platform needed to pass rigorous compliance audits and secure transactional assets from outside penetrations.",
       solution: "We deployed zero-trust system vaults, configured 24/7 SIEM monitoring logs, and ran automated compliance pipelines.",
-      results: "Achieved full SOC2 security compliance audits within 6 months with zero breach issues.",
+      results: "Achieved full security compliance alignment within 6 months with zero breach issues.",
       stats: [
-        { label: "Compliance Audits", value: "SOC2 Pass" },
+        { label: "Compliance Audits", value: "Aligned" },
         { label: "Breach Incident Rate", value: "0 Breach" },
         { label: "Hardening Level", value: "Grade A" }
       ]
     },
     {
       title: "Healthcare Security Compliance",
-      challenge: "Telehealth provider required end-to-end encrypted tunnels for HIPAA compliance patient consultations.",
+      challenge: "Telehealth provider required end-to-end encrypted tunnels for secure patient consultations.",
       solution: "We engineered encrypted databases storage, secure WebRTC signaling paths, and implemented audit logging triggers.",
       results: "Secured all telemedicine files, successfully passing third-party healthcare security checks.",
       stats: [
-        { label: "HIPAA Audits", value: "100% Passed" },
+        { label: "Security Audits", value: "100% Passed" },
         { label: "Data Encryption", value: "AES-256" },
         { label: "Critical Vulnerabilities", value: "0 Found" }
       ]
@@ -258,7 +258,7 @@ export default function CybersecurityPage() {
     },
     {
       q: "How do you handle security incidents?",
-      a: "We follow NIST incident response framework: Preparation, Detection, Analysis, Containment, Eradication, Recovery, and Post-Incident review. Our 24/7 SOC team responds to alerts within 30 minutes for critical incidents."
+      a: "We follow NIST incident response framework: Preparation, Detection, Analysis, Containment, Eradication, Recovery, and Post-Incident review. Our 24/7 security operations team responds to alerts within 30 minutes for critical incidents."
     },
     {
       q: "Can you help with data protection compliance?",
@@ -910,7 +910,7 @@ export default function CybersecurityPage() {
             Secure Your Systems & Achieve Compliance
           </h3>
           <p className="text-sm sm:text-base text-slate-700 lg:text-slate-200 max-w-2xl mx-auto leading-relaxed">
-            Protect your cloud infrastructure, run full penetration assessments, and secure compliance certifications with our dedicated support team.
+            Protect your cloud infrastructure, run full penetration assessments, and secure system standards with our dedicated support team.
           </p>
           <div className="flex justify-center font-mono pt-4">
             <Link 

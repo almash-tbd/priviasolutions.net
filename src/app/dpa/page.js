@@ -20,7 +20,7 @@ export default function DPAPage() {
       <div className="text-sm sm:text-base text-slate-300 leading-relaxed space-y-6 pt-4 border-t border-[#1e2038]/40">
         <h2 className="text-lg font-bold text-slate-100">1. Scope & Applicability</h2>
         <p>
-          This DPA applies when our customer data transfers involve personal data processing regulated by the GDPR or CCPA.
+          This DPA applies when our customer data transfers involve personal data processing regulated by applicable privacy laws.
         </p>
 
         <h2 className="text-lg font-bold text-slate-100">2. Processing Standards</h2>

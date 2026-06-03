@@ -63,7 +63,7 @@ export default function Navbar() {
       title: "Solutions",
       dropdown: [
         { name: "SaaS Solutions", href: "/solutions/saas", desc: "Scalable multi-tenant infrastructures", icon: Layers },
-        { name: "FinTech Platforms", href: "/solutions/fintech", desc: "Audit logs, secure ledgers, and PCI compliance", icon: CreditCard },
+        { name: "FinTech Platforms", href: "/solutions/fintech", desc: "Audit logs, secure ledgers, and transaction security", icon: CreditCard },
         { name: "Healthcare Platforms", href: "/solutions/healthcare", desc: "Telehealth portals and secure FHIR flows", icon: ShieldCheck },
         { name: "Retail & eCommerce", href: "/solutions/retail", desc: "Kafka stock sync and latency-free carts", icon: ShoppingCart }
       ]
@@ -80,7 +80,6 @@ export default function Navbar() {
       dropdown: [
         { name: "Careers", href: "/careers", desc: "Join our global remote-first engineering crew", icon: Briefcase },
         { name: "Security Center", href: "/security", desc: "Our global security trust parameters", icon: Lock },
-        { name: "Compliance Standards", href: "/compliance", desc: "Certified operations and certifications", icon: ShieldCheck },
         { name: "FAQ", href: "/faq", desc: "Frequently asked questions", icon: HelpCircle },
         { name: "Case Studies", href: "/case-studies", desc: "Read our real-world success results", icon: BarChart3 }
       ]
@@ -306,19 +305,6 @@ export default function Navbar() {
             <div className="flex flex-col items-center gap-1">
               <span className="text-[14px] mm-animate-float">🛡️</span>
               <span className="text-[5px] font-bold text-emerald-600 bg-emerald-50 px-1 border border-emerald-200 rounded">ACTIVE</span>
-            </div>
-          </div>
-        );
-      case "Compliance Standards":
-        return (
-          <div className="ill-meetings bg-purple-50">
-            <div className="ill-meetings-pros border-t-4 border-t-purple-400 flex flex-col justify-between p-2">
-              <span className="text-[7px] font-black text-purple-700">RULES</span>
-              <div className="text-[12px] text-center">📜</div>
-            </div>
-            <div className="ill-meetings-cons border-t-4 border-t-emerald-400 flex flex-col justify-between p-2">
-              <span className="text-[7px] font-black text-emerald-700">COMPLY</span>
-              <div className="text-[12px] text-center mm-animate-float">🏅</div>
             </div>
           </div>
         );

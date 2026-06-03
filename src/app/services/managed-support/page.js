@@ -19,7 +19,7 @@ export default function ManagedSupportPage() {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
-  // State for SLA pricing calculator (monthly API load metric)
+  // State for SLA workload calculator (monthly API load metric)
   const [trafficVolume, setTrafficVolume] = useState(500000); // Default to 500K
 
   // State for Incident Escalation Workflow Visualizer
@@ -262,7 +262,7 @@ export default function ManagedSupportPage() {
       <section id="tiers" className="relative bg-gradient-to-b from-[#101733] via-[#152147] to-[#1c2c5c] py-20 border-b border-white/5 overflow-hidden text-slate-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
-            <h2 className="text-[10px] font-black tracking-widest text-[#1591dc] uppercase font-mono">pricing::tiers</h2>
+            <h2 className="text-[10px] font-black tracking-widest text-[#1591dc] uppercase font-mono">support::tiers</h2>
             <h3 className="text-3xl font-extrabold tracking-tight text-white">Flexible Support Tiers</h3>
             <p className="text-xs text-slate-300 max-w-md mx-auto leading-relaxed">
               Drag the volume slider to estimate monthly support workload and find your target tier.

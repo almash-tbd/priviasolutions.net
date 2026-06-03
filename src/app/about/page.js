@@ -83,10 +83,10 @@ export default function AboutPage() {
 
   // Coordinates for the About Page global operation nodes
   const mapNodes = [
-    { id: "na", name: "North America Hub", x: "24%", y: "38%", countries: "USA, Canada", desc: "Primary enterprise clients & SRE team rotation" },
-    { id: "eu", name: "Europe Hub", x: "48%", y: "30%", countries: "UK, Germany", desc: "Financial SaaS advisory & security support" },
-    { id: "me", name: "Middle East Hub", x: "60%", y: "46%", countries: "UAE, Saudi Arabia", desc: "Logistics infrastructure integration teams" },
-    { id: "ap", name: "Asia Pacific Hub", x: "71%", y: "52%", countries: "India, Singapore, Australia", desc: "Global headquarters and 24/7 NOC center" }
+    { id: "na", name: "North America Hub", x: "24%", y: "38%", countries: "North America", desc: "Primary enterprise clients & SRE team rotation" },
+    { id: "eu", name: "Europe Hub", x: "48%", y: "30%", countries: "Europe", desc: "Financial SaaS advisory & security support" },
+    { id: "me", name: "Middle East Hub", x: "60%", y: "46%", countries: "Middle East", desc: "Logistics infrastructure integration teams" },
+    { id: "ap", name: "Asia Pacific Hub", x: "71%", y: "52%", countries: "Asia-Pacific Region", desc: "Global headquarters and 24/7 NOC center" }
   ];
 
   // Coordinates for the About Page DNA nodes
@@ -103,7 +103,7 @@ export default function AboutPage() {
       name: "Security", 
       icon: Shield, 
       desc: "Security is embedded in everything we build and deliver.",
-      bullets: ["Zero Trust Security Architecture", "Regulatory Compliance (SOC 2, ISO)", "Continuous Vulnerability Scanning"]
+      bullets: ["Zero Trust Security Architecture", "Regulatory Compliance Frameworks", "Continuous Vulnerability Scanning"]
     },
     { 
       id: "success", 
@@ -182,7 +182,7 @@ export default function AboutPage() {
       desc: "We run deep automated security scans, compliance audits, and vulnerability tests before deployment.",
       bullets: [
         "Vulnerability assessment & testing",
-        "SOC 2 & ISO compliance check",
+        "Comprehensive security compliance verification",
         "Zero Trust security configuration",
         "Identity & Access Management policies"
       ],
@@ -459,9 +459,9 @@ export default function AboutPage() {
                             ["Initial core team assembly", "Establishment of architecture standards", "Bootstrap phase validation"],
                             ["Scale load optimization", "High-velocity pipeline setups", "Zero-downtime database migration"],
                             ["Multi-cloud architecture expertise", "CI/CD automated deployment models", "Cost optimization frameworks"],
-                            ["SOC 2 Type II audit readiness", "ISO 27001 security compliance", "Continuous automated pen-testing"],
+                            ["Security framework alignment", "Security compliance standards", "Continuous automated pen-testing"],
                             ["Enterprise SLA enforcement", "24/7 client NOC operations", "Global routing latency optimization"],
-                            ["USA, Europe, and India local presence", "Strategic tech partnerships", "Advanced AI & Data services launch"]
+                            ["Global region local presence", "Strategic tech partnerships", "Advanced AI & Data services launch"]
                           ][activeStep]
                         ][0].map((bullet, idx) => (
                           <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-655 font-bold">
@@ -759,9 +759,23 @@ export default function AboutPage() {
         </div>
         <div className="grid sm:grid-cols-3 gap-8 text-left max-w-5xl mx-auto pt-4">
           {[
-            { name: "Aarav Sharma", role: "CEO & Co-founder", desc: "Cloud strategist and business leader with 15+ years of experience leading enterprise digital modernization initiatives." },
-            { name: "Esha Patel", role: "CTO & Co-founder", desc: "Technology architect orchestrating super scale applications and designing zero-latency cloud backends." },
-            { name: "Karan Nair", role: "Head of Cloud", desc: "Infrastructure expert specializing in multi-region Kubernetes migration, cloud security operations, and DevOps." }
+            { 
+              name: "Sagar Ishwarbhai Ramani", 
+              role: "Founder", 
+              desc: "Founder and vision leader of Aetheris, driving enterprise-grade digital transformations, tech strategy, and cloud platform growth.",
+              image: "/assets/images/team/sagar.jpg"
+            },
+            { 
+              name: "Darshan Patel", 
+              role: "CEO", 
+              desc: "Chief Executive Officer orchestrating operations, enterprise partnerships, and scaling engineering delivery models globally.",
+              image: "/assets/images/team/darshan.jpg"
+            },
+            { 
+              name: "Karan Nair", 
+              role: "Head of Cloud", 
+              desc: "Infrastructure expert specializing in multi-region Kubernetes migration, cloud security operations, and DevOps." 
+            }
           ].map((person, idx) => (
             <div 
               key={idx} 
@@ -769,15 +783,37 @@ export default function AboutPage() {
             >
               {/* Initial View: Avatar Icon & Basic Info */}
               <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-slate-100 to-blue-50/40 flex flex-col items-center justify-center transition-all duration-700 group-hover:blur-md group-hover:scale-105 z-0">
-                <div className="w-24 h-24 rounded-full bg-white border border-slate-200/60 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.015),0_8px_16px_rgba(0,0,0,0.03)] flex items-center justify-center text-slate-400 group-hover:text-blue-600 transition-colors duration-500">
-                  <User className="w-12 h-12 stroke-[1.25]" />
-                </div>
-                
-                {/* Minimal Overlay Footer */}
-                <div className="absolute bottom-6 left-6 right-6 text-left transition-opacity duration-500 group-hover:opacity-0">
-                  <h4 className="text-lg font-black text-slate-800 font-outfit leading-tight">{person.name}</h4>
-                  <p className="text-[10px] font-bold text-blue-600 font-mono uppercase tracking-wider mt-1">{person.role}</p>
-                </div>
+                {person.image ? (
+                  <>
+                    {/* Full Card Background Image */}
+                    <img 
+                      src={person.image} 
+                      alt={person.name} 
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                    />
+                    {/* Dark gradient overlay for text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent transition-opacity duration-500 group-hover:opacity-0" />
+                    
+                    {/* Text Footer on Image (White text) */}
+                    <div className="absolute bottom-6 left-6 right-6 text-left transition-opacity duration-500 group-hover:opacity-0">
+                      <h4 className="text-lg font-black text-white font-outfit leading-tight">{person.name}</h4>
+                      <p className="text-[10px] font-bold text-sky-400 font-mono uppercase tracking-wider mt-1">{person.role}</p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {/* Original Placeholder Circular Avatar */}
+                    <div className="w-24 h-24 rounded-full bg-white border border-slate-200/60 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.015),0_8px_16px_rgba(0,0,0,0.03)] flex items-center justify-center text-slate-400 group-hover:text-blue-600 transition-colors duration-500">
+                      <User className="w-12 h-12 stroke-[1.25]" />
+                    </div>
+                    
+                    {/* Original Text Footer */}
+                    <div className="absolute bottom-6 left-6 right-6 text-left transition-opacity duration-500 group-hover:opacity-0">
+                      <h4 className="text-lg font-black text-slate-800 font-outfit leading-tight">{person.name}</h4>
+                      <p className="text-[10px] font-bold text-blue-600 font-mono uppercase tracking-wider mt-1">{person.role}</p>
+                    </div>
+                  </>
+                )}
               </div>
 
               {/* Hover View: Blurs background and displays descriptions clearly */}
@@ -832,28 +868,28 @@ export default function AboutPage() {
                 <MapPin className="w-4 h-4 text-blue-400 mt-0.5 shrink-0" />
                 <div>
                   <strong className="text-white block font-sans">North America</strong>
-                  <span className="text-slate-400">USA, Canada</span>
+                  <span className="text-slate-400">North America Region</span>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-indigo-400 mt-0.5 shrink-0" />
                 <div>
                   <strong className="text-white block font-sans">Europe</strong>
-                  <span className="text-slate-400">UK, Germany</span>
+                  <span className="text-slate-400">Europe Region</span>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" />
                 <div>
                   <strong className="text-white block font-sans">Middle East</strong>
-                  <span className="text-slate-400">UAE, Saudi Arabia</span>
+                  <span className="text-slate-400">Middle East Region</span>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-rose-400 mt-0.5 shrink-0" />
                 <div>
                   <strong className="text-white block font-sans">Asia Pacific</strong>
-                  <span className="text-slate-400">India, Singapore, Australia</span>
+                  <span className="text-slate-400">Asia-Pacific Region</span>
                 </div>
               </div>
             </div>

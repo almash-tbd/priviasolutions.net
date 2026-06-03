@@ -31,8 +31,7 @@ export default function Footer() {
       links: [
         { name: "All Products", href: "/products" },
         { name: "IceDeploy", href: "/products/icedeploy" },
-        { name: "IceInsight", href: "/products/iceinsight" },
-        { name: "Pricing", href: "/pricing" }
+        { name: "IceInsight", href: "/products/iceinsight" }
       ]
     },
     {
@@ -63,7 +62,6 @@ export default function Footer() {
       title: "Legal",
       links: [
         { name: "Security", href: "/security" },
-        { name: "Compliance", href: "/compliance" },
         { name: "Privacy Policy", href: "/privacy" },
         { name: "Terms of Service", href: "/terms" },
         { name: "Data Processing Addendum", href: "/dpa" },
@@ -97,10 +95,6 @@ export default function Footer() {
           </div>
           
           <div className="flex flex-wrap items-center gap-6 text-sm text-slate-200">
-            <a href="tel:+919998233946" className="flex items-center space-x-2 hover:text-[#4BB8FA] transition-colors">
-              <Phone className="w-4 h-4 text-[#4BB8FA]" />
-              <span>+91 9998233946</span>
-            </a>
             <a href="mailto:info@aetherissystems.com" className="flex items-center space-x-2 hover:text-[#4BB8FA] transition-colors">
               <Mail className="w-4 h-4 text-[#4BB8FA]" />
               <span>info@aetherissystems.com</span>
@@ -148,7 +142,7 @@ export default function Footer() {
         {/* Footer bottom */}
         <div className="flex flex-col sm:flex-row items-center justify-between border-t border-white/10 pt-8 gap-4">
           <p className="text-[11px] text-slate-300 tracking-wide text-center sm:text-left">
-            &copy; {new Date().getFullYear()} Aetheris Systems. All rights reserved. Registered in Ahmedabad, Gujarat, India.
+            &copy; {new Date().getFullYear()} Aetheris Systems. All rights reserved.
           </p>
           <div className="flex items-center space-x-4 text-[11px] text-slate-300">
             <Link href="/" className="hover:text-[#4BB8FA] transition-colors">Aetheris Systems official website</Link>

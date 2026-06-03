@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { 
   Code, Cpu, Settings, Terminal, UserCheck, 
   Activity, Lock, Database, Sparkles, ArrowRight,
@@ -431,7 +431,7 @@ export default function Home() {
       id: 1,
       q: "Aetheris Systems provided exceptional cloud setup and migrations. Their engineers solved our synchronization errors and did it with zero platform downtime.", 
       name: "Amit Desai", 
-      role: "VP of Product, ShopUnited", 
+      role: "VP of Product, E-Commerce Brand", 
       glowClass: "glow-card-gold",
       stars: 5,
       initials: "AD",
@@ -441,7 +441,7 @@ export default function Home() {
       id: 2,
       q: "Their team rebuilt our medical booking system, securing patient logs and compliance audits efficiently. Extremely knowledgeable.", 
       name: "Sanjay Rao", 
-      role: "VP Engineering, MediData Insights", 
+      role: "VP Engineering, Healthcare Platform", 
       glowClass: "glow-card-teal",
       stars: 5,
       initials: "SR",
@@ -451,7 +451,7 @@ export default function Home() {
       id: 3,
       q: "Excellent experience working with them. They redesigned our entire payment processing architecture to support a massive volume increase.", 
       name: "Meera Iyer", 
-      role: "CTO, NeoBank Digital", 
+      role: "CTO, Digital Banking Platform", 
       glowClass: "glow-card-purple",
       stars: 5,
       initials: "MI",
@@ -461,7 +461,7 @@ export default function Home() {
       id: 4,
       q: "The scroll stack animations are incredibly smooth. Aetheris Systems helped us elevate our website design to a whole new premium level in just a few hours.", 
       name: "Sarah Jenkins", 
-      role: "Lead Product Designer at Figma", 
+      role: "Lead Product Designer at Design Platform", 
       glowClass: "glow-card-gold",
       stars: 5,
       initials: "SJ",
@@ -631,6 +631,37 @@ export default function Home() {
   const [activeInsightSlug, setActiveInsightSlug] = useState("cloud-cost-guardrails");
   const [hoveredInsightSlug, setHoveredInsightSlug] = useState(null);
   const servicesContainerRef = useRef(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [sectionZIndex, setSectionZIndex] = useState("z-[70]");
+
+  useEffect(() => {
+    if (isLoaded) {
+      const timer = setTimeout(() => {
+        setSectionZIndex("z-10");
+      }, 1500); // Delay to match the transition & preloader exit
+      return () => clearTimeout(timer);
+    } else {
+      setSectionZIndex("z-[70]");
+    }
+  }, [isLoaded]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 2800);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!isLoaded) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isLoaded]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -719,16 +750,59 @@ export default function Home() {
   const blogGlows = ["glow-card-gold", "glow-card-teal", "glow-card-purple"];
 
   return (
-    <div className="relative bg-[#edf5fd] text-slate-900">
+    <div className={`relative text-slate-900 transition-colors duration-1000 ${isLoaded ? "bg-[#edf5fd]" : "bg-[#0a0c16]"}`}>
+      <style dangerouslySetInnerHTML={{ __html: `
+        body {
+          background-color: ${isLoaded ? '#edf5fd' : '#0a0c16'} !important;
+          transition: background-color 1s ease-in-out !important;
+        }
+        nav, footer {
+          opacity: ${isLoaded ? 1 : 0} !important;
+          pointer-events: ${isLoaded ? 'auto' : 'none'} !important;
+          transition: opacity 0.8s ease-in-out !important;
+        }
+      `}} />
+      <AnimatePresence>
+        {!isLoaded && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.0, ease: "easeInOut" }}
+            className="fixed inset-0 bg-[#0a0c16] z-[60] flex flex-col items-center justify-center pointer-events-auto"
+          >
+            {/* Spacer equal to core diameter to center text below it */}
+            <div className="h-[280px] sm:h-[320px]" />
+            
+            <motion.h1
+              initial={{ opacity: 0, y: 30, letterSpacing: "0.1em" }}
+              animate={{ opacity: 1, y: 0, letterSpacing: "0.25em" }}
+              exit={{ opacity: 0, y: -20, transition: { duration: 0.5 } }}
+              transition={{ delay: 0.4, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              className="font-outfit font-black text-3xl sm:text-5xl text-white mt-12 bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-400 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(59,130,246,0.6)] uppercase tracking-[0.25em]"
+            >
+              AETHERIS
+            </motion.h1>
+            
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 0.4, 0.2, 0.4], transition: { delay: 1.6, duration: 3, repeat: Infinity } }}
+              exit={{ opacity: 0 }}
+              className="text-[10px] sm:text-xs text-blue-200/50 mt-4 tracking-[0.4em] uppercase font-mono font-bold"
+            >
+              System Initialization
+            </motion.p>
+          </motion.div>
+        )}
+      </AnimatePresence>
       
       {/* Grid background overlay */}
       <div className="absolute inset-0 grid-pattern opacity-[0.4] pointer-events-none -z-20"></div>
 
       {/* Hero Section Container (Full-width wrapper to support full-bleed background image) */}
-      <div className="relative w-full overflow-hidden border-b border-slate-200/40 bg-gradient-to-b from-[#edf5fd] to-[#dceaf7]">
+      <div className={`relative w-full overflow-hidden border-b border-slate-200/40 transition-colors duration-1000 ${isLoaded ? "bg-gradient-to-b from-[#edf5fd] to-[#dceaf7]" : "bg-[#0a0c16]"}`}>
         
         {/* Full-bleed Background Image */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
+        <div className={`absolute inset-0 z-0 pointer-events-none overflow-hidden select-none transition-opacity duration-1000 ${isLoaded ? "opacity-100" : "opacity-0"}`}>
           <Image 
             src="/assets/images/futuristic_city_bg.jpg"
             alt="Futuristic digital city background Aetheris Core"
@@ -742,15 +816,15 @@ export default function Home() {
         </div>
 
         {/* 1. Hero Section (White/Light Slate Alternate) */}
-        <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 z-10">
+        <section className={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 ${sectionZIndex}`}>
         {/* We use a grid system that divides the space into 12 cols on desktop */}
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           
           {/* Left Column: Headings, Paragraph, Buttons, and Trust Metrics (lg:col-span-7) */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            animate={{ opacity: isLoaded ? 1 : 0, x: isLoaded ? 0 : -30 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
             className="lg:col-span-7 space-y-6 flex flex-col items-center lg:items-start text-center lg:text-left"
           >
             <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#C4E2F5]/30 border border-[#C4E2F5]/50 text-xs font-bold text-[#2C5EAD]">
@@ -793,8 +867,8 @@ export default function Home() {
                   <ShieldCheck className="w-5 h-5" />
                 </div>
                 <div className="text-left">
-                  <span className="text-[10px] font-mono text-slate-800 block font-bold leading-none mb-1">SOC 2 Ready</span>
-                  <span className="text-[9px] font-medium text-slate-400">Compliance</span>
+                  <span className="text-[10px] font-mono text-slate-800 block font-bold leading-none mb-1">Fully Secure</span>
+                  <span className="text-[9px] font-medium text-slate-400">Environment</span>
                 </div>
               </div>
               
@@ -822,15 +896,15 @@ export default function Home() {
           
           {/* Right Column: 3D Hologram WebGL Scene (lg:col-span-5) */}
           <div className="lg:col-span-5 flex justify-center items-center w-full relative">
-            <ThreeDHero />
+            <ThreeDHero isLoaded={isLoaded} />
           </div>
         </div>
 
         {/* Bottom Horizontal Stats Bar */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 30 }}
+          transition={{ duration: 0.8, delay: 1.0 }}
           className="mt-16 sm:mt-24 p-6 sm:p-8 bg-white/80 backdrop-blur-md border border-slate-200/80 rounded-3xl shadow-[0_12px_36px_rgba(0,0,0,0.02)] grid grid-cols-2 lg:grid-cols-4 gap-6 items-center w-full"
         >
           <div className="flex items-center gap-4">
@@ -1152,7 +1226,7 @@ export default function Home() {
                     <div>
                       <div className="ft-ticker mb-4">
                         <div className="ft-ticker-line">
-                          <span className="ft-lbl"><span>▲</span>PCI_AUDIT</span>
+                          <span className="ft-lbl"><span>▲</span>SEC_AUDIT</span>
                           <span className="ft-val">OK</span>
                         </div>
                         <div className="ft-ticker-line">
@@ -1429,7 +1503,7 @@ export default function Home() {
                         <div>
                           <div className="ft-ticker mb-4">
                             <div className="ft-ticker-line">
-                              <span className="ft-lbl"><span>▲</span>PCI_AUDIT</span>
+                              <span className="ft-lbl"><span>▲</span>SEC_AUDIT</span>
                               <span className="ft-val">OK</span>
                             </div>
                             <div className="ft-ticker-line">

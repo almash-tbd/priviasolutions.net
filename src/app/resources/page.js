@@ -89,10 +89,10 @@ export default function ResourcesPage() {
       borderColor: "border-blue-100"
     },
     { 
-      title: "SOC 2 Compliance Roadmap", 
-      id: "soc2-roadmap", 
+      title: "Security Compliance Roadmap", 
+      id: "security-compliance-roadmap", 
       category: "Compliance",
-      desc: "Step-by-step readiness checklist and audit guidelines for SOC 2 Type II certification.",
+      desc: "Step-by-step readiness checklist and guidelines for aligned security frameworks.",
       date: "Jul 02, 2025",
       type: "PDF",
       size: "1.9 MB",

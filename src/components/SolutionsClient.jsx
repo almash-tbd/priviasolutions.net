@@ -81,7 +81,7 @@ export default function SolutionsClient({ slug, data }) {
           cardBorderHover: "hover:border-emerald-400/40 hover:shadow-emerald-500/5",
           btnColor: "bg-emerald-600 hover:bg-emerald-700",
           gradientText: "from-emerald-700 via-teal-600 to-cyan-600",
-          verticalTag: "Healthcare HIPAA Compliance",
+          verticalTag: "Healthcare Security Standards",
           bulletIcon: "text-emerald-500"
         };
       case "retail":

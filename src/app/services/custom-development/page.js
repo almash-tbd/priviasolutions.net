@@ -300,7 +300,7 @@ export default function CustomDevelopmentPage() {
     },
     {
       name: "Healthcare Systems",
-      desc: "HIPAA-ready patient records platforms, telemedicine portals, and secure EHR sync interfaces.",
+      desc: "Secure patient records platforms, telemedicine portals, and secure EHR sync interfaces.",
       bullets: ["Telehealth WebRTC", "Secure PHI Vaulting", "FHIR / HL7 Formats", "Audit Tracking logs"],
       glowColor: "from-teal-500/20 to-emerald-500/20"
     },
@@ -321,14 +321,14 @@ export default function CustomDevelopmentPage() {
   const successStories = [
     {
       title: "FinTech Transaction Engine",
-      challenge: "NeoBank needed to scale transaction pipelines to process high daily volumes with zero downtime and sub-100ms processing latency.",
+      challenge: "A digital banking platform needed to scale transaction pipelines to process high daily volumes with zero downtime and sub-100ms processing latency.",
       solution: "We designed a microservices network utilizing event-sourcing and CQRS database partition patterns, managed by Kong API Gateways.",
       results: ["Successfully processed millions in volume daily", "Sub-100ms P95 transactional latency", "Achieved full regulatory security compliance"],
       borderColor: "border-emerald-250"
     },
     {
       title: "Healthcare Patient Portal",
-      challenge: "MediData required a secure, HIPAA-compliant patient management system featuring real-time video consults and medical record vaulting.",
+      challenge: "A medical records provider required a secure patient management system featuring real-time video consults and medical record vaulting.",
       solution: "We deployed an end-to-end encrypted React app hosted on multi-region AWS clusters, utilizing secure WebRTC connections for video streams.",
       results: ["Active onboarding of 50K+ patient profiles", "100% compliant security audits", "Average user satisfaction rating of 4.8/5"],
       borderColor: "border-teal-250"
@@ -337,18 +337,18 @@ export default function CustomDevelopmentPage() {
 
   const engagementModels = [
     {
-      title: "Fixed Price",
+      title: "Fixed Budget",
       tag: "Defined Scope",
       desc: "Ideal for well-defined MVPs and project designs with a fixed scope, budget, and structured timeline.",
       ideal: ["Launching MVPs", "Specific migrations", "Bespoke feature extensions"],
-      pricing: "One-time project fee"
+      billingModel: "One-time project fee"
     },
     {
       title: "Time & Materials",
       tag: "Flexible Approach",
       desc: "Best suited for evolving requirements, iterative testing, and complex R&D initiatives requiring flexibility.",
       ideal: ["Evolving product cycles", "Complex legacy extractions", "Continuous scaling iterations"],
-      pricing: "Hourly or monthly developer rates",
+      billingModel: "Hourly or monthly developer rates",
       isPopular: true
     },
     {
@@ -356,7 +356,7 @@ export default function CustomDevelopmentPage() {
       tag: "Long-Term Partnership",
       desc: "A fully integrated engineering team consisting of developers, QA, and architects working directly under your roadmap.",
       ideal: ["Continuous product iteration", "Support & operations scaling", "Legacy system modernization"],
-      pricing: "Monthly retainer model"
+      billingModel: "Monthly retainer model"
     }
   ];
 
@@ -1097,7 +1097,7 @@ export default function CustomDevelopmentPage() {
                     </div>
                     <div className="card_inner__content">
                       <div className="title">{model.title}</div>
-                      <div className="price">{model.pricing}</div>
+                      <div className="price">{model.billingModel}</div>
                       <div className="text text-white/90">
                         <p className="mb-4">{model.desc}</p>
                         <div className="text-[11px] font-bold text-white/70 uppercase tracking-widest mb-2 font-mono">Best Suited For:</div>

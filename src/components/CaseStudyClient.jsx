@@ -87,73 +87,73 @@ const testimonialMapping = {
   "banking-core-modernization": {
     author: "Sarah Jenkins",
     role: "VP of Engineering",
-    company: "NeoBank Digital",
+    company: "Digital Banking Platform",
     quote: "Aetheris transformed our legacy core banking monolith. Their phased Strangler Pattern approach achieved zero downtime migration over 18 months, helping us scale concurrent users seamlessly without a single transactional record lost."
   },
   "edtech-lms-platform": {
     author: "Amit Patel",
     role: "Director of Product",
-    company: "LearnHub India",
+    company: "E-Learning Platform",
     quote: "Rebuilding our LMS platform with WebRTC and Redis cache completely resolved our peak load crashes. Our video latency dropped under 3 seconds and lesson completion rates skyrocketed."
   },
   "fintech-scale-up": {
     author: "Marcus Aurelius",
     role: "CTO",
-    company: "PayFlow Systems",
+    company: "Payment Processor",
     quote: "By restructuring our transactional database using partitioning and implementing highly optimized gRPC services, Aetheris enabled our platform to sustain a 10x surge in transaction volume."
   },
   "government-citizen-portal": {
     author: "Rajesh Kumar",
     role: "IT Director",
-    company: "Municipal Corporation",
+    company: "Public Sector Entity",
     quote: "Unifying 50+ services into one portal with secure document validation streamlined our citizen pipeline, cutting operational response delays by 90% and earning praise from municipal authorities."
   },
   "healthcare-analytics": {
     author: "Dr. Anita Desai",
     role: "CMIO",
-    company: "MediData Insights",
-    quote: "Ensuring HIPAA compliance while constructing our analytics pipelines was our highest priority. Aetheris met the challenge with encrypted warehouse perimeters, detailed audit logging, and custom React dashboard widgets."
+    company: "Healthcare Platform",
+    quote: "Ensuring secure data privacy standards while constructing our analytics pipelines was our highest priority. Aetheris met the challenge with encrypted warehouse perimeters, detailed audit logging, and custom React dashboard widgets."
   },
   "hospitality-booking-system": {
     author: "Sophia Loren",
     role: "VP of Operations",
-    company: "GrandStay Hotels",
+    company: "Hospitality Group",
     quote: "Unifying 150+ properties onto one dynamic booking interface saved our staff hundreds of hours and cut mobile cart abandonment significantly with AI pricing integrations."
   },
   "insurance-digital-platform": {
     author: "Richard Branson",
     role: "COO",
-    company: "SecureLife Insurance",
+    company: "Insurance Provider",
     quote: "Automating claims processing with OCR validation and microservices eliminated manual spreadsheet bottlenecks, shrinking verification schedules from 3 weeks to just minutes."
   },
   "logistics-tracking-system": {
     author: "David Miller",
     role: "Director of Fleet Operations",
-    company: "SwiftShip Logistics",
+    company: "Logistics Provider",
     quote: "Aetheris established instant GPS fleet monitoring for over 5,000 trucks using IoT sensors. Fuel consumption dropped by 25% and delivery delays were cut by 30% through predictive routing."
   },
   "manufacturing-iot-platform": {
     author: "Hermann Schmidt",
     role: "Head of Factory automation",
-    company: "TechManufacture Ltd",
+    company: "Manufacturing Firm",
     quote: "Deploying predictive maintenance models across 20+ automated factories reduced equipment breakdowns by 65%. Unplanned downtime is no longer a threat to our bottom line."
   },
   "retail-omnichannel": {
     author: "Chloe Mercer",
     role: "eCommerce Director",
-    company: "ShopUnited",
+    company: "E-Commerce Brand",
     quote: "Integrating our POS registers and online storefront databases via Kafka event brokers solved our inventory sync errors overnight, boosting cart conversion and user trust."
   },
   "saas-devops": {
     author: "Thomas Wright",
     role: "Head of Infrastructure",
-    company: "CloudOps Pro",
+    company: "DevOps Solution",
     quote: "Automating our release cycle using modular Terraform scripts and SRE pipelines increased our deploy frequency by 5x while slashing MTTR metrics by half."
   },
   "telecom-crm-system": {
     author: "Elena Rostova",
     role: "VP of Customer Success",
-    company: "ConnectTel",
+    company: "Telecom Operator",
     quote: "Consolidating 10 million subscriber records from 4 disparate CRM systems allowed support reps to address complex billing inquiries with sub-100ms dashboard latency."
   }
 };

@@ -11,7 +11,7 @@ export default function FAQPage() {
   const [expandedTopic, setExpandedTopic] = useState("General");
   const [expandedQuestions, setExpandedQuestions] = useState({});
   const [chatMessages, setChatMessages] = useState([
-    { role: "assistant", text: "Hi! I'm Aetheris AI. Ask me anything about our cloud architectures, SOC 2 compliance, SRE support, or pricing models." }
+    { role: "assistant", text: "Hi! I'm Aetheris AI. Ask me anything about our cloud architectures, security standards, SRE support, or system services." }
   ]);
   const [chatInput, setChatInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -56,15 +56,15 @@ export default function FAQPage() {
       title: "Compliance",
       desc: "Compliance standards, certifications, and policies.",
       questions: [
-        { q: "Are your projects HIPAA compliant?", a: "Yes. All healthcare projects are developed inside encrypted cloud networks with role-based access control, strict database logs, and encrypted data fields, satisfying HIPAA compliance rules." }
+        { q: "Are your projects aligned with healthcare security standards?", a: "Yes. All healthcare projects are developed inside encrypted cloud networks with role-based access control, strict database logs, and encrypted data fields, satisfying strict industry compliance regulations." }
       ]
     },
     {
       id: "Billing",
       title: "Billing & Payments",
-      desc: "Information about pricing, billing, and payment methods.",
+      desc: "Information about billing, engagement models, and invoicing.",
       questions: [
-        { q: "What is the billing model for SRE and software engineering?", a: "We offer flexible SLA-backed plans, including monthly Scrum subscriptions, sprint-based co-development support, or milestone pricing. Connect with us for a custom quote." }
+        { q: "What is the billing model for SRE and software engineering?", a: "We offer flexible SLA-backed plans, including monthly Scrum subscriptions, sprint-based co-development support, or milestone budgets. Connect with us for a custom quote." }
       ]
     },
     {
@@ -103,9 +103,9 @@ export default function FAQPage() {
   const handleBubbleClick = (term) => {
     setSearchQuery(term);
     // Find the category containing the term
-    if (term.toLowerCase() === "soc2" || term.toLowerCase() === "data security") {
+    if (term.toLowerCase() === "security" || term.toLowerCase() === "data security") {
       setExpandedTopic("Security");
-    } else if (term.toLowerCase() === "pricing") {
+    } else if (term.toLowerCase() === "billing") {
       setExpandedTopic("Billing");
     } else if (term.toLowerCase() === "cloud" || term.toLowerCase() === "devops") {
       setExpandedTopic("Services");
@@ -124,15 +124,15 @@ export default function FAQPage() {
 
     // Simulate AI reply
     setTimeout(() => {
-      let replyText = "I can help with that. Aetheris specializes in building SOC 2 compliant networks, SRE pipelines, and cloud migrations. Would you like to schedule a consultation with our SRE lead?";
+      let replyText = "I can help with that. Aetheris specializes in building secure cloud networks, SRE pipelines, and cloud migrations. Would you like to schedule a consultation with our SRE lead?";
       
       const lowerMsg = userMsg.toLowerCase();
       if (lowerMsg.includes("security") || lowerMsg.includes("data")) {
         replyText = "We encrypt all data in transit via TLS 1.3 and at rest with AES-256. Access is guarded by multi-factor auth and VPC perimeters.";
-      } else if (lowerMsg.includes("pricing") || lowerMsg.includes("billing")) {
-        replyText = "Our pricing is flexible. We offer monthly Sprint-based co-development support, fixed-scope budgets, or SLA-backed Scrum team packages.";
-      } else if (lowerMsg.includes("soc2") || lowerMsg.includes("compliance")) {
-        replyText = "Aetheris automates configuration audits and policy creation, helping you prepare for SOC 2 Type II, ISO 27001, and HIPAA compliance audits.";
+      } else if (lowerMsg.includes("billing") || lowerMsg.includes("model")) {
+        replyText = "Our engagement models are flexible. We offer monthly Sprint-based co-development support, fixed-scope budgets, or SLA-backed Scrum team packages.";
+      } else if (lowerMsg.includes("compliance") || lowerMsg.includes("guidelines")) {
+        replyText = "Aetheris automates configuration audits and policy creation, helping you align with standard industry security frameworks and guidelines.";
       } else if (lowerMsg.includes("devops") || lowerMsg.includes("cloud")) {
         replyText = "Our DevOps pipelines are SRE-managed. We write clean, modular Terraform files and manage canary releases via automated CI/CD tools.";
       }
@@ -194,8 +194,8 @@ export default function FAQPage() {
               <div className="flex flex-wrap gap-2.5">
                 {[
                   { name: "Data Security", tag: "data security" },
-                  { name: "SOC2 Audit", tag: "soc2" },
-                  { name: "Pricing Plans", tag: "pricing" },
+                  { name: "Security Audit", tag: "security" },
+                  { name: "Billing & Plans", tag: "billing" },
                   { name: "Cloud Migrations", tag: "cloud" },
                   { name: "DevOps SRE", tag: "devops" }
                 ].map((bubble) => (
@@ -379,7 +379,7 @@ export default function FAQPage() {
                 <span className="text-xs font-extrabold text-slate-900">Aetheris AI Client</span>
               </div>
               <button 
-                onClick={() => setChatMessages([{ role: "assistant", text: "Hi! I'm Aetheris AI. Ask me anything about our cloud architectures, SOC 2 compliance, SRE support, or pricing models." }])}
+                onClick={() => setChatMessages([{ role: "assistant", text: "Hi! I'm Aetheris AI. Ask me anything about our cloud architectures, security standards, SRE support, or system services." }])}
                 className="text-[9px] font-black text-slate-450 uppercase hover:text-slate-650 tracking-wider font-mono border border-slate-200 rounded px-2 py-0.5 bg-white"
               >
                 Reset Chat
@@ -424,7 +424,7 @@ export default function FAQPage() {
                 type="text"
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
-                placeholder="Ask me about encryption, SOC 2, SRE team sizes, or pricing..."
+                placeholder="Ask me about encryption, security guidelines, SRE team sizes, or services..."
                 className="flex-1 px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-blue-600 focus:bg-white text-xs text-slate-900 outline-none placeholder-slate-400 font-medium"
               />
               <button 

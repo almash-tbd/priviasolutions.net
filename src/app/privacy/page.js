@@ -30,9 +30,9 @@ export default function PrivacyPage() {
           We use industry-standard encryption practices (AES-256) to protect database records. Access is restricted to authorized operations staff.
         </p>
 
-        <h2 className="text-lg font-bold text-slate-100">3. Rights Under GDPR & CCPA</h2>
+        <h2 className="text-lg font-bold text-slate-100">3. Data Subject Rights</h2>
         <p>
-          Users can request access, correction, or deletion of their personal information by contacting our data protection officer at <a href="mailto:privacy@aetheris.com" className="text-primary hover:underline">privacy@aetheris.com</a>.
+          Users can request access, correction, or deletion of their personal information by contacting our data protection team at <a href="mailto:privacy@aetheris.com" className="text-primary hover:underline">privacy@aetheris.com</a>.
         </p>
       </div>
 

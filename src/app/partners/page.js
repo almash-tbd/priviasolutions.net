@@ -6,7 +6,7 @@ import { Users, ShieldCheck, Cpu, ArrowRight } from "lucide-react";
 export default function PartnersPage() {
   const partners = [
     { name: "Cloud Services Alliance", type: "Infrastructure Partner", desc: "Co-implementing multi-region failovers, compliance networks, and auto-scaling setups." },
-    { name: "Global Security Group", type: "Auditing Partner", desc: "Collaborates on corporate audits (SOC2, HIPAA) and zero-trust perimeter testing." },
+    { name: "Global Security Group", type: "Auditing Partner", desc: "Collaborates on corporate security audits and zero-trust perimeter testing." },
     { name: "Database Engineering Labs", type: "Core Database Partner", desc: "Co-designs low-latency cache modules and transactional ledgers under heavy loads." }
   ];
 
