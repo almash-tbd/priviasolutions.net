@@ -96,7 +96,7 @@ export default function SecurityPage() {
           {/* Left: Titles & Tagline */}
           <div className="lg:col-span-7 space-y-6">
             <span className="text-xs font-black tracking-widest text-blue-600 bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-100 shadow-sm inline-block uppercase font-mono">
-              SECURITY AT AETHERIS
+              SECURITY AT PRIVIA
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 font-outfit tracking-tight leading-[1.08]">
               Security Built In. <br />
@@ -302,7 +302,7 @@ export default function SecurityPage() {
             <h3 className="text-xs font-black tracking-widest text-blue-600 uppercase font-mono">FLOW INTEGRATION</h3>
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-outfit">Active Firewall & Attack Simulation</h2>
             <p className="text-xs sm:text-sm text-slate-500 font-medium leading-relaxed">
-              Click the button below to simulate an incoming cyber threat and trace how Aetheris layers mitigate it.
+              Click the button below to simulate an incoming cyber threat and trace how Privia layers mitigate it.
             </p>
           </div>
 

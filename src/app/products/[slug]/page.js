@@ -14,7 +14,7 @@ export async function generateMetadata({ params }) {
   const data = productsData[slug];
   if (!data) return {};
   return {
-    title: `${data.name} - Software Product | Aetheris Systems`,
+    title: `${data.name} - Software Product | Privia Solutions`,
     description: data.tagline,
   };
 }
@@ -36,7 +36,7 @@ export default async function ProductPage({ params }) {
       {/* Hero section */}
       <div className="max-w-4xl space-y-6">
         <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-[#1e2038]/50 border border-[#1e2038] text-xs font-semibold text-primary">
-          <span>Aetheris Systems Product</span>
+          <span>Privia Solutions Product</span>
         </div>
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-slate-100 tracking-tight leading-tight">
           {data.name}

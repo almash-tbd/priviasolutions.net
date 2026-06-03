@@ -1,7 +1,7 @@
 import { blogData, caseStudiesData, productsData, solutionsData } from "@/data/siteData";
 
 export default async function sitemap() {
-  const baseUrl = "https://aetherissystems.com";
+  const baseUrl = "https://priviasolutions.com";
 
   // Static routes
   const staticRoutes = [

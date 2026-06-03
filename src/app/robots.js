@@ -5,6 +5,6 @@ export default function robots() {
       allow: "/",
       disallow: ["/login", "/signup"],
     },
-    sitemap: "https://aetherissystems.com/sitemap.xml",
+    sitemap: "https://priviasolutions.com/sitemap.xml",
   };
 }

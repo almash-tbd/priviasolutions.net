@@ -111,7 +111,7 @@ export default function SolutionsClient({ slug, data }) {
           cardBorderHover: "hover:border-primary/40",
           btnColor: "bg-primary hover:bg-primary-dark",
           gradientText: "from-[#2C5EAD] to-[#1591DC]",
-          verticalTag: "Aetheris Systems",
+          verticalTag: "Privia Solutions",
           bulletIcon: "text-primary"
         };
     }

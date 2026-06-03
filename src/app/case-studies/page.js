@@ -144,7 +144,7 @@ export default function CaseStudiesHub() {
             <span className="text-xs font-black tracking-widest text-blue-600 uppercase font-mono pl-0.5">TRANSFORMATION MOCKUP</span>
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900 font-outfit tracking-tight leading-snug">Deployment Pipeline Speed Shift</h2>
             <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-medium">
-              Slide the slider handle left and right to compare manual pipeline releases against Aetheris automated GitOps canary release speeds.
+              Slide the slider handle left and right to compare manual pipeline releases against Privia automated GitOps canary release speeds.
             </p>
             
             <div className="space-y-4 pt-4 border-t border-slate-100">
@@ -177,7 +177,7 @@ export default function CaseStudiesHub() {
               >
                 {/* Fixed width inner to prevent text wrapping when clipping */}
                 <div className="w-[360px] flex flex-col items-center justify-center shrink-0">
-                  <span className="text-[10px] font-black text-blue-600 tracking-widest uppercase font-mono mb-2">AFTER AETHERIS GITOPS</span>
+                  <span className="text-[10px] font-black text-blue-600 tracking-widest uppercase font-mono mb-2">AFTER PRIVIA GITOPS</span>
                   <h3 className="text-3xl font-black text-blue-700 font-outfit">5 Minutes</h3>
                   <p className="text-xs text-slate-550 font-semibold mt-1 leading-normal">Automated canary release rolls</p>
                 </div>

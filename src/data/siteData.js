@@ -1,4 +1,4 @@
-// Unified content database for Aetheris Systems
+// Unified content database for Privia Solutions
 
 export const servicesData = {
   "custom-development": {
@@ -177,7 +177,7 @@ export const servicesData = {
 export const solutionsData = {
   "saas": {
     title: "SaaS Scaling Solutions",
-    description: "Accelerate your software-as-a-service application with robust multi-tenant architectures, subscription engine integrations, dynamic resource allocation, and zero-downtime deployment pipelines.",
+    description: "Accelerate your software-as-a-service platforms with robust, highly isolated multi-tenant architectures, Stripe subscription integrations, metered billing engines, dynamic resource allocation, and fully automated zero-downtime CD pipelines. We engineer backend architectures optimized for volatile traffic, enabling your product to scale seamlessly from MVP to enterprise grade with detailed system observability, customized usage telemetry analytics, and granular tenant provisioning flows.",
     features: [
       "Highly Isolated Multi-Tenant Database Patterns",
       "Seamless Stripe & Billing Engine Orchestration",
@@ -341,7 +341,7 @@ export const solutionsData = {
   },
   "fintech": {
     title: "FinTech Compliance & Core Platforms",
-    description: "Secure, transaction-safe, and fully compliant financial platforms. We build custom ledger systems, integrate payment processors, and audit systems for transaction security compliance.",
+    description: "Secure, transaction-safe, and fully compliant financial platforms. We build custom double-entry ledger systems with immutable audit logs, integrate payment processors, implement Tier 1 transaction security, and audit pipelines to guarantee complete alignment with regulatory standards. Our banking-grade architectures feature sub-100ms settlement times, KYC/AML automated verification queues, and zero ledger discrepancies, providing robust protection for sensitive financial transactions and customer records.",
     features: [
       "Double-Entry Ledgers & Immutable Audit Logs",
       "Tier 1 Transaction Security Implementations",
@@ -668,7 +668,7 @@ export const solutionsData = {
   },
   "retail": {
     title: "Retail & Omni-Channel eCommerce Engine",
-    description: "Unified commerce platforms integrating brick-and-mortar operations with online stores. Features include real-time inventory management, unified POS syncing, and personalized checkouts.",
+    description: "Unified commerce platforms integrating brick-and-mortar operations with digital storefronts. We build event-driven stock synchronization engines using Apache Kafka to push real-time inventory updates across channels instantly, custom high-speed checkouts supporting 100K+ concurrent carts, and unified POS/warehousing API integrations. Our ecommerce platforms are engineered for sub-200ms page loads and peak transaction handling during high-traffic events, boosting customer retention and scaling conversion rates.",
     features: [
       "Real-time Inventory Sync Across Channels",
       "Custom High-Speed Checkout & Cart Engines",
@@ -1138,7 +1138,7 @@ export const blogData = {
             "num": 1,
             "title": "Set Clear Budget Boundaries",
             "desc": "Define budgets at the organization, team, and project level. Use tags and cost allocation to enforce ownership and transparency.",
-            "insight": "AETHERIS INSIGHT: Teams with defined budgets reduce cloud spend overruns by 40%."
+            "insight": "PRIVIA INSIGHT: Teams with defined budgets reduce cloud spend overruns by 40%."
           },
           {
             "num": 2,
@@ -1345,7 +1345,7 @@ export const blogData = {
         "title": "Conclusion",
         "paragraphs": [
           "Shifting security left is as much a cultural change as a technological one. By integrating scanning directly into pull requests, divisions build high-performance, compliant systems naturally.",
-          "Our security architects specialize in designing automated pipelines and compliance check gates. Contact Aetheris to secure your release lifecycle."
+          "Our security architects specialize in designing automated pipelines and compliance check gates. Contact Privia to secure your release lifecycle."
         ]
       }
     ]
@@ -1636,7 +1636,7 @@ export const blogData = {
         "title": "Conclusion",
         "paragraphs": [
           "AI-driven automation is transforming DevOps, but human oversight remains critical to verify automated changes and maintain stable release gates.",
-          "Aetheris integrates custom ML models with standard pipelines. Speak with our experts to deploy applied AI."
+          "Privia integrates custom ML models with standard pipelines. Speak with our experts to deploy applied AI."
         ]
       }
     ]
@@ -2065,7 +2065,7 @@ export const blogData = {
         "title": "Conclusion",
         "paragraphs": [
           "Decoupling critical checkout sequences ensures your store remains operational during peak shopping surges, protecting ARR.",
-          "Aetheris engineers build headless commerce platforms and integrate POS systems. Contact us to audit your retail stack."
+          "Privia engineers build headless commerce platforms and integrate POS systems. Contact us to audit your retail stack."
         ]
       }
     ]
@@ -2208,7 +2208,7 @@ export const blogData = {
         "title": "Conclusion",
         "paragraphs": [
           "Deploying unified telemetry frameworks enables support teams to diagnose errors in minutes rather than hours, maintaining target SLAs.",
-          "Aetheris integrates OpenTelemetry collectors and configures custom Grafana stacks. Contact us to audit your systems."
+          "Privia integrates OpenTelemetry collectors and configures custom Grafana stacks. Contact us to audit your systems."
         ]
       }
     ]
@@ -2426,7 +2426,7 @@ export const careersData = [
 
 export const faqData = [
   {
-    q: "What types of services does Aetheris Systems offer?",
+    q: "What types of services does Privia Solutions offer?",
     a: "We offer end-to-end IT services including custom software engineering, native and cross-platform mobile apps (Flutter, React Native), cloud migrations & SRE, API designs, QA automation, cybersecurity auditing, and 24/7 managed operations support."
   },
   {

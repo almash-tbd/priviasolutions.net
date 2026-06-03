@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
   const data = solutionsData[slug];
   if (!data) return {};
   return {
-    title: `${data.title} - Solutions | Aetheris Systems`,
+    title: `${data.title} - Solutions | Privia Solutions`,
     description: data.description,
   };
 }

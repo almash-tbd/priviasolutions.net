@@ -88,7 +88,7 @@ const testimonialMapping = {
     author: "Sarah Jenkins",
     role: "VP of Engineering",
     company: "Digital Banking Platform",
-    quote: "Aetheris transformed our legacy core banking monolith. Their phased Strangler Pattern approach achieved zero downtime migration over 18 months, helping us scale concurrent users seamlessly without a single transactional record lost."
+    quote: "Privia transformed our legacy core banking monolith. Their phased Strangler Pattern approach achieved zero downtime migration over 18 months, helping us scale concurrent users seamlessly without a single transactional record lost."
   },
   "edtech-lms-platform": {
     author: "Amit Patel",
@@ -100,7 +100,7 @@ const testimonialMapping = {
     author: "Marcus Aurelius",
     role: "CTO",
     company: "Payment Processor",
-    quote: "By restructuring our transactional database using partitioning and implementing highly optimized gRPC services, Aetheris enabled our platform to sustain a 10x surge in transaction volume."
+    quote: "By restructuring our transactional database using partitioning and implementing highly optimized gRPC services, Privia enabled our platform to sustain a 10x surge in transaction volume."
   },
   "government-citizen-portal": {
     author: "Rajesh Kumar",
@@ -112,7 +112,7 @@ const testimonialMapping = {
     author: "Dr. Anita Desai",
     role: "CMIO",
     company: "Healthcare Platform",
-    quote: "Ensuring secure data privacy standards while constructing our analytics pipelines was our highest priority. Aetheris met the challenge with encrypted warehouse perimeters, detailed audit logging, and custom React dashboard widgets."
+    quote: "Ensuring secure data privacy standards while constructing our analytics pipelines was our highest priority. Privia met the challenge with encrypted warehouse perimeters, detailed audit logging, and custom React dashboard widgets."
   },
   "hospitality-booking-system": {
     author: "Sophia Loren",
@@ -130,7 +130,7 @@ const testimonialMapping = {
     author: "David Miller",
     role: "Director of Fleet Operations",
     company: "Logistics Provider",
-    quote: "Aetheris established instant GPS fleet monitoring for over 5,000 trucks using IoT sensors. Fuel consumption dropped by 25% and delivery delays were cut by 30% through predictive routing."
+    quote: "Privia established instant GPS fleet monitoring for over 5,000 trucks using IoT sensors. Fuel consumption dropped by 25% and delivery delays were cut by 30% through predictive routing."
   },
   "manufacturing-iot-platform": {
     author: "Hermann Schmidt",
@@ -202,7 +202,7 @@ export default function CaseStudyClient({ data, slug }) {
     author: "Rohit Sharma",
     role: "CTO",
     company: data.client,
-    quote: "Aetheris transformed our infrastructure and helped us achieve unprecedented reliability and performance. Their team's expertise and proactive approach were instrumental in our cloud journey."
+    quote: "Privia transformed our infrastructure and helped us achieve unprecedented reliability and performance. Their team's expertise and proactive approach were instrumental in our cloud journey."
   };
 
   // Determine if it is a Cloud/Kubernetes case study to show appropriate diagram

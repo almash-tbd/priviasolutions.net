@@ -370,7 +370,7 @@ export default function Home() {
         { type: "addition", text: "+   stage: compliance" },
         { type: "addition", text: "+   script:" },
         { type: "addition", text: "+     - npm run audit-licenses" },
-        { type: "addition", text: "+     - owasp-dependency-check --project \"Aetheris\"" },
+        { type: "addition", text: "+     - owasp-dependency-check --project \"Privia\"" },
         { type: "addition", text: "+     - semgrep --config auto" }
       ]
     },
@@ -429,7 +429,7 @@ export default function Home() {
   const testimonials = [
     { 
       id: 1,
-      q: "Aetheris Systems provided exceptional cloud setup and migrations. Their engineers solved our synchronization errors and did it with zero platform downtime.", 
+      q: "Privia Solutions provided exceptional cloud setup and migrations. Their engineers solved our synchronization errors and did it with zero platform downtime.", 
       name: "Amit Desai", 
       role: "VP of Product, E-Commerce Brand", 
       glowClass: "glow-card-gold",
@@ -459,7 +459,7 @@ export default function Home() {
     },
     { 
       id: 4,
-      q: "The scroll stack animations are incredibly smooth. Aetheris Systems helped us elevate our website design to a whole new premium level in just a few hours.", 
+      q: "The scroll stack animations are incredibly smooth. Privia Solutions helped us elevate our website design to a whole new premium level in just a few hours.", 
       name: "Sarah Jenkins", 
       role: "Lead Product Designer at Design Platform", 
       glowClass: "glow-card-gold",
@@ -471,7 +471,7 @@ export default function Home() {
       id: 5,
       q: "Implementing infinite loops and interactive elements with vanilla JS has never been this clean. Excellent performance and zero layout thrashing.", 
       name: "Alex Rivera", 
-      role: "Senior Frontend Engineer at Vercel", 
+      role: "Senior Frontend Engineer, DevTools Platform", 
       glowClass: "glow-card-teal",
       stars: 5,
       initials: "AR",
@@ -481,7 +481,7 @@ export default function Home() {
       id: 6,
       q: "Our conversion rates increased by 22% after we refreshed our home page using these fluid motion designs. Highly recommended for modern SaaS websites.", 
       name: "David Chen", 
-      role: "VP of Product at Stripe", 
+      role: "VP of Product, FinTech Enterprise", 
       glowClass: "glow-card-purple",
       stars: 5,
       initials: "DC",
@@ -491,7 +491,7 @@ export default function Home() {
       id: 7,
       q: "The attention to minor details in typography, gradients, and micro-interactions makes a massive difference. Outstanding UI toolkit and support!", 
       name: "Emily Watson", 
-      role: "Creative Director at Framer", 
+      role: "Creative Director, Interactive Web Studio", 
       glowClass: "glow-card-gold",
       stars: 5,
       initials: "EW",
@@ -499,9 +499,9 @@ export default function Home() {
     },
     { 
       id: 8,
-      q: "We were skeptical about pure CSS performance on heavy pages, but Aetheris runs perfectly at 120 FPS even on lower-end mobile devices.", 
+      q: "We were skeptical about pure CSS performance on heavy pages, but Privia runs perfectly at 120 FPS even on lower-end mobile devices.", 
       name: "Marcus Vance", 
-      role: "Tech Lead at Linear", 
+      role: "Tech Lead, Project Management SaaS", 
       glowClass: "glow-card-teal",
       stars: 4,
       initials: "MV",
@@ -511,7 +511,7 @@ export default function Home() {
       id: 9,
       q: "The team has created something truly state-of-the-art here. The glassmorphism transitions are extremely crisp, modern, and perfectly robust.", 
       name: "Hana Kobayashi", 
-      role: "Design Engineer at Vercel", 
+      role: "Design Engineer, Core UI Systems", 
       glowClass: "glow-card-purple",
       stars: 5,
       initials: "HK",
@@ -521,7 +521,7 @@ export default function Home() {
       id: 10,
       q: "Setting this up was a breeze. We integrated the component structure into our NextJS project in under ten minutes with zero compilation errors.", 
       name: "Oliver Larsen", 
-      role: "Frontend Lead at Supabase", 
+      role: "Frontend Lead, Cloud Platform Provider", 
       glowClass: "glow-card-gold",
       stars: 5,
       initials: "OL",
@@ -780,7 +780,7 @@ export default function Home() {
               transition={{ delay: 0.4, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
               className="font-outfit font-black text-3xl sm:text-5xl text-white mt-12 bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-400 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(59,130,246,0.6)] uppercase tracking-[0.25em]"
             >
-              AETHERIS
+              PRIVIA
             </motion.h1>
             
             <motion.p
@@ -805,7 +805,7 @@ export default function Home() {
         <div className={`absolute inset-0 z-0 pointer-events-none overflow-hidden select-none transition-opacity duration-1000 ${isLoaded ? "opacity-100" : "opacity-0"}`}>
           <Image 
             src="/assets/images/futuristic_city_bg.jpg"
-            alt="Futuristic digital city background Aetheris Core"
+            alt="Futuristic digital city background Privia Core"
             fill
             priority
             className="object-cover object-right opacity-35 sm:opacity-55 lg:opacity-100"
@@ -833,7 +833,7 @@ export default function Home() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.1] tracking-tight text-slate-900">
-              AETHERIS SYSTEMS <br />
+              PRIVIA SYSTEMS <br />
               <span className="bg-gradient-to-r from-[#2C5EAD] via-[#1591DC] to-[#4BB8FA] bg-clip-text text-transparent">IT Solutions Engineered for Impact</span>
             </h1>
 
@@ -966,7 +966,7 @@ export default function Home() {
                 Empowering businesses with robust cloud strategies and tailored digital execution.
               </h3>
               <p className="text-slate-600 leading-relaxed">
-                At Aetheris Systems, we solve complex technical architecture bottlenecks. Whether you need to migrate from a legacy monolith database, configure zero-downtime deployments, or audit systems security compliance, our engineering division has the expertise.
+                At Privia Solutions, we solve complex technical architecture bottlenecks. Whether you need to migrate from a legacy monolith database, configure zero-downtime deployments, or audit systems security compliance, our engineering division has the expertise.
               </p>
               <div>
                 <Link 
@@ -1211,9 +1211,9 @@ export default function Home() {
                     src="/assets/images/sectors/fintech.png"
                     alt="FinTech"
                     fill
-                    className="object-cover opacity-20 filter blur-md transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover opacity-20 filter blur-2xl transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-[#0c1729]/30" />
+                  <div className="absolute inset-0 bg-slate-950/40" />
                 </div>
                 
                 <div className="relative z-10 flex flex-col h-full justify-between w-full">
@@ -1238,8 +1238,8 @@ export default function Home() {
                           <span className="ft-val">LOCKED</span>
                         </div>
                       </div>
-                      <h2 className="sector-custom-card-title text-white">{solutionsData.fintech.title}</h2>
-                      <p className="sector-custom-card-desc text-slate-300 text-xs leading-relaxed">{solutionsData.fintech.description}</p>
+                      <h2 className="sector-custom-card-title text-white font-black">{solutionsData.fintech.title}</h2>
+                      <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.fintech.description}</p>
                       
                       {/* Features list */}
                       <ul className="space-y-1.5 my-4">
@@ -1294,9 +1294,9 @@ export default function Home() {
                     src="/assets/images/sectors/saas.png"
                     alt="SaaS"
                     fill
-                    className="object-cover opacity-20 filter blur-md transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover opacity-20 filter blur-2xl transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-[#1a153a]/30" />
+                  <div className="absolute inset-0 bg-slate-950/40" />
                 </div>
 
                 <div className="relative z-10 flex flex-col h-full justify-between w-full">
@@ -1321,8 +1321,8 @@ export default function Home() {
                         <div className="saas-bar" style={{ height: "60%" }}></div>
                         <div className="saas-bar" style={{ height: "45%" }}></div>
                       </div>
-                      <h2 className="sector-custom-card-title text-white">{solutionsData.saas.title}</h2>
-                      <p className="sector-custom-card-desc text-slate-300 text-xs leading-relaxed">{solutionsData.saas.description}</p>
+                      <h2 className="sector-custom-card-title text-white font-black">{solutionsData.saas.title}</h2>
+                      <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.saas.description}</p>
                       
                       {/* Features list */}
                       <ul className="space-y-1.5 my-4">
@@ -1378,9 +1378,9 @@ export default function Home() {
                     src="/assets/images/sectors/retail.png"
                     alt="Retail"
                     fill
-                    className="object-cover opacity-20 filter blur-md transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover opacity-20 filter blur-2xl transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-[#2d1e0a]/30" />
+                  <div className="absolute inset-0 bg-slate-950/40" />
                 </div>
 
                 <div className="relative z-10 flex flex-col h-full justify-between w-full">
@@ -1416,8 +1416,8 @@ export default function Home() {
                           </svg>
                         </div>
                       </div>
-                      <h2 className="sector-custom-card-title text-white">{solutionsData.retail.title}</h2>
-                      <p className="sector-custom-card-desc text-slate-300 text-xs leading-relaxed">{solutionsData.retail.description}</p>
+                      <h2 className="sector-custom-card-title text-white font-black">{solutionsData.retail.title}</h2>
+                      <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.retail.description}</p>
                       
                       {/* Features list */}
                       <ul className="space-y-1.5 my-4">
@@ -1488,9 +1488,9 @@ export default function Home() {
                       src="/assets/images/sectors/fintech.png"
                       alt="FinTech"
                       fill
-                      className="object-cover opacity-20 filter blur-md"
+                      className="object-cover opacity-20 filter blur-2xl"
                     />
-                    <div className="absolute inset-0 bg-[#0c1729]/30" />
+                    <div className="absolute inset-0 bg-slate-950/40" />
                   </div>
                   <div className="relative z-10 flex flex-col h-full justify-between w-full">
                     <div className="ft-header">
@@ -1515,8 +1515,8 @@ export default function Home() {
                               <span className="ft-val">LOCKED</span>
                             </div>
                           </div>
-                          <h2 className="sector-custom-card-title text-white">{solutionsData.fintech.title}</h2>
-                          <p className="sector-custom-card-desc text-slate-300 text-xs leading-relaxed">{solutionsData.fintech.description}</p>
+                          <h2 className="sector-custom-card-title text-white font-black">{solutionsData.fintech.title}</h2>
+                          <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.fintech.description}</p>
                         </div>
                         
                         <div className="flex flex-wrap gap-2 mt-4">
@@ -1582,9 +1582,9 @@ export default function Home() {
                       src="/assets/images/sectors/saas.png"
                       alt="SaaS"
                       fill
-                      className="object-cover opacity-20 filter blur-md"
+                      className="object-cover opacity-20 filter blur-2xl"
                     />
-                    <div className="absolute inset-0 bg-[#1a153a]/30" />
+                    <div className="absolute inset-0 bg-slate-950/40" />
                   </div>
                   <div className="relative z-10 flex flex-col h-full justify-between w-full">
                     <div className="saas-header">
@@ -1609,8 +1609,8 @@ export default function Home() {
                             <div className="saas-bar" style={{ height: "60%" }}></div>
                             <div className="saas-bar" style={{ height: "45%" }}></div>
                           </div>
-                          <h2 className="sector-custom-card-title text-white">{solutionsData.saas.title}</h2>
-                          <p className="sector-custom-card-desc text-slate-300 text-xs leading-relaxed">{solutionsData.saas.description}</p>
+                          <h2 className="sector-custom-card-title text-white font-black">{solutionsData.saas.title}</h2>
+                          <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.saas.description}</p>
                         </div>
                         
                         <div className="flex flex-wrap gap-2 mt-4">
@@ -1677,9 +1677,9 @@ export default function Home() {
                       src="/assets/images/sectors/retail.png"
                       alt="Retail"
                       fill
-                      className="object-cover opacity-20 filter blur-md"
+                      className="object-cover opacity-20 filter blur-2xl"
                     />
-                    <div className="absolute inset-0 bg-[#2d1e0a]/30" />
+                    <div className="absolute inset-0 bg-slate-950/40" />
                   </div>
                   <div className="relative z-10 flex flex-col h-full justify-between w-full">
                     <div className="ret-header">
@@ -1715,8 +1715,8 @@ export default function Home() {
                               </svg>
                             </div>
                           </div>
-                          <h2 className="sector-custom-card-title text-white">{solutionsData.retail.title}</h2>
-                          <p className="sector-custom-card-desc text-slate-300 text-xs leading-relaxed">{solutionsData.retail.description}</p>
+                          <h2 className="sector-custom-card-title text-white font-black">{solutionsData.retail.title}</h2>
+                          <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.retail.description}</p>
                         </div>
                         
                         <div className="flex flex-wrap gap-2 mt-4">
@@ -1790,9 +1790,8 @@ export default function Home() {
               <div className="stacking-card stacking-card-1" id="step-card-1" role="button" tabIndex={0}>
                 <div className="stacking-card-content">
                   <div className="stacking-card-left">
-                    <span className="stacking-card-badge">Card 1</span>
                     <h2>Discovery & Planning</h2>
-                    <p>We deep-dive into your operational pipeline, audit systems infrastructure, and lay down an exhaustive software blueprint.</p>
+                    <p>We deep-dive into your operational pipeline, audit systems infrastructure, and lay down an exhaustive software blueprint. Through technical discovery workshops, system topology analysis, and requirement elicitation, we establish clear milestones and design secure cloud-native architectures tailored to your business needs before any development begins.</p>
                   </div>
                   <div className="stacking-card-right relative w-full h-full p-6">
                     <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-lg">
@@ -1814,9 +1813,8 @@ export default function Home() {
               <div className="stacking-card stacking-card-2" id="step-card-2" role="button" tabIndex={0}>
                 <div className="stacking-card-content">
                   <div className="stacking-card-left">
-                    <span className="stacking-card-badge">Card 2</span>
                     <h2>Design & Development</h2>
-                    <p>Our engineers build iterative cloud-native components and secure APIs, verifying code quality through automation.</p>
+                    <p>Our engineers build iterative, cloud-native components and secure APIs, verifying code quality through automated quality gates. Adhering to secure SDLC principles, we write clean, well-tested code in agile sprints, integrating sonarqube vulnerability scans, unit testing matrices, and continuous integration pipelines to guarantee robust performance and security.</p>
                   </div>
                   <div className="stacking-card-right relative w-full h-full p-6">
                     <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-lg">
@@ -1838,9 +1836,8 @@ export default function Home() {
               <div className="stacking-card stacking-card-3" id="step-card-3" role="button" tabIndex={0}>
                 <div className="stacking-card-content">
                   <div className="stacking-card-left">
-                    <span className="stacking-card-badge">Card 3</span>
                     <h2>Launch & Scale</h2>
-                    <p>We coordinate zero-downtime Strangler deployments and wire up 24/7 reliability monitoring for elastic loads.</p>
+                    <p>We coordinate zero-downtime Strangler deployments and wire up 24/7 reliability monitoring for elastic loads. Utilizing blue-green or canary release strategies, we deploy containerized services into production smoothly, backed by Datadog and Grafana dashboards for proactive incident detection, platform health tracking, and SLA coverage.</p>
                   </div>
                   <div className="stacking-card-right relative w-full h-full p-6">
                     <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-lg">

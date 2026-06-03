@@ -90,7 +90,7 @@ export default function CareersPage() {
           {/* Hero Details */}
           <div className="lg:col-span-7 space-y-6">
             <span className="text-xs font-black tracking-widest text-blue-600 bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-100 shadow-sm inline-block uppercase font-mono">
-              CAREERS AT AETHERIS
+              CAREERS AT PRIVIA
             </span>
             
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 font-outfit tracking-tight leading-[1.08]">
@@ -153,7 +153,7 @@ export default function CareersPage() {
                     <path d="M10 30 Q10 20 25 20 Q30 10 45 10 Q60 10 65 20 Q80 20 80 30 Q80 40 70 45 L20 45 Q10 45 10 30 Z" fill="rgba(37,99,235,0.08)" />
                     {/* Cloud Body Front */}
                     <path d="M10 28 Q10 18 25 18 Q30 8 45 8 Q60 8 65 18 Q80 18 80 28 Q80 38 70 43 H20 Q10 43 10 28 Z" fill="url(#cloudGrad)" stroke="rgba(37,99,235,0.2)" strokeWidth="1.5" />
-                    {/* Aetheris Lambda Logo inside cloud */}
+                    {/* Privia Lambda Logo inside cloud */}
                     <path d="M40 33 L45 23 L50 33 M42 30 H48" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
                   </g>
                 </g>

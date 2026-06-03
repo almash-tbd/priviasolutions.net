@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Webinars & Workshops | Aetheris Systems",
+  title: "Webinars & Workshops | Privia Solutions",
   description: "Register for SRE webinars, cloud optimization workshops, and Kubernetes load-spikes architecture walkthroughs.",
 };
 

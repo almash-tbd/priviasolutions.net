@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Partners & Ecosystem | Aetheris Systems",
+  title: "Partners & Ecosystem | Privia Solutions",
   description: "Collaborating with leading cloud infrastructure groups, security auditors, and database engineering labs to build resilient systems.",
 };
 

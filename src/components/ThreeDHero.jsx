@@ -168,7 +168,7 @@ export default function ThreeDHero({ isLoaded = true }) {
     }
   }, [isLoaded]);
 
-  // Position definitions for Aetheris Nodes
+  // Position definitions for Privia Nodes
   const nodes = [
     {
       id: "infrastructure",

@@ -11,7 +11,7 @@ export default function FAQPage() {
   const [expandedTopic, setExpandedTopic] = useState("General");
   const [expandedQuestions, setExpandedQuestions] = useState({});
   const [chatMessages, setChatMessages] = useState([
-    { role: "assistant", text: "Hi! I'm Aetheris AI. Ask me anything about our cloud architectures, security standards, SRE support, or system services." }
+    { role: "assistant", text: "Hi! I'm Privia AI. Ask me anything about our cloud architectures, security standards, SRE support, or system services." }
   ]);
   const [chatInput, setChatInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -28,9 +28,9 @@ export default function FAQPage() {
     {
       id: "General",
       title: "General",
-      desc: "Common questions about Aetheris and our services.",
+      desc: "Common questions about Privia and our services.",
       questions: [
-        { q: "What types of services does Aetheris Systems offer?", a: "We offer end-to-end IT services including custom software engineering, native and cross-platform mobile apps, cloud migrations & SRE, API designs, QA automation, cybersecurity auditing, and 24/7 managed operations support." },
+        { q: "What types of services does Privia Solutions offer?", a: "We offer end-to-end IT services including custom software engineering, native and cross-platform mobile apps, cloud migrations & SRE, API designs, QA automation, cybersecurity auditing, and 24/7 managed operations support." },
         { q: "Can we request a dedicated engineering team?", a: "Yes. We offer flexible engagement models, including dedicated Scrum teams, project-based contracts, and staff augmentation, fitting your operational requirements." }
       ]
     },
@@ -124,7 +124,7 @@ export default function FAQPage() {
 
     // Simulate AI reply
     setTimeout(() => {
-      let replyText = "I can help with that. Aetheris specializes in building secure cloud networks, SRE pipelines, and cloud migrations. Would you like to schedule a consultation with our SRE lead?";
+      let replyText = "I can help with that. Privia specializes in building secure cloud networks, SRE pipelines, and cloud migrations. Would you like to schedule a consultation with our SRE lead?";
       
       const lowerMsg = userMsg.toLowerCase();
       if (lowerMsg.includes("security") || lowerMsg.includes("data")) {
@@ -132,7 +132,7 @@ export default function FAQPage() {
       } else if (lowerMsg.includes("billing") || lowerMsg.includes("model")) {
         replyText = "Our engagement models are flexible. We offer monthly Sprint-based co-development support, fixed-scope budgets, or SLA-backed Scrum team packages.";
       } else if (lowerMsg.includes("compliance") || lowerMsg.includes("guidelines")) {
-        replyText = "Aetheris automates configuration audits and policy creation, helping you align with standard industry security frameworks and guidelines.";
+        replyText = "Privia automates configuration audits and policy creation, helping you align with standard industry security frameworks and guidelines.";
       } else if (lowerMsg.includes("devops") || lowerMsg.includes("cloud")) {
         replyText = "Our DevOps pipelines are SRE-managed. We write clean, modular Terraform files and manage canary releases via automated CI/CD tools.";
       }
@@ -240,7 +240,7 @@ export default function FAQPage() {
             
             {filteredCategories.length === 0 ? (
               <div className="p-12 text-center bg-white border border-slate-200/80 rounded-2xl text-slate-550 font-bold">
-                No matching questions found. Try typing a different term or ask Aetheris AI below!
+                No matching questions found. Try typing a different term or ask Privia AI below!
               </div>
             ) : (
               filteredCategories.map((cat) => {
@@ -335,7 +335,7 @@ export default function FAQPage() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
             {[
-              { q: "What services does Aetheris offer?", tag: "What types of services does Aetheris Systems offer?" },
+              { q: "What services does Privia offer?", tag: "What types of services does Privia Solutions offer?" },
               { q: "Where is my data hosted?", tag: "data security" },
               { q: "How do you ensure data security?", tag: "How do you ensure data security in transit and at rest?" },
               { q: "Do you offer 24/7 support?", tag: "What is your support response SLA?" }
@@ -376,10 +376,10 @@ export default function FAQPage() {
             <div className="p-4 bg-slate-50 border-b border-slate-100 flex items-center justify-between">
               <div className="flex items-center space-x-2.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-xs font-extrabold text-slate-900">Aetheris AI Client</span>
+                <span className="text-xs font-extrabold text-slate-900">Privia AI Client</span>
               </div>
               <button 
-                onClick={() => setChatMessages([{ role: "assistant", text: "Hi! I'm Aetheris AI. Ask me anything about our cloud architectures, security standards, SRE support, or system services." }])}
+                onClick={() => setChatMessages([{ role: "assistant", text: "Hi! I'm Privia AI. Ask me anything about our cloud architectures, security standards, SRE support, or system services." }])}
                 className="text-[9px] font-black text-slate-450 uppercase hover:text-slate-650 tracking-wider font-mono border border-slate-200 rounded px-2 py-0.5 bg-white"
               >
                 Reset Chat
@@ -409,7 +409,7 @@ export default function FAQPage() {
                     <Bot className="w-4 h-4" />
                   </div>
                   <div className="p-3.5 rounded-2xl bg-white border border-slate-200/60 rounded-tl-none text-xs text-slate-400 font-bold flex gap-1 items-center font-mono">
-                    Aetheris AI is typing
+                    Privia AI is typing
                     <span className="animate-bounce">.</span>
                     <span className="animate-bounce [animation-delay:0.2s]">.</span>
                     <span className="animate-bounce [animation-delay:0.4s]">.</span>

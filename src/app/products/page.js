@@ -205,7 +205,7 @@ export default function ProductsHub() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6 flex flex-col items-center">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1b203a] border border-[#2C5EAD]/30 text-xs font-bold text-[#4BB8FA] font-mono">
             <Layers className="w-3.5 h-3.5 text-[#1591DC]" />
-            <span>Aetheris Platform Products</span>
+            <span>Privia Platform Products</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.1] text-white max-w-4xl">
@@ -690,7 +690,7 @@ export default function ProductsHub() {
             Ready to Try Our Products?
           </h3>
           <p className="text-sm sm:text-base text-slate-700 lg:text-slate-200 max-w-2xl mx-auto leading-relaxed">
-            Start your free consultation. No credit card required. Build, ship, scale, and monitor your entire development pipeline with Aetheris systems.
+            Start your free consultation. No credit card required. Build, ship, scale, and monitor your entire development pipeline with Privia systems.
           </p>
           <div className="flex justify-center font-mono pt-4">
             <Link 

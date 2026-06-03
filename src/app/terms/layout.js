@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Terms of Service | Aetheris Systems",
-  description: "Terms and conditions regulating platform access, server configurations, and engineering agreements at Aetheris.",
+  title: "Terms of Service | Privia Solutions",
+  description: "Terms and conditions regulating platform access, server configurations, and engineering agreements at Privia.",
 };
 
 export default function TermsLayout({ children }) {

@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "UX/UI & Product Design | Aetheris Systems",
+  title: "UX/UI & Product Design | Privia Solutions",
   description: "Accessible user interfaces, performant design systems, interactive prototypes, and high-fidelity layouts designed to wow users.",
 };
 

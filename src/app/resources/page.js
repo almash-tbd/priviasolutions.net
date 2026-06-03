@@ -452,7 +452,7 @@ export default function ResourcesPage() {
                                   <div className="absolute -bottom-8 -right-8 w-16 h-16 bg-blue-400/5 rounded-full blur-md pointer-events-none" />
                                   
                                   <div className="flex justify-between items-center text-[5.5px] text-blue-600/70 font-bold border-b border-blue-100 pb-1.5">
-                                    <span>AETHERIS</span>
+                                    <span>PRIVIA</span>
                                     <span className="bg-blue-100/80 px-1 py-0.5 rounded text-[5px] text-blue-700 font-extrabold">{g.type}</span>
                                   </div>
 

@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "API Design & Integrations | Aetheris Systems",
+  title: "API Design & Integrations | Privia Solutions",
   description: "Secure, high-throughput enterprise API gateways, robust middleware libraries, and declarative integration pipelines.",
 };
 

@@ -53,7 +53,7 @@ export default function BlogHub() {
       <div className="space-y-4">
         <div className="border-t-2 border-b border-slate-900/90 py-6">
           <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black text-slate-900 tracking-tighter text-center uppercase font-sans select-none">
-            <span className="text-purple-700">Today</span> at Aetheris
+            <span className="text-purple-700">Today</span> at Privia
           </h1>
         </div>
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs font-black tracking-wider text-slate-500 uppercase border-b border-slate-900/90 pb-4">

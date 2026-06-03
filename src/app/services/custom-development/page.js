@@ -335,30 +335,6 @@ export default function CustomDevelopmentPage() {
     }
   ];
 
-  const engagementModels = [
-    {
-      title: "Fixed Budget",
-      tag: "Defined Scope",
-      desc: "Ideal for well-defined MVPs and project designs with a fixed scope, budget, and structured timeline.",
-      ideal: ["Launching MVPs", "Specific migrations", "Bespoke feature extensions"],
-      billingModel: "One-time project fee"
-    },
-    {
-      title: "Time & Materials",
-      tag: "Flexible Approach",
-      desc: "Best suited for evolving requirements, iterative testing, and complex R&D initiatives requiring flexibility.",
-      ideal: ["Evolving product cycles", "Complex legacy extractions", "Continuous scaling iterations"],
-      billingModel: "Hourly or monthly developer rates",
-      isPopular: true
-    },
-    {
-      title: "Dedicated Team",
-      tag: "Long-Term Partnership",
-      desc: "A fully integrated engineering team consisting of developers, QA, and architects working directly under your roadmap.",
-      ideal: ["Continuous product iteration", "Support & operations scaling", "Legacy system modernization"],
-      billingModel: "Monthly retainer model"
-    }
-  ];
 
   const faqs = [
     {
@@ -1064,69 +1040,6 @@ export default function CustomDevelopmentPage() {
         </div>
       </section>
 
-      {/* 7. ENGAGEMENT MODELS: Connected transition `#f0f5fd` -> `#f8fafc` -> `#edf4fc` */}
-      <section className="relative bg-gradient-to-b from-[#f0f5fd] via-[#f8fafc] to-[#edf4fc] py-20 border-b border-black/5 overflow-hidden text-slate-950">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
-          <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <h2 className="text-[10px] font-black tracking-widest text-[#2C5EAD] uppercase font-mono">flexible::contracts</h2>
-            <h3 className="text-3xl font-extrabold tracking-tight text-slate-900">Engagement Models</h3>
-            <p className="text-xs text-slate-700 max-w-md mx-auto leading-relaxed">Choose an delivery scope framework mapped to your timeline velocity.</p>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-12 lg:gap-8 justify-items-center engagement-models-container py-12">
-            {engagementModels.map((model, idx) => {
-              const icons = [
-                "https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/rocket.png",
-                "https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/cog.png",
-                "https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/paperplane.png"
-              ];
-              const headers = [
-                "https://www.pixeden.com/media/k2/galleries/343/002-city-vector-background-town-vol2.jpg",
-                "https://www.5genergy.ca/wp-content/uploads/2016/01/free-vector-modern-city_093317_bluecity1.jpg",
-                "https://c7.uihere.com/files/859/510/385/abstract-forest-landscape.jpg"
-              ];
-              return (
-                <div key={model.title} className="custom-card-wrapper">
-                  <div className="card_inner">
-                    <div className="card_inner__circle">
-                      <img src={icons[idx % 3]} alt={`${model.title} icon`} />
-                    </div>
-                    <div className="card_inner__header">
-                      <img src={headers[idx % 3]} alt="banner" />
-                    </div>
-                    <div className="card_inner__content">
-                      <div className="title">{model.title}</div>
-                      <div className="price">{model.billingModel}</div>
-                      <div className="text text-white/90">
-                        <p className="mb-4">{model.desc}</p>
-                        <div className="text-[11px] font-bold text-white/70 uppercase tracking-widest mb-2 font-mono">Best Suited For:</div>
-                        <ul className="space-y-1 text-center">
-                          {model.ideal.map((id, i) => (
-                            <li key={i} className="text-xs">{id}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                    <div className="card_inner__cta">
-                      <Link href="/contact" className="w-full block">
-                        <button>
-                          <span>Get Started</span>
-                        </button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="mt-12 text-center bg-white/60 border border-slate-200/60 rounded-2xl p-6 max-w-md mx-auto shadow-sm">
-            <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest font-mono block mb-2">expected deliverables</span>
-            <span className="text-xs font-bold text-slate-700">Typical Timeline: MVP: 8-12 weeks • Full product: 3-6 months</span>
-          </div>
-        </div>
-      </section>
 
       {/* 8. FAQs: Connected transition `#edf4fc` -> `#e6effb` -> `#d6e5fb` */}
       <section className="relative bg-gradient-to-b from-[#edf4fc] via-[#e6effb] to-[#d6e5fb] py-24 overflow-hidden text-slate-950 border-b border-slate-100">

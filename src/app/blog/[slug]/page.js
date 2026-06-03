@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
   const data = blogData[slug];
   if (!data) return {};
   return {
-    title: `${data.title} - Blog | Aetheris Systems`,
+    title: `${data.title} - Blog | Privia Solutions`,
     description: data.summary,
   };
 }

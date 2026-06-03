@@ -277,8 +277,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest font-mono">Email Us</h4>
-                    <a href="mailto:hello@aetheris.io" className="text-xs font-bold text-slate-700 hover:text-blue-600 transition-colors block mt-0.5">
-                      hello@aetheris.io
+                    <a href="mailto:hello@privia.io" className="text-xs font-bold text-slate-700 hover:text-blue-600 transition-colors block mt-0.5">
+                      hello@privia.io
                     </a>
                   </div>
                 </div>

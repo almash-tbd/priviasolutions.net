@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Cybersecurity & Compliance | Aetheris Systems",
+  title: "Cybersecurity & Compliance | Privia Solutions",
   description: "Secure environments by design. Zero-trust security configurations, static container scanning, and secure networking architectures.",
 };
 

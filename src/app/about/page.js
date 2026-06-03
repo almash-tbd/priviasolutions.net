@@ -241,7 +241,7 @@ export default function AboutPage() {
           <div className="max-w-3xl mx-auto flex flex-col items-center text-center space-y-6">
             
             <span className="text-[10px] font-black tracking-widest text-blue-600 bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-100 shadow-2xs inline-block uppercase font-mono">
-              ABOUT AETHERIS
+              ABOUT PRIVIA
             </span>
             
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 font-outfit tracking-tight leading-[1.1] text-center">
@@ -444,7 +444,7 @@ export default function AboutPage() {
 
                       <p className="text-sm text-slate-500 leading-relaxed font-semibold">
                         {[
-                          "Aetheris was founded with a vision to deliver secure and scalable cloud solutions.",
+                          "Privia was founded with a vision to deliver secure and scalable cloud solutions.",
                           "Onboarded our first enterprise client and successfully delivered critical workloads.",
                           "Expanded our capabilities with a dedicated cloud engineering and DevOps practice.",
                           "Launched compliance and security services aligned with global standards.",
@@ -485,7 +485,7 @@ export default function AboutPage() {
           <div className="max-w-xl mx-auto py-8 space-y-12 md:hidden block">
             <div className="relative pl-8 border-l border-slate-200 space-y-10 text-left">
               {[
-                { year: 2020, title: "Founded", desc: "Aetheris was founded with a vision to deliver secure and scalable cloud solutions." },
+                { year: 2020, title: "Founded", desc: "Privia was founded with a vision to deliver secure and scalable cloud solutions." },
                 { year: 2021, title: "First Enterprise Client", desc: "Onboarded our first enterprise client and successfully delivered critical workloads." },
                 { year: 2022, title: "Cloud Division Launch", desc: "Expanded our capabilities with a dedicated cloud engineering and DevOps practice." },
                 { year: 2023, title: "Compliance Practice", desc: "Launched compliance and security services aligned with global standards." },
@@ -762,7 +762,7 @@ export default function AboutPage() {
             { 
               name: "Sagar Ishwarbhai Ramani", 
               role: "Founder", 
-              desc: "Founder and vision leader of Aetheris, driving enterprise-grade digital transformations, tech strategy, and cloud platform growth.",
+              desc: "Founder and vision leader of Privia, driving enterprise-grade digital transformations, tech strategy, and cloud platform growth.",
               image: "/assets/images/team/sagar.jpg"
             },
             { 

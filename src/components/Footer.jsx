@@ -27,14 +27,6 @@ export default function Footer() {
       ]
     },
     {
-      title: "Products",
-      links: [
-        { name: "All Products", href: "/products" },
-        { name: "IceDeploy", href: "/products/icedeploy" },
-        { name: "IceInsight", href: "/products/iceinsight" }
-      ]
-    },
-    {
       title: "Company",
       links: [
         { name: "About Us", href: "/about" },
@@ -54,8 +46,8 @@ export default function Footer() {
     {
       title: "Account",
       links: [
-        { name: "Login", href: "/login" },
-        { name: "Sign Up", href: "/signup" }
+        { name: "Login", href: "?auth=login" },
+        { name: "Sign Up", href: "?auth=signup" }
       ]
     },
     {
@@ -71,10 +63,20 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-gradient-to-br from-[#1d3f75] to-[#2C5EAD] border-t border-white/10 pt-16 sm:pt-20 pb-10 text-white">
+    <footer className="relative isolate bg-gradient-to-br from-[#1d3f75] to-[#2C5EAD] border-t border-white/10 pt-16 sm:pt-20 pb-10 text-white overflow-hidden">
       
       {/* Background radial glow */}
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#4BB8FA]/5 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+      
+      {/* Background brand name watermark */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center translate-y-12 sm:translate-y-16 pointer-events-none overflow-hidden select-none -z-10 opacity-[0.04]">
+        <span className="text-[12vw] sm:text-[10vw] font-light tracking-[0.22em] text-white uppercase block leading-none font-sans whitespace-nowrap">
+          PRIVIA
+        </span>
+        <span className="text-[12vw] sm:text-[10vw] font-light tracking-[0.22em] text-white uppercase block leading-none font-sans whitespace-nowrap mt-2 sm:mt-4">
+          SOLUTIONS
+        </span>
+      </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -86,7 +88,7 @@ export default function Footer() {
                 <Cpu className="w-4.5 h-4.5" />
               </div>
               <span className="font-extrabold text-xl tracking-wider text-white">
-                AETHERIS
+                PRIVIA
               </span>
             </Link>
             <p className="text-sm text-slate-200 leading-relaxed">
@@ -95,9 +97,9 @@ export default function Footer() {
           </div>
           
           <div className="flex flex-wrap items-center gap-6 text-sm text-slate-200">
-            <a href="mailto:info@aetherissystems.com" className="flex items-center space-x-2 hover:text-[#4BB8FA] transition-colors">
+            <a href="mailto:info@priviasolutions.com" className="flex items-center space-x-2 hover:text-[#4BB8FA] transition-colors">
               <Mail className="w-4 h-4 text-[#4BB8FA]" />
-              <span>info@aetherissystems.com</span>
+              <span>info@priviasolutions.com</span>
             </a>
             <div className="flex items-center space-x-4 ml-2">
               <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" className="p-2 rounded-lg bg-white/5 border border-white/10 hover:border-[#4BB8FA]/50 text-slate-300 hover:text-[#4BB8FA] transition-all" aria-label="Instagram Profile">
@@ -117,7 +119,7 @@ export default function Footer() {
         </div>
 
         {/* Links Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-8 mb-16">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 mb-16 w-full justify-between">
           {footerGroups.map((group) => (
             <div key={group.title} className="space-y-4">
               <h3 className="text-xs font-black tracking-widest text-[#4BB8FA] uppercase">
@@ -142,12 +144,13 @@ export default function Footer() {
         {/* Footer bottom */}
         <div className="flex flex-col sm:flex-row items-center justify-between border-t border-white/10 pt-8 gap-4">
           <p className="text-[11px] text-slate-300 tracking-wide text-center sm:text-left">
-            &copy; {new Date().getFullYear()} Aetheris Systems. All rights reserved.
+            &copy; {new Date().getFullYear()} Privia Solutions. All rights reserved.
           </p>
           <div className="flex items-center space-x-4 text-[11px] text-slate-300">
-            <Link href="/" className="hover:text-[#4BB8FA] transition-colors">Aetheris Systems official website</Link>
+            <Link href="/" className="hover:text-[#4BB8FA] transition-colors">Privia Solutions official website</Link>
           </div>
         </div>
+
 
       </div>
     </footer>

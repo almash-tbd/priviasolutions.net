@@ -509,7 +509,8 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-slate-200/50 shadow-sm">
+    <>
+      <nav className="sticky top-0 z-[80] w-full bg-white/80 backdrop-blur-md border-b border-slate-200/50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between h-20">
           
@@ -519,7 +520,7 @@ export default function Navbar() {
               <Cpu className="w-5 h-5 text-white" />
             </div>
             <span className="font-extrabold text-2xl tracking-wider bg-gradient-to-r from-[#2C5EAD] to-[#1591DC] bg-clip-text text-transparent group-hover:opacity-90 transition-opacity">
-              AETHERIS
+              PRIVIA
             </span>
           </Link>
 
@@ -606,10 +607,11 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+    </nav>
 
-      {/* Mobile Drawer */}
-      <AnimatePresence>
-        {isOpen && (
+    {/* Mobile Drawer */}
+    <AnimatePresence>
+      {isOpen && (
           <>
             {/* Overlay */}
             <motion.div 
@@ -617,7 +619,7 @@ export default function Navbar() {
               animate={{ opacity: 0.3 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 z-40 bg-slate-900"
+              className="fixed inset-0 z-[80] bg-slate-900"
             />
             {/* Drawer */}
             <motion.div 
@@ -625,7 +627,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.3 }}
-              className="fixed right-0 top-0 bottom-0 z-50 w-full sm:w-[380px] bg-white border-l border-slate-200 shadow-2xl flex flex-col"
+              className="fixed right-0 top-0 bottom-0 z-[90] w-full sm:w-[380px] bg-white border-l border-slate-200 shadow-2xl flex flex-col"
             >
               <div className="flex items-center justify-between p-6 border-b border-slate-100 flex-shrink-0">
                 <span className="font-extrabold text-xl tracking-wider text-slate-950">NAVIGATION</span>
@@ -689,6 +691,6 @@ export default function Navbar() {
           </>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 }

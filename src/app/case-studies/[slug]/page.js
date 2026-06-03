@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
   const data = caseStudiesData[slug];
   if (!data) return {};
   return {
-    title: `${data.title} - Case Study | Aetheris Systems`,
+    title: `${data.title} - Case Study | Privia Solutions`,
     description: data.description,
   };
 }
