@@ -355,8 +355,8 @@ export default function UxUiPage() {
                         <span className="text-[8px] font-mono text-rose-400 font-bold uppercase tracking-wider">Target Persona</span>
                         <h5 className="font-extrabold text-white text-sm">Sarah, Product Lead</h5>
                         <div className="border-t border-white/5 pt-2 space-y-1 text-slate-300 text-xs">
-                          <p>🎯 **Core Goal**: Reduce checkout friction by 35%.</p>
-                          <p>⚠️ **Pain Point**: Complex multistep navigations drop user engagement.</p>
+                          <p>**Core Goal**: Reduce checkout friction by 35%.</p>
+                          <p>**Pain Point**: Complex multistep navigations drop user engagement.</p>
                         </div>
                       </div>
                     )}
@@ -469,10 +469,10 @@ export default function UxUiPage() {
               </div>
 
               <div className="p-4 mt-6 rounded-xl bg-slate-900/60 border border-white/5 text-[10px] font-mono text-slate-400 space-y-1">
-                {activeButtonState === "default" && <div>✔ CONTRAST RATIO: 6.2:1 (PASS WCAG AAA)</div>}
-                {activeButtonState === "hover" && <div>✔ HIGHLIGHT STATE: Opacity transition engaged</div>}
-                {activeButtonState === "focus" && <div>✔ KEYBOARD OUTLINE: Enforced ring focus-visible</div>}
-                {activeButtonState === "disabled" && <div>✔ ARIA PROPERTIES: aria-disabled="true"</div>}
+                {activeButtonState === "default" && <div>[PASS] CONTRAST RATIO: 6.2:1 (PASS WCAG AAA)</div>}
+                {activeButtonState === "hover" && <div>[PASS] HIGHLIGHT STATE: Opacity transition engaged</div>}
+                {activeButtonState === "focus" && <div>[PASS] KEYBOARD OUTLINE: Enforced ring focus-visible</div>}
+                {activeButtonState === "disabled" && <div>[PASS] ARIA PROPERTIES: aria-disabled="true"</div>}
               </div>
             </div>
 

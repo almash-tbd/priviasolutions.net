@@ -126,7 +126,7 @@ export default function QaPerformancePage() {
     unit: [
       "guest@qa-audit-node:~$ npm run test:unit",
       "",
-      "🧪 Running Unit Tests via Jest...",
+      "Running Unit Tests via Jest...",
       " PASS  src/components/Button.test.js (0.8s)",
       " PASS  src/utils/auth.test.js (0.4s)",
       " PASS  src/hooks/useMetrics.test.js (1.1s)",
@@ -142,41 +142,41 @@ export default function QaPerformancePage() {
       " Button.js    |     100 |      100 |     100 |     100 |",
       " auth.js      |     100 |       80 |     100 |     100 |",
       "--------------------------------------",
-      "✔ Unit testing baseline PASSED [OK]"
+      "Unit testing baseline PASSED [OK]"
     ],
     integration: [
       "guest@qa-audit-node:~$ playwright test tests/integration/",
       "",
-      "🔗 Running API Integration & Contract Tests...",
-      "  ✔ POST /api/v1/auth/token - 200 OK (54ms)",
-      "  ✔ GET /api/v1/user/config - 200 OK (22ms)",
-      "  ✔ POST /api/v1/billing/charge - 201 Created (142ms)",
-      "  ✔ GET /api/v1/reports/summary - 200 OK (98ms)",
+      "Running API Integration & Contract Tests...",
+      "  POST /api/v1/auth/token - 200 OK (54ms)",
+      "  GET /api/v1/user/config - 200 OK (22ms)",
+      "  POST /api/v1/billing/charge - 201 Created (142ms)",
+      "  GET /api/v1/reports/summary - 200 OK (98ms)",
       "",
       "Checking data schemas against OpenAPI contract specifications...",
-      "  ✔ Authentication Token payload conforms to schema [OK]",
-      "  ✔ Billing receipt schema matching validated database state [OK]",
-      "  ✔ System dependencies ping ... [CONNECTED]",
+      "  Authentication Token payload conforms to schema [OK]",
+      "  Billing receipt schema matching validated database state [OK]",
+      "  System dependencies ping ... [CONNECTED]",
       "",
       "Total requests verified: 4",
-      "✔ Integration testing contract matching PASSED [SUCCESS]"
+      "Integration testing contract matching PASSED [SUCCESS]"
     ],
     e2e: [
       "guest@qa-audit-node:~$ playwright test tests/e2e/",
       "",
-      "🎭 Running Playwright E2E browser tests...",
+      "Running Playwright E2E browser tests...",
       "  [chromium] › checkout.spec.js › Complete Checkout Flow",
       "    - Navigating to localhost:3000/product/99",
       "    - Add item to cart and verify count badge",
       "    - Enter mock credit card & shipping details",
       "    - Submit transaction form and verify response receipt",
-      "    ✔ Receipt matching page content loaded [OK]",
+      "    Receipt matching page content loaded [OK]",
       "",
       "  [webkit] › registration.spec.js › User Signup validation",
-      "    ✔ Signup form validation error paths validated [OK]",
+      "    Signup form validation error paths validated [OK]",
       "",
       "  3 tests passed (7.4s)",
-      "✔ Visual regression checking: 100% MATCH [OK]"
+      "Visual regression checking: 100% MATCH [OK]"
     ]
   };
 
@@ -450,9 +450,9 @@ export default function QaPerformancePage() {
                 <div className="flex-grow py-4 overflow-y-auto space-y-1 text-slate-300 max-h-[320px] min-h-[220px] select-text">
                   {terminalLogs.map((log, idx) => {
                     let colorClass = "text-slate-300";
-                    if (log.startsWith("PASS") || log.startsWith("✔")) {
+                    if (log.startsWith("PASS") || log.startsWith("[OK]")) {
                       colorClass = "text-emerald-400 font-bold";
-                    } else if (log.startsWith("🧪") || log.startsWith("🔗") || log.startsWith("🎭")) {
+                    } else if (log.startsWith("Running") || log.startsWith("Test")) {
                       colorClass = "text-[#4bb8fa] font-black";
                     } else if (log.includes("File ") || log.startsWith("All files")) {
                       colorClass = "text-slate-400";
@@ -520,8 +520,8 @@ export default function QaPerformancePage() {
               </div>
 
               <div className="p-4 mt-6 rounded-xl bg-slate-900/60 border border-white/5 text-[10px] font-mono text-slate-400 space-y-1">
-                <div>⚡ GATEWAY SCALING STATE: {virtualUsers > 4000 ? "⚠️ STRESS SPIKE" : virtualUsers > 2000 ? "⚡ ACTIVE AUTOSCALING" : "✔ STABLE"}</div>
-                <div>📡 LOAD BALANCERS: {virtualUsers > 3500 ? "4 NODES (MAX)" : virtualUsers > 1500 ? "2 NODES" : "1 NODE"}</div>
+                <div>GATEWAY SCALING STATE: {virtualUsers > 4000 ? "STRESS SPIKE" : virtualUsers > 2000 ? "ACTIVE AUTOSCALING" : "STABLE"}</div>
+                <div>LOAD BALANCERS: {virtualUsers > 3500 ? "4 NODES (MAX)" : virtualUsers > 1500 ? "2 NODES" : "1 NODE"}</div>
               </div>
             </div>
 

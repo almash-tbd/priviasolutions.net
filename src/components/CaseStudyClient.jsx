@@ -85,75 +85,63 @@ function TechIcon({ name }) {
 // Client quote details mapping
 const testimonialMapping = {
   "banking-core-modernization": {
-    author: "Sarah Jenkins",
+    author: "Sneha Jha",
     role: "VP of Engineering",
-    company: "Digital Banking Platform",
     quote: "Privia transformed our legacy core banking monolith. Their phased Strangler Pattern approach achieved zero downtime migration over 18 months, helping us scale concurrent users seamlessly without a single transactional record lost."
   },
   "edtech-lms-platform": {
     author: "Amit Patel",
     role: "Director of Product",
-    company: "E-Learning Platform",
     quote: "Rebuilding our LMS platform with WebRTC and Redis cache completely resolved our peak load crashes. Our video latency dropped under 3 seconds and lesson completion rates skyrocketed."
   },
   "fintech-scale-up": {
-    author: "Marcus Aurelius",
+    author: "Mohit Acharya",
     role: "CTO",
-    company: "Payment Processor",
     quote: "By restructuring our transactional database using partitioning and implementing highly optimized gRPC services, Privia enabled our platform to sustain a 10x surge in transaction volume."
   },
   "government-citizen-portal": {
     author: "Rajesh Kumar",
     role: "IT Director",
-    company: "Public Sector Entity",
     quote: "Unifying 50+ services into one portal with secure document validation streamlined our citizen pipeline, cutting operational response delays by 90% and earning praise from municipal authorities."
   },
   "healthcare-analytics": {
     author: "Dr. Anita Desai",
     role: "CMIO",
-    company: "Healthcare Platform",
     quote: "Ensuring secure data privacy standards while constructing our analytics pipelines was our highest priority. Privia met the challenge with encrypted warehouse perimeters, detailed audit logging, and custom React dashboard widgets."
   },
   "hospitality-booking-system": {
-    author: "Sophia Loren",
+    author: "Sunita Laxman",
     role: "VP of Operations",
-    company: "Hospitality Group",
     quote: "Unifying 150+ properties onto one dynamic booking interface saved our staff hundreds of hours and cut mobile cart abandonment significantly with AI pricing integrations."
   },
   "insurance-digital-platform": {
-    author: "Richard Branson",
+    author: "Rishabh Bhasin",
     role: "COO",
-    company: "Insurance Provider",
     quote: "Automating claims processing with OCR validation and microservices eliminated manual spreadsheet bottlenecks, shrinking verification schedules from 3 weeks to just minutes."
   },
   "logistics-tracking-system": {
-    author: "David Miller",
+    author: "Devender Mishra",
     role: "Director of Fleet Operations",
-    company: "Logistics Provider",
     quote: "Privia established instant GPS fleet monitoring for over 5,000 trucks using IoT sensors. Fuel consumption dropped by 25% and delivery delays were cut by 30% through predictive routing."
   },
   "manufacturing-iot-platform": {
-    author: "Hermann Schmidt",
+    author: "Hari Sen",
     role: "Head of Factory automation",
-    company: "Manufacturing Firm",
     quote: "Deploying predictive maintenance models across 20+ automated factories reduced equipment breakdowns by 65%. Unplanned downtime is no longer a threat to our bottom line."
   },
   "retail-omnichannel": {
-    author: "Chloe Mercer",
+    author: "Charu Mishra",
     role: "eCommerce Director",
-    company: "E-Commerce Brand",
     quote: "Integrating our POS registers and online storefront databases via Kafka event brokers solved our inventory sync errors overnight, boosting cart conversion and user trust."
   },
   "saas-devops": {
-    author: "Thomas Wright",
+    author: "Tushar Wagle",
     role: "Head of Infrastructure",
-    company: "DevOps Solution",
     quote: "Automating our release cycle using modular Terraform scripts and SRE pipelines increased our deploy frequency by 5x while slashing MTTR metrics by half."
   },
   "telecom-crm-system": {
-    author: "Elena Rostova",
+    author: "Esha Roy",
     role: "VP of Customer Success",
-    company: "Telecom Operator",
     quote: "Consolidating 10 million subscriber records from 4 disparate CRM systems allowed support reps to address complex billing inquiries with sub-100ms dashboard latency."
   }
 };
@@ -201,7 +189,6 @@ export default function CaseStudyClient({ data, slug }) {
   const testimonial = testimonialMapping[slug] || {
     author: "Rohit Sharma",
     role: "CTO",
-    company: data.client,
     quote: "Privia transformed our infrastructure and helped us achieve unprecedented reliability and performance. Their team's expertise and proactive approach were instrumental in our cloud journey."
   };
 
@@ -367,7 +354,7 @@ export default function CaseStudyClient({ data, slug }) {
                 <ul className="space-y-2.5 pl-0.5">
                   {displayChallenges.map((item, idx) => (
                     <li key={idx} className="flex items-start text-xs text-slate-500 font-medium leading-relaxed">
-                      <span className="text-rose-500 font-mono mr-2 shrink-0 select-none">✕</span>
+                      <span className="text-rose-500 font-mono mr-2 shrink-0 select-none">-</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -383,7 +370,7 @@ export default function CaseStudyClient({ data, slug }) {
                 <ul className="space-y-2.5 pl-0.5">
                   {displaySolutions.map((item, idx) => (
                     <li key={idx} className="flex items-start text-xs text-slate-500 font-medium leading-relaxed">
-                      <span className="text-blue-500 font-mono mr-2 shrink-0 select-none">✓</span>
+                      <span className="text-blue-500 font-mono mr-2 shrink-0 select-none">+</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -729,7 +716,7 @@ export default function CaseStudyClient({ data, slug }) {
                       {activeDiagramNode === "dns" && (
                         <>
                           <h4 className="font-extrabold text-[11px] text-blue-400">Route 53 DNS Resolver</h4>
-                          <p className="text-slate-350 leading-relaxed font-semibold">Provides low-latency geolocation routing and active health monitoring checks to failover nodes.</p>
+                          <p className="text-slate-350 leading-relaxed font-semibold">Provides low-latency origin-based routing and active health monitoring checks to failover nodes.</p>
                         </>
                       )}
                       {activeDiagramNode === "cdn" && (
@@ -842,7 +829,7 @@ export default function CaseStudyClient({ data, slug }) {
                   </div>
                   <div className="text-left leading-tight">
                     <h4 className="font-black text-sm text-slate-900">{testimonial.author}</h4>
-                    <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider font-mono block pt-0.5">{testimonial.role}, {testimonial.company}</span>
+                    <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider font-mono block pt-0.5">{testimonial.role}</span>
                   </div>
                 </div>
               </div>

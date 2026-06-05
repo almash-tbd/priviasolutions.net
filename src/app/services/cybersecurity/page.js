@@ -28,7 +28,7 @@ export default function CybersecurityPage() {
       "[INFO] Probing port range 1-65535 on target assets...",
       "[WARN] Open port 3389 (RDP) detected on public IP space.",
       "[INFO] Threat modeling (STRIDE) analysis started.",
-      "✔ Security audit complete: 1 warning, 0 criticals."
+      "[OK] Security audit complete: 1 warning, 0 criticals."
     ],
     1: [
       "guest@sec-audit:~$ apply-controls --strict",
@@ -36,7 +36,7 @@ export default function CybersecurityPage() {
       "[INFO] Provisioning HashiCorp Vault secrets storage.",
       "[INFO] Generating new AES-256 database encryption keys.",
       "[INFO] Applying strict IAM role segregation policies.",
-      "✔ Secure credentials vaulting active."
+      "[OK] Secure credentials vaulting active."
     ],
     2: [
       "guest@sec-audit:~$ run-penetration-testing",
@@ -44,7 +44,7 @@ export default function CybersecurityPage() {
       "[INFO] Simulating credential brute-force attacks...",
       "[INFO] Auditing API gateway endpoint permissions.",
       "[WARN] Rate limiting disabled on /api/v1/auth/login.",
-      "✔ Pentesting report drafted: remediations verified."
+      "[OK] Pentesting report drafted: remediations verified."
     ],
     3: [
       "guest@sec-audit:~$ start-siem-daemon",
@@ -52,7 +52,7 @@ export default function CybersecurityPage() {
       "[INFO] Spawning anomaly tracking agents...",
       "[INFO] Initializing Web Application Firewall rules.",
       "[INFO] 24/7 incident response schedule: ACTIVE.",
-      "✔ Daemon running. System telemetry reporting: OK."
+      "[OK] Daemon running. System telemetry reporting: OK."
     ]
   };
 
@@ -767,7 +767,7 @@ export default function CybersecurityPage() {
                 {/* Intro Description text */}
                 <div className="space-y-2">
                   <p className="text-xs text-slate-500 leading-relaxed font-mono">
-                    💡 Explore our case studies and security hardening audits where we successfully defended client infrastructure, achieved strict compliance, and mitigated multi-vector attack scenarios.
+                    Explore our case studies and security hardening audits where we successfully defended client infrastructure, achieved strict compliance, and mitigated multi-vector attack scenarios.
                   </p>
                   <p className="text-xs text-slate-600 leading-relaxed">
                     Our dedicated security operations team engineers custom firewalls, secures sensitive patient/transaction data at rest and in transit, and continuously conducts penetration tests to identify and eliminate system vulnerabilities. Select a case below to review challenges, solutions, and key hardening results.

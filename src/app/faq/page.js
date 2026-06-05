@@ -206,7 +206,7 @@ export default function FAQPage() {
                     transition={{ type: "spring", stiffness: 300, damping: 15 }}
                     className="px-3.5 py-2 rounded-full bg-blue-50/50 border border-blue-100 text-blue-600 text-xs font-extrabold hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-colors shadow-2xs hover:shadow-sm"
                   >
-                    🎈 {bubble.name}
+                    {bubble.name}
                   </motion.button>
                 ))}
               </div>

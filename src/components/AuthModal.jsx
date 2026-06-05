@@ -156,7 +156,7 @@ function AuthModalContent() {
                   required
                   value={loginData.email}
                   onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
-                  placeholder="elena@company.com"
+                  placeholder="sneha@company.com"
                   className="w-full px-4 py-2.5 rounded-xl bg-white/[0.02] border border-white/5 focus:border-[#1591dc] hover:border-white/10 text-xs text-slate-100 outline-none transition-all placeholder-slate-600"
                 />
               </div>
@@ -201,7 +201,7 @@ function AuthModalContent() {
                   required
                   value={signupData.name}
                   onChange={(e) => setSignupData({ ...signupData, name: e.target.value })}
-                  placeholder="Marcus Chen"
+                  placeholder="Mohit Acharya"
                   className="w-full px-4 py-2.5 rounded-xl bg-white/[0.02] border border-white/5 focus:border-[#1591dc] hover:border-white/10 text-xs text-slate-100 outline-none transition-all placeholder-slate-600"
                 />
               </div>
@@ -213,7 +213,7 @@ function AuthModalContent() {
                   required
                   value={signupData.email}
                   onChange={(e) => setSignupData({ ...signupData, email: e.target.value })}
-                  placeholder="marcus@company.com"
+                  placeholder="mohit@company.com"
                   className="w-full px-4 py-2.5 rounded-xl bg-white/[0.02] border border-white/5 focus:border-[#1591dc] hover:border-white/10 text-xs text-slate-100 outline-none transition-all placeholder-slate-600"
                 />
               </div>

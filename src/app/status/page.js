@@ -7,7 +7,7 @@ export default function StatusPage() {
     { name: "API Gateways", status: "Operational", uptime: "99.99%", latency: "42ms" },
     { name: "Core Ledgers & Databases", status: "Operational", uptime: "100%", latency: "12ms" },
     { name: "Multi-Cloud CDN", status: "Operational", uptime: "99.98%", latency: "15ms" },
-    { name: "Release Pipelines (IceDeploy)", status: "Operational", uptime: "99.95%", latency: "30s build" }
+    { name: "Release Pipelines", status: "Operational", uptime: "99.95%", latency: "30s build" }
   ];
 
   return (

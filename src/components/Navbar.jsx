@@ -136,7 +136,7 @@ export default function Navbar() {
                 <div className="h-0.5 w-7 bg-blue-300 rounded-sm mx-auto"></div>
                 <div className="h-0.5 w-7 bg-blue-300 rounded-sm mx-auto"></div>
               </div>
-              <span className="text-[12px] mm-animate-float z-10">☁️</span>
+              <svg className="w-5 h-5 text-blue-500 mm-animate-float z-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17.5 19A3.5 3.5 0 0 0 21 15.5c0-2.79-3.5-3.5-3.5-3.5A7 7 0 1 0 5 13.5s-2.5.71-2.5 3A2.5 2.5 0 0 0 5 19Z"/></svg>
             </div>
           </div>
         );
@@ -151,50 +151,11 @@ export default function Navbar() {
             <div className="ill-meetings-cons border-t-4 border-t-emerald-400 flex flex-col justify-between p-2">
               <span className="text-[7px] font-black text-emerald-700 block mb-0.5">RESPONSE</span>
               <div className="h-1 w-10 bg-slate-100 rounded" />
-              <div className="h-2 w-full bg-emerald-50 border border-emerald-100 rounded text-[5px] text-emerald-600 flex items-center justify-center font-mono">{"200 OK ✓"}</div>
+              <div className="h-2 w-full bg-emerald-50 border border-emerald-100 rounded text-[5px] text-emerald-600 flex items-center justify-center font-mono">{"200 OK"}</div>
             </div>
           </div>
         );
 
-      // PRODUCTS
-      case "All Products":
-        return (
-          <div className="ill-brainstorming bg-emerald-50">
-            <div className="ill-brainstorming-board p-2 flex flex-col">
-              <div className="flex gap-1 border-b border-emerald-100 pb-1.5 mb-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-300"></span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-200"></span>
-              </div>
-              <div className="flex gap-2 justify-center">
-                <div className="w-8 h-8 bg-emerald-100 border border-emerald-200 rounded shadow-sm flex items-center justify-center text-[12px] mm-animate-float">📦</div>
-                <div className="w-8 h-8 bg-blue-100 border border-blue-200 rounded shadow-sm flex items-center justify-center text-[12px] mm-animate-float-delay">🛠️</div>
-              </div>
-            </div>
-          </div>
-        );
-      case "IceDeploy":
-        return (
-          <div className="ill-diagramming ml-2 flex-shrink-0 bg-emerald-50/50">
-            <div className="flex flex-col items-center gap-1.5">
-              <div className="text-[12px] mm-animate-float">🚀</div>
-              <div className="w-12 h-1.5 bg-slate-200 rounded-full overflow-hidden">
-                <div className="w-3/4 h-full bg-emerald-500 rounded-full animate-pulse"></div>
-              </div>
-              <span className="text-[5px] font-mono text-emerald-600 font-black">DEPLOYING</span>
-            </div>
-          </div>
-        );
-      case "IceInsight":
-        return (
-          <div className="ill-games ml-2 flex-shrink-0">
-            <div className="flex items-end gap-1 h-12 pb-2">
-              <div className="w-2.5 h-5 bg-rose-200 rounded-sm"></div>
-              <div className="w-2.5 h-8 bg-rose-400 rounded-sm"></div>
-              <div className="w-2.5 h-4 bg-rose-300 rounded-sm"></div>
-              <div className="w-2.5 h-10 bg-rose-500 rounded-sm"></div>
-            </div>
-          </div>
-        );
 
       // SOLUTIONS
       case "SaaS Solutions":
@@ -206,8 +167,8 @@ export default function Navbar() {
                 <span className="w-1.5 h-1.5 rounded-full bg-purple-200"></span>
               </div>
               <div className="flex gap-1.5 items-center justify-center">
-                <div className="w-5 h-5 rounded-full bg-purple-100 flex items-center justify-center text-[10px] mm-animate-float">👤</div>
-                <div className="w-5 h-5 rounded-full bg-purple-200 flex items-center justify-center text-[10px] mm-animate-float-delay">👥</div>
+                <div className="w-5 h-5 rounded-full bg-purple-100 flex items-center justify-center mm-animate-float"><Users className="w-3 h-3 text-purple-600" /></div>
+                <div className="w-5 h-5 rounded-full bg-purple-200 flex items-center justify-center mm-animate-float-delay"><Users className="w-3 h-3 text-purple-700" /></div>
               </div>
             </div>
           </div>
@@ -216,7 +177,7 @@ export default function Navbar() {
         return (
           <div className="ill-diagramming ml-2 flex-shrink-0">
             <div className="flex flex-col items-center gap-1.5">
-              <span className="text-[16px] mm-animate-float">💳</span>
+              <CreditCard className="w-6 h-6 text-blue-600 mm-animate-float" />
               <span className="text-[6px] font-black text-blue-700 bg-blue-50 px-1 border border-blue-200 rounded">SECURE</span>
             </div>
           </div>
@@ -225,7 +186,7 @@ export default function Navbar() {
         return (
           <div className="ill-games ml-2 flex-shrink-0">
             <div className="flex flex-col items-center gap-1.5">
-              <span className="text-[16px] mm-animate-float">❤️</span>
+              <Activity className="w-6 h-6 text-rose-500 mm-animate-float" />
               <div className="w-12 h-1 bg-rose-200 rounded-full overflow-hidden">
                 <div className="w-5/6 h-full bg-rose-500"></div>
               </div>
@@ -237,12 +198,12 @@ export default function Navbar() {
           <div className="ill-meetings bg-amber-50">
             <div className="ill-meetings-pros border-t-4 border-t-amber-400 flex flex-col justify-between p-2">
               <span className="text-[7px] font-black text-amber-700">CART</span>
-              <div className="text-[12px] text-center">🛒</div>
+              <div className="flex justify-center"><ShoppingCart className="w-4 h-4 text-amber-600" /></div>
               <div className="h-1.5 w-full bg-amber-50 rounded flex items-center justify-center text-[5px] font-mono text-amber-600 font-bold">$129.00</div>
             </div>
             <div className="ill-meetings-cons border-t-4 border-t-emerald-400 flex flex-col justify-between p-2">
               <span className="text-[7px] font-black text-emerald-700">PAY</span>
-              <div className="text-[12px] text-center">💳</div>
+              <div className="flex justify-center"><CreditCard className="w-4 h-4 text-emerald-600" /></div>
               <span className="text-[5px] text-center font-bold text-emerald-600 bg-emerald-50 rounded">PAID</span>
             </div>
           </div>
@@ -268,11 +229,11 @@ export default function Navbar() {
           <div className="ill-diagramming ml-2 flex-shrink-0 bg-indigo-50/30">
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-1.5">
-                <span className="text-[9px] text-indigo-500 font-bold">✓</span>
+                <span className="text-[9px] text-indigo-500 font-bold">•</span>
                 <div className="h-1.5 w-8 bg-slate-300 rounded"></div>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="text-[9px] text-indigo-500 font-bold">✓</span>
+                <span className="text-[9px] text-indigo-500 font-bold">•</span>
                 <div className="h-1.5 w-6 bg-slate-300 rounded"></div>
               </div>
             </div>
@@ -285,7 +246,7 @@ export default function Navbar() {
           <div className="ill-brainstorming bg-sky-50">
             <div className="ill-brainstorming-board p-2.5 flex flex-col justify-between">
               <div className="flex justify-between items-center">
-                <span className="text-[12px] mm-animate-float">🌍</span>
+                <svg className="w-5 h-5 text-sky-500 mm-animate-float" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
                 <span className="text-[5px] font-black text-sky-600 bg-sky-50 border border-sky-200 px-1 rounded">HIRING</span>
               </div>
               <div className="h-2 w-full bg-sky-100 rounded-sm"></div>
@@ -295,15 +256,15 @@ export default function Navbar() {
       case "Partners & Ecosystem":
         return (
           <div className="ill-diagramming ml-2 flex-shrink-0">
-            <div className="text-[12px] mm-animate-rotate inline-block">⚙️</div>
-            <div className="text-[11px] inline-block -translate-x-1 translate-y-1">🤝</div>
+            <Settings className="w-4 h-4 text-slate-500 mm-animate-rotate inline-block" />
+            <Users className="w-3.5 h-3.5 text-slate-500 inline-block -translate-x-1 translate-y-1" />
           </div>
         );
       case "Security Center":
         return (
           <div className="ill-games ml-2 flex-shrink-0 bg-blue-50/30 border-l border-blue-100">
             <div className="flex flex-col items-center gap-1">
-              <span className="text-[14px] mm-animate-float">🛡️</span>
+              <ShieldCheck className="w-5 h-5 text-blue-600 mm-animate-float" />
               <span className="text-[5px] font-bold text-emerald-600 bg-emerald-50 px-1 border border-emerald-200 rounded">ACTIVE</span>
             </div>
           </div>

@@ -428,7 +428,7 @@ export default function ManagedSupportPage() {
                     : "bg-slate-900/40 border border-white/5 text-slate-400 hover:text-white"
                 }`}
               >
-                {sev === "P1" ? "🚨 P1 - CRITICAL OUTAGE" : sev === "P2" ? "⚠️ P2 - MAJOR SLOWDOWN" : "🐛 P3 - MINOR ISSUE"}
+                {sev === "P1" ? "P1 - CRITICAL OUTAGE" : sev === "P2" ? "P2 - MAJOR SLOWDOWN" : "P3 - MINOR ISSUE"}
               </button>
             ))}
           </div>

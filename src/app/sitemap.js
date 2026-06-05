@@ -1,4 +1,4 @@
-import { blogData, caseStudiesData, productsData, solutionsData } from "@/data/siteData";
+import { blogData, caseStudiesData, solutionsData } from "@/data/siteData";
 
 export default async function sitemap() {
   const baseUrl = "https://priviasolutions.com";
@@ -21,7 +21,6 @@ export default async function sitemap() {
     "/webinars",
     "/blog",
     "/case-studies",
-    "/products",
     "/services",
     "/services/custom-development",
     "/services/mobile-apps",
@@ -57,14 +56,6 @@ export default async function sitemap() {
     priority: 0.6,
   }));
 
-  // Dynamic routes - Products
-  const productsMaps = Object.keys(productsData).map((slug) => ({
-    url: `${baseUrl}/products/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }));
-
   // Dynamic routes - Solutions
   const solutionsMaps = Object.keys(solutionsData).map((slug) => ({
     url: `${baseUrl}/solutions/${slug}`,
@@ -77,7 +68,6 @@ export default async function sitemap() {
     ...staticMaps,
     ...blogMaps,
     ...caseStudiesMaps,
-    ...productsMaps,
     ...solutionsMaps,
   ];
 }

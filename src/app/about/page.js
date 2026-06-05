@@ -786,7 +786,7 @@ export default function AboutPage() {
                     {processSteps[activeProcessStep - 1].bullets.map((bullet, idx) => (
                       <div key={idx} className="flex items-center gap-2.5 text-[10.5px] text-slate-655 font-bold">
                         <span className="w-4 h-4 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shrink-0 font-mono text-[9px]">
-                          ✓
+                          +
                         </span>
                         <span>{bullet}</span>
                       </div>
@@ -833,105 +833,6 @@ export default function AboutPage() {
 
         <div className="w-full">
           <SolutionsCarousel />
-        </div>
-      </section>
-
-
-      {/* ================= SECTION 7: LEADERSHIP ================= */}
-      <section className="max-w-7xl mx-auto pt-14 pb-20 px-4 sm:px-6 lg:px-8 space-y-12 bg-transparent relative z-10">
-        <div className="text-left space-y-3">
-          <span className="text-[10px] font-black tracking-widest text-blue-600 uppercase font-mono pl-0.5">OUR LEADERSHIP</span>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 font-outfit tracking-tight">Meet the Architects Behind the Systems</h2>
-        </div>
-        <div className="grid sm:grid-cols-3 gap-8 text-left max-w-5xl mx-auto pt-4">
-          {[
-            { 
-              name: "Marcus Vance", 
-              role: "Founder", 
-              desc: "Founder and vision leader of Privia, driving enterprise-grade digital transformations, tech strategy, and cloud platform growth.",
-              image: "/assets/images/team/architect_marcus.png"
-            },
-            { 
-              name: "Elena Rostova", 
-              role: "CEO", 
-              desc: "Chief Executive Officer orchestrating operations, enterprise partnerships, and scaling engineering delivery models globally.",
-              image: "/assets/images/team/architect_elena.png"
-            },
-            { 
-              name: "Karan Nair", 
-              role: "Head of Cloud", 
-              desc: "Infrastructure expert specializing in multi-region Kubernetes migration, cloud security operations, and DevOps.",
-              image: "/assets/images/team/architect_karan.png"
-            }
-          ].map((person, idx) => (
-            <div 
-              key={idx} 
-              className="relative w-full h-[420px] rounded-3xl overflow-hidden group border border-slate-200/80 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.9),inset_0_-1px_0_0_rgba(0,0,0,0.05),0_12px_30px_-8px_rgba(0,0,0,0.04)] cursor-pointer transition-all duration-500 hover:scale-103 hover:border-slate-300"
-            >
-              {/* Initial View: Avatar Icon & Basic Info */}
-              <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-slate-100 to-blue-50/40 flex flex-col items-center justify-center transition-all duration-700 group-hover:blur-md group-hover:scale-105 z-0">
-                {person.image ? (
-                  <>
-                    {/* Full Card Background Image */}
-                    <img 
-                      src={person.image} 
-                      alt={person.name} 
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                    />
-                    {/* Dark gradient overlay for text readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent transition-opacity duration-500 group-hover:opacity-0" />
-                    
-                    {/* Text Footer on Image (White text) */}
-                    <div className="absolute bottom-6 left-6 right-6 text-left transition-opacity duration-500 group-hover:opacity-0">
-                      <h4 className="text-lg font-black text-white font-outfit leading-tight">{person.name}</h4>
-                      <p className="text-[10px] font-bold text-sky-400 font-mono uppercase tracking-wider mt-1">{person.role}</p>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    {/* Original Placeholder Circular Avatar */}
-                    <div className="w-24 h-24 rounded-full bg-white border border-slate-200/60 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.015),0_8px_16px_rgba(0,0,0,0.03)] flex items-center justify-center text-slate-400 group-hover:text-blue-600 transition-colors duration-500">
-                      <User className="w-12 h-12 stroke-[1.25]" />
-                    </div>
-                    
-                    {/* Original Text Footer */}
-                    <div className="absolute bottom-6 left-6 right-6 text-left transition-opacity duration-500 group-hover:opacity-0">
-                      <h4 className="text-lg font-black text-slate-800 font-outfit leading-tight">{person.name}</h4>
-                      <p className="text-[10px] font-bold text-blue-600 font-mono uppercase tracking-wider mt-1">{person.role}</p>
-                    </div>
-                  </>
-                )}
-              </div>
-
-              {/* Hover View: Blurs background and displays descriptions clearly */}
-              <div className="absolute inset-0 bg-white/80 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out z-10 flex flex-col justify-between p-7.5 text-left translate-y-2 group-hover:translate-y-0">
-                <div>
-                  <span className="text-[9px] font-black tracking-widest text-blue-600 uppercase font-mono">
-                    {person.role}
-                  </span>
-                  <h4 className="text-2xl font-black text-slate-900 font-outfit tracking-tight mt-1">
-                    {person.name}
-                  </h4>
-                  <p className="text-[11.5px] text-slate-600 font-semibold leading-relaxed mt-4 border-t border-slate-200/50 pt-4">
-                    {person.desc}
-                  </p>
-                </div>
-
-                <a 
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toast.success(`Connecting to ${person.name} on LinkedIn`);
-                  }}
-                  className="text-[10px] font-black uppercase tracking-widest text-blue-600 hover:text-blue-700 transition-all font-mono mt-auto flex items-center gap-0.5 hover:translate-x-1"
-                >
-                  Connect on LinkedIn →
-                </a>
-              </div>
-            </div>
-          ))}
         </div>
       </section>
 
@@ -1133,8 +1034,8 @@ function OrbitingDna({ dnaNodes, hoveredNodeId, setHoveredNodeId }) {
                 <p className="text-[10px] text-slate-500 font-medium leading-relaxed mb-3">{node.desc}</p>
                 <div className="space-y-1.5 border-t border-slate-100 pt-2">
                   {node.bullets?.map((b, i) => (
-                    <div key={i} className="flex items-start gap-1.5 text-[10px] text-slate-600 font-semibold">
-                      <span className="text-blue-500 mt-0.5 shrink-0">✓</span>
+                    <div key={i} className="flex items-start gap-1.5 text-[10px] text-slate-605 font-semibold">
+                      <span className="text-blue-500 mt-0.5 shrink-0">+</span>
                       <span>{b}</span>
                     </div>
                   ))}

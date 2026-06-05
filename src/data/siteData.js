@@ -422,7 +422,6 @@ export const solutionsData = {
         solution: "Developed cloud-native banking core with event-driven architecture, real-time notifications, and KYC/AML integration.",
         results: [
           "250K users in first year",
-          "Security certified",
           "Real-time transactions",
           "4.8★ app store rating"
         ]
@@ -460,13 +459,13 @@ export const solutionsData = {
         ]
       },
       {
-        phase: "Compliance Certification",
+        phase: "Compliance Alignment",
         duration: "4-6 weeks",
         description: "Prepare for and complete security and compliance audits.",
         deliverables: [
           "Compliance documentation",
           "Audit reports",
-          "Certifications"
+          "Assessment reports"
         ]
       },
       {
@@ -481,10 +480,6 @@ export const solutionsData = {
       }
     ],
     faqs: [
-      {
-        question: "How long does security certification take?",
-        answer: "Typically 4-8 weeks for initial certification, depending on the scope and existing security controls. We guide you through the entire process including gap analysis, remediation, and audit preparation."
-      },
       {
         question: "Can you help with existing legacy systems?",
         answer: "Yes, we specialize in modernizing legacy financial systems. We can build secure APIs around legacy systems, migrate data safely, or completely rebuild on modern architecture while maintaining business continuity."
@@ -505,7 +500,7 @@ export const solutionsData = {
   },
   "healthcare": {
     title: "Secure Healthcare Solutions",
-    description: "Secure, regulatory-compliant, and highly interoperable healthcare platforms. We build custom electronic health records (EHR) systems with automated FHIR/HL7 data pipelines, develop secure telehealth portals with low-latency WebRTC streams, implement HIPAA/HITECH-aligned data access policies, and establish rigorous end-to-end audit trails. Our clinical-grade architectures safeguard Protected Health Information (PHI) with AES-256 encryption at rest and in transit, multi-factor authentication, and automated audit logs, ensuring seamless workflows and complete alignment with strict security standards.",
+    description: "Secure, regulatory-compliant, and highly interoperable healthcare platforms. We build custom electronic health records (EHR) systems with automated FHIR/HL7 data pipelines, develop secure telehealth portals with low-latency WebRTC streams, implement secure data access policies, and establish rigorous end-to-end audit trails. Our clinical-grade architectures safeguard Protected Health Information (PHI) with AES-256 encryption at rest and in transit, multi-factor authentication, and automated audit logs, ensuring seamless workflows and complete alignment with strict security standards.",
     features: [
       "End-to-End Encryption for Patient Health Info",
       "Strict Audit Logging & Access Authentication",
@@ -831,42 +826,7 @@ export const solutionsData = {
   }
 };
 
-export const productsData = {
-  "icedeploy": {
-    name: "IceDeploy",
-    tagline: "Automate your release pipelines. Ship code safely and constantly.",
-    description: "IceDeploy is an enterprise-grade delivery manager designed to orchestrate deployments across multi-cloud clusters. With built-in canary checks, automated rollback systems, and unified log visualization, your product teams can launch features without operational risk.",
-    features: [
-      "Canary & Blue-Green Orchestration Gates",
-      "Automatic Rollover Triggered by Error Budgets",
-      "Multi-Cluster Kubernetes Configuration Sync",
-      "Integrated Security Scanning & Vulnerability Checks"
-    ],
-    metrics: [
-      { value: "-75%", label: "Deployment Failure Rate" },
-      { value: "5 min", label: "Average Rollback Speed" },
-      { value: "4x", label: "Increase in Ship Velocity" }
-    ],
-    techStack: ["Go", "Kubernetes API", "Terraform", "Rust", "React", "gRPC"]
-  },
-  "iceinsight": {
-    name: "IceInsight",
-    tagline: "Real-time analytics engine. Convert database raw events to insight.",
-    description: "IceInsight is a lightweight event aggregator and metrics visualizer. It hooks directly into your database replication streams and application logs, compiling metrics in real time. Predict traffic spikes, discover system bottlenecks, and build analytics dashboards instantly.",
-    features: [
-      "Non-intrusive CDC (Change Data Capture) Integration",
-      "Sub-second Aggregation of High-Volume Logs",
-      "Custom Dashboard Constructor & Alert Engine",
-      "Machine-Learning System Load Forecasting"
-    ],
-    metrics: [
-      { value: "sub-10ms", label: "Event Pipeline Latency" },
-      { value: "100M+", label: "Events Compiled Daily" },
-      { value: "40%", label: "Reduction in Debugging Time" }
-    ],
-    techStack: ["Rust", "Python", "ClickHouse", "Kafka", "React", "D3.js"]
-  }
-};
+export const productsData = {};
 
 export const caseStudiesData = {
   "banking-core-modernization": {
@@ -939,7 +899,7 @@ export const caseStudiesData = {
     description: "Built secure analytics platform for healthcare providers with real-time dashboards and secure PHI handling.",
     metrics: [
       { value: "10M+", label: "Data Processing" },
-      { value: "Certified", label: "Security" },
+      { value: "Enterprise", label: "Security" },
       { value: "High", label: "User Adoption" }
     ],
     challenge: "Medical providers lacked a centralized analytical tool to track clinical outcomes, while having to adhere to strict security compliance guidelines.",
@@ -1020,7 +980,7 @@ export const caseStudiesData = {
       { value: "High", label: "Uptime" },
       { value: "Growth", label: "Revenue Growth" }
     ],
-    challenge: "An e-commerce brand had major inventory sync errors, selling out of stock online when stock was purchased in physical retail locations.",
+    challenge: "An e-commerce brand had major inventory sync errors, selling out of stock online when stock was purchased in physical retail stores.",
     solution: "We implemented an event-driven stock synchronization engine using Kafka, connecting store POS registers to the eCommerce database.",
     techStack: ["React Native", ".NET Core", "MongoDB", "Cloud Platform", "Next.js", "Kafka"]
   },
@@ -1649,7 +1609,7 @@ export const blogData = {
     "readTime": "8 min read",
     "image": "/assets/images/blog/Security-by-Default_SDLC.jpg",
     "summary": "Understand Zero Trust principles and how to implement them in your organization.",
-    "content": "The traditional network security model relied on a secure perimeter: once inside the company network, users were trusted. Modern remote teams and cloud integrations make perimeter-based models obsolete. Zero Trust operates under the core motto: Never Trust, Always Verify.\n\nIdentity verification is the primary pillar of Zero Trust. Implement strict Multi-Factor Authentication (MFA) and tie access control to contextual factors like device health, location, and behavioral analysis.\n\nEnforce Least Privilege access rules. Users and microservices should only be granted permission to specific database cells or APIs required for their current tasks. Revoke permissions automatically when sessions terminate.\n\nImplement network micro-segmentation. Break your cloud network into isolated pockets so that even if one application gets compromised, lateral movement to internal databases is prevented.\n\nEncrypt all traffic at rest and in transit. Secure service-to-service communication with mutual TLS (mTLS) to verify that both sides of an API transaction are authorized and authenticated.\n\nZero Trust is a continuous engineering process, not a one-time product integration. By auditing user credentials and service authentications continuously, companies safeguard their IP against sophisticated cyber threats.",
+    "content": "The traditional network security model relied on a secure perimeter: once inside the company network, users were trusted. Modern remote teams and cloud integrations make perimeter-based models obsolete. Zero Trust operates under the core motto: Never Trust, Always Verify.\n\nIdentity verification is the primary pillar of Zero Trust. Implement strict Multi-Factor Authentication (MFA) and tie access control to contextual factors like device health, network origin, and behavioral analysis.\n\nEnforce Least Privilege access rules. Users and microservices should only be granted permission to specific database cells or APIs required for their current tasks. Revoke permissions automatically when sessions terminate.\n\nImplement network micro-segmentation. Break your cloud network into isolated pockets so that even if one application gets compromised, lateral movement to internal databases is prevented.\n\nEncrypt all traffic at rest and in transit. Secure service-to-service communication with mutual TLS (mTLS) to verify that both sides of an API transaction are authorized and authenticated.\n\nZero Trust is a continuous engineering process, not a one-time product integration. By auditing user credentials and service authentications continuously, companies safeguard their IP against sophisticated cyber threats.",
     "authorMeta": {
       "title": "Principal Security Director",
       "bio": "Focused on zero-trust cloud network engineering, identity lifecycle automation, and pentesting.",
@@ -1719,7 +1679,7 @@ export const blogData = {
           {
             "num": 1,
             "title": "Identity & Context Verification",
-            "desc": "Require identity checks linked to runtime indicators like user location, time parameters, and current device patch states.",
+            "desc": "Require identity checks linked to runtime indicators like user network origin, time parameters, and current device patch states.",
             "insight": "SECURITY TIP: Enforce conditional access policies that prompt for MFA during unusual logins."
           },
           {
@@ -2363,7 +2323,6 @@ export const careersData = [
     id: "sr-sre",
     title: "Senior Site Reliability Engineer",
     department: "Infrastructure / SRE",
-    location: "Remote",
     type: "Full-Time",
     experience: "5+ Years",
     summary: "We are looking for an SRE to scale our multi-cloud Kubernetes clusters, automate environments with Terraform, and optimize application latency.",
@@ -2384,7 +2343,6 @@ export const careersData = [
     id: "fs-engineer",
     title: "Full-Stack Software Engineer (React / Node.js)",
     department: "Software Engineering",
-    location: "Remote / Global",
     type: "Full-Time",
     experience: "3+ Years",
     summary: "Join us in building responsive user interfaces in React and secure microservices backends using Node.js.",
@@ -2405,7 +2363,6 @@ export const careersData = [
     id: "security-architect",
     title: "Information Security Architect",
     department: "Cybersecurity & Compliance",
-    location: "Remote",
     type: "Full-Time",
     experience: "6+ Years",
     summary: "Help secure our core infrastructure and consult clients on security compliance readiness.",
@@ -2426,7 +2383,6 @@ export const careersData = [
     id: "qa-automation",
     title: "QA Automation Engineer",
     department: "Quality Assurance",
-    location: "Remote",
     type: "Full-Time",
     experience: "3+ Years",
     summary: "Design, develop, and execute automated test scripts for our web applications and APIs.",
@@ -2447,7 +2403,6 @@ export const careersData = [
     id: "uiux-designer",
     title: "Lead UX/UI Designer",
     department: "Product Design",
-    location: "Remote",
     type: "Full-Time",
     experience: "5+ Years",
     summary: "Craft beautiful, user-centered product experiences and lead the visual design system.",
@@ -2468,7 +2423,6 @@ export const careersData = [
     id: "data-engineer",
     title: "Data Engineer",
     department: "Data & AI",
-    location: "Remote",
     type: "Full-Time",
     experience: "4+ Years",
     summary: "Build and maintain scalable data pipelines and real-time analytics platforms.",

@@ -663,7 +663,7 @@ export default function ResourcesPage() {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="Elena Rostova"
+                    placeholder="Sneha Jha"
                     className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-blue-600 focus:bg-white text-xs text-slate-900 outline-none placeholder-slate-400 transition-colors font-medium shadow-inner"
                   />
                 </div>
@@ -675,7 +675,7 @@ export default function ResourcesPage() {
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="elena@company.com"
+                    placeholder="sneha@company.com"
                     className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-blue-600 focus:bg-white text-xs text-slate-900 outline-none placeholder-slate-400 transition-colors font-medium shadow-inner"
                   />
                 </div>

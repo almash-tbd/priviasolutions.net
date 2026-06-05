@@ -224,7 +224,7 @@ export default function ApiIntegrationsPage() {
             >
               <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#1b203a] border border-[#2C5EAD]/30 text-xs font-bold text-[#4BB8FA] font-mono">
                 <Plug className="w-3.5 h-3.5 text-[#1591DC]" />
-                <span>🔌 API Design & Integrations</span>
+                <span>API Design & Integrations</span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.1] text-white">

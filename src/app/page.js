@@ -431,7 +431,7 @@ export default function Home() {
       id: 1,
       q: "Privia Solutions provided exceptional cloud setup and migrations. Their engineers solved our synchronization errors and did it with zero platform downtime.", 
       name: "Amit Desai", 
-      role: "VP of Product, E-Commerce Brand", 
+      role: "VP of Product", 
       glowClass: "glow-card-gold",
       stars: 5,
       initials: "AD",
@@ -441,7 +441,7 @@ export default function Home() {
       id: 2,
       q: "Their team rebuilt our medical booking system, securing patient logs and compliance audits efficiently. Extremely knowledgeable.", 
       name: "Sanjay Rao", 
-      role: "VP Engineering, Healthcare Platform", 
+      role: "VP of Engineering", 
       glowClass: "glow-card-teal",
       stars: 5,
       initials: "SR",
@@ -451,7 +451,7 @@ export default function Home() {
       id: 3,
       q: "Excellent experience working with them. They redesigned our entire payment processing architecture to support a massive volume increase.", 
       name: "Meera Iyer", 
-      role: "CTO, Digital Banking Platform", 
+      role: "CTO", 
       glowClass: "glow-card-purple",
       stars: 5,
       initials: "MI",
@@ -460,8 +460,8 @@ export default function Home() {
     { 
       id: 4,
       q: "The scroll stack animations are incredibly smooth. Privia Solutions helped us elevate our website design to a whole new premium level in just a few hours.", 
-      name: "Sarah Jenkins", 
-      role: "Lead Product Designer at Design Platform", 
+      name: "Sneha Jha", 
+      role: "Lead Product Designer", 
       glowClass: "glow-card-gold",
       stars: 5,
       initials: "SJ",
@@ -470,8 +470,8 @@ export default function Home() {
     { 
       id: 5,
       q: "Implementing infinite loops and interactive elements with vanilla JS has never been this clean. Excellent performance and zero layout thrashing.", 
-      name: "Alex Rivera", 
-      role: "Senior Frontend Engineer, DevTools Platform", 
+      name: "Alok Ranjan", 
+      role: "Senior Frontend Engineer", 
       glowClass: "glow-card-teal",
       stars: 5,
       initials: "AR",
@@ -480,8 +480,8 @@ export default function Home() {
     { 
       id: 6,
       q: "Our conversion rates increased by 22% after we refreshed our home page using these fluid motion designs. Highly recommended for modern SaaS websites.", 
-      name: "David Chen", 
-      role: "VP of Product, FinTech Enterprise", 
+      name: "Divya Choudhary", 
+      role: "VP of Product", 
       glowClass: "glow-card-purple",
       stars: 5,
       initials: "DC",
@@ -490,8 +490,8 @@ export default function Home() {
     { 
       id: 7,
       q: "The attention to minor details in typography, gradients, and micro-interactions makes a massive difference. Outstanding UI toolkit and support!", 
-      name: "Emily Watson", 
-      role: "Creative Director, Interactive Web Studio", 
+      name: "Esha Wagle", 
+      role: "Creative Director", 
       glowClass: "glow-card-gold",
       stars: 5,
       initials: "EW",
@@ -500,8 +500,8 @@ export default function Home() {
     { 
       id: 8,
       q: "We were skeptical about pure CSS performance on heavy pages, but Privia runs perfectly at 120 FPS even on lower-end mobile devices.", 
-      name: "Marcus Vance", 
-      role: "Tech Lead, Project Management SaaS", 
+      name: "Mohit Verma", 
+      role: "Tech Lead", 
       glowClass: "glow-card-teal",
       stars: 4,
       initials: "MV",
@@ -510,8 +510,8 @@ export default function Home() {
     { 
       id: 9,
       q: "The team has created something truly state-of-the-art here. The glassmorphism transitions are extremely crisp, modern, and perfectly robust.", 
-      name: "Hana Kobayashi", 
-      role: "Design Engineer, Core UI Systems", 
+      name: "Harsha Kamat", 
+      role: "Design Engineer", 
       glowClass: "glow-card-purple",
       stars: 5,
       initials: "HK",
@@ -520,8 +520,8 @@ export default function Home() {
     { 
       id: 10,
       q: "Setting this up was a breeze. We integrated the component structure into our NextJS project in under ten minutes with zero compilation errors.", 
-      name: "Oliver Larsen", 
-      role: "Frontend Lead, Cloud Platform Provider", 
+      name: "Omkar Lal", 
+      role: "Frontend Lead", 
       glowClass: "glow-card-gold",
       stars: 5,
       initials: "OL",
@@ -1318,7 +1318,6 @@ export default function Home() {
                         <div className="hc-cross">
                           <Heart className="w-5 h-5" />
                         </div>
-                        <span className="hc-badge">HIPAA COMPLIANT</span>
                       </div>
                       <h2 className="sector-custom-card-title text-white font-black">{solutionsData.healthcare.title}</h2>
                       <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.healthcare.description}</p>
@@ -1677,7 +1676,6 @@ export default function Home() {
                             <div className="hc-cross">
                               <Heart className="w-5 h-5" />
                             </div>
-                            <span className="hc-badge">HIPAA COMPLIANT</span>
                           </div>
                           <h2 className="sector-custom-card-title text-white font-black">{solutionsData.healthcare.title}</h2>
                           <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.healthcare.description}</p>

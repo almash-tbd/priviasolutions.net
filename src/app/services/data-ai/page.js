@@ -159,9 +159,9 @@ export default function DataAiPage() {
     "Epoch 4/5 - loss: 0.1205 - accuracy: 0.9612 - val_loss: 0.1480",
     "Epoch 5/5 - loss: 0.0824 - accuracy: 0.9845 - val_loss: 0.0988",
     "--------------------------------------------------",
-    "✔ Model evaluation parameters verified. Metric checks [PASS]",
-    "✔ Model artifact saved to s3://ai-models/recommender_v2.bin",
-    "✔ MLOps pipelines state: Model deployed successfully [SUCCESS]"
+    "Model evaluation parameters verified. Metric checks [PASS]",
+    "Model artifact saved to s3://ai-models/recommender_v2.bin",
+    "MLOps pipelines state: Model deployed successfully [SUCCESS]"
   ];
 
   useEffect(() => {
@@ -185,7 +185,7 @@ export default function DataAiPage() {
   const approachSteps = [
     {
       title: "Enter Basic Criteria",
-      desc: "Beginning with your age, gender, and location we can provide a comprehensive list of plans that are available."
+      desc: "Beginning with your basic criteria, we can provide a comprehensive list of solutions that are available."
     },
     {
       title: "Compare Options",
@@ -531,7 +531,7 @@ export default function DataAiPage() {
                     {activePillar === "mlOps" && (
                       <div className="font-mono text-[10px] text-slate-300 py-3 space-y-1 select-text">
                         {modelLogs.map((log, i) => (
-                          <div key={i} className={log.startsWith("✔") ? "text-emerald-400" : log.startsWith("guest@") ? "text-teal-400" : ""}>
+                          <div key={i} className={log.includes("[PASS]") || log.includes("[SUCCESS]") ? "text-emerald-400" : log.startsWith("guest@") ? "text-teal-400" : ""}>
                             {log}
                           </div>
                         ))}
@@ -1097,7 +1097,7 @@ export default function DataAiPage() {
                 {/* Intro Description text */}
                 <div className="space-y-2">
                   <p className="text-xs text-slate-500 leading-relaxed font-mono">
-                    💡 Explore our data pipelines and AI model deployments where we successfully turned raw data into scalable predictive engines and personalized user experiences.
+                    Explore our data pipelines and AI model deployments where we successfully turned raw data into scalable predictive engines and personalized user experiences.
                   </p>
                   <p className="text-xs text-slate-600 leading-relaxed">
                     Our team specializes in training machine learning models, setting up robust MLOps infrastructure, and optimizing real-time analytics throughput. Select a success story below to read how we resolved core data obstacles and achieved positive business results.

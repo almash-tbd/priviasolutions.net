@@ -806,7 +806,7 @@ export default function BlogPostClient({ post, slug, allBlogs }) {
                 type="submit"
                 className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white text-[10px] font-black uppercase tracking-wider rounded-lg shadow-sm transition-all"
               >
-                {subscribed ? "Subscribed ✓" : "Subscribe"}
+                {subscribed ? "Subscribed" : "Subscribe"}
               </button>
             </form>
           </div>

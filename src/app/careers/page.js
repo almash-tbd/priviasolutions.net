@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Briefcase, MapPin, Clock, ArrowRight, CheckCircle2, Globe, Cpu, LineChart, Shield, ChevronRight } from "lucide-react";
+import { Briefcase, Clock, ArrowRight, CheckCircle2, Globe, Cpu, LineChart, Shield, ChevronRight } from "lucide-react";
 import { careersData } from "@/data/siteData";
 
 export default function CareersPage() {
@@ -162,10 +162,6 @@ export default function CareersPage() {
                           <span className="flex items-center">
                             <Cpu className="w-3.5 h-3.5 mr-1.5 text-blue-600" />
                             {job.department}
-                          </span>
-                          <span className="flex items-center">
-                            <MapPin className="w-3.5 h-3.5 mr-1.5 text-blue-600" />
-                            {job.location}
                           </span>
                           <span className="flex items-center">
                             <Clock className="w-3.5 h-3.5 mr-1.5 text-blue-600" />
