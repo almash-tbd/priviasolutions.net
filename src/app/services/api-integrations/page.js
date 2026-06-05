@@ -2,12 +2,60 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   ArrowRight, Check, CheckCircle2, ChevronDown, Plug,
   Zap, Cpu, Sparkles, Database, Lock, Globe, ArrowUpRight, 
   Layers, Settings, Shield, Link2, Code, Terminal, Activity
 } from "lucide-react";
+
+const TechLogo = ({ name }) => {
+  const logos = {
+    "GraphQL": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 text-pink-600" fill="currentColor">
+        <path d="M12 2L2 7.7v11.4L12 22l10-5.7V7.7zM12 4.4l7.7 4.4L12 13.2 4.3 8.8zM4.3 16.4l7.7-4.4v8.8zM19.7 16.4l-7.7-4.4v8.8z"/>
+      </svg>
+    ),
+    "Multi-Cloud API Gateway": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="#3b82f6" strokeWidth="2" fill="#1e3a8a" fillOpacity="0.3" />
+        <path d="M7 12h10M12 7v10" stroke="#22d3ee" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    ),
+    "Apigee": (
+      <svg viewBox="0 0 256 256" className="w-8 h-8">
+        <rect width="256" height="256" rx="40" fill="#000000" />
+        <path d="M128 40c-48.6 0-88 39.4-88 88s39.4 88 88 88 88-39.4 88-88-39.4-88-88-88zm38.1 138.2l-38.1-22-38.1 22v-44l38.1-22 38.1 22v44zm0-66.2l-38.1-22-38.1 22v-44l38.1-22 38.1 22v44z" fill="#FF4E00" />
+      </svg>
+    ),
+    "Express": (
+      <svg viewBox="0 0 128 128" className="w-8 h-8 text-[#fff] bg-[#000] p-1.5 rounded-xl border border-white/10">
+        <text x="64" y="74" fill="white" fontSize="22" fontWeight="black" textAnchor="middle" letterSpacing="-1" fontFamily="sans-serif">EX</text>
+      </svg>
+    ),
+    "FastAPI": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" fill="#059669" />
+        <path d="M13 5L6 13h5v6l7-10h-5V5z" fill="#00f2fe" />
+      </svg>
+    ),
+    "Postman": (
+      <svg viewBox="0 0 256 256" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="128" cy="128" r="128" fill="#FF6C37" />
+        <path d="M165.7 137.9c16.3-16.3 16.3-42.8 0-59.2-16.3-16.3-42.8-16.3-59.2 0l-37.1 37.1c-16.3 16.3-16.3 42.8 0 59.2 16.3 16.3 42.8 16.3 59.2 0l37.1-37.1z" fill="#FFFFFF" />
+        <path d="M128 64c-35.3 0-64 28.7-64 64s28.7 64 64 64 64-28.7 64-64-28.7-64-64-64z" stroke="#FFFFFF" strokeWidth="12" />
+      </svg>
+    ),
+    "Swagger": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" fill="#85EA2D" />
+        <path d="M9 7c-1.1 0-2 .9-2 2v2c0 1.1.9 2 2 2h2v-2H9V9h4v6H9c-2.2 0-4-1.8-4-4V9c0-2.2 1.8-4 4-4h4V3H9zm6 10c1.1 0 2-.9 2-2v-2c0-1.1-.9-2-2-2h-2v2h2v2h-4V9h4c2.2 0 4 1.8 4 4v2c0 2.2-1.8 4-4 4h-4v2h4z" fill="#000000" />
+      </svg>
+    )
+  };
+  return logos[name] || <Cpu className="w-8 h-8 text-slate-400" />;
+};
 
 export default function ApiIntegrationsPage() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -591,7 +639,7 @@ export default function ApiIntegrationsPage() {
         </div>
       </section>
 
-      {/* 5. INTEGRATION PATTERNS */}
+      {/* 5. INTEGRATION PATTERNS (REDESIGNED: VERTICAL ACCORDION LIST) */}
       <section className="relative bg-gradient-to-b from-[#cddbf7] via-[#e2ecfa] to-[#f0f5fd] py-20 border-b border-black/5 text-slate-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
@@ -602,102 +650,90 @@ export default function ApiIntegrationsPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+          <div className="flex flex-col space-y-4 max-w-4xl mx-auto">
             {patterns.map((pat, idx) => {
-              const isActive = activePattern === idx;
+              const isOpen = activePattern === idx;
+              const patternImages = {
+                0: "/assets/images/patterns/pattern_rest.png",
+                1: "/assets/images/patterns/pattern_messaging.png",
+                2: "/assets/images/patterns/pattern_webhooks.png",
+                3: "/assets/images/patterns/pattern_graphql.png"
+              };
+              const patternDescs = {
+                0: "Establishes a direct, blocking connection between client and server. The client waits until the server processes the request and responds, ensuring immediate data consistency for real-time transactions.",
+                1: "Decouples message producers and consumers using an intermediary broker queue. The client sends a task and immediately continues its work, while background workers consume and process tasks asynchronously.",
+                2: "Enables event-driven push architecture where a source server registers client target endpoints and triggers HTTP POST requests to push updates immediately when specific events occur.",
+                3: "Aggregates multiple underlying microservices into a single GraphQL federated gateway schema. Clients query a single gateway endpoint to fetch data from different subgraphs transparently."
+              };
+
               return (
                 <div 
                   key={pat.title}
-                  onClick={() => setActivePattern(idx)}
-                  className={`p-6 rounded-2xl border transition-all duration-300 flex flex-col justify-between cursor-pointer select-none ${
-                    isActive 
-                      ? "bg-white border-[#2C5EAD] shadow-md shadow-[#2C5EAD]/10 scale-102"
-                      : "bg-white/70 border-slate-200/80 hover:border-slate-300 hover:shadow-sm"
+                  className={`rounded-2xl border transition-all duration-300 overflow-hidden bg-white/70 shadow-sm ${
+                    isOpen ? "border-blue-500 bg-white shadow-md" : "border-slate-200/80 hover:border-slate-350"
                   }`}
                 >
-                  <div className="space-y-2">
-                    <h4 className="text-base font-extrabold text-slate-900">{pat.title}</h4>
-                    <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest font-mono">Use Case</div>
-                    <p className="text-xs text-slate-600 leading-normal">{pat.useCase}</p>
-                  </div>
-                  <div className="border-t border-slate-100 pt-3 mt-4">
-                    <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest font-mono">Example</div>
-                    <span className="text-xs text-slate-800 font-bold">{pat.example}</span>
-                  </div>
+                  {/* Card Header (Click to Toggle) */}
+                  <button
+                    onClick={() => setActivePattern(isOpen ? null : idx)}
+                    className="w-full flex justify-between items-center p-6 text-left focus:outline-none cursor-pointer"
+                  >
+                    <div className="flex items-center gap-3.5">
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center border ${
+                        isOpen ? "bg-blue-600/10 border-blue-500 text-blue-600" : "bg-slate-100 border-slate-200 text-slate-500"
+                      }`}>
+                        <Plug className="w-4 h-4" />
+                      </div>
+                      <h4 className="text-base font-extrabold text-slate-900">{pat.title}</h4>
+                    </div>
+                    <ChevronDown className={`w-5 h-5 text-slate-500 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+                  </button>
+
+                  {/* Dropdown Content */}
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className="px-6 pb-6 pt-2 border-t border-slate-100 grid md:grid-cols-12 gap-6 items-center bg-slate-50/50">
+                          {/* Left text information */}
+                          <div className="md:col-span-7 space-y-4 text-left">
+                            <div>
+                              <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest font-mono">Use Case</span>
+                              <p className="text-xs text-slate-700 leading-normal font-semibold mt-0.5">{pat.useCase}</p>
+                            </div>
+                            
+                            <div>
+                              <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest font-mono">Example / Trigger</span>
+                              <p className="text-xs text-slate-700 leading-normal font-semibold mt-0.5">{pat.example}</p>
+                            </div>
+
+                            <div>
+                              <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest font-mono">Architectural Flow Description</span>
+                              <p className="text-xs text-slate-550 leading-relaxed mt-1">{patternDescs[idx]}</p>
+                            </div>
+                          </div>
+
+                          {/* Right schematic image */}
+                          <div className="md:col-span-5 flex items-center justify-center">
+                            <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-slate-250 bg-white shadow-sm p-1">
+                              <img 
+                                src={patternImages[idx]}
+                                alt={pat.title}
+                                className="w-full h-full object-contain"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               );
             })}
-          </div>
-
-          {/* Pattern Schematic Drawer Monitor */}
-          <div className="rounded-3xl bg-[#060b14] border border-white/5 p-8 text-white max-w-5xl mx-auto shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-4 font-mono text-[9px] text-[#4BB8FA] font-bold uppercase tracking-wider">
-              topology_schema::active
-            </div>
-            
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activePattern}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.25 }}
-                className="w-full flex flex-col items-center space-y-6"
-              >
-                <h4 className="text-base font-bold text-white font-mono flex items-center gap-2">
-                  <Code className="w-4 h-4 text-[#4BB8FA]" />
-                  {patterns[activePattern].title} Topology
-                </h4>
-
-                {/* Workflow schematics */}
-                <div className="w-full py-8 flex flex-col items-center justify-center font-mono text-[10px] text-slate-300 overflow-x-auto min-h-[90px] border border-white/5 rounded-2xl bg-slate-950/60 max-w-4xl">
-                  {activePattern === 0 && (
-                    <div className="flex items-center space-x-6 min-w-max px-6">
-                      <div className="px-4 py-2.5 rounded-lg bg-blue-950/40 border border-blue-500/30 text-blue-400 font-bold">Client UI</div>
-                      <span>───(HTTP GET)───►</span>
-                      <div className="px-4 py-2.5 rounded-lg bg-indigo-950/40 border border-indigo-500/30 text-indigo-400 font-bold">API Gateway</div>
-                      <span>───(Database Query)───►</span>
-                      <div className="px-4 py-2.5 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 font-bold">RDS Database</div>
-                    </div>
-                  )}
-
-                  {activePattern === 1 && (
-                    <div className="flex items-center space-x-6 min-w-max px-6">
-                      <div className="px-4 py-2.5 rounded-lg bg-blue-950/40 border border-blue-500/30 text-blue-400 font-bold">Client Action</div>
-                      <span>───(Push Event)───►</span>
-                      <div className="px-4 py-2.5 rounded-lg bg-amber-950/40 border border-amber-500/30 text-amber-400 font-bold">RabbitMQ Queue</div>
-                      <span>───(Consume Job)───►</span>
-                      <div className="px-4 py-2.5 rounded-lg bg-[#27163c] border-purple-500/30 text-purple-400 font-bold">Worker Engine</div>
-                    </div>
-                  )}
-
-                  {activePattern === 2 && (
-                    <div className="flex items-center space-x-6 min-w-max px-6">
-                      <div className="px-4 py-2.5 rounded-lg bg-[#381c1c] border-red-500/30 text-red-400 font-bold">Stripe Webhook</div>
-                      <span>───(HTTPS POST)───►</span>
-                      <div className="px-4 py-2.5 rounded-lg bg-cyan-950/40 border border-cyan-500/30 text-cyan-400 font-bold">Webhook endpoint</div>
-                      <span>───(Verify & Log)───►</span>
-                      <div className="px-4 py-2.5 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 font-bold">User Database</div>
-                    </div>
-                  )}
-
-                  {activePattern === 3 && (
-                    <div className="flex flex-col items-center space-y-4 px-6">
-                      <div className="flex items-center space-x-6">
-                        <div className="px-4 py-2.5 rounded-lg bg-blue-950/40 border border-blue-500/30 text-blue-400 font-bold">Client Post</div>
-                        <span>───(GraphQL Query)───►</span>
-                        <div className="px-4 py-2.5 rounded-lg bg-[#221028] border-fuchsia-500/30 text-fuchsia-400 font-bold">Apollo Federated Gate</div>
-                      </div>
-                      <div className="flex justify-center space-x-3 text-[9px] pt-1">
-                        <div className="px-3 py-1.5 rounded bg-slate-900 border border-white/5">Auth Microservice</div>
-                        <div className="px-3 py-1.5 rounded bg-slate-900 border border-white/5">Orders Microservice</div>
-                        <div className="px-3 py-1.5 rounded bg-slate-900 border border-white/5">Catalog Microservice</div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-            </AnimatePresence>
           </div>
         </div>
       </section>
@@ -826,10 +862,15 @@ export default function ApiIntegrationsPage() {
               {[...techStack, ...techStack, ...techStack].map((tech, idx) => (
                 <div 
                   key={idx} 
-                  className="p-5 bg-white border border-slate-200/80 rounded-2xl flex flex-col justify-center text-center shadow-sm w-44 flex-shrink-0"
+                  className="p-5 bg-white border border-slate-200/80 rounded-2xl flex flex-col justify-between text-center shadow-sm w-44 flex-shrink-0 group hover:shadow-lg hover:border-cyan-500/30 transition-all duration-300"
                 >
-                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block font-mono mb-1">{tech.category}</span>
-                  <span className="text-sm font-extrabold text-slate-800">{tech.name}</span>
+                  <div className="flex justify-between items-start mb-3">
+                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block font-mono">{tech.category}</span>
+                    <div className="w-8 h-8 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <TechLogo name={tech.name} />
+                    </div>
+                  </div>
+                  <span className="text-sm font-extrabold text-slate-800 text-left block mt-2 group-hover:text-[#2C5EAD] transition-colors">{tech.name}</span>
                 </div>
               ))}
             </motion.div>

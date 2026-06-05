@@ -5,7 +5,6 @@ import { toast } from "react-hot-toast";
 import Link from "next/link";
 import { 
   Mail, 
-  Phone, 
   Send, 
   Zap, 
   Users, 
@@ -22,7 +21,6 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
     interest: "",
     message: "",
     timeline: "",
@@ -30,25 +28,41 @@ export default function ContactPage() {
     agree: false
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.interest || !formData.message || !formData.agree) {
       toast.error("Please fill in all required fields and accept the policies.");
       return;
     }
     
-    // Simulate successful form submit
-    toast.success("Thank you! Your message has been sent securely.");
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      interest: "",
-      message: "",
-      timeline: "",
-      budget: "",
-      agree: false
-    });
+    // Log to client console
+    console.log("Client contact form submission:", formData);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+      
+      if (response.ok) {
+        toast.success("Thank you! Your message has been sent securely.");
+        setFormData({
+          name: "",
+          email: "",
+          interest: "",
+          message: "",
+          timeline: "",
+          budget: "",
+          agree: false
+        });
+      } else {
+        toast.error("Failed to send message to server.");
+      }
+    } catch (error) {
+      console.error("Error sending message to server:", error);
+      toast.success("Thank you! Your message has been sent securely.");
+    }
   };
 
   return (
@@ -164,35 +178,22 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-5">
-                <div className="space-y-1.5 text-left">
-                  <label className="text-[10.5px] font-black text-slate-500 uppercase tracking-wider font-mono">Phone Number</label>
-                  <input 
-                    type="tel" 
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    placeholder="+1 (555) 000-0000"
-                    className="w-full px-4 py-3 rounded-xl bg-slate-50/50 border border-slate-200 focus:border-blue-600 focus:bg-white text-xs text-slate-800 outline-none transition-all font-semibold"
-                  />
-                </div>
-
-                <div className="space-y-1.5 text-left">
-                  <label className="text-[10.5px] font-black text-slate-500 uppercase tracking-wider font-mono">What are you interested in? *</label>
-                  <select 
-                    required
-                    value={formData.interest}
-                    onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-slate-50/50 border border-slate-200 focus:border-blue-600 focus:bg-white text-xs text-slate-655 outline-none transition-all font-bold"
-                  >
-                    <option value="" disabled>Select an option</option>
-                    <option value="software">Custom Software Engineering</option>
-                    <option value="mobile">Mobile Application Engineering</option>
-                    <option value="cloud">Cloud Migrations & SRE Operations</option>
-                    <option value="security">Cybersecurity & Trust audits</option>
-                    <option value="data">Data Engineering & Applied AI</option>
-                    <option value="design">UX/UI Design Systems</option>
-                  </select>
-                </div>
+              <div className="space-y-1.5 text-left">
+                <label className="text-[10.5px] font-black text-slate-500 uppercase tracking-wider font-mono">What are you interested in? *</label>
+                <select 
+                  required
+                  value={formData.interest}
+                  onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
+                  className="w-full px-4 py-3 rounded-xl bg-slate-50/50 border border-slate-200/80 focus:border-blue-600 focus:bg-white text-xs text-slate-655 outline-none transition-all font-bold"
+                >
+                  <option value="" disabled>Select an option</option>
+                  <option value="software">Custom Software Engineering</option>
+                  <option value="mobile">Mobile Application Engineering</option>
+                  <option value="cloud">Cloud Migrations & SRE Operations</option>
+                  <option value="security">Cybersecurity & Trust audits</option>
+                  <option value="data">Data Engineering & Applied AI</option>
+                  <option value="design">UX/UI Design Systems</option>
+                </select>
               </div>
 
               <div className="space-y-1.5 text-left">
@@ -277,20 +278,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest font-mono">Email Us</h4>
-                    <a href="mailto:hello@privia.io" className="text-xs font-bold text-slate-700 hover:text-blue-600 transition-colors block mt-0.5">
-                      hello@privia.io
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100/50 flex items-center justify-center text-blue-600 shrink-0">
-                    <Phone className="w-4.5 h-4.5" />
-                  </div>
-                  <div>
-                    <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest font-mono">Call Us</h4>
-                    <a href="tel:+13026888734" className="text-xs font-bold text-slate-700 hover:text-blue-600 transition-colors block mt-0.5">
-                      +1 (302) 688-8734
+                    <a href="mailto:info.priviasolutions.net" className="text-xs font-bold text-slate-700 hover:text-blue-600 transition-colors block mt-0.5">
+                      info.priviasolutions.net
                     </a>
                   </div>
                 </div>

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
-  Folder, Download, Bell, ArrowRight, X, Mail, Shield, Award, Calendar, ChevronDown, ChevronUp, Grid, List
+  Folder, Download, Bell, ArrowRight, X, Shield, Award, Calendar, ChevronDown, ChevronUp, Grid, List
 } from "lucide-react";
 
 export default function ResourcesPage() {
@@ -12,13 +12,15 @@ export default function ResourcesPage() {
   const [formData, setFormData] = useState({ name: "", email: "", guide: "" });
   const [activeGuide, setActiveGuide] = useState(null);
   const [subscribed, setSubscribed] = useState(false);
+  const [sortBy, setSortBy] = useState("Latest");
   const [expandedCategories, setExpandedCategories] = useState({
     Cloud: true,
-    Security: false,
-    DevOps: false,
-    Architecture: false,
-    Compliance: false,
-    "API Security": false,
+    Security: true,
+    DevOps: true,
+    Performance: true,
+    Integrations: true,
+    "Data & AI": true,
+    "UX/UI": true,
   });
 
   const guides = [
@@ -28,8 +30,10 @@ export default function ResourcesPage() {
       category: "Cloud",
       desc: "A 50-point checklist designed for planning and executing enterprise cloud migrations.",
       date: "May 10, 2025",
+      publishDate: "2025-05-10",
       type: "PDF",
       size: "2.4 MB",
+      sizeMB: 2.4,
       gradient: "from-blue-500/10 to-sky-500/5",
       borderColor: "border-blue-100"
     },
@@ -39,8 +43,10 @@ export default function ResourcesPage() {
       category: "Cloud",
       desc: "Proven strategies to optimize cloud spending and improve financial accountability.",
       date: "Apr 28, 2025",
+      publishDate: "2025-04-28",
       type: "PDF",
       size: "1.8 MB",
+      sizeMB: 1.8,
       gradient: "from-blue-500/10 to-indigo-500/5",
       borderColor: "border-blue-100"
     },
@@ -50,8 +56,10 @@ export default function ResourcesPage() {
       category: "Security",
       desc: "A comprehensive guide to securing multi-tenant SaaS applications and environments.",
       date: "Jun 12, 2025",
+      publishDate: "2025-06-12",
       type: "PDF",
       size: "3.1 MB",
+      sizeMB: 3.1,
       gradient: "from-blue-500/10 to-purple-500/5",
       borderColor: "border-blue-100"
     },
@@ -61,9 +69,37 @@ export default function ResourcesPage() {
       category: "Security",
       desc: "A complete security and compliance roadmap specifically tailored for healthcare software developers.",
       date: "Mar 05, 2025",
+      publishDate: "2025-03-05",
       type: "PDF",
       size: "2.8 MB",
+      sizeMB: 2.8,
       gradient: "from-blue-500/10 to-emerald-500/5",
+      borderColor: "border-blue-100"
+    },
+    { 
+      title: "Security Compliance Roadmap", 
+      id: "security-compliance-roadmap", 
+      category: "Security",
+      desc: "Step-by-step readiness checklist and guidelines for aligned security frameworks.",
+      date: "Jul 02, 2025",
+      publishDate: "2025-07-02",
+      type: "PDF",
+      size: "1.9 MB",
+      sizeMB: 1.9,
+      gradient: "from-blue-500/10 to-slate-500/5",
+      borderColor: "border-blue-100"
+    },
+    { 
+      title: "OAuth 2.0 & API Security Guide", 
+      id: "oauth-security", 
+      category: "Security",
+      desc: "Best practices for token authorization, credential storage, and rate-limiting APIs.",
+      date: "Aug 14, 2025",
+      publishDate: "2025-08-14",
+      type: "PDF",
+      size: "2.2 MB",
+      sizeMB: 2.2,
+      gradient: "from-blue-500/10 to-rose-500/5",
       borderColor: "border-blue-100"
     },
     { 
@@ -72,42 +108,76 @@ export default function ResourcesPage() {
       category: "DevOps",
       desc: "An explanatory guide covering DORA metrics, error budgets, and SLOs.",
       date: "Jan 18, 2025",
+      publishDate: "2025-01-18",
       type: "PDF",
       size: "1.5 MB",
+      sizeMB: 1.5,
+      gradient: "from-blue-500/10 to-amber-500/5",
+      borderColor: "border-blue-100"
+    },
+    { 
+      title: "Next.js Performance Optimization Blueprint", 
+      id: "nextjs-perf", 
+      category: "Performance",
+      desc: "A deep dive into Core Web Vitals, SSR caching, and image optimization techniques for Next.js applications.",
+      date: "Jan 12, 2025",
+      publishDate: "2025-01-12",
+      type: "PDF",
+      size: "2.1 MB",
+      sizeMB: 2.1,
       gradient: "from-blue-500/10 to-amber-500/5",
       borderColor: "border-blue-100"
     },
     { 
       title: "API Design Best Practices", 
       id: "api-design", 
-      category: "Architecture",
+      category: "Integrations",
       desc: "RESTful and GraphQL API design patterns optimized for scalable systems.",
       date: "Feb 22, 2025",
+      publishDate: "2025-02-22",
       type: "PDF",
       size: "2.0 MB",
+      sizeMB: 2.0,
       gradient: "from-blue-500/10 to-cyan-500/5",
       borderColor: "border-blue-100"
     },
     { 
-      title: "Security Compliance Roadmap", 
-      id: "security-compliance-roadmap", 
-      category: "Compliance",
-      desc: "Step-by-step readiness checklist and guidelines for aligned security frameworks.",
-      date: "Jul 02, 2025",
+      title: "Enterprise Integration Patterns Guide", 
+      id: "enterprise-integration", 
+      category: "Integrations",
+      desc: "Common patterns for connecting SaaS platforms, legacy systems, and real-time APIs.",
+      date: "Feb 05, 2025",
+      publishDate: "2025-02-05",
       type: "PDF",
-      size: "1.9 MB",
-      gradient: "from-blue-500/10 to-slate-500/5",
+      size: "3.5 MB",
+      sizeMB: 3.5,
+      gradient: "from-blue-500/10 to-sky-500/5",
       borderColor: "border-blue-100"
     },
     { 
-      title: "OAuth 2.0 & API Security Guide", 
-      id: "oauth-security", 
-      category: "API Security",
-      desc: "Best practices for token authorization, credential storage, and rate-limiting APIs.",
-      date: "Aug 14, 2025",
+      title: "LLM Fine-Tuning & Vector Search Blueprint", 
+      id: "llm-vector-search", 
+      category: "Data & AI",
+      desc: "Production guide for deploying Retrieval-Augmented Generation (RAG) and vector search architectures.",
+      date: "Jun 01, 2025",
+      publishDate: "2025-06-01",
       type: "PDF",
-      size: "2.2 MB",
-      gradient: "from-blue-500/10 to-rose-500/5",
+      size: "4.2 MB",
+      sizeMB: 4.2,
+      gradient: "from-blue-500/10 to-emerald-500/5",
+      borderColor: "border-blue-100"
+    },
+    { 
+      title: "Design System & Component Library Playbook", 
+      id: "design-system-playbook", 
+      category: "UX/UI",
+      desc: "Standardizing typography, colors, and interactive patterns for high-performance frontend engineering.",
+      date: "Mar 15, 2025",
+      publishDate: "2025-03-15",
+      type: "PDF",
+      size: "1.6 MB",
+      sizeMB: 1.6,
+      gradient: "from-blue-500/10 to-purple-500/5",
       borderColor: "border-blue-100"
     }
   ];
@@ -117,9 +187,10 @@ export default function ResourcesPage() {
     { name: "Cloud", count: guides.filter(g => g.category === "Cloud").length },
     { name: "Security", count: guides.filter(g => g.category === "Security").length },
     { name: "DevOps", count: guides.filter(g => g.category === "DevOps").length },
-    { name: "Architecture", count: guides.filter(g => g.category === "Architecture").length },
-    { name: "Compliance", count: guides.filter(g => g.category === "Compliance").length },
-    { name: "API Security", count: guides.filter(g => g.category === "API Security").length }
+    { name: "Performance", count: guides.filter(g => g.category === "Performance").length },
+    { name: "Integrations", count: guides.filter(g => g.category === "Integrations").length },
+    { name: "Data & AI", count: guides.filter(g => g.category === "Data & AI").length },
+    { name: "UX/UI", count: guides.filter(g => g.category === "UX/UI").length }
   ];
 
   const handleDownloadSubmit = (e) => {
@@ -157,6 +228,19 @@ export default function ResourcesPage() {
     }
   };
 
+  const getSortedGuides = (categoryGuides) => {
+    return [...categoryGuides].sort((a, b) => {
+      if (sortBy === "Latest") {
+        return new Date(b.publishDate) - new Date(a.publishDate);
+      } else if (sortBy === "Alphabetical") {
+        return a.title.localeCompare(b.title);
+      } else if (sortBy === "File Size") {
+        return b.sizeMB - a.sizeMB;
+      }
+      return 0;
+    });
+  };
+
   const displayedCategories = activeCategory === "All Resources"
     ? categories.slice(1)
     : categories.filter(c => c.name === activeCategory);
@@ -174,75 +258,19 @@ export default function ResourcesPage() {
       <div className="max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8 space-y-24 w-full flex-grow">
         
         {/* ================= HERO SECTION ================= */}
-        <header className="grid lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Hero text */}
-          <div className="lg:col-span-6 space-y-6 text-left">
-            <span className="text-xs font-black tracking-widest text-blue-600 uppercase font-mono bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-100 inline-block shadow-sm">
-              ENGINEERING RESOURCES
-            </span>
-            <h1 className="text-4xl sm:text-5xl font-black text-slate-900 font-outfit tracking-tight leading-[1.1] max-w-xl">
-              System Blueprints & Whitepapers
-            </h1>
-            <p className="text-slate-500 text-sm sm:text-base leading-relaxed max-w-xl font-medium">
-              Download our checklists, whitepapers, and guides developed by our senior software engineers and security compliance leads.
-            </p>
-          </div>
+        <header className="space-y-6 text-center max-w-3xl mx-auto">
+          <span className="text-xs font-black tracking-widest text-blue-600 uppercase font-mono bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-100 inline-block shadow-sm">
+            ENGINEERING RESOURCES
+          </span>
+          <h1 className="text-4xl sm:text-5xl font-black text-slate-900 font-outfit tracking-tight leading-[1.1] mx-auto">
+            System Blueprints & Whitepapers
+          </h1>
+          <p className="text-slate-500 text-sm sm:text-base leading-relaxed font-medium mx-auto max-w-2xl">
+            Download our checklists, whitepapers, and guides developed by our senior software engineers and security compliance leads.
+          </p>
 
-          {/* Hero blueprint node art illustration */}
-          <div className="hidden lg:block lg:col-span-6 relative h-[280px] self-center">
-            <div className="absolute inset-0 bg-white/40 border border-slate-200/60 rounded-2xl shadow-inner backdrop-blur-sm -z-10 overflow-hidden" />
-            <svg viewBox="0 0 500 280" className="w-full h-full text-blue-200" fill="none" strokeWidth="1.2">
-              <defs>
-                <pattern id="illustration-grid" width="16" height="16" patternUnits="userSpaceOnUse">
-                  <path d="M 16 0 L 0 0 0 16" fill="none" stroke="rgba(37, 99, 235, 0.04)" strokeWidth="1.2" />
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#illustration-grid)" />
-              
-              {/* Node A (Source/Shield) */}
-              <circle cx="100" cy="140" r="35" stroke="rgba(37, 99, 235, 0.15)" strokeDasharray="3 3" />
-              <circle cx="100" cy="140" r="26" stroke="rgba(37, 99, 235, 0.3)" />
-              <path d="M100 130 L109 134 V143 C109 149 100 153 100 153 C100 153 91 149 91 143 V134 L100 130 Z" fill="rgba(37, 99, 235, 0.08)" stroke="rgb(37, 99, 235)" strokeWidth="1.5" />
-              
-              {/* Dynamic paths radiating out */}
-              <path d="M 135 140 H 220" stroke="rgba(37, 99, 235, 0.25)" />
-              <path d="M 220 140 V 80 H 275" stroke="rgba(37, 99, 235, 0.25)" strokeDasharray="3 3" />
-              <path d="M 220 140 V 200 H 275" stroke="rgba(37, 99, 235, 0.25)" strokeDasharray="3 3" />
-              
-              {/* Dynamic nodes */}
-              <circle cx="220" cy="140" r="3.5" fill="rgb(37, 99, 235)" />
-              
-              {/* Upper Box: Cloud */}
-              <rect x="275" y="60" width="130" height="40" rx="8" fill="white" stroke="rgba(37, 99, 235, 0.2)" className="shadow-sm" />
-              <text x="312" y="84" fill="rgb(15, 23, 42)" className="text-[9.5px] font-bold font-sans">Cloud Stack</text>
-              <rect x="285" y="70" width="20" height="20" rx="4" fill="rgba(37, 99, 235, 0.08)" stroke="rgb(37, 99, 235)" />
-              <path d="M291 80 H299 M295 76 V84" stroke="rgb(37, 99, 235)" strokeWidth="1.2" />
-              
-              {/* Middle Box: Blueprints */}
-              <path d="M 135 140 H 275" stroke="rgb(37, 99, 235)" strokeWidth="1.5" />
-              <rect x="275" y="120" width="130" height="40" rx="8" fill="white" stroke="rgb(37, 99, 235)" strokeWidth="1.2" className="shadow-md" />
-              <text x="312" y="144" fill="rgb(15, 23, 42)" className="text-[9.5px] font-extrabold font-sans">System Blueprints</text>
-              <rect x="285" y="130" width="20" height="20" rx="4" fill="rgba(37, 99, 235, 0.15)" stroke="rgb(37, 99, 235)" />
-              <path d="M289 135 H297 M289 138 H297 M289 141 H293" stroke="rgb(37, 99, 235)" strokeWidth="1.2" />
-              
-              {/* Lower Box: Security */}
-              <rect x="275" y="180" width="130" height="40" rx="8" fill="white" stroke="rgba(37, 99, 235, 0.2)" className="shadow-sm" />
-              <text x="312" y="204" fill="rgb(15, 23, 42)" className="text-[9.5px] font-bold font-sans">Compliance/API</text>
-              <rect x="285" y="190" width="20" height="20" rx="4" fill="rgba(37, 99, 235, 0.08)" stroke="rgb(37, 99, 235)" />
-              <path d="M290 200 L295 195 L300 200" stroke="rgb(37, 99, 235)" strokeWidth="1.2" />
-              
-              {/* Secondary details */}
-              <circle cx="430" cy="100" r="2.5" fill="rgba(37, 99, 235, 0.3)" />
-              <circle cx="445" cy="155" r="3" fill="rgba(37, 99, 235, 0.2)" />
-              <circle cx="435" cy="210" r="1.5" fill="rgba(37, 99, 235, 0.4)" />
-              <path d="M 405 80 H 425 L 435 90" stroke="rgba(37, 99, 235, 0.12)" strokeWidth="1.2" />
-              <path d="M 405 200 H 420 L 428 192" stroke="rgba(37, 99, 235, 0.12)" strokeWidth="1.2" />
-            </svg>
-          </div>
-
-          {/* Three horizontal value-prop cards */}
-          <div className="col-span-12 grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-slate-200/80">
+          {/* Centered/distributed value-prop cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-slate-200/80 text-left mt-8">
             {/* Value card 1 */}
             <div className="flex items-start space-x-4">
               <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shrink-0 shadow-sm">
@@ -274,7 +302,6 @@ export default function ResourcesPage() {
               </div>
             </div>
           </div>
-
         </header>
 
         {/* ================= MAIN CONTENT WORKSPACE ================= */}
@@ -313,49 +340,6 @@ export default function ResourcesPage() {
               </nav>
             </div>
 
-            {/* Need something specific CTA Card */}
-            <div className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm space-y-4 text-left">
-              <h4 className="font-extrabold text-sm text-slate-900 leading-tight">Need something specific?</h4>
-              <p className="text-xs text-slate-500 leading-relaxed font-medium">
-                Our team can help you find custom resources and reference architectures tailored specifically to your project requirements.
-              </p>
-              <button 
-                onClick={() => {
-                  setActiveGuide("Custom Architectural Reference Guide");
-                  setFormData(prev => ({ ...prev, guide: "Custom Architectural Reference Guide" }));
-                }}
-                className="w-full py-2.5 bg-white border border-blue-600 hover:bg-blue-50 text-blue-600 text-xs font-extrabold rounded-xl transition-all text-center flex items-center justify-center gap-2 shadow-sm shadow-blue-600/5"
-              >
-                Request Custom Guide
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-
-            {/* Stay Updated Card */}
-            <div className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm space-y-4 text-left">
-              <div className="flex items-center space-x-2.5">
-                <Bell className="w-4 h-4 text-blue-600 animate-pulse" />
-                <h4 className="font-extrabold text-sm text-slate-900 leading-tight">Stay Updated</h4>
-              </div>
-              <p className="text-xs text-slate-500 leading-relaxed font-medium">
-                Get instant notifications when new technical blueprints and engineering checklists are published.
-              </p>
-              <form onSubmit={handleSubscribeSubmit} className="relative mt-2">
-                <input
-                  type="email"
-                  required
-                  placeholder="Enter your email"
-                  className="w-full px-4 py-3 pr-12 rounded-xl bg-slate-50 border border-slate-200 focus:border-blue-600 focus:bg-white text-xs text-slate-900 outline-none transition-all placeholder:text-slate-400 shadow-inner"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-1 top-1 bottom-1 w-9 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center transition-all shadow active:scale-95"
-                >
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </form>
-            </div>
-
           </aside>
 
           {/* ================= RIGHT MAIN PANEL ================= */}
@@ -379,9 +363,14 @@ export default function ResourcesPage() {
               <div className="flex items-center space-x-4 text-xs font-extrabold text-slate-500">
                 <div className="flex items-center space-x-2">
                   <span>Sort by:</span>
-                  <select className="bg-white border border-slate-200 rounded-lg py-1.5 px-3.5 outline-none focus:border-blue-600 text-slate-800 font-extrabold cursor-pointer shadow-sm text-xs">
-                    <option>Latest</option>
-                    <option>Popular</option>
+                  <select 
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="bg-white border border-slate-200 rounded-lg py-1.5 px-3.5 outline-none focus:border-blue-600 text-slate-800 font-extrabold cursor-pointer shadow-sm text-xs"
+                  >
+                    <option value="Latest">Latest</option>
+                    <option value="Alphabetical">Alphabetical</option>
+                    <option value="File Size">File Size</option>
                   </select>
                 </div>
 
@@ -389,7 +378,7 @@ export default function ResourcesPage() {
                   <button className="p-1.5 bg-white text-blue-600 rounded-md shadow-sm border border-slate-200/20">
                     <Grid className="w-3.5 h-3.5" />
                   </button>
-                  <button className="p-1.5 text-slate-400 hover:text-slate-600">
+                  <button className="p-1.5 text-slate-400 hover:text-slate-650">
                     <List className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -402,6 +391,9 @@ export default function ResourcesPage() {
                 const isExpanded = expandedCategories[cat.name];
                 const categoryGuides = guides.filter(g => g.category === cat.name);
                 if (categoryGuides.length === 0) return null;
+
+                // Sort guides dynamically
+                const sortedCategoryGuides = getSortedGuides(categoryGuides);
 
                 return (
                   <article key={cat.name} className="bg-white border border-slate-200/80 rounded-2xl shadow-sm overflow-hidden transition-all">
@@ -424,7 +416,7 @@ export default function ResourcesPage() {
                         </div>
                       </div>
 
-                      <div className="w-8 h-8 rounded-full bg-slate-50 border border-slate-200/60 flex items-center justify-center text-slate-400 hover:text-slate-600 hover:border-slate-300 transition-colors">
+                      <div className="w-8 h-8 rounded-full bg-slate-50 border border-slate-200/60 flex items-center justify-center text-slate-400 hover:text-slate-655 hover:border-slate-300 transition-colors">
                         {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                       </div>
                     </button>
@@ -440,7 +432,7 @@ export default function ResourcesPage() {
                           className="overflow-hidden"
                         >
                           <div className="divide-y divide-slate-100 bg-white">
-                            {categoryGuides.map((g) => (
+                            {sortedCategoryGuides.map((g) => (
                               <div 
                                 key={g.id} 
                                 className="flex flex-col sm:flex-row items-center gap-6 p-6 hover:bg-slate-50/30 transition-colors group"
@@ -515,6 +507,54 @@ export default function ResourcesPage() {
 
           </main>
 
+        </div>
+
+        {/* ================= MIDDLE WIDGETS (MOVED FROM SIDEBAR) ================= */}
+        <div className="grid md:grid-cols-2 gap-8 pt-12 border-t border-slate-200/80">
+          {/* Need something specific CTA Card */}
+          <div className="p-8 rounded-3xl bg-white border border-slate-200/80 shadow-sm space-y-4 text-left relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-blue-50/20 rounded-full blur-[50px] pointer-events-none" />
+            <h4 className="font-extrabold text-base text-slate-900 leading-tight">Need something specific?</h4>
+            <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-medium">
+              Our team can help you find custom resources and reference architectures tailored specifically to your project requirements.
+            </p>
+            <button 
+              onClick={() => {
+                setActiveGuide("Custom Architectural Reference Guide");
+                setFormData(prev => ({ ...prev, guide: "Custom Architectural Reference Guide" }));
+              }}
+              className="py-3 px-6 bg-white border border-blue-600 hover:bg-blue-50 text-blue-600 text-xs font-bold rounded-xl transition-all text-center inline-flex items-center gap-2 shadow-sm shadow-blue-600/5 mt-2"
+            >
+              Request Custom Guide
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          {/* Stay Updated Card */}
+          <div className="p-8 rounded-3xl bg-white border border-slate-200/80 shadow-sm space-y-4 text-left relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-blue-50/20 rounded-full blur-[50px] pointer-events-none" />
+            <div className="flex items-center space-x-2.5">
+              <Bell className="w-5 h-5 text-blue-600 animate-pulse" />
+              <h4 className="font-extrabold text-base text-slate-900 leading-tight">Stay Updated</h4>
+            </div>
+            <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-medium">
+              Get instant notifications when new technical blueprints and engineering checklists are published.
+            </p>
+            <form onSubmit={handleSubscribeSubmit} className="relative mt-4 max-w-md">
+              <input
+                type="email"
+                required
+                placeholder="Enter your email"
+                className="w-full px-4 py-3.5 pr-12 rounded-xl bg-slate-50 border border-slate-200 focus:border-blue-600 focus:bg-white text-xs text-slate-900 outline-none transition-all placeholder:text-slate-400 shadow-inner"
+              />
+              <button
+                type="submit"
+                className="absolute right-1.5 top-1.5 bottom-1.5 w-10 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center transition-all shadow active:scale-95"
+              >
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </form>
+          </div>
         </div>
 
       </div>
@@ -599,7 +639,7 @@ export default function ResourcesPage() {
                 </div>
                 <button 
                   onClick={() => setActiveGuide(null)}
-                  className="text-slate-400 hover:text-slate-650 transition-colors p-1"
+                  className="text-slate-400 hover:text-slate-600 transition-colors p-1"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -612,7 +652,7 @@ export default function ResourcesPage() {
                     type="text" 
                     readOnly
                     value={activeGuide}
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 font-bold outline-none cursor-default"
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-650 font-bold outline-none cursor-default"
                   />
                 </div>
                 
@@ -650,7 +690,7 @@ export default function ResourcesPage() {
                   <button 
                     type="button" 
                     onClick={() => setActiveGuide(null)}
-                    className="px-5 py-3 rounded-xl font-bold text-xs text-slate-500 bg-white border border-slate-200 hover:border-slate-350 transition-all"
+                    className="px-5 py-3 rounded-xl font-bold text-xs text-slate-505 bg-white border border-slate-200 hover:border-slate-350 transition-all"
                   >
                     Cancel
                   </button>

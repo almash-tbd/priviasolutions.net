@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   ArrowRight, Check, CheckCircle2, ChevronDown, Shield, 
@@ -98,22 +99,26 @@ export default function CybersecurityPage() {
     {
       title: "Security Standards",
       desc: "Compliance mapping and preparation audits.",
-      badge: "Security Standard Support"
+      badge: "Security Standard Support",
+      image: "/assets/images/services/compliance_standards.png"
     },
     {
       title: "Data Protection",
       desc: "Privacy assessments, data flow mappings, and privacy regulation readiness.",
-      badge: "Data Privacy Compliance"
+      badge: "Data Privacy Compliance",
+      image: "/assets/images/services/compliance_data.png"
     },
     {
       title: "Healthcare Security",
       desc: "Secure medical infrastructure designs and patient PHI secure vaulting.",
-      badge: "Healthcare Data Handling"
+      badge: "Healthcare Data Handling",
+      image: "/assets/images/services/compliance_healthcare.png"
     },
     {
       title: "Security Management",
       desc: "Setting up information security management systems.",
-      badge: "Security Frameworks"
+      badge: "Security Frameworks",
+      image: "/assets/images/services/compliance_management.png"
     }
   ];
 
@@ -121,24 +126,44 @@ export default function CybersecurityPage() {
     {
       title: "Service Management",
       desc: "Securing operations & services end-to-end with proactive risk and compliance controls.",
+      bullets: [
+        "Continuous compliance checks",
+        "Change control governance",
+        "Unified risk mitigation audits"
+      ],
       icon: ShieldCheck,
       detailType: "wave"
     },
     {
       title: "Access Control",
       desc: "Enforcing least privilege, strong authentication & authorization across all systems.",
+      bullets: [
+        "Zero-Trust IAM boundaries",
+        "Multi-Factor Auth (MFA)",
+        "Least-privilege credentials"
+      ],
       icon: Lock,
       detailType: "user"
     },
     {
       title: "Strong Encryption",
       desc: "Protecting data in transit and at rest with industry-standard encryption methods.",
+      bullets: [
+        "AES-256 database storage",
+        "TLS 1.3 transport tunnels",
+        "KMS key rotation schedules"
+      ],
       icon: RefreshCw,
       detailType: "padlock"
     },
     {
       title: "Active Monitoring",
       desc: "Continuous monitoring, real-time alerts & rapid response for uninterrupted security.",
+      bullets: [
+        "24/7 SIEM log aggregation",
+        "WAF anomaly tracking",
+        "Instant incident paging"
+      ],
       icon: Eye,
       detailType: "chart"
     }
@@ -424,11 +449,22 @@ export default function CybersecurityPage() {
             {complianceStandards.map((std) => (
               <div 
                 key={std.title}
-                className="p-6 rounded-2xl bg-slate-950/40 border border-white/5 hover:border-red-500/30 transition-all flex flex-col justify-between"
+                className="p-5 rounded-2xl bg-slate-950/80 border border-white/5 hover:border-red-500/30 transition-all flex flex-col justify-between overflow-hidden group shadow-lg"
               >
-                <div className="space-y-3">
-                  <h4 className="text-sm font-bold text-white">{std.title}</h4>
-                  <p className="text-xs text-slate-400 leading-relaxed">{std.desc}</p>
+                <div className="space-y-4">
+                  {/* Image container */}
+                  <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-slate-900 border border-white/5">
+                    <Image 
+                      src={std.image} 
+                      alt={std.title} 
+                      fill 
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="text-sm font-bold text-white group-hover:text-red-400 transition-colors">{std.title}</h4>
+                    <p className="text-xs text-slate-400 leading-relaxed">{std.desc}</p>
+                  </div>
                 </div>
                 <div className="border-t border-white/5 pt-3 mt-4 text-[9px] text-red-400 font-mono">
                   {std.badge}
@@ -487,7 +523,7 @@ export default function CybersecurityPage() {
               return (
                 <div 
                   key={bp.title}
-                  className="bg-white border border-slate-200 shadow-md hover:border-slate-300 hover:shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[250px] text-center rounded-3xl p-6 relative overflow-hidden group"
+                  className="bg-white border border-slate-200 shadow-md hover:border-slate-350 hover:shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[380px] text-center rounded-3xl p-8 relative overflow-hidden group"
                 >
                   <div className="space-y-4 flex flex-col items-center">
                     {/* Ring Icon */}
@@ -497,12 +533,23 @@ export default function CybersecurityPage() {
                       </div>
                     </div>
 
-                    <h4 className="text-sm font-extrabold text-slate-900 font-sans">{bp.title}</h4>
+                    <h4 className="text-base font-extrabold text-slate-900 font-sans">{bp.title}</h4>
                     
                     {/* Red divider */}
-                    <div className="w-6 h-0.5 bg-red-500 mx-auto my-1" />
+                    <div className="w-8 h-0.5 bg-red-500 mx-auto my-2" />
 
-                    <p className="text-slate-500 text-[11px] leading-relaxed max-w-[200px]">{bp.desc}</p>
+                    <p className="text-slate-600 text-xs sm:text-[13px] leading-relaxed max-w-xs">{bp.desc}</p>
+                  </div>
+
+                  <div className="border-t border-slate-100 pt-5 mt-5 w-full flex flex-col items-center">
+                    <ul className="space-y-2.5 text-left w-fit max-w-xs mx-auto">
+                      {bp.bullets.map((b) => (
+                        <li key={b} className="flex items-start text-xs text-slate-700 leading-relaxed">
+                          <CheckCircle2 className="w-4 h-4 mr-2.5 text-red-500 flex-shrink-0 mt-0.5" />
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
                   {/* Custom bottom vector backgrounds */}
@@ -670,94 +717,36 @@ export default function CybersecurityPage() {
             <h3 className="text-3xl font-extrabold tracking-tight text-slate-900">Security Integration Process</h3>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-8 items-stretch max-w-6xl mx-auto">
-            {/* Left Column: 2x2 Grid of process cards */}
-            <div className="lg:col-span-8 grid sm:grid-cols-2 gap-6">
-              {processSteps.map((step, idx) => {
-                const isActive = activeStep === idx;
-                return (
-                  <div
-                    key={step.title}
-                    onMouseEnter={() => setActiveStep(idx)}
-                    className={`p-6 rounded-2xl border transition-all duration-300 relative group flex flex-col justify-between cursor-pointer overflow-hidden ${
-                      isActive
-                        ? "bg-slate-950 border-red-500/80 text-white shadow-xl shadow-red-500/10 scale-[1.02]"
-                        : "bg-white border border-slate-300 shadow-md hover:border-slate-400 hover:bg-slate-50/70 text-slate-950"
-                    }`}
-                  >
-                    {/* Laser Scanner top border for active card */}
-                    {isActive && (
-                      <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-red-600 to-orange-500" />
-                    )}
-
-                    <div className="space-y-4">
-                      <h4 className={`text-sm font-black uppercase tracking-wider font-mono flex items-center justify-between ${
-                        isActive ? "text-red-400" : "text-slate-900"
-                      }`}>
-                        <span>0{idx + 1} {step.title}</span>
-                        {isActive && <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping" />}
-                      </h4>
-                      <ul className="space-y-2.5">
-                        {step.bullets.map((b) => (
-                          <li key={b} className="flex items-start text-xs leading-normal">
-                            <Check className={`w-4 h-4 mr-2.5 flex-shrink-0 mt-0.5 transition-transform duration-200 group-hover:translate-x-0.5 ${
-                              isActive ? "text-red-400" : "text-red-600"
-                            }`} />
-                            <span className={isActive ? "text-slate-300" : "text-slate-700"}>{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Right Column: Live Telemetry Terminal Console */}
-            <div className="lg:col-span-4 flex flex-col">
-              <div className="p-6 rounded-3xl bg-[#090b16] border border-white/10 flex flex-col justify-between relative overflow-hidden h-full min-h-[320px] font-mono shadow-2xl">
-                {/* Accent glow background */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(239,68,68,0.03),transparent_70%)] pointer-events-none" />
-                
-                <div className="space-y-4 relative z-10 w-full flex flex-col h-full justify-between">
-                  {/* Terminal Header */}
-                  <div className="flex justify-between items-center pb-3 border-b border-white/5 text-[9px] text-red-400 font-bold uppercase tracking-wider">
-                    <div className="flex items-center gap-1.5">
-                      <Terminal className="w-3.5 h-3.5 text-red-500" />
-                      <span>sec-telemetry::live</span>
-                    </div>
-                    <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                  </div>
-                  
-                  {/* Console lines display */}
-                  <div className="flex-grow flex flex-col justify-start text-[10px] text-slate-350 py-3 space-y-1.5 select-text min-h-[190px]">
-                    {terminalLogs.map((log, i) => {
-                      let colorClass = "text-slate-350";
-                      if (log.startsWith("✔")) {
-                        colorClass = "text-emerald-400 font-bold";
-                      } else if (log.startsWith("guest@")) {
-                        colorClass = "text-teal-400";
-                      } else if (log.includes("[WARN]")) {
-                        colorClass = "text-amber-400";
-                      } else if (log.includes("[INFO]")) {
-                        colorClass = "text-slate-400";
-                      }
-                      return (
-                        <div key={i} className={colorClass}>
-                          {log}
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  {/* Terminal Footer */}
-                  <div className="border-t border-white/5 pt-3 text-[9px] text-slate-500 uppercase tracking-widest flex justify-between">
-                    <span>AUDIT STATUS: ONLINE</span>
-                    <span>LOGS: 100% OK</span>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {processSteps.map((step, idx) => (
+              <motion.div
+                key={step.title}
+                initial={{ opacity: 0, x: idx % 2 === 0 ? -60 : 60 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ 
+                  type: "spring",
+                  stiffness: 70,
+                  damping: 15,
+                  delay: idx * 0.1 
+                }}
+                className="p-6 rounded-2xl border transition-all duration-300 relative group flex flex-col justify-between bg-white border-slate-350 shadow-md hover:border-red-500/50 hover:shadow-lg hover:scale-[1.02] text-slate-950"
+              >
+                <div className="space-y-4">
+                  <h4 className="text-sm font-black uppercase tracking-wider font-mono flex items-center justify-between text-slate-900 group-hover:text-red-600 transition-colors">
+                    <span>0{idx + 1} {step.title}</span>
+                  </h4>
+                  <ul className="space-y-2.5">
+                    {step.bullets.map((b) => (
+                      <li key={b} className="flex items-start text-xs leading-normal">
+                        <Check className="w-4 h-4 mr-2.5 flex-shrink-0 mt-0.5 text-red-600 group-hover:scale-110 transition-transform" />
+                        <span className="text-slate-700">{b}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

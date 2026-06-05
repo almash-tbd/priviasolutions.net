@@ -97,24 +97,10 @@ export default function Footer() {
           </div>
           
           <div className="flex flex-wrap items-center gap-6 text-sm text-slate-200">
-            <a href="mailto:info@priviasolutions.com" className="flex items-center space-x-2 hover:text-[#4BB8FA] transition-colors">
+            <a href="mailto:info.priviasolutions.net" className="flex items-center space-x-2 hover:text-[#4BB8FA] transition-colors">
               <Mail className="w-4 h-4 text-[#4BB8FA]" />
-              <span>info@priviasolutions.com</span>
+              <span>info.priviasolutions.net</span>
             </a>
-            <div className="flex items-center space-x-4 ml-2">
-              <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" className="p-2 rounded-lg bg-white/5 border border-white/10 hover:border-[#4BB8FA]/50 text-slate-300 hover:text-[#4BB8FA] transition-all" aria-label="Instagram Profile">
-                <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-                </svg>
-              </a>
-              <a href="https://www.facebook.com/" target="_blank" rel="noreferrer" className="p-2 rounded-lg bg-white/5 border border-white/10 hover:border-[#4BB8FA]/50 text-slate-300 hover:text-[#4BB8FA] transition-all" aria-label="Facebook Page">
-                <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-                </svg>
-              </a>
-            </div>
           </div>
         </div>
 
@@ -144,7 +130,7 @@ export default function Footer() {
         {/* Footer bottom */}
         <div className="flex flex-col sm:flex-row items-center justify-between border-t border-white/10 pt-8 gap-4">
           <p className="text-[11px] text-slate-300 tracking-wide text-center sm:text-left">
-            &copy; {new Date().getFullYear()} Privia Solutions. All rights reserved.
+            &copy; 2012-{new Date().getFullYear()} Privia Solutions. All rights reserved.
           </p>
           <div className="flex items-center space-x-4 text-[11px] text-slate-300">
             <Link href="/" className="hover:text-[#4BB8FA] transition-colors">Privia Solutions official website</Link>

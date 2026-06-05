@@ -10,6 +10,86 @@ import {
   Activity, Users, FileText, Eye, TrendingUp, ShieldCheck
 } from "lucide-react";
 
+const TechLogo = ({ name }) => {
+  const logos = {
+    "Python": (
+      <svg viewBox="0 0 110 110" className="w-8 h-8">
+        <path fill="#3776AB" d="M55 2C42.8 2 31.8 5.7 31.8 17.5v8.7h23.7v3.3H23.5C11.3 29.5 2 36.8 2 49v17.5C2 78.7 11.3 88 23.5 88h8.7V79.2c0-11.8 9.3-21.1 21.6-21.1h23.7V39.4C77.5 27.2 68.2 17.5 56 17.5H45.7v8.7h8.7c6.1 0 11-4.9 11-11v-4.3C65.4 3 58 2 55 2z"/>
+        <path fill="#FFE873" d="M55 108c12.2 0 23.2-3.7 23.2-15.5v-8.7H54.5v-3.3h32c12.2 0 21.5-7.3 21.5-19.5V49c0-12.2-9.3-21.5-21.5-21.5h-8.7v8.8c0 11.8-9.3 21.1-21.6 21.1H32.5v18.7c0 12.2 9.3 21.9 21.5 21.9h11.8v-8.7h-8.7c-6.1 0-11 4.9-11 11v4.3c0 6.1 7.4 7.1 10.4 7.1z"/>
+      </svg>
+    ),
+    "Apache Airflow": (
+      <svg viewBox="0 0 256 256" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="256" height="256" rx="40" fill="#011627" />
+        <path d="M128 40c-48.6 0-88 39.4-88 88s39.4 88 88 88 88-39.4 88-88-39.4-88-88-88zm38.1 138.2l-38.1-22-38.1 22v-44l38.1-22 38.1 22v44zm0-66.2l-38.1-22-38.1 22v-44l38.1-22 38.1 22v44z" fill="#00B1FF" />
+        <path d="M128 128m-20 0a20 20 0 1 0 40 0a20 20 0 1 0 -40 0" fill="#E0FF4F" />
+      </svg>
+    ),
+    "Snowflake": (
+      <svg viewBox="0 0 256 256" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="256" height="256" rx="40" fill="#29B6F6" />
+        <path d="M128 40v176M40 128h176M66 66l124 124M66 190L190 66" stroke="white" strokeWidth="18" strokeLinecap="round" />
+        <path d="M128 100l28 28-28 28-28-28z" fill="white" />
+      </svg>
+    ),
+    "Google BigQuery": (
+      <svg viewBox="0 0 256 256" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="256" height="256" rx="40" fill="#4285F4" />
+        <path d="M128 60c37.5 0 68 30.5 68 68s-30.5 68-68 68-68-30.5-68-68 30.5-68 68-68z" fill="#FFFFFF" fillOpacity="0.2" />
+        <circle cx="128" cy="128" r="45" fill="#FFFFFF" />
+        <path d="M160 160l40 40" stroke="#FFFFFF" strokeWidth="18" strokeLinecap="round" />
+      </svg>
+    ),
+    "TensorFlow": (
+      <svg viewBox="0 0 256 295" className="w-8 h-8">
+        <path fill="#FF9F00" d="M128 0L24 60v120l104 60 104-60V60L128 0zm79.9 166.1l-79.9 46.1-79.9-46.1v-92.2l79.9-46.1 79.9 46.1v92.2z"/>
+        <path fill="#E53935" d="M128 295l104-60v-68.9l-104 60V295z" />
+      </svg>
+    ),
+    "PyTorch": (
+      <svg viewBox="0 0 256 256" className="w-8 h-8">
+        <rect width="256" height="256" rx="40" fill="#EE4C2C" />
+        <path d="M128 60c-35 0-60 25-60 68s25 68 60 68 60-25 60-68-25-68-60-68z" fill="white" />
+        <path d="M128 85c-20 0-35 15-35 43s15 43 35 43 35-15 35-43-15-43-35-43z" fill="#EE4C2C" />
+        <circle cx="160" cy="100" r="16" fill="white" />
+      </svg>
+    ),
+    "OpenAI": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 text-[#10a37f]" fill="none" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c3.87 0 7 3.13 7 7s-3.13 7-7 7-7-3.13-7-7 3.13-7 7-7zm0 2.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9zm0 2a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5z" />
+      </svg>
+    ),
+    "LangChain": (
+      <svg viewBox="0 0 256 256" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="256" height="256" rx="40" fill="#000000" />
+        <path d="M70 128c0-30 25-55 55-55h10v20h-10c-20 0-35 15-35 35s15 35 35 35h10v20h-10c-30 0-55-25-55-55zm116-55c30 0 55 25 55 55s-25 55-55 55h-10v-20h-10c20 0 35-15 35-35s-15-35-35-35h10v-20h10z" fill="#00D2B4" />
+        <rect x="100" y="118" width="56" height="20" rx="6" fill="#FFFFFF" />
+      </svg>
+    ),
+    "Tableau": (
+      <svg viewBox="0 0 256 256" className="w-8 h-8">
+        <rect width="256" height="256" rx="40" fill="#FFFFFF" stroke="#E2E2E2" strokeWidth="2" />
+        <path d="M128 40v176M40 128h176" stroke="#E22722" strokeWidth="18" strokeLinecap="round" />
+        <path d="M85 85l86 86M85 171l86-86" stroke="#1F77B4" strokeWidth="14" strokeLinecap="round" />
+        <circle cx="128" cy="128" r="22" fill="#E22722" />
+        <circle cx="128" cy="70" r="14" fill="#FF7F0E" />
+        <circle cx="128" cy="186" r="14" fill="#FF7F0E" />
+        <circle cx="70" cy="128" r="14" fill="#FF7F0E" />
+        <circle cx="186" cy="128" r="14" fill="#FF7F0E" />
+      </svg>
+    ),
+    "PowerBI": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="24" height="24" rx="5" fill="#F2C811" />
+        <rect x="5" y="12" width="3.5" height="7" rx="1" fill="#F2A104" />
+        <rect x="10.25" y="8" width="3.5" height="11" rx="1" fill="#E28903" />
+        <rect x="15.5" y="4" width="3.5" height="15" rx="1" fill="#FFD95A" />
+      </svg>
+    )
+  };
+  return logos[name] || <Cpu className="w-8 h-8 text-slate-400" />;
+};
+
 export default function DataAiPage() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [faqPage, setFaqPage] = useState(0);
@@ -1124,10 +1204,15 @@ export default function DataAiPage() {
               {[...techStack, ...techStack, ...techStack].map((tech, idx) => (
                 <div 
                   key={idx} 
-                  className="p-5 bg-white border border-slate-200/80 rounded-2xl flex flex-col justify-center text-center shadow-sm w-44 flex-shrink-0"
+                  className="p-5 bg-white border border-slate-200/80 rounded-2xl flex flex-col justify-between text-center shadow-sm w-44 flex-shrink-0 group hover:shadow-lg hover:border-cyan-500/30 transition-all duration-300"
                 >
-                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block font-mono mb-1">{tech.category}</span>
-                  <span className="text-sm font-extrabold text-slate-800">{tech.name}</span>
+                  <div className="flex justify-between items-start mb-3">
+                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block font-mono">{tech.category}</span>
+                    <div className="w-8 h-8 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <TechLogo name={tech.name} />
+                    </div>
+                  </div>
+                  <span className="text-sm font-extrabold text-slate-800 text-left block mt-2 group-hover:text-[#2C5EAD] transition-colors">{tech.name}</span>
                 </div>
               ))}
             </motion.div>

@@ -208,16 +208,6 @@ export default function SolutionsCarousel() {
         {activeCfg.word}
       </div>
 
-      {/* Info Category Strip - Light background styled */}
-      <div
-        className="absolute top-4 left-1/2 -translate-x-1/2 text-center pointer-events-none z-20 transition-opacity duration-300"
-        style={{ opacity: tagOpacity }}
-      >
-        <div className="text-[10px] tracking-[0.2em] uppercase font-bold px-4 py-1.5 rounded-full border border-slate-200 bg-white/90 backdrop-blur-md text-slate-800 font-mono shadow-sm">
-          {tagText}
-        </div>
-      </div>
-
       {/* 3D Ring Stage - Positioned at top-4 h-[520px] to optimize vertical spacing */}
       <div className="absolute top-4 left-0 right-0 h-[520px] flex items-center justify-center [perspective:1200px] z-10">
         <div
@@ -253,18 +243,7 @@ export default function SolutionsCarousel() {
               >
                 {/* Header Section */}
                 <div>
-                  <div className="flex justify-between items-center w-full">
-                    <span className="text-[9px] tracking-[0.16em] uppercase font-bold text-slate-400 font-mono">
-                      {card.badge}
-                    </span>
-                    <span 
-                      className="text-[9px] tracking-[0.14em] uppercase font-bold font-mono"
-                      style={{ color: card.accent }}
-                    >
-                      {card.category}
-                    </span>
-                  </div>
-                  <h3 className="text-xl md:text-2xl font-black text-slate-800 leading-tight font-outfit tracking-tight mt-2 text-left">
+                  <h3 className="text-xl md:text-2xl font-black text-slate-800 leading-tight font-outfit tracking-tight text-left">
                     {card.title}
                   </h3>
                 </div>
@@ -285,11 +264,7 @@ export default function SolutionsCarousel() {
                     {card.desc}
                   </p>
                   
-                  <div className="flex justify-between items-center border-t border-slate-100 pt-3 mt-auto shrink-0">
-                    <span className="text-[10px] text-slate-400 font-mono font-bold">
-                      {card.date}
-                    </span>
-                    
+                  <div className="flex justify-end items-center border-t border-slate-100 pt-3 mt-auto shrink-0">
                     <span 
                       className="text-[10px] font-black uppercase tracking-widest transition-colors flex items-center font-mono gap-0.5"
                       style={{ color: card.accent }}

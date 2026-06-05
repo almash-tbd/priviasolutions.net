@@ -9,6 +9,69 @@ import {
   Layers, Settings, Shield, ShieldAlert, Play, CheckSquare, Search, Gauge, Terminal
 } from "lucide-react";
 
+const TechLogo = ({ name }) => {
+  const logos = {
+    "Cypress": (
+      <svg viewBox="0 0 256 256" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="256" height="256" rx="40" fill="#17202C" />
+        <path d="M128 40c-48.6 0-88 39.4-88 88s39.4 88 88 88 88-39.4 88-88c0-15.6-4.1-30.2-11.2-42.9l-22.4 22.4c4.3 6.4 6.6 13.9 6.6 20.5 0 35.3-28.7 64-64 64s-64-28.7-64-64 28.7-64 64-64c12.4 0 24.1 3.5 34.1 9.7L194 51.2C175.1 44.1 152.4 40 128 40z" fill="#00BF88" />
+      </svg>
+    ),
+    "Selenium": (
+      <svg viewBox="0 0 256 256" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="256" height="256" rx="40" fill="#000000" />
+        <rect x="30" y="30" width="196" height="196" rx="20" fill="#00B400" />
+        <text x="128" y="160" fill="white" fontSize="90" fontWeight="black" textAnchor="middle" fontFamily="sans-serif">Se</text>
+      </svg>
+    ),
+    "Playwright": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <circle cx="12" cy="12" r="10" fill="#2EAD5E" stroke="#10b981" />
+        <path d="M8.5 12h7M12 8.5v7" stroke="white" strokeLinecap="round" />
+        <path d="M12 5c-3.87 0-7 3.13-7 7s3.13 7 7 7 7-3.13 7-7-3.13-7-7-7zm0 2.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9z" fill="#000" fillOpacity="0.1" />
+      </svg>
+    ),
+    "JMeter": (
+      <svg viewBox="0 0 256 256" className="w-8 h-8">
+        <rect width="256" height="256" rx="40" fill="#D22D2D" />
+        <path d="M70 180c10-25 35-40 60-40s50 15 60 40H70z" fill="white" />
+        <circle cx="128" cy="100" r="28" fill="white" />
+        <path d="M128 35l15 30h-30l15-30z" fill="white" />
+      </svg>
+    ),
+    "Gatling": (
+      <svg viewBox="0 0 256 256" className="w-8 h-8">
+        <rect width="256" height="256" rx="40" fill="#FF5A09" />
+        <circle cx="128" cy="128" r="70" stroke="white" strokeWidth="16" fill="none" />
+        <circle cx="128" cy="128" r="30" fill="white" />
+      </svg>
+    ),
+    "TestRail": (
+      <svg viewBox="0 0 256 256" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="256" height="256" rx="40" fill="#FFFFFF" stroke="#DCDCDC" strokeWidth="2" />
+        <circle cx="128" cy="128" r="80" stroke="#3782E2" strokeWidth="16" />
+        <circle cx="128" cy="128" r="40" stroke="#E2574C" strokeWidth="12" />
+        <circle cx="128" cy="128" r="12" fill="#50B432" />
+      </svg>
+    ),
+    "Allure": (
+      <svg viewBox="0 0 256 256" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="256" height="256" rx="40" fill="#F4BA07" />
+        <path d="M128 60l50 110H78l50-110z" fill="white" />
+        <circle cx="128" cy="140" r="14" fill="#F4BA07" />
+      </svg>
+    ),
+    "SonarQube": (
+      <svg viewBox="0 0 256 256" className="w-8 h-8">
+        <rect width="256" height="256" rx="40" fill="#000000" />
+        <path d="M60 80c40-30 90-30 130 0l-15 15c-30-20-70-20-100 0L60 80zm15 35c30-20 70-20 100 0l-15 15c-20-10-50-10-70 0l-15-15z" fill="#4E9BCD" />
+        <circle cx="128" cy="160" r="24" fill="#4E9BCD" />
+      </svg>
+    )
+  };
+  return logos[name] || <Cpu className="w-8 h-8 text-slate-400" />;
+};
+
 export default function QaPerformancePage() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [faqPage, setFaqPage] = useState(0);
@@ -307,51 +370,64 @@ export default function QaPerformancePage() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-8 items-stretch max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-12 gap-8 items-stretch max-w-6xl mx-auto" style={{ perspective: 1200 }}>
             {/* Left Column: Interactive Tiers List */}
             <div className="lg:col-span-6 flex flex-col space-y-4 justify-between">
               <div className="space-y-4">
-                {Object.entries(pyramidApproach).map(([key, val]) => {
+                {Object.entries(pyramidApproach).map(([key, val], idx) => {
                   const isActive = activePyramidTier === key;
                   return (
-                    <button
+                    <motion.div
                       key={key}
-                      onClick={() => setActivePyramidTier(key)}
-                      className={`text-left p-6 w-full rounded-2xl border transition-all duration-300 flex flex-col justify-between ${
-                        isActive
-                          ? "bg-[#1b203a] border-[#10b981] shadow-lg shadow-[#10b981]/10 text-white"
-                          : "bg-slate-900/40 border-white/5 text-slate-400 hover:border-white/10 hover:text-white"
-                      }`}
+                      initial={{ opacity: 0, y: 40, rotateX: 18, scale: 0.9 }}
+                      whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+                      viewport={{ once: true, margin: "-40px" }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 80,
+                        damping: 12,
+                        delay: idx * 0.15
+                      }}
+                      className="w-full origin-top"
                     >
-                      <div className="space-y-2">
-                        <span className={`text-[9px] font-black tracking-widest uppercase font-mono px-2 py-0.5 rounded border ${
-                          isActive 
-                            ? "text-[#10b981] border-[#10b981]/30 bg-[#10b981]/10" 
-                            : "text-slate-400 border-white/10"
-                        }`}>
-                          {val.title}
-                        </span>
-                        <p className="text-xs text-slate-300 leading-relaxed mt-2">{val.desc}</p>
-                        
-                        <AnimatePresence>
-                          {isActive && (
-                            <motion.ul 
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: "auto" }}
-                              exit={{ opacity: 0, height: 0 }}
-                              className="space-y-1.5 pt-3 border-t border-white/5 mt-3"
-                            >
-                              {val.bullets.map((b) => (
-                                <li key={b} className="flex items-center text-xs text-slate-200">
-                                  <Check className="w-3.5 h-3.5 mr-2 text-[#10b981] flex-shrink-0" />
-                                  <span>{b}</span>
-                                </li>
-                              ))}
-                            </motion.ul>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    </button>
+                      <button
+                        onClick={() => setActivePyramidTier(key)}
+                        className={`text-left p-6 w-full rounded-2xl border transition-all duration-300 flex flex-col justify-between ${
+                          isActive
+                            ? "bg-[#1b203a] border-[#10b981] shadow-lg shadow-[#10b981]/10 text-white"
+                            : "bg-slate-900/40 border-white/5 text-slate-400 hover:border-white/10 hover:text-white"
+                        }`}
+                      >
+                        <div className="space-y-2">
+                          <span className={`text-[9px] font-black tracking-widest uppercase font-mono px-2 py-0.5 rounded border ${
+                            isActive 
+                              ? "text-[#10b981] border-[#10b981]/30 bg-[#10b981]/10" 
+                              : "text-slate-400 border-white/10"
+                          }`}>
+                            {val.title}
+                          </span>
+                          <p className="text-xs text-slate-300 leading-relaxed mt-2">{val.desc}</p>
+                          
+                          <AnimatePresence>
+                            {isActive && (
+                              <motion.ul 
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: "auto" }}
+                                exit={{ opacity: 0, height: 0 }}
+                                className="space-y-1.5 pt-3 border-t border-white/5 mt-3"
+                              >
+                                {val.bullets.map((b) => (
+                                  <li key={b} className="flex items-center text-xs text-slate-200">
+                                    <Check className="w-3.5 h-3.5 mr-2 text-[#10b981] flex-shrink-0" />
+                                    <span>{b}</span>
+                                  </li>
+                                ))}
+                              </motion.ul>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      </button>
+                    </motion.div>
                   );
                 })}
               </div>
@@ -581,10 +657,15 @@ export default function QaPerformancePage() {
               {[...techStack, ...techStack, ...techStack].map((tech, idx) => (
                 <div 
                   key={idx} 
-                  className="p-5 bg-white border border-slate-200/80 rounded-2xl flex flex-col justify-center text-center shadow-sm w-44 flex-shrink-0"
+                  className="p-5 bg-white border border-slate-200/80 rounded-2xl flex flex-col justify-between text-center shadow-sm w-44 flex-shrink-0 group hover:shadow-lg hover:border-cyan-500/30 transition-all duration-300"
                 >
-                  <span className="text-[9px] font-bold text-[#2C5EAD] uppercase tracking-widest block font-mono mb-1">{tech.category}</span>
-                  <span className="text-sm font-extrabold text-slate-800">{tech.name}</span>
+                  <div className="flex justify-between items-start mb-3">
+                    <span className="text-[9px] font-bold text-[#2C5EAD] uppercase tracking-widest block font-mono">{tech.category}</span>
+                    <div className="w-8 h-8 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <TechLogo name={tech.name} />
+                    </div>
+                  </div>
+                  <span className="text-sm font-extrabold text-slate-800 text-left block mt-2 group-hover:text-[#10b981] transition-colors">{tech.name}</span>
                 </div>
               ))}
             </motion.div>

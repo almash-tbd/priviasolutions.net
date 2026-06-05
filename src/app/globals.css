@@ -439,7 +439,7 @@ body {
   font-size: 11px;
   font-weight: 600;
   color: var(--hc-badge-text);
-  background: #edfcf7;
+  background: rgba(16, 185, 129, 0.08);
   padding: 4px 10px;
   border-radius: 12px;
   border: 1px solid rgba(16, 185, 129, 0.12);
@@ -1017,7 +1017,7 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1023px) {
   :root {
     --s-card-height: auto;
     --s-card-top-offset: 60px;
@@ -2147,7 +2147,7 @@ body {
 
 .sector-custom-card.card-health,
 .sector-accordion-card.card-health.active {
-  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(245, 253, 250, 0.96) 95%), url('/assets/images/sectors/healthcare.png') !important;
+  background-image: linear-gradient(180deg, rgba(4, 20, 16, 0.84) 0%, rgba(4, 20, 16, 0.97) 100%), url('/assets/images/sectors/healthcare.png') !important;
   background-size: cover !important;
   background-position: center !important;
 }
@@ -2174,9 +2174,9 @@ body {
   backdrop-filter: blur(4px);
 }
 .hc-tech-badge {
-  background: #e1f5ee !important;
-  border: 1px solid rgba(29, 158, 117, 0.25) !important;
-  color: #0c5946 !important;
+  background: rgba(16, 185, 129, 0.08) !important;
+  border: 1px solid rgba(16, 185, 129, 0.2) !important;
+  color: #34d399 !important;
   font-weight: 600;
   backdrop-filter: blur(4px);
 }
@@ -2573,7 +2573,7 @@ body {
   -webkit-backdrop-filter: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1023px) {
   .sticky-heading-wrapper {
     position: relative;
     top: 0;

@@ -341,7 +341,7 @@ export default function BlogPostClient({ post, slug, allBlogs }) {
     .map(s => ({ slug: s, ...allBlogs[s] }));
 
   return (
-    <div className="min-h-screen bg-slate-50/50 text-slate-850 font-sans pb-20">
+    <div className="min-h-screen bg-slate-50/50 text-slate-850 font-sans pb-20 w-full max-w-full overflow-x-hidden">
       
       {/* Pinned Reading Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-[3px] bg-slate-100 z-50">
@@ -355,20 +355,20 @@ export default function BlogPostClient({ post, slug, allBlogs }) {
       </div>
 
       {/* Breadcrumbs Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-        <nav className="flex items-center space-x-2 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 min-w-0">
+        <nav className="flex flex-wrap items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-slate-400">
           <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
           <span>/</span>
           <Link href="/blog" className="hover:text-blue-600 transition-colors">Blog</Link>
           <span>/</span>
           <span className="text-slate-500">{post.category}</span>
           <span>/</span>
-          <span className="text-slate-900 truncate max-w-xs">{post.title}</span>
+          <span className="text-slate-900 truncate max-w-[80px] xs:max-w-[120px] sm:max-w-xs">{post.title}</span>
         </nav>
       </div>
 
       {/* Main Layout Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-8 pt-6 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6 relative min-w-0">
         
         {/* ================= LEFT SIDEBAR ================= */}
         <aside className="hidden lg:block lg:col-span-3 space-y-8 sticky top-12 self-start h-[calc(100vh-100px)] overflow-y-auto pr-4 scrollbar-thin">
@@ -422,17 +422,17 @@ export default function BlogPostClient({ post, slug, allBlogs }) {
         </aside>
 
         {/* ================= CENTER MAIN ARTICLE ================= */}
-        <main className="col-span-12 lg:col-span-6 space-y-12">
+        <main className="col-span-1 lg:col-span-6 space-y-12 min-w-0">
           
           {/* Article Header block */}
           <div className="space-y-6">
             <span className="inline-block px-3 py-1 text-[10px] font-black tracking-widest text-blue-700 bg-blue-100 rounded-md uppercase">
               {post.category}
             </span>
-            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 leading-tight">
+            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 leading-tight break-words">
               {post.title}
             </h1>
-            <p className="text-slate-500 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-500 text-sm sm:text-base leading-relaxed break-words">
               {post.summary}
             </p>
 
@@ -479,7 +479,7 @@ export default function BlogPostClient({ post, slug, allBlogs }) {
                       const restText = pText.slice(1);
                       return (
                         <p key={pIdx}>
-                          <span className="text-5xl font-black text-blue-600 float-left mr-2.5 mt-1.5 font-serif line-none leading-[0.8] select-none">
+                          <span className="text-4xl sm:text-5xl font-black text-blue-600 float-left mr-2.5 mt-1 font-serif leading-none select-none">
                             {firstChar}
                           </span>
                           {restText}
@@ -665,15 +665,15 @@ export default function BlogPostClient({ post, slug, allBlogs }) {
           </div>
 
           {/* Bottom Pagination Links */}
-          <div className="flex justify-between items-center border-t border-slate-200 pt-8 mt-12 font-sans">
+          <div className="flex justify-between items-center border-t border-slate-200 pt-8 mt-12 font-sans min-w-0 w-full">
             {prevSlug ? (
               <Link 
                 href={`/blog/${prevSlug}`}
-                className="text-left group select-none flex-1 max-w-[45%]"
+                className="text-left group select-none flex-1 max-w-[45%] min-w-0"
               >
                 <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center">
-                  <ArrowLeft className="w-3.5 h-3.5 mr-1 group-hover:-translate-x-1 transition-transform" />
-                  Previous Article
+                  <ArrowLeft className="w-3.5 h-3.5 mr-1 group-hover:-translate-x-1 transition-transform shrink-0" />
+                  <span className="truncate">Previous Article</span>
                 </div>
                 <div className="text-xs font-black text-slate-850 truncate group-hover:text-blue-600 transition-colors mt-1">
                   {allBlogs[prevSlug].title}
@@ -681,7 +681,7 @@ export default function BlogPostClient({ post, slug, allBlogs }) {
               </Link>
             ) : <div className="flex-1 max-w-[45%]" />}
 
-            <Link href="/blog" className="mx-4 text-slate-400 hover:text-blue-600 transition-colors">
+            <Link href="/blog" className="mx-4 text-slate-400 hover:text-blue-600 transition-colors shrink-0">
               <svg viewBox="0 0 100 100" className="w-5 h-5 fill-current">
                 <rect x="15" y="15" width="26" height="26" rx="4" />
                 <rect x="59" y="15" width="26" height="26" rx="4" />
@@ -693,11 +693,11 @@ export default function BlogPostClient({ post, slug, allBlogs }) {
             {nextSlug ? (
               <Link 
                 href={`/blog/${nextSlug}`}
-                className="text-right group select-none flex-1 max-w-[45%]"
+                className="text-right group select-none flex-1 max-w-[45%] min-w-0"
               >
                 <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center justify-end">
-                  Next Article
-                  <ArrowRight className="w-3.5 h-3.5 ml-1 group-hover:translate-x-1 transition-transform" />
+                  <span className="truncate">Next Article</span>
+                  <ArrowRight className="w-3.5 h-3.5 ml-1 group-hover:translate-x-1 transition-transform shrink-0" />
                 </div>
                 <div className="text-xs font-black text-slate-850 truncate group-hover:text-blue-600 transition-colors mt-1">
                   {allBlogs[nextSlug].title}

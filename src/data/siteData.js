@@ -505,7 +505,7 @@ export const solutionsData = {
   },
   "healthcare": {
     title: "Secure Healthcare Solutions",
-    description: "Secure health-tech software designed to improve patient care while complying with regulatory requirements. We build EHR integrations, telehealth portals, and medical analytics systems.",
+    description: "Secure, regulatory-compliant, and highly interoperable healthcare platforms. We build custom electronic health records (EHR) systems with automated FHIR/HL7 data pipelines, develop secure telehealth portals with low-latency WebRTC streams, implement HIPAA/HITECH-aligned data access policies, and establish rigorous end-to-end audit trails. Our clinical-grade architectures safeguard Protected Health Information (PHI) with AES-256 encryption at rest and in transit, multi-factor authentication, and automated audit logs, ensuring seamless workflows and complete alignment with strict security standards.",
     features: [
       "End-to-End Encryption for Patient Health Info",
       "Strict Audit Logging & Access Authentication",
@@ -2420,6 +2420,69 @@ export const careersData = [
       "Familiarity with cloud security controls (AWS IAM, WAF).",
       "Understanding of security and data privacy regulatory frameworks.",
       "Experience auditing complex web application architectures."
+    ]
+  },
+  {
+    id: "qa-automation",
+    title: "QA Automation Engineer",
+    department: "Quality Assurance",
+    location: "Remote",
+    type: "Full-Time",
+    experience: "3+ Years",
+    summary: "Design, develop, and execute automated test scripts for our web applications and APIs.",
+    responsibilities: [
+      "Build and maintain robust E2E test suites using Playwright or Cypress.",
+      "Integrate automated test runs into our GitHub Actions CI/CD pipelines.",
+      "Perform api testing and validate schema responses under load.",
+      "Work closely with developers to debug issues and write reproduction tests."
+    ],
+    requirements: [
+      "Strong coding experience in JavaScript/TypeScript or Python.",
+      "Extensive experience with modern automation frameworks (Playwright, Cypress, Selenium).",
+      "Understanding of web protocols, DOM, and REST APIs.",
+      "Familiarity with Docker containerization and CI/CD tools."
+    ]
+  },
+  {
+    id: "uiux-designer",
+    title: "Lead UX/UI Designer",
+    department: "Product Design",
+    location: "Remote",
+    type: "Full-Time",
+    experience: "5+ Years",
+    summary: "Craft beautiful, user-centered product experiences and lead the visual design system.",
+    responsibilities: [
+      "Create high-fidelity mockups, wireframes, and interactive prototypes.",
+      "Maintain and evolve our design token systems and Figma libraries.",
+      "Conduct user research and usability testing sessions to gather feedback.",
+      "Collaborate with developers to ensure implementation aligns with design systems."
+    ],
+    requirements: [
+      "A strong portfolio showcasing web application design.",
+      "Expert command of Figma, auto-layouts, and prototyping tools.",
+      "Deep understanding of accessibility guidelines (WCAG) and responsive layouts.",
+      "Ability to translate complex user workflows into clean, simple user interfaces."
+    ]
+  },
+  {
+    id: "data-engineer",
+    title: "Data Engineer",
+    department: "Data & AI",
+    location: "Remote",
+    type: "Full-Time",
+    experience: "4+ Years",
+    summary: "Build and maintain scalable data pipelines and real-time analytics platforms.",
+    responsibilities: [
+      "Design, implement, and support robust data pipelines using Apache Kafka and Spark.",
+      "Optimize data warehouse schemas and partition tables for low-latency queries.",
+      "Collaborate with data scientists to package and deploy machine learning models.",
+      "Ensure data protection, access audit logging, and metadata compliance."
+    ],
+    requirements: [
+      "Strong proficiency in SQL and Python or Scala.",
+      "Hands-on experience with databases (PostgreSQL, MongoDB) and data lakes.",
+      "Familiarity with cloud data warehousing solutions (BigQuery, Redshift).",
+      "Experience with stream processing and event brokers (Kafka, RabbitMQ)."
     ]
   }
 ];

@@ -54,8 +54,8 @@ export default function PrivacyPage() {
             </h2>
             <p className="text-slate-600 pl-3.5">
               Users can request access, correction, or deletion of their personal information by contacting our data protection team at{" "}
-              <a href="mailto:privacy@priviasolutions.com" className="text-[#2c5ead] font-semibold hover:underline">
-                privacy@priviasolutions.com
+              <a href="mailto:info.priviasolutions.net" className="text-[#2c5ead] font-semibold hover:underline">
+                info.priviasolutions.net
               </a>.
             </p>
           </div>

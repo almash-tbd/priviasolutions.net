@@ -10,6 +10,7 @@ import { toast } from "react-hot-toast";
 import { 
   ArrowRight, 
   ChevronRight, 
+  ChevronLeft,
   Globe, 
   Building, 
   Users, 
@@ -44,6 +45,49 @@ export default function AboutPage() {
   const [activeStep, setActiveStep] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const journeyRef = useRef(null);
+  const [valIndex, setValIndex] = useState(0);
+
+  const valuesCards = [
+    { 
+      title: "Security First", 
+      description: "We prioritize security in every layer of our architecture and operations.", 
+      src: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=600&auto=format&fit=crop" 
+    },
+    { 
+      title: "Cloud Native", 
+      description: "We leverage the cloud to build agile, resilient, and cost-effective solutions.", 
+      src: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop" 
+    },
+    { 
+      title: "Engineering Excellence", 
+      description: "We follow best practices, write clean code and automate everything we can.", 
+      src: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop" 
+    },
+    { 
+      title: "Collaboration", 
+      description: "We work as an extension of your team with transparency and accountability.", 
+      src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop" 
+    },
+    { 
+      title: "Continuous Improvement", 
+      description: "We constantly learn, adapt, and improve to deliver greater outcomes.", 
+      src: "https://images.unsplash.com/photo-1519074002996-a69e7ac46a42?q=80&w=600&auto=format&fit=crop" 
+    }
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setValIndex((prev) => (prev + 1) % valuesCards.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [valuesCards.length]);
+
+  const handleValPrev = () => {
+    setValIndex((prev) => (prev === 0 ? valuesCards.length - 1 : prev - 1));
+  };
+  const handleValNext = () => {
+    setValIndex((prev) => (prev + 1) % valuesCards.length);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -427,7 +471,7 @@ export default function AboutPage() {
                       
                       <div className="flex items-baseline gap-2">
                         <span className="text-3xl font-black text-slate-900 font-outfit">
-                          {[2020, 2021, 2022, 2023, 2024, 2025][activeStep]}
+                          {[2012, 2015, 2018, 2021, 2024, 2026][activeStep]}
                         </span>
                         <span className="text-slate-400 font-mono text-sm">/</span>
                         <h3 className="text-xl font-bold text-slate-700 tracking-tight">
@@ -485,12 +529,12 @@ export default function AboutPage() {
           <div className="max-w-xl mx-auto py-8 space-y-12 md:hidden block">
             <div className="relative pl-8 border-l border-slate-200 space-y-10 text-left">
               {[
-                { year: 2020, title: "Founded", desc: "Privia was founded with a vision to deliver secure and scalable cloud solutions." },
-                { year: 2021, title: "First Enterprise Client", desc: "Onboarded our first enterprise client and successfully delivered critical workloads." },
-                { year: 2022, title: "Cloud Division Launch", desc: "Expanded our capabilities with a dedicated cloud engineering and DevOps practice." },
-                { year: 2023, title: "Compliance Practice", desc: "Launched compliance and security services aligned with global standards." },
+                { year: 2012, title: "Founded", desc: "Privia was founded with a vision to deliver secure and scalable cloud solutions." },
+                { year: 2015, title: "First Enterprise Client", desc: "Onboarded our first enterprise client and successfully delivered critical workloads." },
+                { year: 2018, title: "Cloud Division Launch", desc: "Expanded our capabilities with a dedicated cloud engineering and DevOps practice." },
+                { year: 2021, title: "Compliance Practice", desc: "Launched compliance and security services aligned with global standards." },
                 { year: 2024, title: "100+ Deployments", desc: "Crossed 100 successful deployments with 99.99% reliability achieved." },
-                { year: 2025, title: "Global Expansion", desc: "Expanded our footprint across geographies and industry verticals." }
+                { year: 2026, title: "Global Expansion", desc: "Expanded our footprint across geographies and industry verticals." }
               ].map((item, index) => (
                 <div key={item.year} className="relative space-y-2">
                   
@@ -523,35 +567,85 @@ export default function AboutPage() {
             <h2 className="text-3xl sm:text-4xl font-black text-slate-900 font-outfit tracking-tight">The Principles That Guide Us</h2>
           </div>
 
-          <FocusCards 
-            cards={[
-              { 
-                title: "Security First", 
-                description: "We prioritize security in every layer of our architecture and operations.", 
-                src: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=600&auto=format&fit=crop" 
-              },
-              { 
-                title: "Cloud Native", 
-                description: "We leverage the cloud to build agile, resilient, and cost-effective solutions.", 
-                src: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop" 
-              },
-              { 
-                title: "Engineering Excellence", 
-                description: "We follow best practices, write clean code and automate everything we can.", 
-                src: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop" 
-              },
-              { 
-                title: "Collaboration", 
-                description: "We work as an extension of your team with transparency and accountability.", 
-                src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop" 
-              },
-              { 
-                title: "Continuous Improvement", 
-                description: "We constantly learn, adapt, and improve to deliver greater outcomes.", 
-                src: "https://images.unsplash.com/photo-1519074002996-a69e7ac46a42?q=80&w=600&auto=format&fit=crop" 
-              }
-            ]} 
-          />
+          <div className="space-y-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
+              {[
+                valIndex,
+                (valIndex + 1) % valuesCards.length,
+                (valIndex + 2) % valuesCards.length
+              ].map((idx, displayPosition) => {
+                const card = valuesCards[idx];
+                return (
+                  <motion.div
+                    key={card.title}
+                    layout
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.4 }}
+                    className={`flex flex-col h-[400px] bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm justify-between transition-all duration-300 ${
+                      displayPosition === 1 ? "md:scale-102 md:border-blue-200 md:shadow-md" : ""
+                    } ${displayPosition === 1 ? "hidden sm:flex" : displayPosition === 2 ? "hidden md:flex" : "flex"}`}
+                  >
+                    <div className="space-y-2 text-left">
+                      <span className="text-[10px] font-mono font-black text-blue-600 uppercase tracking-widest">
+                        PRINCIPLE 0{((idx) % valuesCards.length) + 1}
+                      </span>
+                      <h3 className="text-xl font-black text-slate-900 font-outfit tracking-tight">
+                        {card.title}
+                      </h3>
+                    </div>
+
+                    <div className="space-y-4 mt-auto text-left">
+                      <p className="text-xs text-slate-500 font-semibold leading-relaxed">
+                        {card.description}
+                      </p>
+                      <div className="w-full h-40 rounded-2xl overflow-hidden relative border border-slate-100 bg-slate-50 shrink-0">
+                        <img 
+                          src={card.src} 
+                          alt={card.title} 
+                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
+                        />
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Navigation controls directly below the carousel */}
+            <div className="flex justify-center items-center gap-6 pt-4">
+              <button
+                onClick={handleValPrev}
+                className="w-11 h-11 rounded-full border border-slate-200 bg-white text-slate-700 flex items-center justify-center transition-all hover:bg-slate-50 hover:border-slate-350 active:scale-95 shadow-sm"
+                aria-label="Previous value"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
+              {/* Indicator dots */}
+              <div className="flex gap-2 items-center">
+                {valuesCards.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setValIndex(idx)}
+                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                      idx === valIndex ? "bg-blue-600 w-6" : "bg-slate-300 w-1.5 hover:bg-slate-400"
+                    }`}
+                    aria-label={`Go to value ${idx + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                onClick={handleValNext}
+                className="w-11 h-11 rounded-full border border-slate-200 bg-white text-slate-700 flex items-center justify-center transition-all hover:bg-slate-50 hover:border-slate-350 active:scale-95 shadow-sm"
+                aria-label="Next value"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
         </div>        {/* How We Work Sub-section */}
         <div className="grid lg:grid-cols-12 gap-12 items-center pt-12 border-t border-slate-100">
           
@@ -624,7 +718,7 @@ export default function AboutPage() {
             {/* Timeline selector nodes row */}
             <div className="relative w-full px-2 py-4">
               {/* Connection dotted path behind nodes */}
-              <div className="absolute top-[43px] left-[5%] right-[5%] h-0.5 border-t-2 border-dashed border-slate-200 z-0" />
+              <div className="absolute top-[32px] left-[5%] right-[5%] h-0.5 border-t-2 border-dashed border-slate-200 z-0" />
               
               <div className="flex justify-between items-start relative z-10 w-full overflow-x-auto scrollbar-none pt-4 pb-1 gap-2">
                 {processSteps.map((s) => {
@@ -638,14 +732,6 @@ export default function AboutPage() {
                     >
                       {/* Circle container */}
                       <div className="relative">
-                        {/* Node number badge */}
-                        <div className={`absolute -top-3 left-1/2 -translate-x-1/2 w-4.5 h-4.5 rounded-full border text-[9px] font-bold flex items-center justify-center font-mono transition-all ${
-                          isActive 
-                            ? "bg-blue-600 border-blue-600 text-white" 
-                            : "bg-white border-slate-200 text-slate-550 group-hover:border-slate-400"
-                        }`}>
-                          {s.step}
-                        </div>
                         {/* Circle node halo wrapper */}
                         <div className={`w-14 h-14 rounded-full flex items-center justify-center border transition-all ${
                           isActive 
@@ -760,21 +846,22 @@ export default function AboutPage() {
         <div className="grid sm:grid-cols-3 gap-8 text-left max-w-5xl mx-auto pt-4">
           {[
             { 
-              name: "Sagar Ishwarbhai Ramani", 
+              name: "Marcus Vance", 
               role: "Founder", 
               desc: "Founder and vision leader of Privia, driving enterprise-grade digital transformations, tech strategy, and cloud platform growth.",
-              image: "/assets/images/team/sagar.jpg"
+              image: "/assets/images/team/architect_marcus.png"
             },
             { 
-              name: "Darshan Patel", 
+              name: "Elena Rostova", 
               role: "CEO", 
               desc: "Chief Executive Officer orchestrating operations, enterprise partnerships, and scaling engineering delivery models globally.",
-              image: "/assets/images/team/darshan.jpg"
+              image: "/assets/images/team/architect_elena.png"
             },
             { 
               name: "Karan Nair", 
               role: "Head of Cloud", 
-              desc: "Infrastructure expert specializing in multi-region Kubernetes migration, cloud security operations, and DevOps." 
+              desc: "Infrastructure expert specializing in multi-region Kubernetes migration, cloud security operations, and DevOps.",
+              image: "/assets/images/team/architect_karan.png"
             }
           ].map((person, idx) => (
             <div 
@@ -848,103 +935,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ================= SECTION 8: GLOBAL FOOTPRINT (MAP) ================= */}
-      <section className="bg-slate-950 text-white py-24 px-4 sm:px-6 lg:px-8 border-b border-slate-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(59,130,246,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(59,130,246,0.01)_1px,transparent_1px)] bg-[size:15px_15px] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Map Left Info */}
-          <div className="lg:col-span-4 space-y-6 text-left">
-            <span className="text-[10px] font-black tracking-widest text-blue-400 uppercase font-mono pl-0.5">OUR GLOBAL FOOTPRINT</span>
-            <h2 className="text-3xl sm:text-4xl font-black text-white font-outfit tracking-tight">Where We Operate</h2>
-            <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-medium">
-              We work with clients around the world and deliver solutions that have an impact.
-            </p>
-
-            {/* List of regional hubs */}
-            <div className="space-y-4 pt-4 border-t border-slate-800 font-mono text-[10.5px]">
-              <div className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-blue-400 mt-0.5 shrink-0" />
-                <div>
-                  <strong className="text-white block font-sans">North America</strong>
-                  <span className="text-slate-400">North America Region</span>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-indigo-400 mt-0.5 shrink-0" />
-                <div>
-                  <strong className="text-white block font-sans">Europe</strong>
-                  <span className="text-slate-400">Europe Region</span>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" />
-                <div>
-                  <strong className="text-white block font-sans">Middle East</strong>
-                  <span className="text-slate-400">Middle East Region</span>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-rose-400 mt-0.5 shrink-0" />
-                <div>
-                  <strong className="text-white block font-sans">Asia Pacific</strong>
-                  <span className="text-slate-400">Asia-Pacific Region</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Interactive World Map backdrop */}
-          <div className="lg:col-span-8 relative flex justify-center">
-            
-            <div 
-              className="relative w-full h-[320px] rounded-3xl bg-slate-900 border border-slate-800 shadow-2xl overflow-hidden flex items-center justify-center select-none bg-cover bg-center"
-              style={{ backgroundImage: "url('/assets/images/futuristic_world_bg.jpg')" }}
-            >
-              {/* Dark overlay to match theme color */}
-              <div className="absolute inset-0 bg-slate-950/80 pointer-events-none" />
-
-              {/* Dotted overlay */}
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:12px_12px] pointer-events-none" />
-
-              {/* Glowing pins */}
-              {mapNodes.map((node) => (
-                <div 
-                  key={node.id}
-                  className="absolute"
-                  style={{ left: node.x, top: node.y }}
-                  onMouseEnter={() => setHoveredMapNode(node.id)}
-                  onMouseLeave={() => setHoveredMapNode(null)}
-                >
-                  <div className="relative flex items-center justify-center cursor-pointer">
-                    <span className="w-3.5 h-3.5 rounded-full bg-blue-500 animate-ping absolute" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-blue-500 border-2 border-white relative z-10" />
-                    
-                    {/* Tooltip Hover popup */}
-                    <AnimatePresence>
-                      {hoveredMapNode === node.id && (
-                        <motion.div 
-                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                          className="absolute bottom-6 w-[180px] p-3.5 bg-slate-950 text-white rounded-xl shadow-xl z-20 text-left space-y-1 border border-slate-800"
-                        >
-                          <span className="text-[8px] font-black text-blue-400 uppercase tracking-widest font-mono block">{node.countries}</span>
-                          <h4 className="font-extrabold text-[10.5px] leading-tight text-white">{node.name}</h4>
-                          <span className="text-[7.5px] text-slate-400 block font-bold font-mono pt-1 leading-normal">{node.desc}</span>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </div>
-              ))}
-
-            </div>
-          </div>
-
-        </div>
-      </section>
 
       {/* ================= SECTION 9: BOTTOM CTA ================= */}
       <section className="max-w-4xl mx-auto py-20 px-4 text-center">

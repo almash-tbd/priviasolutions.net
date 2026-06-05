@@ -273,7 +273,7 @@ export default function Home() {
       const card3 = document.getElementById("step-card-3");
       if (!card1 || !card2 || !card3) return;
 
-      if (window.innerWidth <= 768) {
+      if (window.innerWidth <= 1023) {
         [card1, card2, card3].forEach((card) => {
           card.classList.remove("stacked-under-1", "stacked-under-2", "active-focus");
         });
@@ -1070,16 +1070,15 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
               <h2 className="text-xs font-black tracking-widest text-[#1591DC] uppercase">Comprehensive IT Solutions</h2>
-              <h3 className="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">Our Core Services</h3>
-              <p className="text-slate-400 text-sm sm:text-base">
+              <h3 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Our Core Services</h3>
+              <p className="text-slate-800 text-sm sm:text-base">
                 From frontend development to high-availability database engineering, we deliver clean systems designed to withstand heavy loads.
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {Object.entries(servicesData).slice(0, 8).map(([slug, data], index) => {
+            <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6">
+              {Object.entries(servicesData).slice(0, 4).map(([slug, data], index) => {
                 const IconComponent = serviceIcons[slug] || Code;
-                const glowClass = serviceGlowClasses[index % serviceGlowClasses.length];
                 return (
                   <motion.div 
                     key={slug} 
@@ -1087,35 +1086,47 @@ export default function Home() {
                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
                     viewport={{ once: true, margin: "-40px" }}
                     transition={{ duration: 0.5, delay: index * 0.05 }}
-                    className={`p-6 rounded-2xl ${glowClass} flex flex-col justify-between group`}
+                    onClick={() => router.push(`/services/${slug}`)}
+                    className="relative h-[300px] rounded-3xl overflow-hidden shadow-lg border border-white/10 hover:border-[#1591DC]/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-end p-6 group cursor-pointer"
                   >
-                    <div className="space-y-4">
-                      <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200/60 text-slate-500 group-hover:bg-[#1591DC]/10 group-hover:text-[#2C5EAD] transition-all flex items-center justify-center">
-                        <IconComponent className="w-6 h-6" />
+                    {/* Background Image Container */}
+                    <div className="absolute inset-0 z-0 select-none pointer-events-none">
+                      <Image 
+                        src={serviceImages[slug] || "/assets/images/services/custom-development.png"}
+                        alt={data.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 1024px) 100vw, 400px"
+                      />
+                      {/* Dark gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent z-10" />
+                    </div>
+
+                    <div className="relative z-20 space-y-2 text-white">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-lg bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/10 group-hover:bg-[#1591DC] transition-colors duration-300">
+                          <IconComponent className="w-4 h-4" />
+                        </div>
+                        <span className="text-[9px] font-bold uppercase tracking-wider text-[#4BB8FA] font-mono">Service</span>
                       </div>
-                      <h4 className="text-lg font-bold text-slate-900 group-hover:text-[#2C5EAD] transition-colors">
+                      
+                      <h4 className="text-base font-extrabold text-white group-hover:text-[#4BB8FA] transition-colors leading-tight">
                         {data.title}
                       </h4>
-                      <p className="text-xs text-slate-600 leading-relaxed">
+                      
+                      <p className="text-[11px] text-slate-200 leading-normal line-clamp-2">
                         {data.description}
                       </p>
-                      <ul className="space-y-1.5 pt-2">
-                        {data.features.slice(0, 3).map((f) => (
-                          <li key={f} className="text-[10px] text-slate-700 flex items-center">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#2C5EAD]/40 mr-2 flex-shrink-0"></span>
-                            <span>{f}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="pt-6 mt-6 border-t border-slate-100">
-                      <Link 
-                        href={`/services/${slug}`}
-                        className="inline-flex items-center text-xs font-bold text-[#2C5EAD] group-hover:text-blue-800 transition-colors"
-                      >
-                        Learn More
-                        <ArrowRight className="w-3.5 h-3.5 ml-1.5 group-hover:translate-x-1 transition-transform" />
-                      </Link>
+
+                      <div className="pt-1 flex items-center justify-between">
+                        <Link 
+                          href={`/services/${slug}`}
+                          className="inline-flex items-center text-[10px] font-black tracking-widest text-[#4BB8FA] group-hover:text-white uppercase transition-colors"
+                        >
+                          Explore Pathway
+                          <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                      </div>
                     </div>
                   </motion.div>
                 );
@@ -1125,9 +1136,9 @@ export default function Home() {
             <div className="text-center mt-12">
               <Link 
                 href="/services" 
-                className="inline-flex items-center text-sm font-bold text-slate-300 hover:text-white transition-colors group"
+                className="inline-flex items-center text-sm font-bold text-slate-900 hover:text-slate-800 transition-colors group"
               >
-                View All Services
+                View Other Services
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
@@ -1271,6 +1282,77 @@ export default function Home() {
                       </div>
 
                       <div className="sector-custom-card-link text-sky-400 mt-6 inline-flex items-center gap-1.5 text-xs font-bold">
+                        Explore Solution
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="3" y1="8" x2="13" y2="8" />
+                          <polyline points="9 4 13 8 9 12" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* 2. HEALTHCARE: Clinical Mint Theme */}
+              <div 
+                onClick={() => router.push("/solutions/healthcare")} 
+                className="sector-custom-card card-health relative overflow-hidden group" 
+                role="button" 
+                tabIndex={0}
+              >
+                {/* Background Image (blurred) */}
+                <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+                  <Image 
+                    src="/assets/images/sectors/healthcare.png"
+                    alt="Healthcare"
+                    fill
+                    className="object-cover opacity-20 filter blur-2xl transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-slate-950/40" />
+                </div>
+                
+                <div className="relative z-10 flex flex-col h-full justify-between w-full">
+                  <div className="hc-strip"></div>
+                  <div className="sector-custom-card-body flex flex-col justify-between h-full pt-4">
+                    <div>
+                      <div className="hc-pulse mb-4">
+                        <div className="hc-cross">
+                          <Heart className="w-5 h-5" />
+                        </div>
+                        <span className="hc-badge">HIPAA COMPLIANT</span>
+                      </div>
+                      <h2 className="sector-custom-card-title text-white font-black">{solutionsData.healthcare.title}</h2>
+                      <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.healthcare.description}</p>
+                      
+                      {/* Features list */}
+                      <ul className="space-y-1.5 my-4">
+                        {solutionsData.healthcare.features.slice(0, 3).map((feat, idx) => (
+                          <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
+                            <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
+                            <span>{feat}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      {/* Metrics Row */}
+                      <div className="grid grid-cols-3 gap-2 border-t border-white/10 pt-4 mt-2">
+                        {solutionsData.healthcare.metrics.map((m, idx) => (
+                          <div key={idx} className="text-center bg-[#061e17] border border-white/5 p-2 rounded-xl">
+                            <span className="text-[9px] font-bold text-slate-400 block truncate">{m.label}</span>
+                            <span className="text-xs font-black text-emerald-400 block mt-0.5">{m.value}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Tech stack badges */}
+                      <div className="flex flex-wrap gap-1.5 mt-4">
+                        {solutionsData.healthcare.techStack.map((tech) => (
+                          <span key={tech} className="hc-tag text-[9px] px-2 py-0.5 rounded bg-white/5 text-emerald-300 border border-white/10">{tech}</span>
+                        ))}
+                      </div>
+
+                      <div className="sector-custom-card-link text-emerald-400 mt-6 inline-flex items-center gap-1.5 text-xs font-bold">
                         Explore Solution
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <line x1="3" y1="8" x2="13" y2="8" />
@@ -1563,13 +1645,95 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              {/* 2. SAAS */}
+              {/* 2. HEALTHCARE */}
               <div 
                 onClick={() => setActiveSectorIndex(1)}
-                className={`sector-accordion-card card-saas ${activeSectorIndex === 1 ? 'active' : 'collapsed'}`}
+                className={`sector-accordion-card card-health ${activeSectorIndex === 1 ? 'active' : 'collapsed'}`}
               >
                 <div className="collapsed-content">
                   <span className="collapsed-number">02</span>
+                  <div className="collapsed-icon-wrapper">
+                    <Heart className="w-5 h-5" />
+                  </div>
+                  <span className="collapsed-title-rotated">Healthcare</span>
+                </div>
+                <div className="expanded-content relative h-full">
+                  {/* Background Image (blurred) */}
+                  <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+                    <Image 
+                      src="/assets/images/sectors/healthcare.png"
+                      alt="Healthcare"
+                      fill
+                      className="object-cover opacity-20 filter blur-2xl"
+                    />
+                    <div className="absolute inset-0 bg-slate-950/40" />
+                  </div>
+                  <div className="relative z-10 flex flex-col h-full justify-between w-full">
+                    <div className="hc-strip"></div>
+                    <div className="sector-custom-card-body flex flex-row gap-6 p-6 pt-8">
+                      <div className="sector-left-col flex-1 flex flex-col justify-between">
+                        <div>
+                          <div className="hc-pulse mb-4">
+                            <div className="hc-cross">
+                              <Heart className="w-5 h-5" />
+                            </div>
+                            <span className="hc-badge">HIPAA COMPLIANT</span>
+                          </div>
+                          <h2 className="sector-custom-card-title text-white font-black">{solutionsData.healthcare.title}</h2>
+                          <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.healthcare.description}</p>
+                        </div>
+                        
+                        <div className="flex flex-wrap gap-2 mt-4">
+                          {solutionsData.healthcare.techStack.map((tech) => (
+                            <span key={tech} className="hc-tag text-[10px] px-2 py-1 rounded bg-white/5 text-emerald-300 border border-white/10">{tech}</span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="sector-right-col w-[240px] flex flex-col justify-between border-l border-white/10 pl-6">
+                        <div className="space-y-4">
+                          <span className="text-[10px] font-bold text-emerald-400 tracking-wider uppercase block">Key Metrics</span>
+                          <div className="grid grid-cols-1 gap-2.5">
+                            {solutionsData.healthcare.metrics.map((m, idx) => (
+                              <div key={idx} className="metric-box bg-[#061e17] border border-white/5 p-2 rounded-xl flex items-center justify-between">
+                                <span className="text-xs font-bold text-[#e2e8f0]">{m.label}</span>
+                                <span className="text-sm font-black text-emerald-400">{m.value}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="space-y-3 mt-4">
+                          <span className="text-[10px] font-bold text-emerald-400 tracking-wider uppercase block">Key Features</span>
+                          <ul className="space-y-1.5">
+                            {solutionsData.healthcare.features.slice(0, 3).map((feat, idx) => (
+                              <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
+                                <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
+                                <span>{feat}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <Link href="/solutions/healthcare" className="sector-custom-card-link text-emerald-400 hover:text-emerald-300 mt-6 inline-flex items-center gap-1.5 text-xs font-bold">
+                          Explore Solution
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="3" y1="8" x2="13" y2="8" />
+                            <polyline points="9 4 13 8 9 12" />
+                          </svg>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* 3. SAAS */}
+              <div 
+                onClick={() => setActiveSectorIndex(2)}
+                className={`sector-accordion-card card-saas ${activeSectorIndex === 2 ? 'active' : 'collapsed'}`}
+              >
+                <div className="collapsed-content">
+                  <span className="collapsed-number">03</span>
                   <div className="collapsed-icon-wrapper">
                     <Cloud className="w-5 h-5" />
                   </div>
@@ -1658,13 +1822,13 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* 3. RETAIL */}
+              {/* 4. RETAIL */}
               <div 
-                onClick={() => setActiveSectorIndex(2)}
-                className={`sector-accordion-card card-retail ${activeSectorIndex === 2 ? 'active' : 'collapsed'}`}
+                onClick={() => setActiveSectorIndex(3)}
+                className={`sector-accordion-card card-retail ${activeSectorIndex === 3 ? 'active' : 'collapsed'}`}
               >
                 <div className="collapsed-content">
-                  <span className="collapsed-number">03</span>
+                  <span className="collapsed-number">04</span>
                   <div className="collapsed-icon-wrapper">
                     <ShoppingCart className="w-5 h-5" />
                   </div>
@@ -1790,14 +1954,15 @@ export default function Home() {
               <div className="stacking-card stacking-card-1" id="step-card-1" role="button" tabIndex={0}>
                 <div className="stacking-card-content">
                   <div className="stacking-card-left">
-                    <h2>Discovery & Planning</h2>
+                    <span className="stacking-card-badge mb-4">Card 1</span>
+                    <h2>Discovery</h2>
                     <p>We deep-dive into your operational pipeline, audit systems infrastructure, and lay down an exhaustive software blueprint. Through technical discovery workshops, system topology analysis, and requirement elicitation, we establish clear milestones and design secure cloud-native architectures tailored to your business needs before any development begins.</p>
                   </div>
-                  <div className="stacking-card-right relative w-full h-full p-6">
+                  <div className="stacking-card-right relative w-full h-[250px] lg:h-full p-6">
                     <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-lg">
                       <Image 
-                        src="/assets/images/Process/plan_v2.png"
-                        alt="Discovery & Planning Strategy"
+                        src="/assets/images/Process/office_work_scene.png"
+                        alt="Discovery Strategy"
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 400px"
@@ -1813,13 +1978,14 @@ export default function Home() {
               <div className="stacking-card stacking-card-2" id="step-card-2" role="button" tabIndex={0}>
                 <div className="stacking-card-content">
                   <div className="stacking-card-left">
+                    <span className="stacking-card-badge mb-4">Card 2</span>
                     <h2>Design & Development</h2>
                     <p>Our engineers build iterative, cloud-native components and secure APIs, verifying code quality through automated quality gates. Adhering to secure SDLC principles, we write clean, well-tested code in agile sprints, integrating sonarqube vulnerability scans, unit testing matrices, and continuous integration pipelines to guarantee robust performance and security.</p>
                   </div>
-                  <div className="stacking-card-right relative w-full h-full p-6">
+                  <div className="stacking-card-right relative w-full h-[250px] lg:h-full p-6">
                     <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-lg">
                       <Image 
-                        src="/assets/images/Process/design_v2.png"
+                        src="/assets/images/Process/process_development.png"
                         alt="Design & Development"
                         fill
                         className="object-cover"
@@ -1836,13 +2002,14 @@ export default function Home() {
               <div className="stacking-card stacking-card-3" id="step-card-3" role="button" tabIndex={0}>
                 <div className="stacking-card-content">
                   <div className="stacking-card-left">
+                    <span className="stacking-card-badge mb-4">Card 3</span>
                     <h2>Launch & Scale</h2>
                     <p>We coordinate zero-downtime Strangler deployments and wire up 24/7 reliability monitoring for elastic loads. Utilizing blue-green or canary release strategies, we deploy containerized services into production smoothly, backed by Datadog and Grafana dashboards for proactive incident detection, platform health tracking, and SLA coverage.</p>
                   </div>
-                  <div className="stacking-card-right relative w-full h-full p-6">
+                  <div className="stacking-card-right relative w-full h-[250px] lg:h-full p-6">
                     <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-lg">
                       <Image 
-                        src="/assets/images/Process/launch_v2.png"
+                        src="/assets/images/Process/process_launch.png"
                         alt="Launch & Scale"
                         fill
                         className="object-cover"
@@ -2364,7 +2531,7 @@ export default function Home() {
             </div>
 
             {/* Column 3: IDE Diff Previewer (lg:col-span-4) */}
-            <div className="lg:col-span-4 flex flex-col justify-stretch">
+            <div className="hidden lg:flex lg:col-span-4 flex-col justify-stretch">
               {(() => {
                 const activeGitMeta = gitInsightsData[activeInsightSlug] || gitInsightsData["cloud-cost-guardrails"];
                 return (

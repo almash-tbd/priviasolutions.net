@@ -301,50 +301,71 @@ export default function ManagedSupportPage() {
           </div>
 
           {/* Support cards grid */}
-          <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
+          <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
             {supportTiers.map((tier) => {
               const isActive = activeTierId === tier.id;
               return (
                 <div 
                   key={tier.name}
-                  className={`p-8 rounded-3xl border transition-all duration-300 flex flex-col justify-between h-full relative ${
+                  onClick={() => {
+                    if (!isActive) {
+                      if (tier.id === "starter") setTrafficVolume(100000);
+                      else if (tier.id === "growth") setTrafficVolume(500000);
+                      else if (tier.id === "enterprise") setTrafficVolume(2000000);
+                    }
+                  }}
+                  className={`p-8 rounded-3xl border transition-all duration-500 flex flex-col justify-between relative cursor-pointer ${
                     isActive 
-                      ? "bg-white border-[#1591dc] shadow-[0_15px_40px_rgba(21,145,220,0.2)] scale-102 z-10" 
-                      : "bg-slate-50/90 border-slate-200 shadow-md opacity-80"
+                      ? "bg-white border-[#1591dc] shadow-[0_15px_40px_rgba(21,145,220,0.2)] scale-102 z-10 min-h-[440px]" 
+                      : "bg-slate-50/90 border-slate-200 shadow-sm opacity-60 min-h-[90px] hover:opacity-85"
                   }`}
                 >
-                  {tier.isPopular && (
+                  {tier.isPopular && isActive && (
                     <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-600 to-[#1591dc] text-white text-[9px] font-bold px-3 py-1 rounded-full uppercase tracking-wider font-mono">
                       Most Popular
                     </span>
                   )}
                   
-                  <div className="space-y-4 text-left">
-                    <h4 className="text-xl font-bold text-slate-900">{tier.name} Tier</h4>
-                    <div className="text-xs text-[#1591dc] font-mono font-bold uppercase tracking-wider">{tier.rto}</div>
-                    <span className="text-[10px] font-semibold text-slate-400 font-mono block">{tier.limitText}</span>
-                    <p className="text-xs text-slate-600 leading-relaxed">{tier.desc}</p>
-                    
-                    <ul className="space-y-2.5 pt-4 border-t border-slate-100">
-                      {tier.bullets.map((b) => (
-                        <li key={b} className="flex items-start text-xs text-slate-700">
-                          <Check className="w-4 h-4 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" />
-                          <span>{b}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <div className="space-y-4 text-left w-full">
+                    <div className="flex justify-between items-center w-full">
+                      <h4 className="text-xl font-bold text-slate-900">{tier.name} Tier</h4>
+                      {!isActive && (
+                        <span className="text-[9px] font-bold text-slate-400 bg-slate-100 border border-slate-200/50 px-2 py-0.5 rounded uppercase font-mono">Inactive</span>
+                      )}
+                    </div>
 
-                  <div className="pt-6 border-t border-slate-100 mt-6">
-                    <Link href="/contact" className="w-full">
-                      <button className={`w-full py-3.5 rounded-full font-bold text-xs transition-all uppercase tracking-wider font-mono ${
-                        isActive 
-                          ? "bg-[#1591dc] hover:bg-blue-600 text-white shadow-lg" 
-                          : "bg-slate-100 hover:bg-slate-200 text-slate-800"
-                      }`}>
-                        Activate Support
-                      </button>
-                    </Link>
+                    <AnimatePresence initial={false}>
+                      {isActive && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="space-y-4 overflow-hidden w-full"
+                        >
+                          <div className="text-xs text-[#1591dc] font-mono font-bold uppercase tracking-wider">{tier.rto}</div>
+                          <span className="text-[10px] font-semibold text-slate-400 font-mono block">{tier.limitText}</span>
+                          <p className="text-xs text-slate-600 leading-relaxed">{tier.desc}</p>
+                          
+                          <ul className="space-y-2.5 pt-4 border-t border-slate-100">
+                            {tier.bullets.map((b) => (
+                              <li key={b} className="flex items-start text-xs text-slate-700">
+                                <Check className="w-4 h-4 text-emerald-600 mr-2 flex-shrink-0 mt-0.5" />
+                                <span>{b}</span>
+                              </li>
+                            ))}
+                          </ul>
+
+                          <div className="pt-6 border-t border-slate-100 mt-6">
+                            <Link href="/contact" className="w-full">
+                              <button className="w-full py-3.5 rounded-full font-bold text-xs bg-[#1591dc] hover:bg-blue-600 text-white shadow-lg uppercase tracking-wider font-mono cursor-pointer">
+                                Activate Support
+                              </button>
+                            </Link>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </div>
               );

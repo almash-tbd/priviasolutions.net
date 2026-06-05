@@ -1,13 +1,79 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ShieldCheck, Lock, Eye, AlertCircle, Cpu, Shield, HelpCircle, Activity, Server, Database, ChevronRight, Check } from "lucide-react";
+import { ShieldCheck, Lock, Cpu, Server, Database, ChevronRight, Activity } from "lucide-react";
 
 export default function SecurityPage() {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [simActive, setSimActive] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const rotateY1 = useTransform(scrollYProgress, [0.15, 0.35], [-35, 0]);
+  const rotateY2 = useTransform(scrollYProgress, [0.22, 0.42], [-35, 0]);
+  const rotateY3 = useTransform(scrollYProgress, [0.29, 0.49], [-35, 0]);
+  const rotateY4 = useTransform(scrollYProgress, [0.36, 0.56], [-35, 0]);
+  const rotateY5 = useTransform(scrollYProgress, [0.43, 0.63], [-35, 0]);
+
+  const x1 = useTransform(scrollYProgress, [0.15, 0.35], [-100, 0]);
+  const x2 = useTransform(scrollYProgress, [0.22, 0.42], [-100, 0]);
+  const x3 = useTransform(scrollYProgress, [0.29, 0.49], [-100, 0]);
+  const x4 = useTransform(scrollYProgress, [0.36, 0.56], [-100, 0]);
+  const x5 = useTransform(scrollYProgress, [0.43, 0.63], [-100, 0]);
+
+  const opacity1 = useTransform(scrollYProgress, [0.15, 0.35], [0.3, 1]);
+  const opacity2 = useTransform(scrollYProgress, [0.22, 0.42], [0.3, 1]);
+  const opacity3 = useTransform(scrollYProgress, [0.29, 0.49], [0.3, 1]);
+  const opacity4 = useTransform(scrollYProgress, [0.36, 0.56], [0.3, 1]);
+  const opacity5 = useTransform(scrollYProgress, [0.43, 0.63], [0.3, 1]);
+
+  const flowStates = [
+    {
+      title: "Threat Ingestion",
+      label: "Attempted",
+      image: "/assets/images/security/threat_ingestion.png",
+      desc: "Incoming packet or threat vector audit boundary scan detection."
+    },
+    {
+      title: "Firewall Layer",
+      label: "Boundary Filter",
+      image: "/assets/images/security/firewall_layer.png",
+      desc: "Deep packet boundary filter blocks illegal IP and port rules."
+    },
+    {
+      title: "Web WAF Gateway",
+      label: "Payload Audit",
+      image: "/assets/images/security/waf_gateway.png",
+      desc: "Validates application parameters and prevents SQLi/XSS execution."
+    },
+    {
+      title: "SIEM Analytics",
+      label: "Anomaly Check",
+      image: "/assets/images/security/siem_analytics.png",
+      desc: "Real-time log analytics index correlations against threat intelligence."
+    },
+    {
+      title: "Threat Mitigation",
+      label: "Secure Blocked",
+      image: "/assets/images/security/threat_mitigation.png",
+      desc: "Threat vector successfully isolated and logs secured on vault."
+    }
+  ];
 
   // For cursor spotlight
   const handleMouseMove = (e) => {
@@ -94,36 +160,36 @@ export default function SecurityPage() {
           className="grid lg:grid-cols-12 gap-12 items-center"
         >
           {/* Left: Titles & Tagline */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-7 space-y-6 text-center lg:text-left flex flex-col items-center lg:items-start">
             <span className="text-xs font-black tracking-widest text-blue-600 bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-100 shadow-sm inline-block uppercase font-mono">
               SECURITY AT PRIVIA
             </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 font-outfit tracking-tight leading-[1.08]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 font-outfit tracking-tight leading-[1.08] text-center lg:text-left">
               Security Built In. <br />
               Trust Earned.
             </h1>
-            <p className="text-slate-500 text-sm sm:text-base leading-relaxed max-w-xl font-medium">
+            <p className="text-slate-500 text-sm sm:text-base leading-relaxed max-w-xl font-medium text-center lg:text-left mx-auto lg:mx-0">
               We build and operate with a security-first mindset to protect your data, applications, and infrastructure at every layer.
             </p>
 
             {/* Horizontal Mini-Values */}
-            <div className="grid sm:grid-cols-3 gap-6 pt-6 border-t border-slate-200/80">
-              <div>
-                <h4 className="font-extrabold text-xs text-slate-900 tracking-tight flex items-center gap-1.5">
+            <div className="grid sm:grid-cols-3 gap-6 pt-6 border-t border-slate-200/80 w-full">
+              <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+                <h4 className="font-extrabold text-xs text-slate-900 tracking-tight flex items-center gap-1.5 justify-center lg:justify-start">
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
                   Proactive Protection
                 </h4>
                 <p className="text-[10px] text-slate-500 leading-normal font-medium mt-1">Continuous threat monitoring and risk mitigation.</p>
               </div>
-              <div>
-                <h4 className="font-extrabold text-xs text-slate-900 tracking-tight flex items-center gap-1.5">
+              <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+                <h4 className="font-extrabold text-xs text-slate-900 tracking-tight flex items-center gap-1.5 justify-center lg:justify-start">
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
                   Secure by Design
                 </h4>
                 <p className="text-[10px] text-slate-500 leading-normal font-medium mt-1">Security is embedded in our architecture and workflows.</p>
               </div>
-              <div>
-                <h4 className="font-extrabold text-xs text-slate-900 tracking-tight flex items-center gap-1.5">
+              <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+                <h4 className="font-extrabold text-xs text-slate-900 tracking-tight flex items-center gap-1.5 justify-center lg:justify-start">
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
                   Always Improving
                 </h4>
@@ -178,25 +244,25 @@ export default function SecurityPage() {
               <div className="absolute right-[12%] top-[18%] flex flex-col items-center pointer-events-none">
                 <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-ping absolute" />
                 <span className="w-2.5 h-2.5 rounded-full bg-blue-600 border border-white" />
-                <span className="text-[8px] font-black text-slate-550 uppercase tracking-widest font-mono mt-1">Network</span>
+                <span className="text-[8px] font-black text-slate-555 uppercase tracking-widest font-mono mt-1">Network</span>
               </div>
               {/* 3. Monitoring (right-center) */}
               <div className="absolute right-[4%] top-[50%] -translate-y-1/2 flex flex-col items-center pointer-events-none">
                 <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-ping absolute" />
                 <span className="w-2.5 h-2.5 rounded-full bg-blue-600 border border-white" />
-                <span className="text-[8px] font-black text-slate-550 uppercase tracking-widest font-mono mt-1">Monitoring</span>
+                <span className="text-[8px] font-black text-slate-555 uppercase tracking-widest font-mono mt-1">Monitoring</span>
               </div>
               {/* 4. Encryption (bottom-right) */}
               <div className="absolute right-[18%] bottom-[12%] flex flex-col items-center pointer-events-none">
                 <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-ping absolute" />
                 <span className="w-2.5 h-2.5 rounded-full bg-blue-600 border border-white" />
-                <span className="text-[8px] font-black text-slate-550 uppercase tracking-widest font-mono mt-1">Encryption</span>
+                <span className="text-[8px] font-black text-slate-555 uppercase tracking-widest font-mono mt-1">Encryption</span>
               </div>
               {/* 5. Compliance (bottom-left) */}
               <div className="absolute left-[18%] bottom-[12%] flex flex-col items-center pointer-events-none">
                 <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-ping absolute" />
                 <span className="w-2.5 h-2.5 rounded-full bg-blue-600 border border-white" />
-                <span className="text-[8px] font-black text-slate-550 uppercase tracking-widest font-mono mt-1">Compliance</span>
+                <span className="text-[8px] font-black text-slate-555 uppercase tracking-widest font-mono mt-1">Compliance</span>
               </div>
 
               {/* 3D Parallax Shield Panel */}
@@ -240,7 +306,7 @@ export default function SecurityPage() {
             <h2 className="text-xs font-black tracking-widest text-blue-600 uppercase font-mono pl-1">
               OUR SECURITY PILLARS
             </h2>
-            <p className="text-slate-500 text-xs sm:text-sm font-medium">Hover over each card to inspect detailed coverage specifications.</p>
+            <p className="text-slate-500 text-xs sm:text-sm font-medium">Standard specifications and compliance perimeters monitored at each layer.</p>
           </div>
 
           {/* Pillars Cards Grid */}
@@ -254,33 +320,32 @@ export default function SecurityPage() {
                   whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm relative group overflow-hidden cursor-default min-h-[220px]"
+                  className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm relative overflow-hidden cursor-default h-full flex flex-col justify-between"
                 >
-                  {/* Slid-up coverage info wrapper */}
-                  <div className="space-y-4 transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-14">
-                    
-                    <div className="w-10 h-10 rounded-lg bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center shrink-0">
-                      <Icon className="w-5 h-5" />
+                  <div className="space-y-4 flex flex-col justify-between h-full">
+                    <div className="space-y-4">
+                      <div className="w-10 h-10 rounded-lg bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center shrink-0">
+                        <Icon className="w-5 h-5" />
+                      </div>
+
+                      <div className="space-y-2">
+                        <h3 className="text-sm font-black text-slate-900 tracking-tight leading-snug">{pil.title}</h3>
+                        <p className="text-[11px] text-slate-500 leading-relaxed font-medium">{pil.desc}</p>
+                      </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <h3 className="text-sm font-black text-slate-900 tracking-tight leading-snug">{pil.title}</h3>
-                      <p className="text-[11px] text-slate-500 leading-relaxed font-medium">{pil.desc}</p>
-                    </div>
-
-                    {/* Hidden Details Block sliding up */}
-                    <div className="space-y-2.5 pt-4 border-t border-slate-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-left">
+                    {/* Details Block - Always Visible */}
+                    <div className="space-y-2.5 pt-4 border-t border-slate-100 text-left mt-4">
                       <span className="text-[9px] font-black text-blue-600 uppercase tracking-widest block font-mono">{pil.stat}</span>
                       <ul className="space-y-1.5">
                         {pil.details.map((det) => (
-                          <li key={det} className="text-[10px] text-slate-650 font-bold flex items-center gap-1.5">
-                            <span className="w-1 h-1 rounded-full bg-blue-600 shrink-0" />
+                          <li key={det} className="text-[10px] text-slate-655 font-bold flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0" />
                             {det}
                           </li>
                         ))}
                       </ul>
                     </div>
-
                   </div>
                 </motion.div>
               );
@@ -288,117 +353,75 @@ export default function SecurityPage() {
           </div>
         </section>
 
-        {/* ================= ATTACK SIMULATION SECTION ================= */}
+        {/* ================= FLOW INTEGRATION SECTION ================= */}
         <motion.section 
+          ref={containerRef}
           initial={{ opacity: 0, y: 35, filter: "blur(10px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="p-8 sm:p-12 rounded-3xl bg-white border border-slate-200/80 shadow-md text-center max-w-5xl mx-auto space-y-8 relative overflow-hidden"
+          className="space-y-12"
         >
-          <div className="absolute top-0 right-0 w-[240px] h-[240px] bg-blue-50/20 rounded-full blur-[80px] pointer-events-none" />
-
-          <div className="text-center max-w-2xl mx-auto space-y-3 relative z-10">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
             <h3 className="text-xs font-black tracking-widest text-blue-600 uppercase font-mono">FLOW INTEGRATION</h3>
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-outfit">Active Firewall & Attack Simulation</h2>
+            <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight font-outfit">Active Multi-Layer Firewall Mitigation Flow</h2>
             <p className="text-xs sm:text-sm text-slate-500 font-medium leading-relaxed">
-              Click the button below to simulate an incoming cyber threat and trace how Privia layers mitigate it.
+              Scroll down to trace the automatic pipeline routing and threat neutralizing flow across Privia core perimeters.
             </p>
           </div>
 
-          {/* Interactive Simulation Pipeline */}
-          <div className="relative py-8 z-10">
-            
-            {/* Connection Flow Line */}
-            <div className="absolute left-[8%] right-[8%] top-1/2 -translate-y-1/2 h-[3px] bg-slate-100 hidden sm:block">
-              {/* Animated glowing Threat packet */}
-              {simActive && (
-                <motion.div 
-                  initial={{ left: "0%", backgroundColor: "#ef4444", boxShadow: "0 0 10px #ef4444" }}
-                  animate={[
-                    { left: "28%" }, // Hits firewall
-                    { left: "55%" }, // Hits WAF
-                    { left: "82%" }, // Hits SIEM
-                    { left: "91%", backgroundColor: "#10b981", boxShadow: "0 0 10px #10b981" } // Blocked/Safe
-                  ]}
-                  transition={{ duration: 3.5, times: [0, 0.3, 0.6, 0.9, 1], ease: "easeInOut" }}
-                  onAnimationComplete={() => setSimActive(false)}
-                  className="absolute w-3.5 h-3.5 rounded-full -translate-y-[5px]"
-                />
-              )}
-            </div>
+          {/* Cards Grid */}
+          <div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 pt-4"
+            style={{ perspective: "1000px" }}
+          >
+            {flowStates.map((state, idx) => {
+              const rotateY = idx === 0 ? rotateY1 : idx === 1 ? rotateY2 : idx === 2 ? rotateY3 : idx === 3 ? rotateY4 : rotateY5;
+              const x = idx === 0 ? x1 : idx === 1 ? x2 : idx === 2 ? x3 : idx === 3 ? x4 : x5;
+              const opacity = idx === 0 ? opacity1 : idx === 1 ? opacity2 : idx === 2 ? opacity3 : idx === 3 ? opacity4 : opacity5;
 
-            {/* Steps Row */}
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-6 relative">
-              {/* Step 1: Threat */}
-              <div className="flex flex-col items-center space-y-3 bg-white p-3 rounded-xl border border-slate-100 sm:border-transparent">
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center border font-bold shadow-sm transition-all ${simActive ? "border-red-100 bg-red-50 text-red-600 scale-102" : "border-slate-100 bg-slate-50 text-slate-400"}`}>
-                  ☠️
-                </div>
-                <div className="text-center">
-                  <h5 className="font-extrabold text-xs text-slate-900 leading-tight">Threat Ingestion</h5>
-                  <span className="text-[9px] text-slate-450 font-bold uppercase tracking-wider font-mono">Attempted</span>
-                </div>
-              </div>
+              return (
+                <motion.div
+                  key={state.title}
+                  style={isMobile ? {} : { rotateY, x, opacity }}
+                  initial={isMobile ? { opacity: 0, x: -60 } : undefined}
+                  whileInView={isMobile ? { opacity: 1, x: 0 } : undefined}
+                  viewport={isMobile ? { once: true, margin: "-100px" } : undefined}
+                  transition={isMobile ? { type: "spring", stiffness: 80, damping: 15, delay: idx * 0.05 } : undefined}
+                  className="rounded-2xl bg-white border border-slate-200 shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow duration-300"
+                >
+                  {/* Card Image */}
+                  <div className="relative w-full aspect-video bg-slate-950 overflow-hidden shrink-0 border-b border-slate-100">
+                    <img 
+                      src={state.image} 
+                      alt={state.title} 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-3 left-3 bg-slate-950/60 backdrop-blur-xs text-white border border-slate-800 text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded font-mono">
+                      State 0{idx + 1}
+                    </div>
+                  </div>
 
-              {/* Step 2: Firewall */}
-              <div className="flex flex-col items-center space-y-3 bg-white p-3 rounded-xl border border-slate-100 sm:border-transparent">
-                <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center font-bold shadow-sm">
-                  🛡️
-                </div>
-                <div className="text-center">
-                  <h5 className="font-extrabold text-xs text-slate-900 leading-tight">Firewall Layer</h5>
-                  <span className="text-[9px] text-slate-450 font-bold uppercase tracking-wider font-mono">Boundary Filter</span>
-                </div>
-              </div>
+                  {/* Card Content & Topic bottom */}
+                  <div className="p-5 flex-1 flex flex-col justify-between text-left space-y-4">
+                    <p className="text-[11px] text-slate-500 font-medium leading-relaxed">
+                      {state.desc}
+                    </p>
 
-              {/* Step 3: WAF */}
-              <div className="flex flex-col items-center space-y-3 bg-white p-3 rounded-xl border border-slate-100 sm:border-transparent">
-                <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center font-bold shadow-sm">
-                  🌐
-                </div>
-                <div className="text-center">
-                  <h5 className="font-extrabold text-xs text-slate-900 leading-tight">Web WAF Gateway</h5>
-                  <span className="text-[9px] text-slate-450 font-bold uppercase tracking-wider font-mono">Payload Audit</span>
-                </div>
-              </div>
-
-              {/* Step 4: SIEM */}
-              <div className="flex flex-col items-center space-y-3 bg-white p-3 rounded-xl border border-slate-100 sm:border-transparent">
-                <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center font-bold shadow-sm">
-                  📊
-                </div>
-                <div className="text-center">
-                  <h5 className="font-extrabold text-xs text-slate-900 leading-tight">SIEM Analytics</h5>
-                  <span className="text-[9px] text-slate-450 font-bold uppercase tracking-wider font-mono">Anomaly Check</span>
-                </div>
-              </div>
-
-              {/* Step 5: Blocked */}
-              <div className="col-span-2 sm:col-span-1 flex flex-col items-center space-y-3 bg-white p-3 rounded-xl border border-slate-100 sm:border-transparent">
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center border font-bold shadow-sm transition-all ${simActive ? "border-emerald-100 bg-emerald-50 text-emerald-600 scale-102 animate-pulse" : "border-slate-100 bg-slate-50 text-slate-400"}`}>
-                  <Check className="w-5 h-5" />
-                </div>
-                <div className="text-center">
-                  <h5 className="font-extrabold text-xs text-slate-900 leading-tight">Threat Mitigation</h5>
-                  <span className="text-[9px] text-slate-450 font-bold uppercase tracking-wider font-mono">Secure Blocked</span>
-                </div>
-              </div>
-
-            </div>
-
+                    <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+                      <div className="text-left">
+                        <span className="text-[7.5px] font-black text-blue-600 uppercase tracking-widest block font-mono">TOPIC</span>
+                        <h4 className="font-extrabold text-xs text-slate-900 tracking-tight leading-tight mt-0.5">{state.title}</h4>
+                      </div>
+                      <span className="px-2 py-0.5 rounded text-[8px] text-emerald-600 bg-emerald-50 border border-emerald-100 font-extrabold uppercase tracking-wide shrink-0">
+                        {state.label}
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
-
-          <div className="pt-4 relative z-10 flex justify-center">
-            <button 
-              disabled={simActive}
-              onClick={() => setSimActive(true)}
-              className="inline-flex items-center justify-center px-8 py-3 rounded-xl font-extrabold text-xs text-white bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 disabled:scale-100 transition-all shadow-md shadow-blue-600/10 hover:scale-102 active:scale-98 uppercase tracking-wider"
-            >
-              {simActive ? "Running Simulation..." : "Simulate Threat Attempt"}
-            </button>
-          </div>
-
         </motion.section>
 
         {/* Bottom trust banner card */}
@@ -433,7 +456,6 @@ export default function SecurityPage() {
             <ChevronRight className="w-4 h-4" />
           </a>
         </motion.div>
-
       </div>
     </div>
   );

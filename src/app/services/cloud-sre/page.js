@@ -477,40 +477,41 @@ export default function CloudSrePage() {
             <h3 className="text-3xl font-extrabold tracking-tight text-white">Our SRE & Infrastructure Approach</h3>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-8 items-stretch">
-            {/* Left Column: Interactive Tab Selector and Info */}
-            <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
-              <div className="flex flex-col space-y-3">
+          <div className="grid grid-cols-12 gap-8 items-stretch">
+            {/* Left Column: Interactive Tab Selector */}
+            <div className="col-span-12 lg:col-span-4 flex flex-col justify-center">
+              <div className="flex flex-col sm:flex-row lg:flex-col gap-3 w-full">
                 {Object.entries(approach).map(([key, value]) => {
                   const isActive = activePillar === key;
                   return (
                     <button
                       key={key}
                       onClick={() => setActivePillar(key)}
-                      className={`text-left p-5 rounded-2xl border transition-all duration-300 flex items-center justify-between ${
+                      className={`text-left p-4 rounded-2xl border transition-all duration-300 flex items-center justify-between flex-1 sm:flex-initial ${
                         isActive
                           ? "bg-[#1b203a] border-[#2C5EAD] shadow-lg shadow-[#2C5EAD]/10 text-white"
                           : "bg-slate-900/40 border-white/5 text-slate-400 hover:border-white/10 hover:text-white"
                       }`}
                     >
-                      <div className="flex items-center space-x-4">
-                        <div className={`p-2.5 rounded-xl ${isActive ? "bg-[#2C5EAD]/20 text-[#4BB8FA]" : "bg-slate-800 text-slate-400"}`}>
-                          {key === "migration" && <Cloud className="w-5 h-5" />}
-                          {key === "iac" && <Settings className="w-5 h-5" />}
-                          {key === "sre" && <Activity className="w-5 h-5" />}
+                      <div className="flex items-center space-x-3">
+                        <div className={`p-2 rounded-xl ${isActive ? "bg-[#2C5EAD]/20 text-[#4BB8FA]" : "bg-slate-800 text-slate-400"}`}>
+                          {key === "migration" && <Cloud className="w-4 h-4" />}
+                          {key === "iac" && <Settings className="w-4 h-4" />}
+                          {key === "sre" && <Activity className="w-4 h-4" />}
                         </div>
                         <div>
-                          <h4 className="text-sm font-extrabold tracking-wide">{value.title}</h4>
-                          <p className="text-[10px] text-slate-400 mt-0.5 line-clamp-1">{value.desc}</p>
+                          <h4 className="text-xs font-extrabold tracking-wide">{value.title}</h4>
                         </div>
                       </div>
-                      <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isActive ? "-rotate-90 text-[#4BB8FA]" : "text-slate-500"}`} />
+                      <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isActive ? "-rotate-90 text-[#4BB8FA]" : "text-slate-500"}`} />
                     </button>
                   );
                 })}
               </div>
+            </div>
 
-              {/* Dynamic Info Panel */}
+            {/* Right Column: Dynamic Info Panel (Replaces Terminal on Desktop/Tablet) */}
+            <div className="col-span-12 lg:col-span-8 flex flex-col h-full">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activePillar}
@@ -518,17 +519,17 @@ export default function CloudSrePage() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3 }}
-                  className="p-6 rounded-3xl bg-slate-900/60 border border-white/5 flex flex-col justify-between flex-grow"
+                  className="p-8 rounded-3xl bg-slate-900/60 border border-white/5 flex flex-col justify-between h-full min-h-[300px] w-full"
                 >
                   <div className="space-y-4">
                     <div className="flex items-center space-x-2">
                       <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
                       <span className="text-[9px] font-bold text-cyan-400 font-mono uppercase tracking-wider">active_scope::details</span>
                     </div>
-                    <h4 className="text-xl font-bold text-white">{approach[activePillar].title}</h4>
-                    <p className="text-xs text-slate-300 leading-relaxed">{approach[activePillar].desc}</p>
+                    <h4 className="text-2xl font-bold text-white">{approach[activePillar].title}</h4>
+                    <p className="text-sm text-slate-300 leading-relaxed">{approach[activePillar].desc}</p>
                     
-                    <ul className="space-y-2.5 pt-4 border-t border-white/5">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-6 border-t border-white/5">
                       {approach[activePillar].bullets.map((b) => (
                         <li key={b} className="flex items-start text-xs text-slate-300">
                           <Check className="w-4 h-4 text-cyan-400 mr-2 flex-shrink-0 mt-0.5" />
@@ -539,112 +540,6 @@ export default function CloudSrePage() {
                   </div>
                 </motion.div>
               </AnimatePresence>
-            </div>
-
-            {/* Right Column: Console CLI Simulation */}
-            <div className="lg:col-span-7 flex flex-col justify-between bg-slate-950/60 border border-white/5 p-6 rounded-3xl relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#1b203a]/10 to-transparent pointer-events-none" />
-              
-              <div className="space-y-4 relative z-10 w-full">
-                {/* Console Window */}
-                <div className="rounded-2xl border border-white/10 bg-[#060813] overflow-hidden shadow-2xl flex flex-col h-72">
-                  {/* Console Header */}
-                  <div className="bg-[#101428] px-4 py-3 flex items-center justify-between border-b border-white/5 select-none">
-                    <div className="flex items-center space-x-1.5">
-                      <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                      <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                      <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                    </div>
-                    <span className="text-[10px] font-bold text-slate-400 font-mono flex items-center gap-1.5">
-                      <Terminal className="w-3.5 h-3.5 text-cyan-400" />
-                      sre-console -- bash
-                    </span>
-                    <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 font-mono animate-pulse">
-                      CONNECTED
-                    </span>
-                  </div>
-
-                  {/* Console Body */}
-                  <div className="p-4 overflow-y-auto font-mono text-[10px] text-slate-300 leading-relaxed flex-grow space-y-1.5 scrollbar-thin scrollbar-thumb-slate-800">
-                    {terminalLogs.map((log, index) => {
-                      const formatLog = (l) => {
-                        if (l.startsWith("guest@sre-console:~$")) {
-                          return (
-                            <span className="text-slate-400">
-                              <span className="text-[#c084fc]">guest@sre-console</span>
-                              <span className="text-slate-500">:</span>
-                              <span className="text-[#3b82f6]">~$</span>{" "}
-                              <span className="text-white font-semibold">{l.substring(21)}</span>
-                            </span>
-                          );
-                        }
-                        if (l.startsWith("//") || l.startsWith("#")) {
-                          if (l.includes("[OK]") || l.includes("[SUCCESS]") || l.includes("SUCCESS")) {
-                            return <span className="text-emerald-400 font-bold">{l}</span>;
-                          }
-                          return <span className="text-slate-500 italic">{l}</span>;
-                        }
-                        
-                        // Basic syntax highlights for code structures
-                        let styleClass = "text-slate-300";
-                        if (l.includes("const ") || l.includes("function ") || l.includes("resource ") || l.includes("module ") || l.includes("apiVersion:") || l.includes("kind:")) {
-                          styleClass = "text-cyan-400 font-medium";
-                        } else if (l.includes(":") && !l.includes("//")) {
-                          styleClass = "text-indigo-300";
-                        }
-                        
-                        return <span className={styleClass}>{l}</span>;
-                      };
-                      return (
-                        <div key={index} className="flex items-start">
-                          <span className="text-slate-600 mr-2.5 select-none">{index + 1}</span>
-                          <div>{formatLog(log)}</div>
-                        </div>
-                      );
-                    })}
-                    <span className="inline-block w-1.5 h-3.5 bg-cyan-400 ml-1 animate-pulse" />
-                  </div>
-                </div>
-
-                {/* Sub-Console Live Micro-Metrics */}
-                <div className="grid grid-cols-3 gap-4 pt-2">
-                  <div className="p-3.5 rounded-xl bg-slate-900/60 border border-white/5 space-y-1">
-                    <span className="text-[8px] font-bold text-slate-400 uppercase tracking-wider block font-mono">
-                      {activePillar === "migration" ? "DB SYNC RATE" : activePillar === "iac" ? "STATE DRIFTS" : "CPU CLUSTER LOAD"}
-                    </span>
-                    <span className="text-sm font-extrabold text-white font-mono flex items-center gap-1.5">
-                      <RefreshCw className={`w-3.5 h-3.5 text-cyan-400 ${activePillar === "migration" ? "animate-spin" : ""}`} />
-                      {activePillar === "migration" && "99.98%"}
-                      {activePillar === "iac" && "0 Drifts"}
-                      {activePillar === "sre" && "34.8%"}
-                    </span>
-                  </div>
-
-                  <div className="p-3.5 rounded-xl bg-slate-900/60 border border-white/5 space-y-1">
-                    <span className="text-[8px] font-bold text-slate-400 uppercase tracking-wider block font-mono">
-                      {activePillar === "migration" ? "MIGRATED CAPACITY" : activePillar === "iac" ? "RESOURCES BUILT" : "PODS HEALTHY"}
-                    </span>
-                    <span className="text-sm font-extrabold text-white font-mono flex items-center gap-1.5">
-                      <Database className="w-3.5 h-3.5 text-indigo-400" />
-                      {activePillar === "migration" && "1.2 TB / 1.2 TB"}
-                      {activePillar === "iac" && "15 Objects"}
-                      {activePillar === "sre" && "3/3 active"}
-                    </span>
-                  </div>
-
-                  <div className="p-3.5 rounded-xl bg-slate-900/60 border border-white/5 space-y-1">
-                    <span className="text-[8px] font-bold text-slate-400 uppercase tracking-wider block font-mono">
-                      {activePillar === "migration" ? "NETWORK THROTTLE" : activePillar === "iac" ? "GITOPS COMMITS" : "COMPLIANCE SLA"}
-                    </span>
-                    <span className="text-sm font-extrabold text-white font-mono flex items-center gap-1.5">
-                      <Cpu className="w-3.5 h-3.5 text-purple-400" />
-                      {activePillar === "migration" && "112 MB/s"}
-                      {activePillar === "iac" && "a8f3d1e (main)"}
-                      {activePillar === "sre" && "99.995%"}
-                    </span>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -713,9 +608,9 @@ export default function CloudSrePage() {
           </div>
 
           {/* Custom Horizontal Step Pipeline Stepper */}
-          <div className="relative max-w-4xl mx-auto mb-12 select-none">
+          <div className="relative max-w-4xl mx-auto mb-16 select-none">
             {/* SVG Connecting pipeline underlay */}
-            <div className="absolute top-[22px] left-0 right-0 h-0.5 bg-[#ffffff]/10 -z-10 hidden sm:block">
+            <div className="absolute top-[28px] sm:top-[32px] left-0 right-0 h-0.5 bg-[#ffffff]/10 -z-10">
               <motion.div 
                 className="h-full bg-gradient-to-r from-cyan-400 via-indigo-500 to-[#10b981]" 
                 style={{ width: `${(activeMigrationStep / 3) * 100}%` }}
@@ -724,7 +619,7 @@ export default function CloudSrePage() {
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-0">
+            <div className="flex flex-row justify-between items-center w-full gap-2 sm:gap-0">
               {migrationSteps.map((step, idx) => {
                 const isActive = activeMigrationStep === idx;
                 const isCompleted = idx < activeMigrationStep;
@@ -735,7 +630,7 @@ export default function CloudSrePage() {
                     className="flex flex-col items-center group relative z-10 focus:outline-none"
                   >
                     <div 
-                      className={`w-12 h-12 rounded-full flex items-center justify-center font-mono font-bold text-sm transition-all duration-300 border shadow-lg ${
+                      className={`w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center font-mono font-bold text-sm sm:text-lg transition-all duration-300 border shadow-lg ${
                         isActive
                           ? "bg-slate-900 text-white border-cyan-400 scale-110 shadow-cyan-400/20"
                           : isCompleted
@@ -745,7 +640,7 @@ export default function CloudSrePage() {
                     >
                       0{idx + 1}
                     </div>
-                    <span className={`text-[11px] font-extrabold font-mono tracking-wider mt-2.5 transition-colors duration-300 uppercase ${
+                    <span className={`text-[9px] sm:text-xs font-extrabold font-mono tracking-wider mt-3 transition-colors duration-300 uppercase ${
                       isActive ? "text-white" : "text-slate-300 group-hover:text-white"
                     }`}>
                       {step.title}
@@ -757,9 +652,9 @@ export default function CloudSrePage() {
           </div>
 
           {/* Details & Visual Pipeline */}
-          <div className="grid lg:grid-cols-12 gap-8 items-stretch max-w-6xl mx-auto">
+          <div className="grid grid-cols-12 gap-8 items-stretch max-w-6xl mx-auto">
             {/* Left Card: Details for active step */}
-            <div className="lg:col-span-5 flex flex-col justify-between">
+            <div className="col-span-12 lg:col-span-5 flex flex-col justify-between max-w-2xl mx-auto lg:mx-0 w-full">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeMigrationStep}
@@ -767,22 +662,27 @@ export default function CloudSrePage() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 10 }}
                   transition={{ duration: 0.3 }}
-                  className="p-8 rounded-3xl bg-[#090b16]/95 border border-white/5 flex flex-col justify-between h-full"
+                  className="p-8 rounded-3xl bg-white border border-slate-300 shadow-lg flex flex-col justify-between h-full text-slate-800 relative shadow-[inset_1px_1px_0px_#fff,0_4px_12px_rgba(0,0,0,0.05)] border-t-[#ffffff] border-l-[#ffffff] border-b-[#b8c2cc] border-r-[#b8c2cc]"
                 >
-                  <div className="space-y-4">
-                    <div className="flex items-center space-x-2">
-                      <span className="text-[10px] font-bold text-cyan-400 bg-cyan-950/50 border border-cyan-500/30 px-2.5 py-0.5 rounded-full uppercase tracking-wider font-mono">
+                  <div className="text-center flex flex-col items-center">
+                    <div className="space-y-2">
+                      <span className="text-[10px] font-bold text-blue-600 bg-blue-100/60 border border-blue-200/50 px-2.5 py-0.5 rounded-full uppercase tracking-wider font-mono">
                         step_wave::0{activeMigrationStep + 1}
                       </span>
+                      <h3 className="text-xl font-bold text-[#0a1e3b] pt-1">{migrationSteps[activeMigrationStep].title}</h3>
+                      
+                      {/* Accent Blue Separator Line */}
+                      <div className="w-12 h-1 bg-blue-600 rounded mx-auto my-3" />
+                      
+                      <p className="text-xs text-slate-650 leading-relaxed max-w-sm mx-auto">{migrationSteps[activeMigrationStep].desc}</p>
                     </div>
-                    <h3 className="text-xl font-bold text-white">{migrationSteps[activeMigrationStep].title}</h3>
-                    <p className="text-xs text-slate-300 leading-relaxed">{migrationSteps[activeMigrationStep].desc}</p>
                   </div>
-                  <div className="border-t border-white/5 pt-5 mt-6">
-                    <ul className="space-y-2">
+
+                  <div className="border-t border-slate-200 pt-5 mt-6 flex flex-col items-center">
+                    <ul className="space-y-2 text-left w-fit">
                       {migrationSteps[activeMigrationStep].bullets.map((b) => (
-                        <li key={b} className="flex items-center text-xs text-slate-300">
-                          <Check className="w-4 h-4 text-cyan-400 mr-2 flex-shrink-0" />
+                        <li key={b} className="flex items-center text-xs text-slate-700 font-medium">
+                          <Check className="w-4 h-4 text-blue-600 mr-2 flex-shrink-0" />
                           <span>{b}</span>
                         </li>
                       ))}
@@ -793,7 +693,7 @@ export default function CloudSrePage() {
             </div>
 
             {/* Right Card: SVG Visual Network Pipeline */}
-            <div className="lg:col-span-7 p-6 rounded-3xl bg-[#090b16]/95 border border-white/5 flex flex-col items-center justify-center relative overflow-hidden h-[300px] lg:h-auto">
+            <div className="col-span-12 lg:col-span-7 p-6 rounded-3xl bg-[#090b16]/95 border border-white/5 hidden lg:flex flex-col items-center justify-center relative overflow-hidden h-[300px] lg:h-auto">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(16,185,129,0.02),transparent_70%)] pointer-events-none" />
               
               <div className="w-full h-full max-w-[480px] max-h-[220px]">

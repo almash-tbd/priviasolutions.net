@@ -124,7 +124,7 @@ export default function SolutionsClient({ slug, data }) {
       {slugBackgrounds[slug] && (
         <div className={`fixed inset-0 -z-20 pointer-events-none select-none overflow-hidden ${slugBackgrounds[slug].bgColor}`}>
           <div 
-            className="w-full h-full bg-cover bg-center bg-no-repeat opacity-[0.7]"
+            className="w-full h-full bg-cover bg-center bg-no-repeat opacity-[0.18]"
             style={{ 
               backgroundImage: `url('${slugBackgrounds[slug].url}')`,
             }}

@@ -2,12 +2,80 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   ArrowRight, Check, CheckCircle2, ChevronDown, Compass, 
   Zap, Cpu, Sparkles, Database, Lock, Globe, ArrowUpRight, 
   Layers, Settings, Palette, Eye, Layout, PenTool, Accessibility
 } from "lucide-react";
+
+const TechLogo = ({ name }) => {
+  const logos = {
+    "Figma": (
+      <svg viewBox="0 0 38 57" className="w-8 h-8">
+        <path d="M19 0H9.5C4.25 0 0 4.25 0 9.5C0 14.75 4.25 19 9.5 19H19V0Z" fill="#F24E1E"/>
+        <path d="M19 19H28.5C33.75 19 38 14.75 38 9.5C38 4.25 33.75 0 28.5 0H19V19Z" fill="#FF7262"/>
+        <path d="M19 19H9.5C4.25 19 0 23.25 0 28.5C0 33.75 4.25 38 9.5 38H19V19Z" fill="#A259FF"/>
+        <path d="M38 28.5C38 23.25 33.75 19 28.5 19H19V38H28.5C33.75 38 38 33.75 38 28.5Z" fill="#1ABC9C"/>
+        <path d="M19 38H9.5C4.25 38 0 42.25 0 47.5C0 52.75 4.25 57 9.5 57C14.75 57 19 52.75 19 47.5V38Z" fill="#0ACF83"/>
+      </svg>
+    ),
+    "Sketch": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none">
+        <path d="M12 2L2 9L5 21H19L22 9L12 2Z" fill="#FDB300"/>
+        <path d="M12 2L6 9H18L12 2Z" fill="#EA6C00"/>
+        <path d="M12 2L2 9H6L12 2Z" fill="#FDAD00"/>
+        <path d="M12 2L22 9H18L12 2Z" fill="#FDD231"/>
+        <path d="M2 9L12 22L6 9H2Z" fill="#E25400"/>
+        <path d="M22 9L12 22L18 9H22Z" fill="#EA6C00"/>
+        <path d="M6 9L12 22L18 9H6Z" fill="#F38200"/>
+      </svg>
+    ),
+    "Adobe XD": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none">
+        <rect width="24" height="24" rx="5" fill="#2E001F" stroke="#FF61F6" strokeWidth="1"/>
+        <path d="M6.5 7.5L8.5 11.5L10.5 7.5H12L9.5 12.5L12 17.5H10.5L8.5 13.5L6.5 17.5H5L7.5 12.5L5 7.5H6.5Z" fill="#FF61F6" />
+        <path d="M13.5 7.5H16C18.2 7.5 19.5 9 19.5 12.5C19.5 16 18.2 17.5 16 17.5H13.5V7.5ZM15 9V16H16C17.2 16 18 15 18 12.5C18 10 17.2 9 16 9H15Z" fill="#FF61F6" />
+      </svg>
+    ),
+    "Storybook": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none">
+        <rect width="24" height="24" rx="5" fill="#FF4785" />
+        <path d="M6 18V6C6 5.4 6.4 5 7 5H17C17.6 5 18 5.4 18 6V18C18 18.6 17.6 19 17 19H7C6.4 19 6 18.6 6 18Z" stroke="white" strokeWidth="2" />
+        <path d="M10 5V12L12.5 10L15 12V5" fill="white" />
+      </svg>
+    ),
+    "InVision": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none">
+        <rect width="24" height="24" rx="5" fill="#FF3366" />
+        <circle cx="9" cy="8" r="1.5" fill="white" />
+        <rect x="8" y="11" width="2" height="6" fill="white" />
+        <path d="M12 11V17H14V14C14 13 14.5 12.5 15.5 12.5C16.5 12.5 17 13 17 14V17H19V13.5C19 11.5 17.5 10.5 15.5 10.5C14 10.5 13 11 12.5 12" fill="white" />
+      </svg>
+    ),
+    "Hotjar": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none">
+        <path d="M12 2C12 2 19 7 19 12C19 15.9 15.9 19 12 19C8.1 19 5 15.9 5 12C5 7 12 2 12 2Z" fill="url(#hotjar-gradient)" />
+        <path d="M12 7C12 7 16 10 16 13C16 15.2 14.2 17 12 17C9.8 17 8 15.2 8 13C8 10 12 7 12 7Z" fill="#FFE082" />
+        <defs>
+          <linearGradient id="hotjar-gradient" x1="12" y1="2" x2="12" y2="19" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#FF4A00" />
+            <stop offset="1" stopColor="#FF9000" />
+          </linearGradient>
+        </defs>
+      </svg>
+    ),
+    "UserTesting": (
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none">
+        <rect width="24" height="24" rx="5" fill="#00D2B4" />
+        <circle cx="12" cy="9" r="3" fill="white" />
+        <path d="M6 19C6 15.5 9 14 12 14C15 14 18 15.5 18 19" stroke="white" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    )
+  };
+  return logos[name] || <Cpu className="w-8 h-8 text-slate-400" />;
+};
 
 export default function UxUiPage() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -454,19 +522,67 @@ export default function UxUiPage() {
             <h3 className="text-3xl font-extrabold tracking-tight text-white">What You Get</h3>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {deliverables.map((deliv) => (
-              <motion.div 
-                key={deliv.title}
-                whileHover={{ y: -5 }}
-                className="p-6 rounded-3xl bg-[#090b16]/95 border border-white/5 flex flex-col justify-between h-full hover:border-rose-500/30 transition-colors shadow-lg"
-              >
-                <div className="space-y-4">
-                  <h4 className="text-sm font-bold text-white">{deliv.title}</h4>
-                  <p className="text-xs text-slate-400 leading-relaxed">{deliv.desc}</p>
-                </div>
-              </motion.div>
-            ))}
+          {/* Unified Infinite Rotating Marquee Scroller for all viewports */}
+          <div className="relative w-full overflow-hidden py-4 select-none">
+            {/* Left and Right blur/fade overlays */}
+            <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-[#334e8f] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-[#cddbf7] to-transparent z-10 pointer-events-none" />
+
+            <motion.div 
+              className="flex space-x-6 w-max"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{
+                repeat: Infinity,
+                ease: "linear",
+                duration: 25
+              }}
+            >
+              {/* Duplicate array to enable seamless looping */}
+              {[...deliverables, ...deliverables].map((deliv, idx) => {
+                const deliverableImages = {
+                  "User Research & Persona": "/assets/images/services/ux_user_research.png",
+                  "Architecture & Wireframes": "/assets/images/services/ux_wireframes.png",
+                  "High-Fidelity Mockups": "/assets/images/services/ux_high_fidelity.png",
+                  "Interactive Prototypes": "/assets/images/services/ux_prototypes.png"
+                };
+                return (
+                  <div 
+                    key={`${deliv.title}-${idx}`}
+                    className="relative w-[280px] sm:w-[320px] lg:w-[350px] h-[360px] lg:h-[400px] rounded-3xl overflow-hidden shadow-lg border border-white/10 flex flex-col justify-end p-6 lg:p-8 group flex-shrink-0 cursor-pointer"
+                  >
+                    {/* Background Image */}
+                    <div className="absolute inset-0 z-0 select-none pointer-events-none">
+                      <Image 
+                        src={deliverableImages[deliv.title] || "/assets/images/services/compliance_management.png"}
+                        alt={deliv.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 1024px) 320px, 400px"
+                      />
+                      {/* Dark overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent z-10" />
+                    </div>
+
+                    <div className="relative z-20 space-y-2 lg:space-y-3 text-white">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center border border-white/10 bg-white/10 backdrop-blur-md">
+                          <Sparkles className="w-4 h-4 text-white" />
+                        </div>
+                        <span className="text-[9px] font-bold uppercase tracking-wider text-[#4bb8fa] font-mono">Deliverable</span>
+                      </div>
+                      
+                      <h4 className="text-base lg:text-lg font-extrabold text-white group-hover:text-rose-500 transition-colors leading-tight">
+                        {deliv.title}
+                      </h4>
+                      
+                      <p className="text-[11px] lg:text-xs text-slate-200 leading-normal line-clamp-3">
+                        {deliv.desc}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </motion.div>
           </div>
         </div>
       </section>
@@ -498,10 +614,15 @@ export default function UxUiPage() {
               {[...techStack, ...techStack, ...techStack].map((tech, idx) => (
                 <div 
                   key={idx} 
-                  className="p-5 bg-white border border-slate-200/80 rounded-2xl flex flex-col justify-center text-center shadow-sm w-44 flex-shrink-0"
+                  className="p-5 bg-white border border-slate-200/80 rounded-2xl flex flex-col justify-between text-center shadow-sm w-44 flex-shrink-0 group hover:shadow-lg hover:border-rose-500/30 transition-all duration-300"
                 >
-                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block font-mono mb-1">{tech.category}</span>
-                  <span className="text-sm font-extrabold text-slate-800">{tech.name}</span>
+                  <div className="flex justify-between items-start mb-3">
+                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block font-mono">{tech.category}</span>
+                    <div className="w-8 h-8 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <TechLogo name={tech.name} />
+                    </div>
+                  </div>
+                  <span className="text-sm font-extrabold text-slate-800 text-left block mt-2 group-hover:text-rose-500 transition-colors">{tech.name}</span>
                 </div>
               ))}
             </motion.div>

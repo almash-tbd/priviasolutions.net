@@ -2,11 +2,13 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue } from "framer-motion";
 import { 
   ArrowRight, Check, CheckCircle2, ChevronDown, Clock, 
   Shield, Zap, Cpu, Sparkles, Database, Code, Terminal, Activity,
-  Globe, Server, HardDrive, ArrowUpRight, Layers, ThumbsUp
+  Globe, Server, HardDrive, ArrowUpRight, Layers, ThumbsUp,
+  CreditCard, Heart, Cloud, ShoppingCart
 } from "lucide-react";
 
 // Inline vector SVG logos for each of the 12 technologies in the stack
@@ -173,6 +175,38 @@ export default function CustomDevelopmentPage() {
       window.removeEventListener("resize", handleScroll);
     };
   }, [scrollProgress]);
+
+  useEffect(() => {
+    const isMobileTablet = window.innerWidth < 1024;
+    if (!isMobileTablet) return;
+
+    const elements = [];
+    processSteps.forEach((_, idx) => {
+      const el = document.getElementById(`mobile-process-card-${idx}`);
+      if (el) elements.push(el);
+    });
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "-25% 0px -25% 0px",
+      threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = parseInt(entry.target.getAttribute("data-index"), 10);
+          setActiveStep(index);
+        }
+      });
+    }, observerOptions);
+
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   // Scroll Mitosis Card division coordinates
   // Left card translates from 0px to -55px (shifts left)
@@ -663,13 +697,14 @@ export default function CustomDevelopmentPage() {
             
             <div className="space-y-8 pl-14 sm:pl-16 relative z-10">
               {processSteps.map((step, idx) => (
-                <ProcessCard 
-                  key={step.step}
-                  step={step}
-                  idx={idx}
-                  isActive={activeStep === idx}
-                  onHover={setActiveStep}
-                />
+                <div key={step.step} id={`mobile-process-card-${idx}`} data-index={idx}>
+                  <ProcessCard 
+                    step={step}
+                    idx={idx}
+                    isActive={activeStep === idx}
+                    onHover={setActiveStep}
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -683,24 +718,24 @@ export default function CustomDevelopmentPage() {
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             
             {/* Left Col: Deliverables */}
-            <div className="lg:col-span-5 space-y-6 text-white">
+             <div className="lg:col-span-5 space-y-6 text-white text-center lg:text-left flex flex-col items-center lg:items-start">
               <div className="space-y-3">
                 <h2 className="text-[10px] font-black tracking-widest text-[#4BB8FA] uppercase font-mono">deliverables::manifest</h2>
                 <h3 className="text-3xl font-extrabold tracking-tight text-white">Deliverables</h3>
-                <p className="text-xs text-slate-200 leading-relaxed max-w-lg">
+                <p className="text-xs text-slate-200 leading-relaxed max-w-lg mx-auto lg:mx-0">
                   Every production release is delivered with a complete developer operational package to ensure you can support, run, and scale the systems autonomously.
                 </p>
               </div>
               
-              <ul className="grid sm:grid-cols-1 gap-4 pt-4">
+              <ul className="grid grid-cols-1 gap-4 pt-4 text-center lg:text-left w-full max-w-md">
                 {deliverables.map((deliv, idx) => (
                   <motion.li 
                     key={deliv}
-                    initial={{ opacity: 0, x: -15 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: idx * 0.05 }}
-                    className="flex items-start text-xs text-slate-100 group cursor-default"
+                    className="flex flex-row items-start text-left text-xs text-slate-100 group cursor-default"
                   >
                     <CheckCircle2 className="w-4 h-4 text-[#4BB8FA] mr-2.5 flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
                     <span className="group-hover:text-white transition-colors">{deliv}</span>
@@ -796,36 +831,76 @@ export default function CustomDevelopmentPage() {
             <p className="text-xs text-slate-700 max-w-md mx-auto leading-relaxed">Custom architecture patterns tailored for high-concurrency compliance domains.</p>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-6">
-            {industries.map((ind, idx) => (
-              <motion.div 
-                key={ind.name}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className="p-8 rounded-3xl border transition-all duration-300 relative overflow-hidden group flex flex-col justify-between bg-white/75 backdrop-blur-md border-blue-200/50 shadow-md shadow-blue-900/5 hover:bg-white hover:border-[#1591dc]/30"
-              >
-                <div>
-                  <h4 className="text-lg font-bold text-slate-900 group-hover:text-[#2C5EAD] transition-colors mb-3">{ind.name}</h4>
-                  <p className="text-xs text-slate-700 leading-relaxed mb-6">{ind.desc}</p>
-                </div>
-                
-                <div className="border-t border-slate-200/60 pt-4 mt-6">
-                  <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider block mb-3 font-mono">Modules catalog</span>
-                  <div className="flex flex-wrap gap-2">
-                    {ind.bullets.map((bullet) => (
-                      <span 
-                        key={bullet}
-                        className="text-[10px] font-semibold text-slate-700 bg-slate-50 border border-slate-200/80 px-2.5 py-1 rounded-lg hover:border-[#1591dc]/20 transition-all cursor-default"
-                      >
-                        {bullet}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          {/* Unified Industries Grid Layout (Image-filled cards on all viewports) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {(() => {
+              const industryMeta = {
+                "FinTech & Banking": { icon: CreditCard },
+                "Healthcare Systems": { icon: Heart },
+                "SaaS Platforms": { icon: Cloud },
+                "E-Commerce Engines": { icon: ShoppingCart }
+              };
+              const industryImages = {
+                "FinTech & Banking": "/assets/images/sectors/fintech.png",
+                "Healthcare Systems": "/assets/images/sectors/healthcare.png",
+                "SaaS Platforms": "/assets/images/sectors/saas.png",
+                "E-Commerce Engines": "/assets/images/sectors/retail.png"
+              };
+              return industries.map((ind, idx) => {
+                const meta = industryMeta[ind.name] || { icon: Code };
+                const Icon = meta.icon;
+                return (
+                  <motion.div 
+                    key={ind.name}
+                    initial={{ opacity: 0, y: 25 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: idx * 0.1 }}
+                    className="relative h-[300px] sm:h-[320px] lg:h-[360px] rounded-3xl overflow-hidden border border-white/10 hover:border-blue-400/30 transition-all duration-300 flex flex-col justify-end p-6 lg:p-8 group cursor-pointer shadow-lg"
+                  >
+                    {/* Background Image */}
+                    <div className="absolute inset-0 z-0 select-none pointer-events-none">
+                      <Image 
+                        src={industryImages[ind.name] || "/assets/images/sectors/fintech.png"}
+                        alt={ind.name}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 1024px) 100vw, 600px"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent z-10" />
+                    </div>
+
+                    <div className="relative z-20 space-y-2 lg:space-y-3 text-white">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center border border-white/10 bg-white/10 backdrop-blur-md">
+                          <Icon className="w-4 h-4 text-white" />
+                        </div>
+                        <span className="text-[9px] font-bold uppercase tracking-wider text-blue-400 font-mono">Industry</span>
+                      </div>
+                      
+                      <h4 className="text-base lg:text-lg font-extrabold text-white group-hover:text-blue-400 transition-colors leading-tight">
+                        {ind.name}
+                      </h4>
+                      
+                      <p className="text-[11px] lg:text-xs text-slate-200 leading-normal line-clamp-2">
+                        {ind.desc}
+                      </p>
+
+                      <div className="flex flex-wrap gap-1.5 pt-2">
+                        {ind.bullets.slice(0, 3).map((bullet) => (
+                          <span 
+                            key={bullet}
+                            className="text-[9px] lg:text-[10px] font-semibold text-slate-200 bg-white/5 border border-white/10 px-2 py-0.5 rounded"
+                          >
+                            {bullet}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              });
+            })()}
           </div>
         </div>
       </section>

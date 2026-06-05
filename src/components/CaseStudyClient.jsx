@@ -213,7 +213,7 @@ export default function CaseStudyClient({ data, slug }) {
   return (
     <div 
       onMouseMove={handleMouseMove}
-      className="min-h-screen bg-slate-50/50 text-slate-900 font-sans selection:bg-blue-600 selection:text-white relative overflow-hidden text-left"
+      className="min-h-screen bg-slate-50/50 text-slate-900 font-sans selection:bg-blue-600 selection:text-white relative overflow-hidden text-left w-full max-w-full"
       style={{
         background: `
           radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.035), transparent 40%),
@@ -235,19 +235,19 @@ export default function CaseStudyClient({ data, slug }) {
           <div className="lg:col-span-8 space-y-6">
             
             {/* Breadcrumb */}
-            <div className="flex items-center space-x-2 text-xs font-semibold text-slate-400 font-mono">
+            <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-slate-400 font-mono">
               <Link href="/" className="hover:text-blue-400 transition-colors">Home</Link>
               <ChevronRight className="w-3.5 h-3.5" />
               <Link href="/case-studies" className="hover:text-blue-400 transition-colors">Case Studies</Link>
               <ChevronRight className="w-3.5 h-3.5" />
-              <span className="text-slate-200 truncate max-w-[200px] sm:max-w-none">{data.client}</span>
+              <span className="text-slate-200 truncate max-w-[140px] sm:max-w-[280px] lg:max-w-none">{data.client}</span>
             </div>
 
             <div className="space-y-4">
               <span className="text-[10px] font-black tracking-widest text-blue-400 bg-blue-500/10 px-3.5 py-1.5 rounded-full border border-blue-500/20 shadow-sm inline-block uppercase font-mono">
                 CASE STUDY
               </span>
-              <h1 className="text-3xl sm:text-5xl font-black text-white font-outfit tracking-tight leading-[1.15]">
+              <h1 className="text-3xl sm:text-5xl font-black text-white font-outfit tracking-tight leading-[1.15] break-words">
                 {data.title}
               </h1>
               <p className="text-slate-350 text-sm sm:text-base leading-relaxed max-w-3xl font-medium">
@@ -300,16 +300,16 @@ export default function CaseStudyClient({ data, slug }) {
 
               <div className="grid grid-cols-2 gap-4">
                 {data.metrics.slice(0, 4).map((m, idx) => (
-                  <div key={idx} className="bg-slate-950/50 border border-slate-800/70 p-4.5 rounded-2xl text-left hover:border-slate-700 transition-colors group">
-                    <div className="flex justify-between items-start">
-                      <div className="text-xl sm:text-2xl font-black text-white font-outfit tracking-tight group-hover:text-blue-400 transition-colors">
+                  <div key={idx} className="bg-slate-950/50 border border-slate-800/70 p-4.5 rounded-2xl text-left hover:border-slate-700 transition-colors group min-w-0">
+                    <div className="flex justify-between items-start gap-1">
+                      <div className="text-xl sm:text-2xl font-black text-white font-outfit tracking-tight group-hover:text-blue-400 transition-colors break-words">
                         {m.value}
                       </div>
-                      <div className="w-3.5 h-3.5 rounded-full bg-blue-500/10 text-blue-400 flex items-center justify-center text-[7.5px] font-bold">
+                      <div className="w-3.5 h-3.5 rounded-full bg-blue-500/10 text-blue-400 flex items-center justify-center text-[7.5px] font-bold shrink-0">
                         ↗
                       </div>
                     </div>
-                    <div className="text-[9px] font-black uppercase tracking-widest text-slate-400 font-mono mt-1.5 leading-tight">
+                    <div className="text-[9px] font-black uppercase tracking-widest text-slate-400 font-mono mt-1.5 leading-tight break-words">
                       {m.label}
                     </div>
                   </div>
@@ -340,7 +340,7 @@ export default function CaseStudyClient({ data, slug }) {
         <div className="grid lg:grid-cols-12 gap-12 items-start">
           
           {/* Left Column (Overview, Challenges, Solutions, Outcomes, Tech stack, Diagram) */}
-          <div className="lg:col-span-8 space-y-12">
+          <div className="lg:col-span-8 space-y-12 min-w-0">
             
             {/* Overview */}
             <article className="space-y-4 text-left">
@@ -436,9 +436,9 @@ export default function CaseStudyClient({ data, slug }) {
               </div>
 
               {/* Animated interactive SVG Network flow */}
-              <div className="relative w-full rounded-3xl bg-white border border-slate-200/80 shadow-md p-6 sm:p-8 select-none overflow-x-auto min-w-[700px]">
-                
-                {isCloudOrDevOps ? (
+              <div className="relative w-full rounded-3xl bg-white border border-slate-200/80 shadow-md p-6 sm:p-8 select-none overflow-x-auto">
+                <div className="min-w-[700px] w-full">
+                  {isCloudOrDevOps ? (
                   /* AWS / Cloud native network EKS architecture dynamic diagram */
                   <svg viewBox="0 0 820 280" className="w-full h-auto text-slate-400 font-mono text-[9px] font-bold">
                     
@@ -709,6 +709,7 @@ export default function CaseStudyClient({ data, slug }) {
 
                   </svg>
                 )}
+                </div>
 
                 {/* Info Tooltip box for active diagram node */}
                 <AnimatePresence>

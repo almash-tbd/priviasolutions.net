@@ -1,12 +1,13 @@
 "use client";
-
-import { useState } from "react";
+ 
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   ArrowRight, Check, CheckCircle2, ChevronDown, Smartphone,
   Zap, Cpu, Sparkles, Database, Lock, Globe, Star, ArrowUpRight, 
-  Layers, Settings, Play, Flame, HelpCircle
+  Layers, Settings, Play, Flame, HelpCircle, CreditCard, Heart, ShoppingCart
 } from "lucide-react";
 
 const TechLogo = ({ name }) => {
@@ -66,10 +67,48 @@ export default function MobileAppsPage() {
   const [faqPage, setFaqPage] = useState(0);
   const [faqInput, setFaqInput] = useState("");
   const [faqSent, setFaqSent] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
 
   const toggleFaq = (index) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
+
+  const processImages = [
+    "/assets/images/Process/mobile_discovery.png",
+    "/assets/images/Process/mobile_design.png",
+    "/assets/images/Process/mobile_development.png",
+    "/assets/images/Process/mobile_launch.png"
+  ];
+
+  useEffect(() => {
+    const isMobileTablet = typeof window !== "undefined" && window.innerWidth < 1024;
+    const elements = [];
+    processSteps.forEach((_, idx) => {
+      const el = document.getElementById(`mobile-process-card-${idx}`);
+      if (el) elements.push(el);
+    });
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "-25% 0px -25% 0px",
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = parseInt(entry.target.getAttribute("data-index"), 10);
+          setActiveStep(index);
+        }
+      });
+    }, observerOptions);
+
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   const capabilities = [
     "Offline-first architecture with sync",
@@ -113,22 +152,26 @@ export default function MobileAppsPage() {
     {
       title: "E-Commerce & Retail",
       desc: "Shopping apps featuring interactive product catalogs, persistent carts, payment gates, and live order tracking.",
-      accent: "from-blue-500/20 to-indigo-500/20"
+      accent: "from-blue-500/20 to-indigo-500/20",
+      icon: ShoppingCart
     },
     {
       title: "FinTech & Banking",
       desc: "Secure banking, digital wallets, and investment platforms fully compliant with financial transactional safety.",
-      accent: "from-emerald-500/20 to-teal-500/20"
+      accent: "from-emerald-500/20 to-teal-500/20",
+      icon: CreditCard
     },
     {
       title: "Healthcare & Wellness",
       desc: "Secure telemedicine portals, fitness tracking, and active patient monitoring interfaces.",
-      accent: "from-rose-500/20 to-pink-500/20"
+      accent: "from-rose-500/20 to-pink-500/20",
+      icon: Heart
     },
     {
       title: "Social & Entertainment",
       desc: "High-frequency social feeds, live streaming media channels, and real-time user-to-user messaging engines.",
-      accent: "from-amber-500/20 to-orange-500/20"
+      accent: "from-amber-500/20 to-orange-500/20",
+      icon: Play
     }
   ];
 
@@ -363,7 +406,7 @@ export default function MobileAppsPage() {
       </section>
 
       {/* 4. DEVELOPMENT PROCESS */}
-      <section id="process" className="relative bg-gradient-to-b from-[#334e8f] via-[#5978be] to-[#cddbf7] py-20 border-b border-white/5 overflow-hidden">
+      <section id="process" className="relative bg-gradient-to-b from-[#334e8f] via-[#5978be] to-[#0a0c16] py-20 border-b border-white/5 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3 text-white">
             <h2 className="text-[10px] font-black tracking-widest text-[#4BB8FA] uppercase font-mono">workflow::lifecycle</h2>
@@ -373,31 +416,99 @@ export default function MobileAppsPage() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {processSteps.map((step) => (
-              <div 
-                key={step.step}
-                className="p-6 rounded-3xl bg-[#090b16]/95 border border-white/5 flex flex-col justify-between h-full"
-              >
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <span className="text-3xl font-black font-mono text-[#1591dc]">{step.step}</span>
+          <div className="relative max-w-5xl mx-auto mt-12">
+            {/* Center line for desktop */}
+            <div className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-0.5 bg-slate-700/30 -translate-x-1/2 hidden md:block" />
+            
+            {/* Active glowing line */}
+            <div className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 hidden md:block overflow-hidden">
+              <motion.div 
+                className="w-full bg-gradient-to-b from-[#2C5EAD] via-[#1591DC] to-[#4BB8FA] rounded-full"
+                initial={{ height: "0%" }}
+                animate={{ height: `${((activeStep + 1) / 4) * 100}%` }}
+                transition={{ type: "spring", stiffness: 50, damping: 15 }}
+              />
+            </div>
+
+            <div className="space-y-16 lg:space-y-24">
+              {processSteps.map((step, idx) => {
+                const isEven = idx % 2 === 0;
+                const isActive = activeStep === idx;
+                
+                return (
+                  <div 
+                    key={step.step}
+                    id={`mobile-process-card-${idx}`}
+                    data-index={idx}
+                    className="relative grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
+                    onMouseEnter={() => setActiveStep(idx)}
+                  >
+                    {/* Timeline Dot */}
+                    <div className="absolute left-8 lg:left-1/2 top-6 -translate-x-1/2 z-20 hidden md:block">
+                      <motion.div 
+                        className={`w-5 h-5 rounded-full border-4 transition-all duration-300 ${
+                          isActive 
+                            ? "bg-[#1591DC] border-slate-950 scale-125 shadow-[0_0_12px_#1591DC]" 
+                            : "bg-slate-800 border-slate-700"
+                        }`}
+                      />
+                    </div>
+
+                    {/* Left/Content Side */}
+                    <div className={`md:col-span-6 ${isEven ? "lg:order-1" : "lg:order-2 lg:pl-12"} pl-16 md:pl-12 lg:pl-0`}>
+                      <motion.div 
+                        className={`p-8 rounded-3xl transition-all duration-500 border ${
+                          isActive 
+                            ? "bg-slate-950/90 border-[#1591dc] shadow-[0_10px_35px_rgba(21,145,220,0.25)] scale-[1.02]" 
+                            : "bg-[#090b16]/95 border-white/5 opacity-75"
+                        }`}
+                      >
+                        <div className="flex justify-between items-center mb-4">
+                          <span className={`text-4xl font-black font-mono transition-colors ${isActive ? "text-[#1591dc]" : "text-slate-700"}`}>
+                            {step.step}
+                          </span>
+                          <span className={`text-[10px] font-bold font-mono tracking-wider px-2 py-0.5 rounded ${
+                            isActive ? "bg-[#1591dc]/10 text-[#4bb8fa]" : "bg-white/5 text-slate-500"
+                          }`}>
+                            PHASE
+                          </span>
+                        </div>
+                        <h4 className="text-xl font-bold text-white mb-2">{step.title}</h4>
+                        <p className="text-xs text-slate-400 leading-relaxed mb-6">{step.desc}</p>
+                        
+                        {/* Checkmark Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-white/5">
+                          {step.bullets.map((bullet) => (
+                            <div key={bullet} className="flex items-center text-xs text-slate-300">
+                              <Check className={`w-4 h-4 mr-2 flex-shrink-0 ${isActive ? "text-[#1591dc]" : "text-slate-500"}`} />
+                              <span>{bullet}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    </div>
+
+                    {/* Right/Image Side */}
+                    <div className={`md:col-span-6 ${isEven ? "lg:order-2 lg:pl-12" : "lg:order-1"} flex justify-center`}>
+                      <motion.div 
+                        className={`relative w-full max-w-[240px] aspect-[9/18.5] rounded-[36px] overflow-hidden border-[8px] transition-all duration-500 ${
+                          isActive 
+                            ? "border-slate-900 shadow-[0_20px_50px_rgba(0,0,0,0.5)] scale-105" 
+                            : "border-slate-950/60 opacity-60 scale-95"
+                        }`}
+                      >
+                        <Image 
+                          src={processImages[idx]} 
+                          alt={`${step.title} Process Mockup`} 
+                          fill
+                          className="object-cover"
+                        />
+                      </motion.div>
+                    </div>
                   </div>
-                  <h4 className="text-base font-bold text-white">{step.title}</h4>
-                  <p className="text-xs text-slate-400 leading-relaxed">{step.desc}</p>
-                </div>
-                <div className="border-t border-white/5 pt-4 mt-6">
-                  <ul className="space-y-1.5">
-                    {step.bullets.map((b) => (
-                      <li key={b} className="flex items-center text-[10px] text-slate-300">
-                        <Check className="w-3.5 h-3.5 text-blue-400 mr-2 flex-shrink-0" />
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
@@ -413,17 +524,68 @@ export default function MobileAppsPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {categories.map((cat) => (
-              <div 
-                key={cat.title}
-                className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden"
-              >
-                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${cat.accent}`} />
-                <h4 className="text-base font-bold text-slate-900 mb-2">{cat.title}</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">{cat.desc}</p>
-              </div>
-            ))}
+          {/* Unified Infinite Rotating Marquee Scroller for all viewports */}
+          <div className="relative w-full overflow-hidden py-4 select-none">
+            {/* Left and Right blur/fade overlays */}
+            <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-[#cddbf7] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-[#f0f5fd] to-transparent z-10 pointer-events-none" />
+
+            <motion.div 
+              className="flex space-x-6 w-max"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{
+                repeat: Infinity,
+                ease: "linear",
+                duration: 25
+              }}
+            >
+              {/* Duplicate array to enable seamless looping */}
+              {[...categories, ...categories].map((cat, idx) => {
+                const IconComponent = cat.icon;
+                const categoryImages = {
+                  "E-Commerce & Retail": "/assets/images/sectors/retail.png",
+                  "FinTech & Banking": "/assets/images/sectors/fintech.png",
+                  "Healthcare & Wellness": "/assets/images/sectors/healthcare.png",
+                  "Social & Entertainment": "/assets/images/sectors/saas.png"
+                };
+                return (
+                  <div 
+                    key={`${cat.title}-${idx}`}
+                    className="relative w-[280px] sm:w-[320px] lg:w-[350px] h-[360px] lg:h-[400px] rounded-3xl overflow-hidden shadow-lg border border-white/10 flex flex-col justify-end p-6 lg:p-8 group flex-shrink-0 cursor-pointer"
+                  >
+                    {/* Background Image */}
+                    <div className="absolute inset-0 z-0 select-none pointer-events-none">
+                      <Image 
+                        src={categoryImages[cat.title] || "/assets/images/sectors/retail.png"}
+                        alt={cat.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 1024px) 320px, 400px"
+                      />
+                      {/* Dark overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent z-10" />
+                    </div>
+
+                    <div className="relative z-20 space-y-2 lg:space-y-3 text-white">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center border border-white/10 bg-white/10 backdrop-blur-md">
+                          <IconComponent className="w-4 h-4 text-white" />
+                        </div>
+                        <span className="text-[9px] font-bold uppercase tracking-wider text-cyan-400 font-mono">Category</span>
+                      </div>
+                      
+                      <h4 className="text-base lg:text-lg font-extrabold text-white group-hover:text-cyan-400 transition-colors leading-tight">
+                        {cat.title}
+                      </h4>
+                      
+                      <p className="text-[11px] lg:text-xs text-slate-200 leading-normal line-clamp-3">
+                        {cat.desc}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </motion.div>
           </div>
         </div>
       </section>
@@ -514,7 +676,7 @@ export default function MobileAppsPage() {
               >
                 <div className="flex justify-between items-start mb-4">
                   <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest font-mono">{tech.category}</span>
-                  <div className="w-8 h-8 flex items-center justify-center text-slate-700 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-8 h-8 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <TechLogo name={tech.name} />
                   </div>
                 </div>
