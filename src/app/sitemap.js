@@ -1,5 +1,7 @@
 import { blogData, caseStudiesData, solutionsData } from "@/data/siteData";
 
+export const dynamic = 'force-static';
+
 export default async function sitemap() {
   const baseUrl = "https://priviasolutions.com";
 

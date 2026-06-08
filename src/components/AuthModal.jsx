@@ -108,7 +108,8 @@ function AuthModalContent() {
                 alt="Privia Logo Symbol" 
                 width={24} 
                 height={24} 
-                className="w-6 h-6 object-contain" 
+                className="w-6 h-6 object-contain"
+                unoptimized={true}
               />
             </div>
             <h2 className="text-2xl font-black tracking-tight text-white font-outfit uppercase">

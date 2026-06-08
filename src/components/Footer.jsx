@@ -89,7 +89,8 @@ export default function Footer() {
                 alt="Privia Solutions" 
                 width={192} 
                 height={48} 
-                className="h-12 w-auto object-contain brightness-0 invert" 
+                className="h-12 w-auto object-contain brightness-0 invert"
+                unoptimized={true}
               />
             </Link>
             <p className="text-sm text-slate-200 leading-relaxed">
