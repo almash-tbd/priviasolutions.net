@@ -735,7 +735,7 @@ export default function ManagedSupportPage() {
               {/* Question mark illustration */}
               <div className="w-56 h-48 relative mb-6">
                 <img 
-                  src="/assets/support_faq_illustration.png" 
+                  src="/assets/support_faq_illustration.webp" 
                   alt="Managed Support FAQ Illustration" 
                   className="w-full h-full object-contain"
                 />

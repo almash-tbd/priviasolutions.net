@@ -711,28 +711,6 @@ export default function BlogPostClient({ post, slug, allBlogs }) {
         {/* ================= RIGHT SIDEBAR ================= */}
         <aside className="hidden lg:block lg:col-span-3 space-y-8 sticky top-12 self-start h-[calc(100vh-100px)] overflow-y-auto pr-2 scrollbar-thin">
           
-          {/* Author Widget */}
-          <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm text-center space-y-4">
-            <h4 className="text-[10px] font-black tracking-widest text-slate-400 uppercase border-b border-slate-100 pb-2">
-              About The Author
-            </h4>
-            <div className="flex flex-col items-center space-y-3">
-              {/* Initials round gradient avatar */}
-              <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-600 text-white font-extrabold text-lg flex items-center justify-center select-none shadow-md">
-                {post.authorMeta ? post.authorMeta.avatar : post.author.split(" ").map(n => n[0]).join("")}
-              </div>
-              <div className="space-y-1">
-                <h5 className="text-sm font-extrabold text-slate-900">{post.author}</h5>
-                <p className="text-[10px] font-black text-slate-400 uppercase">
-                  {post.authorMeta ? post.authorMeta.title : "Technical Director"}
-                </p>
-              </div>
-            </div>
-            <p className="text-[11px] text-slate-500 leading-relaxed">
-              {post.authorMeta ? post.authorMeta.bio : "Technical lead focused on developer operations, software design systems, and cloud scaling."}
-            </p>
-          </div>
-
           {/* Share Article Widget */}
           <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
             <h4 className="text-[10px] font-black tracking-widest text-slate-400 uppercase border-b border-slate-100 pb-2 text-center">

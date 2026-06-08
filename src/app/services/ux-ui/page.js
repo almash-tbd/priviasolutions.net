@@ -524,9 +524,6 @@ export default function UxUiPage() {
 
           {/* Unified Infinite Rotating Marquee Scroller for all viewports */}
           <div className="relative w-full overflow-hidden py-4 select-none">
-            {/* Left and Right blur/fade overlays */}
-            <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-[#334e8f] to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-[#cddbf7] to-transparent z-10 pointer-events-none" />
 
             <motion.div 
               className="flex space-x-6 w-max"
@@ -540,20 +537,20 @@ export default function UxUiPage() {
               {/* Duplicate array to enable seamless looping */}
               {[...deliverables, ...deliverables].map((deliv, idx) => {
                 const deliverableImages = {
-                  "User Research & Persona": "/assets/images/services/ux_user_research.png",
-                  "Architecture & Wireframes": "/assets/images/services/ux_wireframes.png",
-                  "High-Fidelity Mockups": "/assets/images/services/ux_high_fidelity.png",
-                  "Interactive Prototypes": "/assets/images/services/ux_prototypes.png"
+                  "User Research & Persona": "/assets/images/services/ux_user_research.webp",
+                  "Architecture & Wireframes": "/assets/images/services/ux_wireframes.webp",
+                  "High-Fidelity Mockups": "/assets/images/services/ux_high_fidelity.webp",
+                  "Interactive Prototypes": "/assets/images/services/ux_prototypes.webp"
                 };
                 return (
                   <div 
                     key={`${deliv.title}-${idx}`}
-                    className="relative w-[280px] sm:w-[320px] lg:w-[350px] h-[360px] lg:h-[400px] rounded-3xl overflow-hidden shadow-lg border border-white/10 flex flex-col justify-end p-6 lg:p-8 group flex-shrink-0 cursor-pointer"
+                    className="relative w-[230px] sm:w-[280px] lg:w-[320px] h-[300px] sm:h-[340px] lg:h-[360px] rounded-3xl overflow-hidden shadow-lg border border-white/10 flex flex-col justify-end p-5 lg:p-8 group flex-shrink-0 cursor-pointer"
                   >
                     {/* Background Image */}
                     <div className="absolute inset-0 z-0 select-none pointer-events-none">
                       <Image 
-                        src={deliverableImages[deliv.title] || "/assets/images/services/compliance_management.png"}
+                        src={deliverableImages[deliv.title] || "/assets/images/services/compliance_management.webp"}
                         alt={deliv.title}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -717,7 +714,7 @@ export default function UxUiPage() {
             <div className="lg:col-span-5 flex flex-col items-center p-8 bg-slate-50/50 rounded-3xl border border-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.02)]">
               <div className="w-56 h-48 relative mb-6">
                 <img 
-                  src="/assets/ux_ui_faq_illustration.png" 
+                  src="/assets/ux_ui_faq_illustration.webp" 
                   alt="UX/UI FAQ Illustration" 
                   className="w-full h-full object-contain"
                 />

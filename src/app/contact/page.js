@@ -128,7 +128,7 @@ export default function ContactPage() {
           {/* Right Vector Illustration */}
           <div className="lg:col-span-4 flex justify-center">
             <img 
-              src="/assets/images/contact_illustration.png" 
+              src="/assets/images/contact_illustration.webp" 
               alt="Cyber security data rings"
               className="w-full max-w-[320px] h-auto object-contain drop-shadow-[0_0_35px_rgba(59,130,246,0.22)] select-none pointer-events-none animate-[pulse_6s_ease-in-out_infinite]"
             />
@@ -284,17 +284,6 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100/50 flex items-center justify-center text-blue-600 shrink-0">
-                    <MessageSquare className="w-4.5 h-4.5" />
-                  </div>
-                  <div>
-                    <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest font-mono">Live Chat</h4>
-                    <span className="text-xs font-bold text-slate-700 block mt-0.5">
-                      Chat with our team
-                    </span>
-                  </div>
-                </div>
 
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100/50 flex items-center justify-center text-blue-600 shrink-0">
@@ -383,12 +372,7 @@ export default function ContactPage() {
             
             {/* Actions */}
             <div className="flex flex-wrap gap-4 pt-3">
-              <button 
-                onClick={() => toast.success("Opening booking console...")}
-                className="px-5.5 py-3 rounded-xl text-xs font-black uppercase tracking-wider font-mono text-blue-600 bg-white hover:bg-slate-50 transition-all flex items-center gap-1.5 shadow-md active:scale-98"
-              >
-                Schedule a Consultation <ArrowRight className="w-3.5 h-3.5" />
-              </button>
+
               
               <Link 
                 href="/services"

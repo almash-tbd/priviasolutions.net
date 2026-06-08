@@ -100,25 +100,25 @@ export default function CybersecurityPage() {
       title: "Security Standards",
       desc: "Compliance mapping and preparation audits.",
       badge: "Security Standard Support",
-      image: "/assets/images/services/compliance_standards.png"
+      image: "/assets/images/services/compliance_standards.webp"
     },
     {
       title: "Data Protection",
       desc: "Privacy assessments, data flow mappings, and privacy regulation readiness.",
       badge: "Data Privacy Compliance",
-      image: "/assets/images/services/compliance_data.png"
+      image: "/assets/images/services/compliance_data.webp"
     },
     {
       title: "Healthcare Security",
       desc: "Secure medical infrastructure designs and patient PHI secure vaulting.",
       badge: "Healthcare Data Handling",
-      image: "/assets/images/services/compliance_healthcare.png"
+      image: "/assets/images/services/compliance_healthcare.webp"
     },
     {
       title: "Security Management",
       desc: "Setting up information security management systems.",
       badge: "Security Frameworks",
-      image: "/assets/images/services/compliance_management.png"
+      image: "/assets/images/services/compliance_management.webp"
     }
   ];
 

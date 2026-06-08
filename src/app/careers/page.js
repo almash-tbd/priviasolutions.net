@@ -6,10 +6,10 @@ import { Briefcase, Clock, ArrowRight, CheckCircle2, Globe, Cpu, LineChart, Shie
 import { careersData } from "@/data/siteData";
 
 export default function CareersPage() {
-  const [activeJob, setActiveJob] = useState(careersData[0]?.id || "");
+  const [openJobs, setOpenJobs] = useState({
+    [careersData[0]?.id || ""]: true
+  });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  const selectedJob = careersData.find(j => j.id === activeJob) || careersData[0];
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -20,7 +20,10 @@ export default function CareersPage() {
   };
 
   const handleJobSelect = (jobId) => {
-    setActiveJob(activeJob === jobId ? "" : jobId);
+    setOpenJobs(prev => ({
+      ...prev,
+      [jobId]: !prev[jobId]
+    }));
   };
 
   const containerVariants = {
@@ -142,7 +145,7 @@ export default function CareersPage() {
 
           <div className="space-y-6">
             {careersData.map((job) => {
-              const isActive = activeJob === job.id;
+              const isActive = !!openJobs[job.id];
               return (
                 <div key={job.id} className="space-y-4">
                   <motion.button
@@ -243,7 +246,7 @@ export default function CareersPage() {
                             </div>
                             <div className="pt-2">
                               <a 
-                                href={`mailto:info.priviasolutions.net?subject=Application for ${job.title}`}
+                                href={`mailto:info@priviasolutions.net?subject=Application for ${job.title}`}
                                 className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 rounded-xl font-extrabold text-xs text-white bg-blue-600 hover:bg-blue-700 transition-all text-center shadow-lg shadow-blue-600/10 active:scale-98"
                               >
                                 Apply for this Position
@@ -275,7 +278,7 @@ export default function CareersPage() {
               </div>
               
               <a 
-                href="mailto:info.priviasolutions.net?subject=Open Application for Careers at Privia"
+                href="mailto:info@priviasolutions.net?subject=Open Application for Careers at Privia"
                 className="px-5 py-2.5 bg-white border border-blue-600 hover:bg-blue-50 text-blue-600 text-xs font-extrabold rounded-xl transition-all flex items-center shrink-0 gap-1.5"
               >
                 Send Open Application

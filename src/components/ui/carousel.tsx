@@ -2,11 +2,14 @@
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 import { useState, useRef, useId, useEffect } from "react";
 
+import Link from "next/link";
+
 interface SlideData {
   title: string;
   desc?: string;
   button: string;
   src: string;
+  href?: string;
 }
 
 interface SlideProps {
@@ -21,7 +24,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
 
   const xRef = useRef(0);
   const yRef = useRef(0);
-  const frameRef = useRef<number>();
+  const frameRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const animate = () => {
@@ -119,9 +122,12 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
             </p>
           )}
           <div className="flex justify-center">
-            <button className="mt-6 px-6 py-2.5 w-fit mx-auto text-xs sm:text-sm font-bold text-slate-900 bg-white rounded-xl hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-205 shadow-md">
+            <Link 
+              href={slide.href || "/contact"}
+              className="mt-6 px-6 py-2.5 w-fit mx-auto text-xs sm:text-sm font-bold text-slate-900 bg-white rounded-xl hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-205 shadow-md inline-block text-center"
+            >
               {button}
-            </button>
+            </Link>
           </div>
         </article>
       </li>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Cpu, Mail, Phone } from "lucide-react";
 
 export default function Footer() {
@@ -53,7 +54,6 @@ export default function Footer() {
     {
       title: "Legal",
       links: [
-        { name: "Security", href: "/security" },
         { name: "Privacy Policy", href: "/privacy" },
         { name: "Terms of Service", href: "/terms" },
         { name: "Data Processing Addendum", href: "/dpa" },
@@ -83,13 +83,14 @@ export default function Footer() {
         {/* Top brand header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between pb-12 border-b border-white/10 mb-12 gap-6">
           <div className="max-w-md">
-            <Link href="/" className="flex items-center space-x-2 group mb-4">
-              <div className="w-9 h-9 rounded-lg bg-white text-[#2C5EAD] flex items-center justify-center">
-                <Cpu className="w-4.5 h-4.5" />
-              </div>
-              <span className="font-extrabold text-xl tracking-wider text-white">
-                PRIVIA
-              </span>
+            <Link href="/" className="flex items-center group mb-4">
+              <Image 
+                src="/assets/logo.webp" 
+                alt="Privia Solutions" 
+                width={192} 
+                height={48} 
+                className="h-12 w-auto object-contain brightness-0 invert" 
+              />
             </Link>
             <p className="text-sm text-slate-200 leading-relaxed">
               Orchestrating next-generation cloud architectures, bespoke software environments, and robust security systems for progressive enterprises globally.
@@ -97,9 +98,9 @@ export default function Footer() {
           </div>
           
           <div className="flex flex-wrap items-center gap-6 text-sm text-slate-200">
-            <a href="mailto:info.priviasolutions.net" className="flex items-center space-x-2 hover:text-[#4BB8FA] transition-colors">
+            <a href="mailto:info@priviasolutions.net" className="flex items-center space-x-2 hover:text-[#4BB8FA] transition-colors">
               <Mail className="w-4 h-4 text-[#4BB8FA]" />
-              <span>info.priviasolutions.net</span>
+              <span>info@priviasolutions.net</span>
             </a>
           </div>
         </div>

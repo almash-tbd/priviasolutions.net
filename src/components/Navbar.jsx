@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -37,9 +38,14 @@ export default function Navbar() {
     setActiveDropdown(title);
   };
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = (title) => {
     const timeout = setTimeout(() => {
-      setActiveDropdown(null);
+      setActiveDropdown((current) => {
+        if (current === title) {
+          return null;
+        }
+        return current;
+      });
     }, 150);
     setLeaveTimeout(timeout);
   };
@@ -68,13 +74,7 @@ export default function Navbar() {
         { name: "Retail & eCommerce", href: "/solutions/retail", desc: "Kafka stock sync and latency-free carts", icon: ShoppingCart }
       ]
     },
-    {
-      title: "Resources",
-      dropdown: [
-        { name: "Blog / Insights", href: "/blog", desc: "Latest engineering resources & tutorials", icon: BookOpen },
-        { name: "Resources & Guides", href: "/resources", desc: "Guides, whitepapers, and cloud checklists", icon: Terminal }
-      ]
-    },
+
     {
       title: "Company",
       dropdown: [
@@ -476,13 +476,15 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
           
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#2C5EAD] via-[#1591DC] to-[#4BB8FA] flex items-center justify-center shadow-md shadow-primary/10">
-              <Cpu className="w-5 h-5 text-white" />
-            </div>
-            <span className="font-extrabold text-2xl tracking-wider bg-gradient-to-r from-[#2C5EAD] to-[#1591DC] bg-clip-text text-transparent group-hover:opacity-90 transition-opacity">
-              PRIVIA
-            </span>
+          <Link href="/" className="flex items-center group">
+            <Image 
+              src="/assets/logo.webp" 
+              alt="Privia Solutions" 
+              width={192} 
+              height={48} 
+              className="h-12 w-auto object-contain" 
+              priority
+            />
           </Link>
 
           {/* Desktop Menu */}
@@ -496,7 +498,7 @@ export default function Navbar() {
                   key={link.title}
                   className="group py-6"
                   onMouseEnter={() => handleMouseEnter(link.title)}
-                  onMouseLeave={handleMouseLeave}
+                  onMouseLeave={() => handleMouseLeave(link.title)}
                 >
                   <button className={`flex items-center space-x-1 px-4 py-2 text-sm font-semibold transition-all rounded-lg relative ${
                     isCategoryActive || activeDropdown === link.title ? "bg-slate-100 text-slate-900" : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
@@ -521,7 +523,7 @@ export default function Navbar() {
                         transition={{ duration: 0.15 }}
                         className="mega-menu-panel"
                         onMouseEnter={() => handleMouseEnter(link.title)}
-                        onMouseLeave={handleMouseLeave}
+                        onMouseLeave={() => handleMouseLeave(link.title)}
                       >
                         {renderMegaMenu(link)}
                       </motion.div>
@@ -532,6 +534,18 @@ export default function Navbar() {
             })}
             
             {/* Standalone links */}
+            <Link 
+              href="/blog" 
+              className={`px-4 py-2 text-sm font-semibold transition-colors rounded-lg hover:bg-slate-50 relative ${
+                pathname.startsWith("/blog") ? "text-primary" : "text-slate-700 hover:text-primary"
+              }`}
+            >
+              <span>Blogs</span>
+              {pathname.startsWith("/blog") && (
+                <div className="absolute bottom-0 left-4 right-4 h-0.5 bg-primary" />
+              )}
+            </Link>
+
             <Link 
               href="/about" 
               className={`px-4 py-2 text-sm font-semibold transition-colors rounded-lg hover:bg-slate-50 relative ${
@@ -628,6 +642,15 @@ export default function Navbar() {
                 ))}
 
                 <div className="border-t border-slate-100 pt-4 space-y-2">
+                  <Link
+                    href="/blog"
+                    className={`flex items-center px-3 py-2.5 rounded-xl transition-all text-sm font-semibold ${
+                      pathname.startsWith("/blog") ? "bg-slate-50 text-primary" : "text-slate-700 hover:bg-slate-50 hover:text-primary"
+                    }`}
+                  >
+                    <span>Blogs</span>
+                  </Link>
+
                   <Link
                     href="/about"
                     className={`flex items-center px-3 py-2.5 rounded-xl transition-all text-sm font-semibold ${

@@ -654,10 +654,10 @@ export default function ApiIntegrationsPage() {
             {patterns.map((pat, idx) => {
               const isOpen = activePattern === idx;
               const patternImages = {
-                0: "/assets/images/patterns/pattern_rest.png",
-                1: "/assets/images/patterns/pattern_messaging.png",
-                2: "/assets/images/patterns/pattern_webhooks.png",
-                3: "/assets/images/patterns/pattern_graphql.png"
+                0: "/assets/images/patterns/pattern_rest.webp",
+                1: "/assets/images/patterns/pattern_messaging.webp",
+                2: "/assets/images/patterns/pattern_webhooks.webp",
+                3: "/assets/images/patterns/pattern_graphql.webp"
               };
               const patternDescs = {
                 0: "Establishes a direct, blocking connection between client and server. The client waits until the server processes the request and responds, ensuring immediate data consistency for real-time transactions.",
@@ -746,11 +746,11 @@ export default function ApiIntegrationsPage() {
             <h3 className="text-3xl font-extrabold tracking-tight text-slate-900">Integration Success Story</h3>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-8 items-stretch max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-12 gap-8 items-stretch max-w-6xl mx-auto w-full">
             {/* Left Column: Interactive Story card with sub-tabs */}
-            <div className="lg:col-span-8 p-8 rounded-3xl bg-white border-2 border-[#2C5EAD]/25 shadow-[0_15px_40px_rgba(10,12,22,0.06)] hover:shadow-[0_20px_50px_rgba(44,94,173,0.12)] hover:border-[#2C5EAD]/50 hover:scale-[1.005] transition-all duration-300 flex flex-col justify-between h-full">
+            <div className="w-full lg:col-span-8 p-4 sm:p-8 rounded-3xl bg-white border-2 border-[#2C5EAD]/25 shadow-[0_15px_40px_rgba(10,12,22,0.06)] hover:shadow-[0_20px_50px_rgba(44,94,173,0.12)] hover:border-[#2C5EAD]/50 hover:scale-[1.005] transition-all duration-300 flex flex-col justify-between h-full">
               <div className="space-y-6">
-                <div className="flex justify-between items-center pb-3 border-b border-slate-100">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 pb-3 border-b border-slate-100">
                   <h4 className="text-lg font-black text-slate-900">{successStory.title}</h4>
                   <div className="flex space-x-1">
                     {["challenge", "solution", "results"].map((tab) => (
@@ -768,7 +768,7 @@ export default function ApiIntegrationsPage() {
                     ))}
                   </div>
                 </div>
-
+ 
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeStoryTab}
@@ -807,9 +807,9 @@ export default function ApiIntegrationsPage() {
                 </AnimatePresence>
               </div>
             </div>
-
+ 
             {/* Right Column: Performance Stats Widget */}
-            <div className="lg:col-span-4 p-8 rounded-3xl bg-[#090b16] text-white border border-white/5 flex flex-col justify-between text-center min-h-[250px] lg:min-h-0">
+            <div className="w-full lg:col-span-4 p-4 sm:p-8 rounded-3xl bg-[#090b16] text-white border border-white/5 flex flex-col justify-between text-center min-h-[250px] lg:min-h-0">
               <div className="space-y-4 w-full my-auto">
                 <span className="text-[9px] font-bold text-[#4BB8FA] uppercase tracking-wider block font-mono">Integration Output</span>
                 
@@ -966,7 +966,7 @@ export default function ApiIntegrationsPage() {
               {/* Question mark illustration */}
               <div className="w-56 h-48 relative mb-6">
                 <img 
-                  src="/assets/api_faq_illustration.png" 
+                  src="/assets/api_faq_illustration.webp" 
                   alt="API FAQ Illustration" 
                   className="w-full h-full object-contain"
                 />

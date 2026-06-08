@@ -1307,7 +1307,7 @@ export default function DataAiPage() {
             <div className="lg:col-span-5 flex flex-col items-center p-8 bg-slate-50/50 rounded-3xl border border-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.02)]">
               <div className="w-56 h-48 relative mb-6">
                 <img 
-                  src="/assets/data_ai_faq_illustration.png" 
+                  src="/assets/data_ai_faq_illustration.webp" 
                   alt="Data & AI FAQ Illustration" 
                   className="w-full h-full object-contain"
                 />

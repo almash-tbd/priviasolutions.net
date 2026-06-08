@@ -36,6 +36,202 @@ import {
   Rocket
 } from "lucide-react";
 
+const MobileValuesCard = ({ card, idx, valuesCards }) => {
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={card.title}
+        initial={{ opacity: 0, y: 15, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: -15, scale: 0.95 }}
+        transition={{ duration: 0.35, ease: "easeInOut" }}
+        className="flex flex-col bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm justify-between text-left cursor-pointer w-full h-[500px]"
+      >
+        <div className="space-y-2 text-left pointer-events-none">
+          <span className="text-[10px] font-mono font-black text-blue-600 uppercase tracking-widest">
+            PRINCIPLE 0{((idx) % valuesCards.length) + 1}
+          </span>
+          <h3 className="text-xl font-black text-slate-900 font-outfit tracking-tight">
+            {card.title}
+          </h3>
+        </div>
+
+        <div className="space-y-4 mt-6 text-left flex-grow flex flex-col justify-between pointer-events-none">
+          <p className="text-xs text-slate-500 font-semibold leading-relaxed">
+            {card.description}
+          </p>
+          
+          <div className="space-y-2 py-1">
+            {card.bullets?.map((b, i) => (
+              <div key={i} className="flex items-start gap-1.5 text-[10.5px] text-slate-600 font-semibold">
+                <span className="text-blue-600 shrink-0 font-bold">•</span>
+                <span>{b}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="w-full h-36 rounded-2xl overflow-hidden relative border border-slate-100 bg-slate-50 shrink-0 mt-2">
+            <img 
+              src={card.src} 
+              alt={card.title} 
+              className="w-full h-full object-cover" 
+            />
+          </div>
+        </div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
+const CoreValuesSlide = ({ card, index, current, handleSlideClick, valuesCards }) => {
+  const cardRef = useRef(null);
+  const xRef = useRef(0);
+  const yRef = useRef(0);
+  const frameRef = useRef(null);
+  const [isHoverEnabled, setIsHoverEnabled] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsHoverEnabled(window.innerWidth > 644);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    
+    const animate = () => {
+      if (!cardRef.current) return;
+      cardRef.current.style.setProperty("--x", `${xRef.current}px`);
+      cardRef.current.style.setProperty("--y", `${yRef.current}px`);
+      frameRef.current = requestAnimationFrame(animate);
+    };
+    frameRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+    };
+  }, []);
+
+  const handleMouseMove = (event) => {
+    if (!isHoverEnabled) return;
+    const el = cardRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    xRef.current = event.clientX - (r.left + Math.floor(r.width / 2));
+    yRef.current = event.clientY - (r.top + Math.floor(r.height / 2));
+  };
+
+  const handleMouseLeave = () => {
+    xRef.current = 0;
+    yRef.current = 0;
+  };
+
+  const isActive = current === index;
+
+  return (
+    <div className="[perspective:1200px] [transform-style:preserve-3d] shrink-0">
+      <li
+        ref={cardRef}
+        onClick={() => handleSlideClick(index)}
+        onMouseMove={(e) => {
+          handleMouseMove(e);
+          setIsHovered(true);
+        }}
+        onMouseLeave={() => {
+          handleMouseLeave();
+          setIsHovered(false);
+        }}
+        className="flex flex-col bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm justify-between text-left cursor-pointer w-[85vw] md:w-[400px] h-[540px] mx-[3vw] md:mx-[20px] z-10 transition-shadow duration-300 hover:shadow-md hover:border-slate-350"
+        style={{
+          transform: !isActive
+            ? "scale(0.96) rotateX(6deg)"
+            : isHoverEnabled && isHovered
+              ? "perspective(1000px) rotateX(calc(var(--y) / -80)) rotateY(calc(var(--x) / 80)) translateZ(0)"
+              : "scale(1) rotateX(0deg)",
+          transition: isHoverEnabled && isHovered
+            ? "transform 0.1s ease-out, border-color 0.3s, shadow 0.3s"
+            : "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s, shadow 0.3s",
+          transformOrigin: "bottom",
+          transformStyle: "preserve-3d",
+        }}
+      >
+        <div className="space-y-2 text-left pointer-events-none">
+          <span className="text-[10px] font-mono font-black text-blue-600 uppercase tracking-widest">
+            PRINCIPLE 0{((index) % valuesCards.length) + 1}
+          </span>
+          <h3 className="text-xl font-black text-slate-900 font-outfit tracking-tight">
+            {card.title}
+          </h3>
+        </div>
+
+        <div className="space-y-4 mt-6 text-left flex-grow flex flex-col justify-between pointer-events-none">
+          <p className="text-xs text-slate-500 font-semibold leading-relaxed">
+            {card.description}
+          </p>
+          
+          <div className="space-y-2 py-1">
+            {card.bullets?.map((b, i) => (
+              <div key={i} className="flex items-start gap-1.5 text-[10.5px] text-slate-600 font-semibold">
+                <span className="text-blue-600 shrink-0 font-bold">•</span>
+                <span>{b}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="w-full h-36 rounded-2xl overflow-hidden relative border border-slate-100 bg-slate-50 shrink-0 mt-2">
+            <div 
+              className="absolute inset-0 transition-transform duration-150 ease-out"
+              style={{
+                transform: isActive && isHoverEnabled && isHovered
+                  ? "translate3d(calc(var(--x) / -18), calc(var(--y) / -18), 0) scale(1.12)"
+                  : "none"
+              }}
+            >
+              <img 
+                src={card.src} 
+                alt={card.title} 
+                className="w-full h-full object-cover" 
+              />
+            </div>
+          </div>
+        </div>
+      </li>
+    </div>
+  );
+};
+
+const CoreValuesCarousel = ({ valuesCards, current, setCurrent, handleValPrev, handleValNext }) => {
+  const handleSlideClick = (index) => {
+    if (current !== index) {
+      setCurrent(index);
+    }
+  };
+
+  return (
+    <div
+      className="relative w-[85vw] md:w-[400px] h-[540px] mx-auto overflow-visible"
+    >
+      <ul
+        className="absolute flex mx-[-3vw] md:mx-[-20px] transition-transform duration-1000 cubic-bezier(0.4, 0, 0.2, 1) overflow-visible"
+        style={{
+          transform: `translateX(-${current * (100 / valuesCards.length)}%)`,
+        }}
+      >
+        {valuesCards.map((card, index) => (
+          <CoreValuesSlide
+            key={index}
+            card={card}
+            index={index}
+            current={current}
+            handleSlideClick={handleSlideClick}
+            valuesCards={valuesCards}
+          />
+        ))}
+      </ul>
+    </div>
+  );
+};
+
 export default function AboutPage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [hoveredNodeId, setHoveredNodeId] = useState(null);
@@ -51,26 +247,31 @@ export default function AboutPage() {
     { 
       title: "Security First", 
       description: "We prioritize security in every layer of our architecture and operations.", 
+      bullets: ["Zero-Trust Identity & IAM Controls", "Continuous Compliance Audits", "Military-Grade AES-256 Encryption"],
       src: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=600&auto=format&fit=crop" 
     },
     { 
       title: "Cloud Native", 
       description: "We leverage the cloud to build agile, resilient, and cost-effective solutions.", 
+      bullets: ["Elastic Multi-Region Infrastructure", "Infrastructure as Code Automation", "Self-Healing Kubernetes Clusters"],
       src: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop" 
     },
     { 
       title: "Engineering Excellence", 
       description: "We follow best practices, write clean code and automate everything we can.", 
+      bullets: ["Strict Peer Review Guidelines", "Automated QA Validation Pipelines", "Optimized Sub-millisecond Execution"],
       src: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop" 
     },
     { 
       title: "Collaboration", 
       description: "We work as an extension of your team with transparency and accountability.", 
+      bullets: ["Cohesive Slack & Jira Integration", "Bi-weekly Velocity Adjustments", "Shared SLA & Performance Audits"],
       src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop" 
     },
     { 
       title: "Continuous Improvement", 
       description: "We constantly learn, adapt, and improve to deliver greater outcomes.", 
+      bullets: ["Iterative Post-Mortem Reviews", "Proactive System Modernization", "Continuous Query & Database Tuning"],
       src: "https://images.unsplash.com/photo-1519074002996-a69e7ac46a42?q=80&w=600&auto=format&fit=crop" 
     }
   ];
@@ -186,7 +387,7 @@ export default function AboutPage() {
         "Define scope and success metrics"
       ],
       deliverable: "Discovery Report & Roadmap",
-      image: "/assets/images/Process/process_discover.png",
+      image: "/assets/images/Process/process_discover.webp",
       icon: Search
     },
     { 
@@ -201,7 +402,7 @@ export default function AboutPage() {
         "Security & compliance scoping"
       ],
       deliverable: "Architecture Design Document",
-      image: "/assets/images/Process/process_architect.png",
+      image: "/assets/images/Process/process_architect.webp",
       icon: Layers
     },
     { 
@@ -216,7 +417,7 @@ export default function AboutPage() {
         "API gateway integrations"
       ],
       deliverable: "Production Ready Codebase",
-      image: "/assets/images/Process/process_build.png",
+      image: "/assets/images/Process/process_build.webp",
       icon: Code
     },
     { 
@@ -231,7 +432,7 @@ export default function AboutPage() {
         "Identity & Access Management policies"
       ],
       deliverable: "Security Audit & Clearance Report",
-      image: "/assets/images/Process/process_secure.png",
+      image: "/assets/images/Process/process_secure.webp",
       icon: Shield
     },
     { 
@@ -246,7 +447,7 @@ export default function AboutPage() {
         "24/7 SRE alerts and support"
       ],
       deliverable: "Live Scaled System & SLA Policy",
-      image: "/assets/images/Process/process_scale.png",
+      image: "/assets/images/Process/process_scale.webp",
       icon: Rocket
     }
   ];
@@ -261,7 +462,7 @@ export default function AboutPage() {
       {/* Global Background Image (Hero background) */}
       <div 
         className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat pointer-events-none select-none"
-        style={{ backgroundImage: "url('/assets/images/about_hero_bg.png')", opacity: 0.7 }}
+        style={{ backgroundImage: "url('/assets/images/about_hero_bg.webp')", opacity: 0.7 }}
       />
       {/* Semi-transparent Overlay for Readability */}
       <div className="fixed inset-0 z-0 bg-slate-50/80 backdrop-blur-[1px] pointer-events-none select-none" />
@@ -330,7 +531,7 @@ export default function AboutPage() {
       </section>
 
       {/* ================= SECTION 2: OUR DNA (LIGHT THEME STAR LAYOUT) ================= */}
-      <section id="our-dna" className="max-w-7xl mx-auto py-28 px-4 sm:px-6 lg:px-8 bg-transparent border-b border-slate-200/30 min-h-[800px] flex flex-col justify-center relative z-10">
+      <section id="our-dna" className="max-w-7xl mx-auto py-12 sm:py-20 px-4 sm:px-6 lg:px-8 bg-transparent border-b border-slate-200/30 min-h-[800px] flex flex-col justify-center relative z-10">
         {/* SVG Custom Style for Electric flow Animation */}
         <style dangerouslySetInnerHTML={{__html: `
           @keyframes dash {
@@ -344,7 +545,7 @@ export default function AboutPage() {
         `}} />
 
         {/* Section Header (Centered on Top) */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-20">
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-8 sm:mb-10">
           <span className="text-[10px] font-black tracking-widest text-blue-600 uppercase font-mono bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-100 shadow-2xs inline-block">
             OUR DNA
           </span>
@@ -568,56 +769,31 @@ export default function AboutPage() {
           </div>
 
           <div className="space-y-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
-              {[
-                valIndex,
-                (valIndex + 1) % valuesCards.length,
-                (valIndex + 2) % valuesCards.length
-              ].map((idx, displayPosition) => {
-                const card = valuesCards[idx];
-                return (
-                  <motion.div
-                    key={card.title}
-                    layout
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.4 }}
-                    className={`flex flex-col h-[400px] bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm justify-between transition-all duration-300 ${
-                      displayPosition === 1 ? "md:scale-102 md:border-blue-200 md:shadow-md" : ""
-                    } ${displayPosition === 1 ? "hidden sm:flex" : displayPosition === 2 ? "hidden md:flex" : "flex"}`}
-                  >
-                    <div className="space-y-2 text-left">
-                      <span className="text-[10px] font-mono font-black text-blue-600 uppercase tracking-widest">
-                        PRINCIPLE 0{((idx) % valuesCards.length) + 1}
-                      </span>
-                      <h3 className="text-xl font-black text-slate-900 font-outfit tracking-tight">
-                        {card.title}
-                      </h3>
-                    </div>
+            {/* Mobile View: Single card with fade/slide transition */}
+            <div className="block sm:hidden w-full h-[500px]">
+              <MobileValuesCard 
+                card={valuesCards[valIndex]}
+                idx={valIndex}
+                valuesCards={valuesCards}
+              />
+            </div>
 
-                    <div className="space-y-4 mt-auto text-left">
-                      <p className="text-xs text-slate-500 font-semibold leading-relaxed">
-                        {card.description}
-                      </p>
-                      <div className="w-full h-40 rounded-2xl overflow-hidden relative border border-slate-100 bg-slate-50 shrink-0">
-                        <img 
-                          src={card.src} 
-                          alt={card.title} 
-                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
-                        />
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
+            {/* Desktop/Tablet View: 3D Sliding Carousel */}
+            <div className="hidden sm:flex relative w-full h-[540px] items-center justify-center overflow-visible">
+              <CoreValuesCarousel 
+                valuesCards={valuesCards}
+                current={valIndex}
+                setCurrent={setValIndex}
+                handleValPrev={handleValPrev}
+                handleValNext={handleValNext}
+              />
             </div>
 
             {/* Navigation controls directly below the carousel */}
             <div className="flex justify-center items-center gap-6 pt-4">
               <button
                 onClick={handleValPrev}
-                className="w-11 h-11 rounded-full border border-slate-200 bg-white text-slate-700 flex items-center justify-center transition-all hover:bg-slate-50 hover:border-slate-350 active:scale-95 shadow-sm"
+                className="w-11 h-11 rounded-full border border-slate-200 bg-white text-slate-700 flex items-center justify-center transition-all hover:bg-slate-50 hover:border-slate-350 active:scale-95 shadow-sm cursor-pointer"
                 aria-label="Previous value"
               >
                 <ChevronLeft className="w-5 h-5" />
@@ -639,7 +815,7 @@ export default function AboutPage() {
 
               <button
                 onClick={handleValNext}
-                className="w-11 h-11 rounded-full border border-slate-200 bg-white text-slate-700 flex items-center justify-center transition-all hover:bg-slate-50 hover:border-slate-350 active:scale-95 shadow-sm"
+                className="w-11 h-11 rounded-full border border-slate-200 bg-white text-slate-700 flex items-center justify-center transition-all hover:bg-slate-50 hover:border-slate-350 active:scale-95 shadow-sm cursor-pointer"
                 aria-label="Next value"
               >
                 <ChevronRight className="w-5 h-5" />
@@ -647,10 +823,10 @@ export default function AboutPage() {
             </div>
           </div>
         </div>        {/* How We Work Sub-section */}
-        <div className="grid lg:grid-cols-12 gap-12 items-center pt-12 border-t border-slate-100">
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 items-center pt-12 border-t border-slate-100 w-full">
           
           {/* Left Column: Heading, features, CTA button */}
-          <div className="lg:col-span-5 space-y-8 text-left">
+          <div className="w-full lg:col-span-5 space-y-8 text-left">
             <div className="space-y-4">
               <span className="text-[10px] font-black tracking-widest text-blue-600 uppercase font-mono pl-0.5">HOW WE WORK</span>
               <h2 className="text-3xl sm:text-4xl font-black text-slate-900 font-outfit tracking-tight leading-[1.15]">
@@ -713,7 +889,7 @@ export default function AboutPage() {
           </div>
 
           {/* Right Column: Process timeline + active card */}
-          <div className="lg:col-span-7 space-y-8 flex flex-col justify-center">
+          <div className="w-full lg:col-span-7 space-y-8 flex flex-col justify-center">
             
             {/* Timeline selector nodes row */}
             <div className="relative w-full px-2 py-4">
@@ -753,7 +929,7 @@ export default function AboutPage() {
             </div>
 
             {/* Active Step Details Card */}
-            <div className="bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row gap-8 relative shadow-sm text-left">
+            <div className="w-full bg-white border border-slate-200/80 rounded-3xl p-4 sm:p-8 flex flex-col md:flex-row gap-8 relative shadow-sm text-left">
               {/* Top Accent Blue line */}
               <div className="absolute top-0 left-8 w-16 h-1 bg-blue-600 rounded-b-full" />
               
@@ -811,7 +987,7 @@ export default function AboutPage() {
               {/* Floating Next chevron button */}
               <button 
                 onClick={() => setActiveProcessStep((prev) => (prev % 5) + 1)}
-                className="absolute right-[-20px] top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border border-slate-200 shadow-md hover:shadow-lg text-blue-600 hover:text-blue-700 flex items-center justify-center transition-all z-20 outline-none hover:scale-108 active:scale-95"
+                className="absolute right-[-20px] top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border border-slate-200 shadow-md hover:shadow-lg text-blue-600 hover:text-blue-700 hidden sm:flex items-center justify-center transition-all z-20 outline-none hover:scale-108 active:scale-95"
                 aria-label="Next step"
               >
                 <ChevronRight className="w-5 h-5 stroke-[2.5]" />

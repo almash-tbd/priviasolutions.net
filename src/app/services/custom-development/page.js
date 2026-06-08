@@ -133,6 +133,37 @@ const ProcessCard = ({ step, idx, isActive, onHover }) => {
 };
 
 export default function CustomDevelopmentPage() {
+  const processSteps = [
+    {
+      step: "01",
+      title: "Discovery & Planning",
+      subtitle: "AUDIT & BLUEPRINT",
+      desc: "We analyze your operations, audit existing database layers, map user flows, and construct a complete technical architecture and roadmap.",
+      bullets: ["Infrastructure Auditing", "Database Schema Mapping", "Strategic Roadmap Design"]
+    },
+    {
+      step: "02",
+      title: "Design & Prototyping",
+      subtitle: "UX/UI VALIDATION",
+      desc: "Our product designers build interactive wireframes and interactive prototypes, validating usability before writing any code.",
+      bullets: ["Interactive Figma Prototypes", "Component Design Libraries", "UX Usability Auditing"]
+    },
+    {
+      step: "03",
+      title: "Development & Testing",
+      subtitle: "AGILE SHIELD BUILD",
+      desc: "We write clean code in agile 2-week sprints, combining automated testing pipelines (unit, integration, E2E) with peer code review checkpoints.",
+      bullets: ["Agile 2-Week Sprints", "Continuous E2E Test Gates", "SonarQube Vulnerability Scan"]
+    },
+    {
+      step: "04",
+      title: "Deployment & Support",
+      subtitle: "BLUE-GREEN LAUNCH",
+      desc: "We deploy using zero-downtime blue-green canary pipelines, configure 24/7 reliability metrics tracing, and guarantee ongoing support.",
+      bullets: ["Zero-Downtime Rollouts", "Grafana Metric Tracing", "SLA Platforms Coverage"]
+    }
+  ];
+
   // States
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [activeStep, setActiveStep] = useState(0);
@@ -261,36 +292,7 @@ export default function CustomDevelopmentPage() {
     }
   ];
 
-  const processSteps = [
-    {
-      step: "01",
-      title: "Discovery & Planning",
-      subtitle: "AUDIT & BLUEPRINT",
-      desc: "We analyze your operations, audit existing database layers, map user flows, and construct a complete technical architecture and roadmap.",
-      bullets: ["Infrastructure Auditing", "Database Schema Mapping", "Strategic Roadmap Design"]
-    },
-    {
-      step: "02",
-      title: "Design & Prototyping",
-      subtitle: "UX/UI VALIDATION",
-      desc: "Our product designers build interactive wireframes and interactive prototypes, validating usability before writing any code.",
-      bullets: ["Interactive Figma Prototypes", "Component Design Libraries", "UX Usability Auditing"]
-    },
-    {
-      step: "03",
-      title: "Development & Testing",
-      subtitle: "AGILE SHIELD BUILD",
-      desc: "We write clean code in agile 2-week sprints, combining automated testing pipelines (unit, integration, E2E) with peer code review checkpoints.",
-      bullets: ["Agile 2-Week Sprints", "Continuous E2E Test Gates", "SonarQube Vulnerability Scan"]
-    },
-    {
-      step: "04",
-      title: "Deployment & Support",
-      subtitle: "BLUE-GREEN LAUNCH",
-      desc: "We deploy using zero-downtime blue-green canary pipelines, configure 24/7 reliability metrics tracing, and guarantee ongoing support.",
-      bullets: ["Zero-Downtime Rollouts", "Grafana Metric Tracing", "SLA Platforms Coverage"]
-    }
-  ];
+
 
   const outcomes = [
     { value: "-40%", label: "Development Time", desc: "Accelerated release velocity through pre-tested core boilerplates and GitOps pipelines." },
@@ -841,10 +843,10 @@ export default function CustomDevelopmentPage() {
                 "E-Commerce Engines": { icon: ShoppingCart }
               };
               const industryImages = {
-                "FinTech & Banking": "/assets/images/sectors/fintech.png",
-                "Healthcare Systems": "/assets/images/sectors/healthcare.png",
-                "SaaS Platforms": "/assets/images/sectors/saas.png",
-                "E-Commerce Engines": "/assets/images/sectors/retail.png"
+                "FinTech & Banking": "/assets/images/sectors/fintech.webp",
+                "Healthcare Systems": "/assets/images/sectors/healthcare.webp",
+                "SaaS Platforms": "/assets/images/sectors/saas.webp",
+                "E-Commerce Engines": "/assets/images/sectors/retail.webp"
               };
               return industries.map((ind, idx) => {
                 const meta = industryMeta[ind.name] || { icon: Code };
@@ -861,7 +863,7 @@ export default function CustomDevelopmentPage() {
                     {/* Background Image */}
                     <div className="absolute inset-0 z-0 select-none pointer-events-none">
                       <Image 
-                        src={industryImages[ind.name] || "/assets/images/sectors/fintech.png"}
+                        src={industryImages[ind.name] || "/assets/images/sectors/fintech.webp"}
                         alt={ind.name}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -1204,7 +1206,7 @@ export default function CustomDevelopmentPage() {
               {/* Question mark illustration */}
               <div className="w-56 h-48 relative mb-6">
                 <img 
-                  src="/assets/faq_illustration.png" 
+                  src="/assets/faq_illustration.webp" 
                   alt="FAQ Illustration" 
                   className="w-full h-full object-contain"
                 />

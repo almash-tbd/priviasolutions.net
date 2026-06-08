@@ -23,7 +23,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable} dark scroll-smooth`}>
-      <body className="flex flex-col min-h-screen bg-slate-50 text-slate-900 selection:bg-[#C4E2F5] selection:text-[#2C5EAD]">
+      <body className="flex flex-col min-h-screen bg-slate-50 text-slate-900 selection:bg-[#C4E2F5] selection:text-[#2C5EAD] overflow-x-hidden">
         <ToastProvider />
         <AuthModal />
         <Navbar />

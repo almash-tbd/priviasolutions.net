@@ -1024,7 +1024,7 @@ export const blogData = {
     "category": "Cloud / SRE",
     "author": "Anjali Deshmukh",
     "readTime": "8 min read",
-    "image": "/assets/images/blog/cloud.jpg",
+    "image": "/assets/images/blog/cloud.webp",
     "summary": "Implement proactive cost controls and prevent cloud bill surprises with these proven strategies.",
     "content": "Cloud costs can spiral out of control quickly. One misconfigured resource, an overpowered instance, or forgotten dev environment can add thousands to your monthly bill. Traditional reactive monitoring isn't enough—you need proactive guardrails.\n\nSet up multi-threshold budget alerts across major cloud platforms. Configure alerts at 50%, 75%, 90%, and 100% of your budget thresholds. Don't just email—integrate with Slack or PagerDuty for immediate visibility.\n\nImplement a comprehensive tagging strategy: Environment (prod, dev, staging), Owner (team or person), Project, CostCenter. Enforce tags with cloud policies. Use tag-based cost allocation reports to identify waste.\n\nRegularly analyze utilization metrics. Use cloud provider optimization tools and advisors. Set up automated scaling policies. Schedule non-production resources to shut down after hours.\n\nFor predictable workloads, commit to 1- or 3-year reserved instances or savings plans. Typical savings: 30-60% vs on-demand pricing. Use automated RI management tools to optimize coverage.\n\nImplement automated cleanup policies for: EBS volumes unattached for 30+ days, Elastic IPs not associated with running instances, Old snapshots (keep last 7 days, weekly for 4 weeks, monthly for 12 months), and Unused load balancers.\n\nCloud cost management is a continuous process. Set up these guardrails, review your spending weekly, and make optimization a team responsibility. With the right controls, you can reduce costs by 30-50% without compromising performance.\n\nNeed Expert Help? Our team can help you implement these best practices in your organization.",
     "authorMeta": {
@@ -1173,7 +1173,7 @@ export const blogData = {
     "category": "DevOps",
     "author": "Rohan Mehta",
     "readTime": "10 min read",
-    "image": "/assets/images/blog/DevOps.jpg",
+    "image": "/assets/images/blog/DevOps.webp",
     "summary": "Integrate security early in your CI/CD pipeline to build safer applications, faster.",
     "content": "In traditional software development, security audits occurred at the very end of the release cycle. This approach frequently caused critical release delays when vulnerabilities were discovered late. By shifting security left, developers address security issues early in the engineering lifecycle.\n\nThe foundation of shifting security left is automation within the CI/CD pipeline. Every code commit should trigger automated Static Application Security Testing (SAST) tools to scan the codebase for security flaws, hardcoded credentials, and bad coding practices.\n\nAdditionally, dependency scanning must run continuously. Modern applications rely heavily on open-source libraries. Tools like Snyk or OWASP Dependency-Check monitor your dependencies for known vulnerabilities and automatically alert the team to upgrade packages when critical patches are released.\n\nAs applications transition to staging, Dynamic Application Security Testing (DAST) analyzes the running system for API vulnerabilities, configuration errors, and cross-site scripting risks. Combining static code scans with dynamic sandbox analysis provides full perimeter validation.\n\nFinally, container security ensures that base images and runtime environments are secured. Scan Docker images for vulnerabilities prior to deploying them to production registry hubs. Restrict runtime privileges so containers cannot run with host root access.\n\nShifting security left is as much a cultural change as a technological one. By educating development divisions on secure coding standards and integrating scanning directly into standard pull request reviews, organizations ship robust, compliant code constantly.",
     "authorMeta": {
@@ -1316,7 +1316,7 @@ export const blogData = {
     "category": "Cloud / SRE",
     "author": "Arjun Nair",
     "readTime": "7 min read",
-    "image": "/assets/images/blog/cloud.jpg",
+    "image": "/assets/images/blog/cloud.webp",
     "summary": "Reduce waste and improve performance with these battle-tested Kubernetes tips.",
     "content": "Deploying applications on Kubernetes is easy, but optimizing their resource utilization is a major challenge. Many engineering teams default to over-provisioning resources to prevent performance issues, resulting in massive cloud wastes.\n\nThe first step to optimization is configuring accurate resource requests and limits. Requests tell the scheduler what node resources a pod is guaranteed to have, while limits prevent pods from consuming excess host CPU and memory. Set limits carefully to avoid out-of-memory container restarts.\n\nImplement Vertical Pod Autoscalers (VPA) in recommendation mode to analyze historical CPU and memory utilization patterns. Use these analytics to rightsize your resource configurations instead of guessing workloads manually.\n\nFor dynamic scaling, configure Horizontal Pod Autoscaling (HPA) using custom metrics (like query latency or queue depth) instead of just raw CPU/Memory averages. HPA ensures you only spin up replica pods when user traffic demands it.\n\nUtilize node-level autoscaling (Cluster Autoscaler) to shrink the underlying pool of virtual machines when workloads decrease. Set up node affinity and tolerations to pack pods tightly onto minimal infrastructure nodes.\n\nRegularly run open-source cost analyzers like Kubecost to get granular pricing breakdowns of namespaces, deployments, and storage. By tracking waste continuously, organizations reduce cluster bills by up to 40% while maintaining target SLAs.",
     "authorMeta": {
@@ -1464,7 +1464,7 @@ export const blogData = {
     "category": "AI & Automation",
     "author": "Neha Kapoor",
     "readTime": "9 min read",
-    "image": "/assets/images/blog/MLOps.jpg",
+    "image": "/assets/images/blog/MLOps.webp",
     "summary": "Explore real-world use cases where AI enhances automation and accelerates delivery.",
     "content": "Artificial Intelligence is shifting from an analytical concept to a core engine for infrastructure automation. In DevOps, AI is dramatically improving velocity and system stability by automating complex tasks.\n\nOne of the most immediate use cases is predictive log analytics. Traditional monitoring relies on static alert thresholds. AI models scan streaming application logs to identify abnormal data sequences, warning SRE teams of systemic failures before they manifest as outright downtime.\n\nAI is also optimizing dynamic cloud autoscaling. By analyzing traffic histories, models forecast spikes and pre-emptively spin up cloud resources, ensuring zero latency surges for users during sudden traffic events.\n\nIn testing pipelines, AI assists developers by generating unit tests based on code changes and filtering redundant test cases. This decreases test execution cycles by targeting only code paths modified during active commits.\n\nFurthermore, automated incident response triage uses historical resolution notes to recommend specific hotfixes or runbooks to on-call engineers. This reduces mean-time-to-resolution (MTTR) by up to 50%.\n\nWhile AI increases pipeline automation, human oversight remains essential for system stability. By combining machine intelligence with robust engineering guardrails, software teams achieve unprecedented operational scaling.",
     "authorMeta": {
@@ -1607,7 +1607,7 @@ export const blogData = {
     "category": "Security",
     "author": "Vivek Singh",
     "readTime": "8 min read",
-    "image": "/assets/images/blog/Security-by-Default_SDLC.jpg",
+    "image": "/assets/images/blog/Security-by-Default_SDLC.webp",
     "summary": "Understand Zero Trust principles and how to implement them in your organization.",
     "content": "The traditional network security model relied on a secure perimeter: once inside the company network, users were trusted. Modern remote teams and cloud integrations make perimeter-based models obsolete. Zero Trust operates under the core motto: Never Trust, Always Verify.\n\nIdentity verification is the primary pillar of Zero Trust. Implement strict Multi-Factor Authentication (MFA) and tie access control to contextual factors like device health, network origin, and behavioral analysis.\n\nEnforce Least Privilege access rules. Users and microservices should only be granted permission to specific database cells or APIs required for their current tasks. Revoke permissions automatically when sessions terminate.\n\nImplement network micro-segmentation. Break your cloud network into isolated pockets so that even if one application gets compromised, lateral movement to internal databases is prevented.\n\nEncrypt all traffic at rest and in transit. Secure service-to-service communication with mutual TLS (mTLS) to verify that both sides of an API transaction are authorized and authenticated.\n\nZero Trust is a continuous engineering process, not a one-time product integration. By auditing user credentials and service authentications continuously, companies safeguard their IP against sophisticated cyber threats.",
     "authorMeta": {
@@ -1750,7 +1750,7 @@ export const blogData = {
     "category": "Cloud / SRE",
     "author": "Karan Joshi",
     "readTime": "8 min read",
-    "image": "/assets/images/blog/Designing_Scalable_APIs.jpg",
+    "image": "/assets/images/blog/Designing_Scalable_APIs.webp",
     "summary": "Write maintainable, reusable, and secure IaC to scale your cloud infrastructure efficiently.",
     "content": "Infrastructure as Code (IaC) has revolutionized systems engineering. By defining server topologies, network segments, and database instances in code, teams replicate entire cloud regions in minutes.\n\nTo write maintainable IaC, construct modular scripts. Avoid hardcoding variables. Create isolated modules for networks, databases, and container clusters, allowing teams to reuse templates across different projects.\n\nAlways store IaC state files in secure, remote, and versioned backends (like AWS S3 with DynamoDB state locking). State locking prevents multiple pipelines from editing configurations concurrently, avoiding drift issues.\n\nIntegrate static code check analyzers (like Checkov, tfsec, or Terrascan) into your codebase reviews. These scanners automatically audit configurations for security vulnerabilities, such as public storage buckets or open SSH ports.\n\nImplement GitOps practices by running IaC updates through automated CI/CD tools (like Atlantis or Terraform Cloud). Only apply infrastructure changes when code branches are approved and merged into main repositories.\n\nBy treating infrastructure with the same rigor as application code, companies minimize manual configuration errors, speed up developer onboarding, and ensure consistent staging-to-production configurations.",
     "authorMeta": {
@@ -1893,7 +1893,7 @@ export const blogData = {
     "category": "Software Design",
     "author": "Priya Iyer",
     "readTime": "7 min read",
-    "image": "/assets/images/blog/DataOps.jpg",
+    "image": "/assets/images/blog/DataOps.webp",
     "summary": "Design seamless, scalable, and high-availability platforms for modern retail experiences.",
     "content": "Omni-channel retail requires synchronizing inventory, pricing, and user data across physical stores and web portals in real-time. System lag can lead to stock inconsistencies and poor user experiences.\n\nTo build resilient e-commerce systems, decouple frontend checkouts from backend inventory processing. Use message queues like Apache Kafka to ingest checkout events, allowing user transactions to process even during database congestion.\n\nConfigure high-speed caching layers using Redis to cache product listings, user carts, and active discounts. Caching cuts down database read latencies to sub-10ms levels during peak shopping events.\n\nImplement write-behind database strategies for inventory management. Instead of writing stock updates directly to main databases during high-traffic checkouts, write updates to memory buffers and sync them asynchronously.\n\nDesign for failures by establishing fallback payment gateways. If your primary processor encounters an outage, automatically route checkout transactions to alternative payment networks to maintain constant transactions.\n\nBy investing in decoupled event architectures and robust cache designs, retailers maintain high availability during peak traffic spikes while keeping multi-channel inventories aligned.",
     "authorMeta": {
@@ -2036,7 +2036,7 @@ export const blogData = {
     "category": "Observability",
     "author": "Saurabh Patil",
     "readTime": "8 min read",
-    "image": "/assets/images/blog/Observability_for_Product_Teams.jpg",
+    "image": "/assets/images/blog/Observability_for_Product_Teams.webp",
     "summary": "Gain full visibility into your systems and resolve issues faster with observability.",
     "content": "As software architectures transition from simple monoliths to distributed microservices, debugging issues becomes complex. Observability provides deep system insights, enabling developers to resolve performance issues quickly.\n\nObservability relies on three distinct pillars: Metrics, Logs, and Traces. Metrics show the quantitative state of systems over time, measuring server variables like CPU utilization, request throughput, and error rates.\n\nLogs provide detailed textual records of code execution events. Structure logs as JSON formats so log aggregators can parse, search, and catalog error messages easily across cluster nodes.\n\nTraces follow a request's journey across network hops. Distributed tracing tools (like OpenTelemetry) attach unique correlation IDs to requests, tracking latencies across API gateways, microservices, and databases.\n\nCorrelate all three pillars into single observability dashboards. When metrics show a latency spike, click the trace to find the slow service, and check the associated logs to locate the exact error line.\n\nDeveloping a robust observability strategy reduces debugging times from hours to minutes, allowing teams to deliver excellent product experiences with minimal downtime.",
     "authorMeta": {
@@ -2179,7 +2179,7 @@ export const blogData = {
     "category": "Software Design",
     "author": "Rahul Shah",
     "readTime": "5 min read",
-    "image": "/assets/images/blog/DevOps.jpg",
+    "image": "/assets/images/blog/DevOps.webp",
     "summary": "Step-by-step guide to modernize your application architecture the right way.",
     "content": "Migrating a legacy monolith to a microservices architecture is a major engineering undertaking. Done wrong, it results in distributed monoliths with high latencies and complex deployments.\n\nThe most successful migration strategy is the Strangler Fig Pattern. Instead of rewriting the entire monolith from scratch, incrementally extract individual services, routing traffic to new endpoints using API gateways.\n\nUse Domain-Driven Design (DDD) to identify bounded contexts. Group related application workflows together to define clean microservice boundaries. Keep service APIs isolated to avoid tight coupling.\n\nImplement a database-per-service pattern. Sharing a single database across microservices bypasses service isolation. Replicate shared data asynchronously using event streaming pipelines.\n\nHandle distributed transactions with the Saga Pattern instead of two-phase commits. Sagas coordinate sequences of local transactions across services, triggering compensating rollbacks if any step fails.\n\nModernizing codebases requires patience and robust testing. By strangling legacy codebases slowly, product teams deliver modern, scalable microservice architectures with zero deployment downtime.",
     "authorMeta": {

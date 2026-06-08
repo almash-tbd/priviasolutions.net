@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { Cpu, Send, X } from "lucide-react";
 import { toast } from "react-hot-toast";
 
@@ -101,8 +102,14 @@ function AuthModalContent() {
 
           {/* Logo & Header */}
           <div className="flex flex-col items-center text-center space-y-3 mb-6">
-            <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-[#2C5EAD] via-[#1591DC] to-[#4BB8FA] flex items-center justify-center shadow-md">
-              <Cpu className="w-5.5 h-5.5 text-white" />
+            <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-[#2C5EAD] via-[#1591DC] to-[#4BB8FA] flex items-center justify-center shadow-md overflow-hidden">
+              <Image 
+                src="/assets/logo-symbol.webp" 
+                alt="Privia Logo Symbol" 
+                width={24} 
+                height={24} 
+                className="w-6 h-6 object-contain" 
+              />
             </div>
             <h2 className="text-2xl font-black tracking-tight text-white font-outfit uppercase">
               {activeTab === "login" ? "Welcome Back" : "Get Started"}

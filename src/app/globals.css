@@ -2140,28 +2140,28 @@ body {
 /* Background Cover Images for Mobile Cards & Desktop Active Cards */
 .sector-custom-card.card-fintech,
 .sector-accordion-card.card-fintech.active {
-  background-image: linear-gradient(180deg, rgba(7, 13, 24, 0.4) 0%, rgba(7, 13, 24, 0.97) 95%), url('/assets/images/sectors/fintech.png') !important;
+  background-image: linear-gradient(180deg, rgba(7, 13, 24, 0.4) 0%, rgba(7, 13, 24, 0.97) 95%), url('/assets/images/sectors/fintech.webp') !important;
   background-size: cover !important;
   background-position: center !important;
 }
 
 .sector-custom-card.card-health,
 .sector-accordion-card.card-health.active {
-  background-image: linear-gradient(180deg, rgba(4, 20, 16, 0.84) 0%, rgba(4, 20, 16, 0.97) 100%), url('/assets/images/sectors/healthcare.png') !important;
+  background-image: linear-gradient(180deg, rgba(4, 20, 16, 0.84) 0%, rgba(4, 20, 16, 0.97) 100%), url('/assets/images/sectors/healthcare.webp') !important;
   background-size: cover !important;
   background-position: center !important;
 }
 
 .sector-custom-card.card-saas,
 .sector-accordion-card.card-saas.active {
-  background-image: linear-gradient(180deg, rgba(8, 9, 16, 0.84) 0%, rgba(8, 9, 16, 0.97) 100%), url('/assets/images/sectors/saas.png') !important;
+  background-image: linear-gradient(180deg, rgba(8, 9, 16, 0.84) 0%, rgba(8, 9, 16, 0.97) 100%), url('/assets/images/sectors/saas.webp') !important;
   background-size: cover !important;
   background-position: center !important;
 }
 
 .sector-custom-card.card-retail,
 .sector-accordion-card.card-retail.active {
-  background-image: linear-gradient(180deg, rgba(12, 10, 8, 0.84) 0%, rgba(12, 10, 8, 0.97) 100%), url('/assets/images/sectors/retail.png') !important;
+  background-image: linear-gradient(180deg, rgba(12, 10, 8, 0.84) 0%, rgba(12, 10, 8, 0.97) 100%), url('/assets/images/sectors/retail.webp') !important;
   background-size: cover !important;
   background-position: center !important;
 }

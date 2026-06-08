@@ -477,7 +477,7 @@ export default function CloudSrePage() {
             <h3 className="text-3xl font-extrabold tracking-tight text-white">Our SRE & Infrastructure Approach</h3>
           </div>
 
-          <div className="grid grid-cols-12 gap-8 items-stretch">
+          <div className="grid grid-cols-12 gap-4 lg:gap-8 items-stretch">
             {/* Left Column: Interactive Tab Selector */}
             <div className="col-span-12 lg:col-span-4 flex flex-col justify-center">
               <div className="flex flex-col sm:flex-row lg:flex-col gap-3 w-full">
@@ -519,7 +519,7 @@ export default function CloudSrePage() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3 }}
-                  className="p-8 rounded-3xl bg-slate-900/60 border border-white/5 flex flex-col justify-between h-full min-h-[300px] w-full"
+                  className="p-4 sm:p-8 rounded-3xl bg-slate-900/60 border border-white/5 flex flex-col justify-between h-full min-h-[300px] w-full"
                 >
                   <div className="space-y-4">
                     <div className="flex items-center space-x-2">
@@ -608,9 +608,9 @@ export default function CloudSrePage() {
           </div>
 
           {/* Custom Horizontal Step Pipeline Stepper */}
-          <div className="relative max-w-4xl mx-auto mb-16 select-none">
+          <div className="relative max-w-4xl mx-auto mb-12 select-none">
             {/* SVG Connecting pipeline underlay */}
-            <div className="absolute top-[28px] sm:top-[32px] left-0 right-0 h-0.5 bg-[#ffffff]/10 -z-10">
+            <div className="absolute top-[24px] sm:top-[32px] left-0 right-0 h-0.5 bg-[#ffffff]/10 -z-10">
               <motion.div 
                 className="h-full bg-gradient-to-r from-cyan-400 via-indigo-500 to-[#10b981]" 
                 style={{ width: `${(activeMigrationStep / 3) * 100}%` }}
@@ -640,7 +640,7 @@ export default function CloudSrePage() {
                     >
                       0{idx + 1}
                     </div>
-                    <span className={`text-[9px] sm:text-xs font-extrabold font-mono tracking-wider mt-3 transition-colors duration-300 uppercase ${
+                    <span className={`hidden sm:block text-[9px] sm:text-xs font-extrabold font-mono tracking-wider mt-3 transition-colors duration-300 uppercase ${
                       isActive ? "text-white" : "text-slate-300 group-hover:text-white"
                     }`}>
                       {step.title}
@@ -652,9 +652,9 @@ export default function CloudSrePage() {
           </div>
 
           {/* Details & Visual Pipeline */}
-          <div className="grid grid-cols-12 gap-8 items-stretch max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch max-w-6xl mx-auto w-full">
             {/* Left Card: Details for active step */}
-            <div className="col-span-12 lg:col-span-5 flex flex-col justify-between max-w-2xl mx-auto lg:mx-0 w-full">
+            <div className="col-span-1 lg:col-span-5 flex flex-col justify-between max-w-2xl mx-auto lg:mx-0 w-full">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeMigrationStep}
@@ -662,7 +662,7 @@ export default function CloudSrePage() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 10 }}
                   transition={{ duration: 0.3 }}
-                  className="p-8 rounded-3xl bg-white border border-slate-300 shadow-lg flex flex-col justify-between h-full text-slate-800 relative shadow-[inset_1px_1px_0px_#fff,0_4px_12px_rgba(0,0,0,0.05)] border-t-[#ffffff] border-l-[#ffffff] border-b-[#b8c2cc] border-r-[#b8c2cc]"
+                  className="w-full p-4 sm:p-8 rounded-3xl bg-white border border-slate-300 shadow-lg flex flex-col justify-between h-full text-slate-800 relative shadow-[inset_1px_1px_0px_#fff,0_4px_12px_rgba(0,0,0,0.05)] border-t-[#ffffff] border-l-[#ffffff] border-b-[#b8c2cc] border-r-[#b8c2cc]"
                 >
                   <div className="text-center flex flex-col items-center">
                     <div className="space-y-2">
@@ -1335,7 +1335,7 @@ export default function CloudSrePage() {
               {/* Question mark illustration */}
               <div className="w-56 h-48 relative mb-6">
                 <img 
-                  src="/assets/cloud_faq_illustration.png" 
+                  src="/assets/cloud_faq_illustration.webp" 
                   alt="Cloud FAQ Illustration" 
                   className="w-full h-full object-contain"
                 />

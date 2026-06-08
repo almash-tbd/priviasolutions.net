@@ -11,19 +11,19 @@ import {
 
 const slugBackgrounds = {
   saas: {
-    url: "/assets/images/futuristic_world_bg.jpg",
+    url: "/assets/images/futuristic_world_bg.webp",
     bgColor: "bg-[#f3f8fc]"
   },
   fintech: {
-    url: "/assets/images/futuristic_fintech_bg.png",
+    url: "/assets/images/futuristic_fintech_bg.webp",
     bgColor: "bg-[#eef6fe]"
   },
   healthcare: {
-    url: "/assets/images/futuristic_healthcare_bg.png",
+    url: "/assets/images/futuristic_healthcare_bg.webp",
     bgColor: "bg-[#f5effe]"
   },
   retail: {
-    url: "/assets/images/futuristic_retail_bg.png",
+    url: "/assets/images/futuristic_retail_bg.webp",
     bgColor: "bg-[#eefaf7]"
   }
 };
@@ -135,7 +135,7 @@ export default function SolutionsClient({ slug, data }) {
         </div>
       )}
       
-      <div className="relative py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-24 scroll-smooth z-10">
+      <div className="relative py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-24 scroll-smooth z-10 overflow-x-hidden">
         {/* Background radial glow */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[130px] pointer-events-none -z-10"></div>
 

@@ -761,7 +761,7 @@ export default function QaPerformancePage() {
               {/* Question mark illustration */}
               <div className="w-56 h-48 relative mb-6">
                 <img 
-                  src="/assets/qa_faq_illustration.png" 
+                  src="/assets/qa_faq_illustration.webp" 
                   alt="QA FAQ Illustration" 
                   className="w-full h-full object-contain"
                 />

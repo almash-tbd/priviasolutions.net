@@ -46,31 +46,31 @@ export default function SecurityPage() {
     {
       title: "Threat Ingestion",
       label: "Attempted",
-      image: "/assets/images/security/threat_ingestion.png",
+      image: "/assets/images/security/threat_ingestion.webp",
       desc: "Incoming packet or threat vector audit boundary scan detection."
     },
     {
       title: "Firewall Layer",
       label: "Boundary Filter",
-      image: "/assets/images/security/firewall_layer.png",
+      image: "/assets/images/security/firewall_layer.webp",
       desc: "Deep packet boundary filter blocks illegal IP and port rules."
     },
     {
       title: "Web WAF Gateway",
       label: "Payload Audit",
-      image: "/assets/images/security/waf_gateway.png",
+      image: "/assets/images/security/waf_gateway.webp",
       desc: "Validates application parameters and prevents SQLi/XSS execution."
     },
     {
       title: "SIEM Analytics",
       label: "Anomaly Check",
-      image: "/assets/images/security/siem_analytics.png",
+      image: "/assets/images/security/siem_analytics.webp",
       desc: "Real-time log analytics index correlations against threat intelligence."
     },
     {
       title: "Threat Mitigation",
       label: "Secure Blocked",
-      image: "/assets/images/security/threat_mitigation.png",
+      image: "/assets/images/security/threat_mitigation.webp",
       desc: "Threat vector successfully isolated and logs secured on vault."
     }
   ];
@@ -424,38 +424,7 @@ export default function SecurityPage() {
           </div>
         </motion.section>
 
-        {/* Bottom trust banner card */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true }}
-          className="p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-blue-700 to-blue-800 text-white text-left flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden"
-        >
-          {/* Subtle grid texture in banner */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:10px_10px] pointer-events-none" />
-          
-          <div className="flex flex-col sm:flex-row items-center gap-6 relative z-10">
-            <div className="w-16 h-16 shrink-0 bg-white/10 rounded-2xl flex items-center justify-center border border-white/10 shadow-inner">
-              <ShieldCheck className="w-8 h-8 text-white" />
-            </div>
-            <div className="space-y-1.5 text-center sm:text-left">
-              <h3 className="text-xl sm:text-2xl font-black tracking-tight">
-                Security is not a feature. It's our foundation.
-              </h3>
-              <p className="text-xs sm:text-sm text-blue-100 max-w-xl font-medium leading-relaxed">
-                We follow industry-leading practices and continuously invest in security protocols, audits, and compliance tests to protect you.
-              </p>
-            </div>
-          </div>
-          
-          <a 
-            href="/security"
-            className="px-6 py-3.5 rounded-xl text-xs font-extrabold text-slate-900 bg-white hover:bg-slate-100 transition-all flex items-center shrink-0 gap-2 shadow-md relative z-10"
-          >
-            View Security Practices
-            <ChevronRight className="w-4 h-4" />
-          </a>
-        </motion.div>
+
       </div>
     </div>
   );

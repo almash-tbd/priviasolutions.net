@@ -109,14 +109,14 @@ const serviceAnimationMeta = {
 };
 
 const serviceImages = {
-  "custom-development": "/assets/images/services/custom-development.png",
-  "mobile-apps": "/assets/images/services/mobile-apps.png",
-  "cloud-sre": "/assets/images/services/cloud-sre.png",
-  "api-integrations": "/assets/images/services/api-integrations.png",
-  "qa-performance": "/assets/images/services/qa-performance.png",
-  "managed-support": "/assets/images/services/managed-support.png",
-  "cybersecurity": "/assets/images/services/cybersecurity.png",
-  "data-ai": "/assets/images/services/data-ai.png"
+  "custom-development": "/assets/images/services/custom-development.webp",
+  "mobile-apps": "/assets/images/services/mobile-apps.webp",
+  "cloud-sre": "/assets/images/services/cloud-sre.webp",
+  "api-integrations": "/assets/images/services/api-integrations.webp",
+  "qa-performance": "/assets/images/services/qa-performance.webp",
+  "managed-support": "/assets/images/services/managed-support.webp",
+  "cybersecurity": "/assets/images/services/cybersecurity.webp",
+  "data-ai": "/assets/images/services/data-ai.webp"
 };
 
 const serviceLinkColors = {
@@ -198,7 +198,7 @@ function Carousel3dCard({ slug, data, index, scrollYProgress, isActive, onCardCl
         >
           {/* Service Image */}
           <Image 
-            src={serviceImages[slug] || `/assets/images/services/${slug}.png`}
+            src={serviceImages[slug] || `/assets/images/services/${slug}.webp`}
             alt={data.title}
             fill
             sizes="360px"
@@ -635,22 +635,34 @@ export default function Home() {
   const [sectionZIndex, setSectionZIndex] = useState("z-[70]");
 
   useEffect(() => {
-    if (isLoaded) {
+    const hasLoaded = sessionStorage.getItem("privia_website_loaded") === "true";
+    if (hasLoaded) {
+      setIsLoaded(true);
+      setSectionZIndex("z-10");
+    } else {
       const timer = setTimeout(() => {
-        setSectionZIndex("z-10");
-      }, 1500); // Delay to match the transition & preloader exit
+        setIsLoaded(true);
+      }, 2800);
       return () => clearTimeout(timer);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isLoaded) {
+      const hasLoaded = sessionStorage.getItem("privia_website_loaded") === "true";
+      if (hasLoaded) {
+        setSectionZIndex("z-10");
+      } else {
+        const timer = setTimeout(() => {
+          setSectionZIndex("z-10");
+          sessionStorage.setItem("privia_website_loaded", "true");
+        }, 1500); // Delay to match the transition & preloader exit
+        return () => clearTimeout(timer);
+      }
     } else {
       setSectionZIndex("z-[70]");
     }
   }, [isLoaded]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoaded(true);
-    }, 2800);
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     if (!isLoaded) {
@@ -804,7 +816,7 @@ export default function Home() {
         {/* Full-bleed Background Image */}
         <div className={`absolute inset-0 z-0 pointer-events-none overflow-hidden select-none transition-opacity duration-1000 ${isLoaded ? "opacity-100" : "opacity-0"}`}>
           <Image 
-            src="/assets/images/futuristic_city_bg.jpg"
+            src="/assets/images/futuristic_city_bg.webp"
             alt="Futuristic digital city background Privia Core"
             fill
             priority
@@ -1092,7 +1104,7 @@ export default function Home() {
                     {/* Background Image Container */}
                     <div className="absolute inset-0 z-0 select-none pointer-events-none">
                       <Image 
-                        src={serviceImages[slug] || "/assets/images/services/custom-development.png"}
+                        src={serviceImages[slug] || "/assets/images/services/custom-development.webp"}
                         alt={data.title}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -1219,7 +1231,7 @@ export default function Home() {
                 {/* Background Image (blurred) */}
                 <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
                   <Image 
-                    src="/assets/images/sectors/fintech.png"
+                    src="/assets/images/sectors/fintech.webp"
                     alt="FinTech"
                     fill
                     className="object-cover opacity-20 filter blur-2xl transition-transform duration-700 group-hover:scale-105"
@@ -1250,11 +1262,11 @@ export default function Home() {
                         </div>
                       </div>
                       <h2 className="sector-custom-card-title text-white font-black">{solutionsData.fintech.title}</h2>
-                      <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.fintech.description}</p>
+                      <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.fintech.description.split('. ')[0] + '.'}</p>
                       
                       {/* Features list */}
                       <ul className="space-y-1.5 my-4">
-                        {solutionsData.fintech.features.slice(0, 3).map((feat, idx) => (
+                        {solutionsData.fintech.features.slice(0, 2).map((feat, idx) => (
                           <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
                             <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
                             <span>{feat}</span>
@@ -1302,7 +1314,7 @@ export default function Home() {
                 {/* Background Image (blurred) */}
                 <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
                   <Image 
-                    src="/assets/images/sectors/healthcare.png"
+                    src="/assets/images/sectors/healthcare.webp"
                     alt="Healthcare"
                     fill
                     className="object-cover opacity-20 filter blur-2xl transition-transform duration-700 group-hover:scale-105"
@@ -1320,11 +1332,11 @@ export default function Home() {
                         </div>
                       </div>
                       <h2 className="sector-custom-card-title text-white font-black">{solutionsData.healthcare.title}</h2>
-                      <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.healthcare.description}</p>
+                      <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.healthcare.description.split('. ')[0] + '.'}</p>
                       
                       {/* Features list */}
                       <ul className="space-y-1.5 my-4">
-                        {solutionsData.healthcare.features.slice(0, 3).map((feat, idx) => (
+                        {solutionsData.healthcare.features.slice(0, 2).map((feat, idx) => (
                           <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
                             <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
                             <span>{feat}</span>
@@ -1372,7 +1384,7 @@ export default function Home() {
                 {/* Background Image (blurred) */}
                 <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
                   <Image 
-                    src="/assets/images/sectors/saas.png"
+                    src="/assets/images/sectors/saas.webp"
                     alt="SaaS"
                     fill
                     className="object-cover opacity-20 filter blur-2xl transition-transform duration-700 group-hover:scale-105"
@@ -1403,11 +1415,11 @@ export default function Home() {
                         <div className="saas-bar" style={{ height: "45%" }}></div>
                       </div>
                       <h2 className="sector-custom-card-title text-white font-black">{solutionsData.saas.title}</h2>
-                      <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.saas.description}</p>
+                      <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.saas.description.split('. ')[0] + '.'}</p>
                       
                       {/* Features list */}
                       <ul className="space-y-1.5 my-4">
-                        {solutionsData.saas.features.slice(0, 3).map((feat, idx) => (
+                        {solutionsData.saas.features.slice(0, 2).map((feat, idx) => (
                           <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
                             <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
                             <span>{feat}</span>
@@ -1456,7 +1468,7 @@ export default function Home() {
                 {/* Background Image (blurred) */}
                 <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
                   <Image 
-                    src="/assets/images/sectors/retail.png"
+                    src="/assets/images/sectors/retail.webp"
                     alt="Retail"
                     fill
                     className="object-cover opacity-20 filter blur-2xl transition-transform duration-700 group-hover:scale-105"
@@ -1498,11 +1510,11 @@ export default function Home() {
                         </div>
                       </div>
                       <h2 className="sector-custom-card-title text-white font-black">{solutionsData.retail.title}</h2>
-                      <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.retail.description}</p>
+                      <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.retail.description.split('. ')[0] + '.'}</p>
                       
                       {/* Features list */}
                       <ul className="space-y-1.5 my-4">
-                        {solutionsData.retail.features.slice(0, 3).map((feat, idx) => (
+                        {solutionsData.retail.features.slice(0, 2).map((feat, idx) => (
                           <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
                             <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
                             <span>{feat}</span>
@@ -1566,7 +1578,7 @@ export default function Home() {
                   {/* Background Image (blurred) */}
                   <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
                     <Image 
-                      src="/assets/images/sectors/fintech.png"
+                      src="/assets/images/sectors/fintech.webp"
                       alt="FinTech"
                       fill
                       className="object-cover opacity-20 filter blur-2xl"
@@ -1597,7 +1609,7 @@ export default function Home() {
                             </div>
                           </div>
                           <h2 className="sector-custom-card-title text-white font-black">{solutionsData.fintech.title}</h2>
-                          <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.fintech.description}</p>
+                          <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.fintech.description.split('. ')[0] + '.'}</p>
                         </div>
                         
                         <div className="flex flex-wrap gap-2 mt-4">
@@ -1623,7 +1635,7 @@ export default function Home() {
                         <div className="space-y-3 mt-4">
                           <span className="text-[10px] font-bold text-sky-400 tracking-wider uppercase block">Key Features</span>
                           <ul className="space-y-1.5">
-                            {solutionsData.fintech.features.slice(0, 3).map((feat, idx) => (
+                            {solutionsData.fintech.features.slice(0, 2).map((feat, idx) => (
                               <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
                                 <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
                                 <span>{feat}</span>
@@ -1660,7 +1672,7 @@ export default function Home() {
                   {/* Background Image (blurred) */}
                   <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
                     <Image 
-                      src="/assets/images/sectors/healthcare.png"
+                      src="/assets/images/sectors/healthcare.webp"
                       alt="Healthcare"
                       fill
                       className="object-cover opacity-20 filter blur-2xl"
@@ -1678,7 +1690,7 @@ export default function Home() {
                             </div>
                           </div>
                           <h2 className="sector-custom-card-title text-white font-black">{solutionsData.healthcare.title}</h2>
-                          <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.healthcare.description}</p>
+                          <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.healthcare.description.split('. ')[0] + '.'}</p>
                         </div>
                         
                         <div className="flex flex-wrap gap-2 mt-4">
@@ -1704,7 +1716,7 @@ export default function Home() {
                         <div className="space-y-3 mt-4">
                           <span className="text-[10px] font-bold text-emerald-400 tracking-wider uppercase block">Key Features</span>
                           <ul className="space-y-1.5">
-                            {solutionsData.healthcare.features.slice(0, 3).map((feat, idx) => (
+                            {solutionsData.healthcare.features.slice(0, 2).map((feat, idx) => (
                               <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
                                 <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
                                 <span>{feat}</span>
@@ -1741,7 +1753,7 @@ export default function Home() {
                   {/* Background Image (blurred) */}
                   <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
                     <Image 
-                      src="/assets/images/sectors/saas.png"
+                      src="/assets/images/sectors/saas.webp"
                       alt="SaaS"
                       fill
                       className="object-cover opacity-20 filter blur-2xl"
@@ -1772,7 +1784,7 @@ export default function Home() {
                             <div className="saas-bar" style={{ height: "45%" }}></div>
                           </div>
                           <h2 className="sector-custom-card-title text-white font-black">{solutionsData.saas.title}</h2>
-                          <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.saas.description}</p>
+                          <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.saas.description.split('. ')[0] + '.'}</p>
                         </div>
                         
                         <div className="flex flex-wrap gap-2 mt-4">
@@ -1798,7 +1810,7 @@ export default function Home() {
                         <div className="space-y-3 mt-4">
                           <span className="text-[10px] font-bold text-purple-300 tracking-wider uppercase block">Key Features</span>
                           <ul className="space-y-1.5">
-                            {solutionsData.saas.features.slice(0, 3).map((feat, idx) => (
+                            {solutionsData.saas.features.slice(0, 2).map((feat, idx) => (
                               <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
                                 <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
                                 <span>{feat}</span>
@@ -1836,7 +1848,7 @@ export default function Home() {
                   {/* Background Image (blurred) */}
                   <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
                     <Image 
-                      src="/assets/images/sectors/retail.png"
+                      src="/assets/images/sectors/retail.webp"
                       alt="Retail"
                       fill
                       className="object-cover opacity-20 filter blur-2xl"
@@ -1878,7 +1890,7 @@ export default function Home() {
                             </div>
                           </div>
                           <h2 className="sector-custom-card-title text-white font-black">{solutionsData.retail.title}</h2>
-                          <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.retail.description}</p>
+                          <p className="sector-custom-card-desc text-slate-100 font-semibold text-xs leading-relaxed">{solutionsData.retail.description.split('. ')[0] + '.'}</p>
                         </div>
                         
                         <div className="flex flex-wrap gap-2 mt-4">
@@ -1904,7 +1916,7 @@ export default function Home() {
                         <div className="space-y-3 mt-4">
                           <span className="text-[10px] font-bold text-amber-300 tracking-wider uppercase block">Key Features</span>
                           <ul className="space-y-1.5">
-                            {solutionsData.retail.features.slice(0, 3).map((feat, idx) => (
+                            {solutionsData.retail.features.slice(0, 2).map((feat, idx) => (
                               <li key={idx} className="text-[10px] text-slate-300 flex items-start gap-1.5">
                                 <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
                                 <span>{feat}</span>
@@ -1954,12 +1966,12 @@ export default function Home() {
                   <div className="stacking-card-left">
                     <span className="stacking-card-badge mb-4">Card 1</span>
                     <h2>Discovery</h2>
-                    <p>We deep-dive into your operational pipeline, audit systems infrastructure, and lay down an exhaustive software blueprint. Through technical discovery workshops, system topology analysis, and requirement elicitation, we establish clear milestones and design secure cloud-native architectures tailored to your business needs before any development begins.</p>
+                    <p>We audit your infrastructure and design a cloud-native architecture blueprint. Through technical workshops and topology analysis, we set clear development milestones.</p>
                   </div>
                   <div className="stacking-card-right relative w-full h-[250px] lg:h-full p-6">
                     <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-lg">
                       <Image 
-                        src="/assets/images/Process/office_work_scene.png"
+                        src="/assets/images/Process/office_work_scene.webp"
                         alt="Discovery Strategy"
                         fill
                         className="object-cover"
@@ -1978,12 +1990,12 @@ export default function Home() {
                   <div className="stacking-card-left">
                     <span className="stacking-card-badge mb-4">Card 2</span>
                     <h2>Design & Development</h2>
-                    <p>Our engineers build iterative, cloud-native components and secure APIs, verifying code quality through automated quality gates. Adhering to secure SDLC principles, we write clean, well-tested code in agile sprints, integrating sonarqube vulnerability scans, unit testing matrices, and continuous integration pipelines to guarantee robust performance and security.</p>
+                    <p>Our engineers build iterative cloud-native components and secure APIs. We write clean, well-tested code in agile sprints, using automated pipelines to ensure security and quality.</p>
                   </div>
                   <div className="stacking-card-right relative w-full h-[250px] lg:h-full p-6">
                     <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-lg">
                       <Image 
-                        src="/assets/images/Process/process_development.png"
+                        src="/assets/images/Process/process_development.webp"
                         alt="Design & Development"
                         fill
                         className="object-cover"
@@ -2002,12 +2014,12 @@ export default function Home() {
                   <div className="stacking-card-left">
                     <span className="stacking-card-badge mb-4">Card 3</span>
                     <h2>Launch & Scale</h2>
-                    <p>We coordinate zero-downtime Strangler deployments and wire up 24/7 reliability monitoring for elastic loads. Utilizing blue-green or canary release strategies, we deploy containerized services into production smoothly, backed by Datadog and Grafana dashboards for proactive incident detection, platform health tracking, and SLA coverage.</p>
+                    <p>We coordinate zero-downtime deployments and configure 24/7 reliability monitoring. Using canary releases and real-time dashboards, we scale your platform smoothly.</p>
                   </div>
                   <div className="stacking-card-right relative w-full h-[250px] lg:h-full p-6">
                     <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-lg">
                       <Image 
-                        src="/assets/images/Process/process_launch.png"
+                        src="/assets/images/Process/process_launch.webp"
                         alt="Launch & Scale"
                         fill
                         className="object-cover"

@@ -61,6 +61,48 @@ const TechLogo = ({ name }) => {
   return logos[name] || <Cpu className="w-8 h-8 text-slate-400" />;
 };
 
+// Modular ProcessCard component reused on desktop and mobile
+const ProcessCard = ({ step, idx, isActive, onHover }) => {
+  return (
+    <motion.div 
+      onMouseEnter={() => onHover(idx)}
+      onClick={() => onHover(idx)}
+      className={`p-6 rounded-3xl border transition-all duration-300 flex flex-col justify-between cursor-pointer group h-full w-full ${
+        isActive 
+          ? "bg-slate-950/95 border-[#1591dc] shadow-[0_10px_35px_rgba(21,145,220,0.35)] scale-105 z-20" 
+          : "bg-[#090b16]/90 border-white/5 opacity-75 hover:opacity-100 hover:border-white/15 z-10"
+      }`}
+    >
+      <div className="space-y-4">
+        <div className="flex justify-between items-center">
+          <span className={`text-3xl font-black font-mono transition-colors ${isActive ? "text-[#1591dc]" : "text-slate-700 group-hover:text-slate-500"}`}>
+            {step.step}
+          </span>
+          <span className={`text-[8.5px] font-bold font-mono tracking-wider px-2 py-0.5 rounded transition-all ${
+            isActive ? "bg-[#1591dc]/10 text-[#4bb8fa]" : "bg-white/5 text-slate-500"
+          }`}>
+            PHASE
+          </span>
+        </div>
+
+        <h4 className="text-xl font-bold text-white">{step.title}</h4>
+        <p className="text-xs text-slate-400 leading-relaxed">{step.desc}</p>
+      </div>
+
+      <div className="border-t border-white/5 pt-4 mt-6">
+        <ul className="space-y-1.5">
+          {step.bullets.map((bullet) => (
+            <li key={bullet} className="flex items-center text-[10px] text-slate-300">
+              <Check className={`w-3 h-3 mr-2 flex-shrink-0 ${isActive ? "text-[#1591dc]" : "text-slate-500"}`} />
+              <span>{bullet}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
+  );
+};
+
 export default function MobileAppsPage() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [activeTab, setActiveTab] = useState("cross"); // native or cross
@@ -74,10 +116,37 @@ export default function MobileAppsPage() {
   };
 
   const processImages = [
-    "/assets/images/Process/mobile_discovery.png",
-    "/assets/images/Process/mobile_design.png",
-    "/assets/images/Process/mobile_development.png",
-    "/assets/images/Process/mobile_launch.png"
+    "/assets/images/Process/mobile_discovery.webp",
+    "/assets/images/Process/mobile_design.webp",
+    "/assets/images/Process/mobile_development.webp",
+    "/assets/images/Process/mobile_launch.webp"
+  ];
+
+  const processSteps = [
+    {
+      step: "01",
+      title: "Discovery",
+      desc: "Detailed requirements gathering, target audience research, and selection of the optimal platform strategy.",
+      bullets: ["Readiness Assessment", "User Persona Definition", "Feature Prioritization"]
+    },
+    {
+      step: "02",
+      title: "Design",
+      desc: "UI/UX design customized specifically following platform-specific design guidelines.",
+      bullets: ["Figma Wireframes", "Interactive Prototypes", "Human Interface Guidelines Audit"]
+    },
+    {
+      step: "03",
+      title: "Development",
+      desc: "Agile build sprints integrating secure database connections and high-frequency endpoints.",
+      bullets: ["Clean Repository Structure", "API Endpoint Integration", "Parallel Testing Gates"]
+    },
+    {
+      step: "04",
+      title: "Launch",
+      desc: "App Store and Google Play compliance auditing, asset packaging, and submission support.",
+      bullets: ["Metadata & Assets Preparation", "App Store Submission", "Post-Launch Monitoring"]
+    }
   ];
 
   useEffect(() => {
@@ -121,32 +190,7 @@ export default function MobileAppsPage() {
     "Real-time updates & messaging"
   ];
 
-  const processSteps = [
-    {
-      step: "01",
-      title: "Discovery",
-      desc: "Detailed requirements gathering, target audience research, and selection of the optimal platform strategy.",
-      bullets: ["Readiness Assessment", "User Persona Definition", "Feature Prioritization"]
-    },
-    {
-      step: "02",
-      title: "Design",
-      desc: "UI/UX design customized specifically following platform-specific design guidelines.",
-      bullets: ["Figma Wireframes", "Interactive Prototypes", "Human Interface Guidelines Audit"]
-    },
-    {
-      step: "03",
-      title: "Development",
-      desc: "Agile build sprints integrating secure database connections and high-frequency endpoints.",
-      bullets: ["Clean Repository Structure", "API Endpoint Integration", "Parallel Testing Gates"]
-    },
-    {
-      step: "04",
-      title: "Launch",
-      desc: "App Store and Google Play compliance auditing, asset packaging, and submission support.",
-      bullets: ["Metadata & Assets Preparation", "App Store Submission", "Post-Launch Monitoring"]
-    }
-  ];
+
 
   const categories = [
     {
@@ -416,98 +460,106 @@ export default function MobileAppsPage() {
             </p>
           </div>
 
-          <div className="relative max-w-5xl mx-auto mt-12">
-            {/* Center line for desktop */}
-            <div className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-0.5 bg-slate-700/30 -translate-x-1/2 hidden md:block" />
-            
-            {/* Active glowing line */}
-            <div className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 hidden md:block overflow-hidden">
-              <motion.div 
-                className="w-full bg-gradient-to-b from-[#2C5EAD] via-[#1591DC] to-[#4BB8FA] rounded-full"
-                initial={{ height: "0%" }}
-                animate={{ height: `${((activeStep + 1) / 4) * 100}%` }}
-                transition={{ type: "spring", stiffness: 50, damping: 15 }}
+          {/* DESKTOP VIEW: Staggered Oblique Wavy Road Timeline (NW to SE) */}
+          <div className="relative w-full h-[800px] hidden lg:block z-10">
+            {/* SVG Winding Road Path (Diagonal from NW to SE) */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1000 800" fill="none">
+              {/* Base Road Path (Dashed & Inactive) */}
+              <path 
+                d="M 125,150 C 250,90 250,370 375,320 C 500,270 500,540 625,490 C 750,440 750,710 875,660" 
+                fill="none" 
+                stroke="rgba(255, 255, 255, 0.08)" 
+                strokeWidth="8" 
+                strokeLinecap="round" 
               />
+              <path 
+                d="M 125,150 C 250,90 250,370 375,320 C 500,270 500,540 625,490 C 750,440 750,710 875,660" 
+                fill="none" 
+                stroke="rgba(255, 255, 255, 0.06)" 
+                strokeWidth="2" 
+                strokeDasharray="8 8"
+                strokeLinecap="round" 
+              />
+              
+              {/* Active Glowing Path (Fills up to the active step) */}
+              <motion.path 
+                d="M 125,150 C 250,90 250,370 375,320 C 500,270 500,540 625,490 C 750,440 750,710 875,660" 
+                fill="none" 
+                stroke="url(#oblique-road-glow-gradient-mobile)" 
+                strokeWidth="8" 
+                strokeLinecap="round" 
+                className="timeline-road-active"
+                initial={{ pathLength: 0.05 }}
+                animate={{ pathLength: activeStep === 0 ? 0.05 : activeStep === 1 ? 0.38 : activeStep === 2 ? 0.72 : 1.0 }}
+                transition={{ type: "spring", stiffness: 60, damping: 15 }}
+              />
+              <motion.path 
+                d="M 125,150 C 250,90 250,370 375,320 C 500,270 500,540 625,490 C 750,440 750,710 875,660" 
+                fill="none" 
+                stroke="url(#oblique-road-glow-gradient-mobile)" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeDasharray="8 8"
+                className="timeline-road-dash"
+                initial={{ pathLength: 0.05 }}
+                animate={{ pathLength: activeStep === 0 ? 0.05 : activeStep === 1 ? 0.38 : activeStep === 2 ? 0.72 : 1.0 }}
+                transition={{ type: "spring", stiffness: 60, damping: 15 }}
+              />
+              
+              <defs>
+                <linearGradient id="oblique-road-glow-gradient-mobile" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#2c5ead" />
+                  <stop offset="50%" stopColor="#1591dc" />
+                  <stop offset="100%" stopColor="#4bb8fa" />
+                </linearGradient>
+              </defs>
+            </svg>
+
+            {/* Staggered Cards */}
+            {/* Card 1: x = 12.5% (125 in SVG), y = 150px */}
+            <div className="absolute left-[12.5%] top-[150px] -translate-x-1/2 -translate-y-1/2 w-[270px] z-10">
+              <ProcessCard step={processSteps[0]} idx={0} isActive={activeStep === 0} onHover={setActiveStep} />
             </div>
 
-            <div className="space-y-16 lg:space-y-24">
-              {processSteps.map((step, idx) => {
-                const isEven = idx % 2 === 0;
-                const isActive = activeStep === idx;
-                
-                return (
-                  <div 
-                    key={step.step}
-                    id={`mobile-process-card-${idx}`}
-                    data-index={idx}
-                    className="relative grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
-                    onMouseEnter={() => setActiveStep(idx)}
-                  >
-                    {/* Timeline Dot */}
-                    <div className="absolute left-8 lg:left-1/2 top-6 -translate-x-1/2 z-20 hidden md:block">
-                      <motion.div 
-                        className={`w-5 h-5 rounded-full border-4 transition-all duration-300 ${
-                          isActive 
-                            ? "bg-[#1591DC] border-slate-950 scale-125 shadow-[0_0_12px_#1591DC]" 
-                            : "bg-slate-800 border-slate-700"
-                        }`}
-                      />
-                    </div>
+            {/* Card 2: x = 37.5% (375 in SVG), y = 320px */}
+            <div className="absolute left-[37.5%] top-[320px] -translate-x-1/2 -translate-y-1/2 w-[270px] z-10">
+              <ProcessCard step={processSteps[1]} idx={1} isActive={activeStep === 1} onHover={setActiveStep} />
+            </div>
 
-                    {/* Left/Content Side */}
-                    <div className={`md:col-span-6 ${isEven ? "lg:order-1" : "lg:order-2 lg:pl-12"} pl-16 md:pl-12 lg:pl-0`}>
-                      <motion.div 
-                        className={`p-8 rounded-3xl transition-all duration-500 border ${
-                          isActive 
-                            ? "bg-slate-950/90 border-[#1591dc] shadow-[0_10px_35px_rgba(21,145,220,0.25)] scale-[1.02]" 
-                            : "bg-[#090b16]/95 border-white/5 opacity-75"
-                        }`}
-                      >
-                        <div className="flex justify-between items-center mb-4">
-                          <span className={`text-4xl font-black font-mono transition-colors ${isActive ? "text-[#1591dc]" : "text-slate-700"}`}>
-                            {step.step}
-                          </span>
-                          <span className={`text-[10px] font-bold font-mono tracking-wider px-2 py-0.5 rounded ${
-                            isActive ? "bg-[#1591dc]/10 text-[#4bb8fa]" : "bg-white/5 text-slate-500"
-                          }`}>
-                            PHASE
-                          </span>
-                        </div>
-                        <h4 className="text-xl font-bold text-white mb-2">{step.title}</h4>
-                        <p className="text-xs text-slate-400 leading-relaxed mb-6">{step.desc}</p>
-                        
-                        {/* Checkmark Grid */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-white/5">
-                          {step.bullets.map((bullet) => (
-                            <div key={bullet} className="flex items-center text-xs text-slate-300">
-                              <Check className={`w-4 h-4 mr-2 flex-shrink-0 ${isActive ? "text-[#1591dc]" : "text-slate-500"}`} />
-                              <span>{bullet}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </motion.div>
-                    </div>
+            {/* Card 3: x = 62.5% (625 in SVG), y = 490px */}
+            <div className="absolute left-[62.5%] top-[490px] -translate-x-1/2 -translate-y-1/2 w-[270px] z-10">
+              <ProcessCard step={processSteps[2]} idx={2} isActive={activeStep === 2} onHover={setActiveStep} />
+            </div>
 
-                    {/* Right/Image Side */}
-                    <div className={`md:col-span-6 ${isEven ? "lg:order-2 lg:pl-12" : "lg:order-1"} flex justify-center`}>
-                      <motion.div 
-                        className={`relative w-full max-w-[240px] aspect-[9/18.5] rounded-[36px] overflow-hidden border-[8px] transition-all duration-500 ${
-                          isActive 
-                            ? "border-slate-900 shadow-[0_20px_50px_rgba(0,0,0,0.5)] scale-105" 
-                            : "border-slate-950/60 opacity-60 scale-95"
-                        }`}
-                      >
-                        <Image 
-                          src={processImages[idx]} 
-                          alt={`${step.title} Process Mockup`} 
-                          fill
-                          className="object-cover"
-                        />
-                      </motion.div>
-                    </div>
-                  </div>
-                );
-              })}
+            {/* Card 4: x = 87.5% (875 in SVG), y = 660px */}
+            <div className="absolute left-[87.5%] top-[660px] -translate-x-1/2 -translate-y-1/2 w-[270px] z-10">
+              <ProcessCard step={processSteps[3]} idx={3} isActive={activeStep === 3} onHover={setActiveStep} />
+            </div>
+          </div>
+
+          {/* MOBILE VIEW: Stacked Vertical Road Timeline */}
+          <div className="relative lg:hidden">
+            {/* Vertical timeline road */}
+            <div className="absolute left-8 top-12 bottom-12 w-[4px] bg-white/5 rounded-full z-0">
+              <motion.div 
+                className="w-full bg-gradient-to-b from-[#2C5EAD] via-[#1591DC] to-[#4BB8FA] rounded-full shadow-[0_0_12px_#1591dc]"
+                initial={{ height: "10%" }}
+                animate={{ height: `${((activeStep + 1) / 4) * 100}%` }}
+                transition={{ type: "spring", stiffness: 60, damping: 15 }}
+              />
+            </div>
+            
+            <div className="space-y-8 pl-14 sm:pl-16 relative z-10">
+              {processSteps.map((step, idx) => (
+                <div key={step.step} id={`mobile-process-card-${idx}`} data-index={idx}>
+                  <ProcessCard 
+                    step={step}
+                    idx={idx}
+                    isActive={activeStep === idx}
+                    onHover={setActiveStep}
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -543,20 +595,20 @@ export default function MobileAppsPage() {
               {[...categories, ...categories].map((cat, idx) => {
                 const IconComponent = cat.icon;
                 const categoryImages = {
-                  "E-Commerce & Retail": "/assets/images/sectors/retail.png",
-                  "FinTech & Banking": "/assets/images/sectors/fintech.png",
-                  "Healthcare & Wellness": "/assets/images/sectors/healthcare.png",
-                  "Social & Entertainment": "/assets/images/sectors/saas.png"
+                  "E-Commerce & Retail": "/assets/images/sectors/retail_mobile.webp",
+                  "FinTech & Banking": "/assets/images/sectors/fintech_mobile.webp",
+                  "Healthcare & Wellness": "/assets/images/sectors/healthcare_mobile.webp",
+                  "Social & Entertainment": "/assets/images/sectors/saas_mobile.webp"
                 };
                 return (
                   <div 
                     key={`${cat.title}-${idx}`}
-                    className="relative w-[280px] sm:w-[320px] lg:w-[350px] h-[360px] lg:h-[400px] rounded-3xl overflow-hidden shadow-lg border border-white/10 flex flex-col justify-end p-6 lg:p-8 group flex-shrink-0 cursor-pointer"
+                    className="relative w-[230px] sm:w-[280px] lg:w-[320px] h-[300px] sm:h-[340px] lg:h-[360px] rounded-3xl overflow-hidden shadow-lg border border-white/10 flex flex-col justify-end p-5 lg:p-8 group flex-shrink-0 cursor-pointer"
                   >
                     {/* Background Image */}
                     <div className="absolute inset-0 z-0 select-none pointer-events-none">
                       <Image 
-                        src={categoryImages[cat.title] || "/assets/images/sectors/retail.png"}
+                        src={categoryImages[cat.title] || "/assets/images/sectors/retail.webp"}
                         alt={cat.title}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -777,7 +829,7 @@ export default function MobileAppsPage() {
               {/* Question mark illustration */}
               <div className="w-56 h-48 relative mb-6">
                 <img 
-                  src="/assets/faq_illustration.png" 
+                  src="/assets/faq_illustration.webp" 
                   alt="FAQ Illustration" 
                   className="w-full h-full object-contain"
                 />
